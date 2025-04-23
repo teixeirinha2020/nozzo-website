@@ -27,9 +27,57 @@
         "stack_images_on_mobile": false,
         "show_text_below": false
       }
+    },
+    "image_banner_8rTC3T": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_JBdPYP": {
+          "type": "heading",
+          "settings": {
+            "heading": "Banner de imagem",
+            "heading_size": "h1"
+          }
+        },
+        "text_ffrLrg": {
+          "type": "text",
+          "settings": {
+            "text": "Dê informações aos clientes sobre a(s) imagem(s) ou o conteúdo do banner no modelo.",
+            "text_style": "body"
+          }
+        },
+        "buttons_px8zrm": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Etiqueta do botão",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Etiqueta do botão",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_JBdPYP",
+        "text_ffrLrg",
+        "buttons_px8zrm"
+      ],
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
     }
   },
   "order": [
-    "image_banner"
+    "image_banner",
+    "image_banner_8rTC3T"
   ]
 }
