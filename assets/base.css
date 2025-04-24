@@ -2950,16 +2950,6 @@ details-disclosure > details {
   transition: background-color 0.50s ease-out;
 }
 
-.glass-effect {
-  background-color: rgba(255, 255, 255, 0.1) !important; /* fundo semi-transparente */
-  backdrop-filter: blur(10px);          /* desfoque do que está atrás */
-  -webkit-backdrop-filter: blur(10px);  /* suporte para Safari */
-  
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  /* sombra para realce */
-
-  border-radius: 0.5rem;
-}
-
 @media screen and (forced-colors: active) {
   .icon {
     color: CanvasText;

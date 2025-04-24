@@ -11,8 +11,9 @@
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
+{% assign glass_blur_int = section.settings.glass_blur | default: 10 %}
 
-<style>
+<style> 
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;
@@ -94,6 +95,17 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .glass-effect {
+    background-color: rgba(255, 255, 255, 0.1) !important; /* fundo semi-transparente */
+    backdrop-filter: blur(10px);          /* desfoque do que está atrás */
+    -webkit-backdrop-filter: blur({{ glass_blur_int }}px);  /* suporte para Safari */
+  
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  /* sombra para realce */
+
+    border-radius: 0.5rem;
+  }
+
 {%- endstyle -%}
 
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
@@ -553,6 +565,12 @@
       "id": "glass_effect",
       "label": "Glass Effect",
       "default": false,
+    },
+    {
+      "type": "number",
+      "id": "glass_blur",
+      "label": "Glass Blur",
+      "default": 10,
     },
     {
       "type": "header",
