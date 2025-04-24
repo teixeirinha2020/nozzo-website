@@ -98,7 +98,7 @@
 
   .glass-effect {
     background-color: rgba(255, 255, 255, 0.1) !important; /* fundo semi-transparente */
-    backdrop-filter: blur(10px);          /* desfoque do que está atrás */
+    backdrop-filter: blur({{ glass_blur_int }}px);          /* desfoque do que está atrás */
     -webkit-backdrop-filter: blur({{ glass_blur_int }}px);  /* suporte para Safari */
   
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  /* sombra para realce */

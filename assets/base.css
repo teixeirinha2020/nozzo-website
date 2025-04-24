@@ -2336,7 +2336,7 @@ input[type='checkbox'] {
 }
 
 .section-header.animate {
-  transition: top 0.15s ease-out;
+  transition: top 0.30s ease-out;
 }
 
 .shopify-section-group-header-group {
