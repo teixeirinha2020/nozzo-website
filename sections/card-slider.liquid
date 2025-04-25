@@ -1,0 +1,588 @@
+{% schema %}
+{
+  "name": "Cards Slider",
+  "settings": [
+    {
+      "type": "select",
+      "id": "card_height",
+      "label": "Card Height",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "arrows_position",
+      "label": "Arrows Position",
+      "options": [
+        {
+          "value": "sides",
+          "label": "Sides"
+        },
+        {
+          "value": "top-left",
+          "label": "Top Left"
+        },
+        {
+          "value": "top-right",
+          "label": "Top Right" 
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom Right"
+        }
+      ],
+      "default": "sides"
+    },
+    {
+      "type": "color",
+      "id": "arrows_background",
+      "label": "Arrows Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrows_color",
+      "label": "Arrows Icon Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "slider_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Slider Transition Speed",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Progress Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress_bar",
+      "label": "Show Progress Bar",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "progress_bar_color",
+      "label": "Progress Bar Color",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Background Image (optional)",
+          "info": "If not selected, product image will be used"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom Title",
+          "info": "Leave blank to use product title"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "price_text",
+          "label": "Price Text",
+          "info": "Example: 'From €300'"
+        },
+        {
+          "type": "color",
+          "id": "price_color",
+          "label": "Price Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Button Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button Text Color",
+          "default": "#ffffff"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cards Slider",
+      "category": "Custom Content",
+      "blocks": [
+        {
+          "type": "product_card"
+        },
+        {
+          "type": "product_card"
+        },
+        {
+          "type": "product_card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="cards-slider-section" data-arrows-position="{{ section.settings.arrows_position }}">
+  {% if section.blocks.size > 0 %}
+    <div class="cards-slider cards-slider--{{ section.settings.card_height }} swiper-container">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          {% if block.type == 'product_card' and block.settings.product != blank %}
+            {% assign product = block.settings.product %}
+            {% assign background_image = block.settings.background_image | default: product.featured_image %}
+            {% assign card_title = block.settings.title | default: product.title %}
+            {% assign button_text = block.settings.button_text | default: 'Shop Now' %}
+            
+            <div class="card-slide swiper-slide" {{ block.shopify_attributes }}>
+              <a href="{{ product.url }}" class="card-slide__link">
+                <div class="card-slide__content">
+                  <div class="card-slide__background-wrapper">
+                    <div class="card-slide__background">
+                      {% if background_image != blank %}
+                        {% assign img_url = background_image | img_url: '1200x' %}
+                        <img src="{{ img_url }}" alt="{{ card_title }}" loading="lazy">
+                      {% else %}
+                        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {% endif %}
+                    </div>
+                    <div class="card-slide__overlay"></div>
+                  </div>
+                  
+                  <div class="card-slide__text-container">
+                    <h3 class="card-slide__title" style="color: {{ block.settings.title_color }}">{{ card_title }}</h3>
+                    
+                    {% if block.settings.price_text != blank %}
+                      <div class="card-slide__price" style="color: {{ block.settings.price_color }}">
+                        {{ block.settings.price_text }}
+                      </div>
+                    {% endif %}
+                    
+                    <div class="card-slide__button-wrapper">
+                      <span class="card-slide__button" 
+                        style="background-color: {{ block.settings.button_color }}; color: {{ block.settings.button_text_color }}">
+                        {{ button_text }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <div class="navigation-container navigation-container--{{ section.settings.arrows_position }}">
+        <div class="swiper-button-prev" 
+             style="background-color: {{ section.settings.arrows_background }}; color: {{ section.settings.arrows_color }}">
+        </div>
+        <div class="swiper-button-next" 
+             style="background-color: {{ section.settings.arrows_background }}; color: {{ section.settings.arrows_color }}">
+        </div>
+      </div>
+      
+      {% if section.settings.show_progress_bar %}
+        <div class="slider-progress">
+          <div class="slider-progress-bar" style="background-color: {{ section.settings.progress_bar_color }}"></div>
+        </div>
+      {% endif %}
+    </div>
+  {% else %}
+    <div class="placeholder-container">
+      <div class="placeholder-message">
+        Add product cards to display your slider
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .cards-slider-section {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+  }
+  
+  .cards-slider {
+    position: relative;
+    width: 100%;
+  }
+  
+  .cards-slider--small {
+    height: 300px;
+  }
+  
+  .cards-slider--medium {
+    height: 400px;
+  }
+  
+  .cards-slider--large {
+    height: 500px;
+  }
+  
+  .card-slide {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  
+  .card-slide__link {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+  }
+  
+  .card-slide__content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+  }
+  
+  .card-slide__background-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+  
+  .card-slide__background {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .card-slide__background img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .card-slide__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+    z-index: 2;
+  }
+  
+  .card-slide__text-container {
+    padding: 2rem;
+    position: relative;
+    z-index: 3;
+  }
+  
+  .card-slide__title {
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+  }
+  
+  .card-slide__price {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card-slide__button-wrapper {
+    margin-top: 1rem;
+  }
+  
+  .card-slide__button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+  }
+  
+  .card-slide__button:hover {
+    opacity: 0.9;
+  }
+  
+  /* Navigation Styles */
+  .navigation-container {
+    position: absolute;
+    z-index: 10;
+  }
+  
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    opacity: 0.9;
+  }
+  
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    font-size: 18px;
+  }
+  
+  /* Arrow Positions */
+  .navigation-container--sides {
+    width: 100%;
+    height: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+  
+  .navigation-container--top-left {
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .navigation-container--top-right {
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .navigation-container--bottom-left {
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .navigation-container--bottom-right {
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* Progress Bar */
+  .slider-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .slider-progress-bar {
+    height: 100%;
+    width: 0;
+    transition-property: transform;
+    transform-origin: 0 0;
+  }
+  
+  .placeholder-container {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f8f8;
+    border: 2px dashed #ddd;
+  }
+  
+  .placeholder-message {
+    font-size: 1.2rem;
+    color: #888;
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .cards-slider--small {
+      height: 250px;
+    }
+    
+    .cards-slider--medium {
+      height: 350px;
+    }
+    
+    .cards-slider--large {
+      height: 400px;
+    }
+    
+    .card-slide__title {
+      font-size: 1.5rem;
+    }
+    
+    .card-slide__price {
+      font-size: 1rem;
+    }
+    
+    .card-slide__text-container {
+      padding: 1.5rem;
+    }
+    
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: 35px;
+      height: 35px;
+    }
+    
+    .swiper-button-prev:after,
+    .swiper-button-next:after {
+      font-size: 16px;
+    }
+    
+    .navigation-container--top-left,
+    .navigation-container--top-right,
+    .navigation-container--bottom-left,
+    .navigation-container--bottom-right {
+      gap: 8px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .cards-slider--small {
+      height: 200px;
+    }
+    
+    .cards-slider--medium {
+      height: 300px;
+    }
+    
+    .cards-slider--large {
+      height: 350px;
+    }
+    
+    .card-slide__title {
+      font-size: 1.2rem;
+    }
+    
+    .card-slide__button {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .card-slide__text-container {
+      padding: 1rem;
+    }
+    
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .swiper-button-prev:after,
+    .swiper-button-next:after {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var cardsSlider = new Swiper('.cards-slider', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      speed: {{ section.settings.slider_speed | times: 1000 }},
+      // Removed autoplay to only move on arrow click
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        }
+      }
+    });
+    
+    {% if section.settings.show_progress_bar %}
+      // Progress bar functionality
+      var progressBar = document.querySelector('.slider-progress-bar');
+      var totalSlides = cardsSlider.slides.length - cardsSlider.loopedSlides * 2;
+      
+      function updateProgressBar() {
+        var progress = (cardsSlider.realIndex) / (totalSlides - 1);
+        progressBar.style.transform = 'scaleX(' + progress + ')';
+      }
+      
+      // Initialize progress bar
+      updateProgressBar();
+      
+      // Update progress bar when slide changes
+      cardsSlider.on('slideChange', function() {
+        updateProgressBar();
+      });
+    {% endif %}
+  });
+</script>

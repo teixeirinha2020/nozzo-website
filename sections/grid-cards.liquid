@@ -1,0 +1,174 @@
+{% case section.settings.card_height %}
+{% when 'small' %}
+	{%  style %}
+	  .card {
+		height: 200px;
+	  }
+	{% endstyle %}
+{% when 'medium' %}
+	{%  style %}
+	  .card {
+		height: 400px;
+	  }
+	{% endstyle %}
+{% when 'large' %}
+	{%  style %}
+	  .card {
+		height: 600px;
+	  }
+	{% endstyle %}
+{% when 'full' %}
+	{%  style %}
+	  .card {
+		height: 100vh;
+	  }
+	{% endstyle %}
+{% endcase %}
+
+{% stylesheet %}
+.custom-cards-grid {
+	display: grid;
+	gap: {{ section.settings.grid_gap }}px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: {{ section.settings.card_radius }};
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 2rem;
+}
+
+.card .button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 768px) {
+  .custom-cards-grid.grid-1 {
+	grid-template-columns: 1fr;
+  }
+
+  .custom-cards-grid.grid-2 {
+	grid-template-columns: repeat(2, 1fr);
+  }
+}
+{% endstylesheet %}
+
+<div class="custom-cards-grid grid-{{ section.blocks.size }}">
+  {% for block in section.blocks %}
+	{% case block.type %}
+	  
+	  {% when 'product_card' %}
+		{% assign product = all_products[block.settings.product] %}
+		<a href="{{ product.url }}" class="card" style="background-image: url({{ block.settings.image | default: product.featured_image | image_url }})">
+		  <h3>{{ product.title }}</h3>
+		  <div style="margin-top: auto;">
+			<a href="{{ block.settings.button1_link }}" class="button" style="background-color: {{ block.settings.button1_bg }}; color: {{ block.settings.button1_text }}"> {{ block.settings.button1_text }} </a>
+			<a href="{{ block.settings.button2_link }}" class="button" style="background-color: {{ block.settings.button2_bg }}; color: {{ block.settings.button2_text }}"> {{ block.settings.button2_text }} </a>
+		  </div>
+		</a>
+
+	  {% when 'info_card' %}
+		<div class="card" style="background-image: url({{ block.settings.image | image_url }})">
+		  <span>{{ block.settings.span }}</span>
+		  <h3>{{ block.settings.title }}</h3>
+		  <h2 style="font-family: cursive;">{{ block.settings.fancy_title }}</h2>
+		  <p>{{ block.settings.text }}</p>
+		  <a href="{{ block.settings.button_link }}" class="button" style="background-color: {{ block.settings.button_bg }}; color: {{ block.settings.button_text }}">{{ block.settings.button_text }}</a>
+		</div>
+
+	{% endcase %}
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Custom Cards Grid",
+  "settings": [
+	{
+	  "type": "range",
+	  "id": "grid_gap",
+	  "label": "Gap entre cards",
+	  "min": 0,
+	  "max": 100,
+	  "step": 4,
+	  "default": 16
+	},
+	{
+	  "type": "select",
+	  "id": "card_height",
+	  "label": "Altura dos cards",
+	  "options": [
+		{ "value": "small", "label": "Pequeno" },
+		{ "value": "medium", "label": "Médio" },
+		{ "value": "large", "label": "Grande" },
+		{ "value": "full", "label": "100vh" }
+	  ],
+	  "default": "medium"
+	},
+	{
+	  "type": "select",
+	  "id": "card_radius",
+	  "label": "Bordas dos cards",
+	  "options": [
+		{ "value": "0px", "label": "Nenhuma" },
+		{ "value": "8px", "label": "Pequena" },
+		{ "value": "16px", "label": "Média" },
+		{ "value": "32px", "label": "Grande" },
+		{ "value": "9999px", "label": "Total (full)" }
+	  ],
+	  "default": "16px"
+	}
+  ],
+  "blocks": [
+	{
+	  "type": "product_card",
+	  "name": "Product Card",
+	  "settings": [
+		{ "type": "product", "id": "product_product", "label": "Produto" },
+		{ "type": "image_picker", "id": "product_image", "label": "Imagem personalizada" },
+		{ "type": "url", "id": "product_button1_link", "label": "Link botão 1" },
+		{ "type": "text", "id": "product_button1_text", "label": "Texto botão 1", "default": "Comprar" },
+		{ "type": "color", "id": "product_button1_bg", "label": "Cor fundo botão 1", "default": "#000000" },
+		{ "type": "color", "id": "product_button1_text_color", "label": "Cor texto botão 1", "default": "#ffffff" },
+		{ "type": "url", "id": "product_button2_link", "label": "Link botão 2" },
+		{ "type": "text", "id": "product_button2_text", "label": "Texto botão 2", "default": "Saber mais" },
+		{ "type": "color", "id": "product_button2_bg", "label": "Cor fundo botão 2", "default": "#ffffff" },
+		{ "type": "color", "id": "product_button2_text_color", "label": "Cor texto botão 2", "default": "#000000" }
+	  ]
+	},
+	{
+	  "type": "info_card",
+	  "name": "Info Card",
+	  "settings": [
+		{ "type": "image_picker", "id": "info_image", "label": "Imagem ou vídeo de fundo" },
+		{ "type": "text", "id": "info_span", "label": "Span", "default": "Texto acima do título" },
+		{ "type": "text", "id": "info_title", "label": "Título" },
+		{ "type": "text", "id": "info_fancy_title", "label": "Título estilizado" },
+		{ "type": "textarea", "id": "info_text", "label": "Parágrafo" },
+		{ "type": "url", "id": "info_button_link", "label": "Link botão" },
+		{ "type": "text", "id": "info_button_text", "label": "Texto botão", "default": "Saber mais" },
+		{ "type": "color", "id": "info_button_bg", "label": "Cor fundo botão", "default": "#000000" },
+		{ "type": "color", "id": "info_button_text_color", "label": "Cor texto botão", "default": "#ffffff" }
+	  ]
+	}
+  ],
+  "max_blocks": 10,
+  "presets": [
+	{
+	  "name": "Cards Grid Personalizável",
+	  "blocks": [
+		{ "type": "product_card" },
+		{ "type": "info_card" }
+	  ]
+	}
+  ]
+}
+{% endschema %}

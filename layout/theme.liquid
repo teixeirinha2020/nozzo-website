@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -34,7 +36,8 @@
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
-    <script src="https://unpkg.com/lenis@1.3.1/dist/lenis.min.js" async="async"></script> 
+    <script src="https://unpkg.com/lenis@1.3.1/dist/lenis.min.js" defer="defer"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer="defer"></script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
@@ -375,16 +378,17 @@
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    <script>
+    <script defer="defer">
+      document.addEventListener("DOMContentLoaded", function () {
+        const lenis = new Lenis({
+          autoRaf: true,
+        });
+        // Listen for the scroll event and log the event data
+        lenis.on('scroll', (e) => {
+          console.log(e);
+        });
+      });
       // Initialize Lenis
-      const lenis = new Lenis({
-        autoRaf: true,
-      });
-
-      // Listen for the scroll event and log the event data
-      lenis.on('scroll', (e) => {
-        console.log(e);
-      });
     </script>
 
   </body>
