@@ -3,6 +3,20 @@
   "name": "Cards Slider",
   "settings": [
     {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Section Title",
+      "info": "This title will be displayed above the slider."
+    },
+    {
+      "type": "color",
+      "id": "section_title_color",
+      "label": "Section Title Color",
+      "default": "#000000",
+      "info": "Choose a color for the section title."
+    },
+    {
       "type": "select",
       "id": "card_height",
       "label": "Card Height",
@@ -219,61 +233,68 @@
 <div class="cards-slider-section"  data-arrows-position="{{ section.settings.arrows_position }}" style="margin-top: {{ section.settings.margin_top }}px; margin-bottom: {{ section.settings.margin_bottom }}px;">
     {% if section.blocks.size > 0 %}
     <div class="cards-slider-container cards-order--{{ row_order }}">
+      {% if row_order == 'not-reverse' %}
+      <div class="cards-title"><h1 style="color: {{ section.settings.section_title_color }}; margin: 0;">{{ section.settings.section_title }}</h1></div>
+      {% endif %}
+      <div class="cards-slider-wrapper">
         <div class="cards-slider cards-slider--{{ section.settings.card_height }} swiper-container">
             <div class="swiper-wrapper">
-            {% for block in section.blocks %}
-                {% if block.type == 'product_card' and block.settings.product != blank %}
-                {% assign product = block.settings.product %}
-                {% assign background_image = block.settings.background_image | default: product.featured_image %}
-                {% assign card_title = block.settings.title | default: product.title %}
-                {% assign button_text = block.settings.button_text | default: 'Shop Now' %}
-
-                <div class="card-slide swiper-slide" {{ block.shopify_attributes }}>
-                    <a href="{{ product.url }}" class="card-slide__link">
-                    <div class="card-slide__content">
-                        <div class="card-slide__background-wrapper">
-                        <div class="card-slide__background">
-                            {% if background_image != blank %}
-                            {% assign img_url = background_image | img_url: '1200x' %}
-                            <img src="{{ img_url }}" alt="{{ card_title }}" loading="lazy">
-                            {% else %}
-                            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                            {% endif %}
-                        </div>
-                        <div class="card-slide__overlay"></div>
-                        </div>
-                        
-                        <div class="card-slide__text-container">
-                        <h3 class="card-slide__title" style="color: {{ block.settings.title_color }}">{{ card_title }}</h3>
-                        
-                        {% if block.settings.price_text != blank %}
-                            <div class="card-slide__price" style="color: {{ block.settings.price_color }}">
-                            {{ block.settings.price_text }}
-                            </div>
-                        {% endif %}
-                        
-                        <div class="card-slide__button-wrapper">
-                            <span class="card-slide__button" 
-                            style="background-color: {{ block.settings.button_color }}; color: {{ block.settings.button_text_color }}">
-                            {{ button_text }}
-                            </span>
-                        </div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                {% endif %}
-            {% endfor %}
+              {% for block in section.blocks %}
+                  {% if block.type == 'product_card' and block.settings.product != blank %}
+                  {% assign product = block.settings.product %}
+                  {% assign background_image = block.settings.background_image | default: product.featured_image %}
+                  {% assign card_title = block.settings.title | default: product.title %}
+                  {% assign button_text = block.settings.button_text | default: 'Shop Now' %}
+  
+                  <div class="card-slide swiper-slide" {{ block.shopify_attributes }}>
+                      <a href="{{ product.url }}" class="card-slide__link">
+                      <div class="card-slide__content">
+                          <div class="card-slide__background-wrapper">
+                          <div class="card-slide__background">
+                              {% if background_image != blank %}
+                              {% assign img_url = background_image | img_url: '1200x' %}
+                              <img src="{{ img_url }}" alt="{{ card_title }}" loading="lazy">
+                              {% else %}
+                              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                              {% endif %}
+                          </div>
+                          <div class="card-slide__overlay"></div>
+                          </div>
+                          
+                          <div class="card-slide__text-container">
+                          <h3 class="card-slide__title" style="color: {{ block.settings.title_color }}">{{ card_title }}</h3>
+                          
+                          {% if block.settings.price_text != blank %}
+                              <div class="card-slide__price" style="color: {{ block.settings.price_color }}">
+                              {{ block.settings.price_text }}
+                              </div>
+                          {% endif %}
+                          
+                          <div class="card-slide__button-wrapper">
+                              <span class="card-slide__button" 
+                              style="background-color: {{ block.settings.button_color }}; color: {{ block.settings.button_text_color }}">
+                              {{ button_text }}
+                              </span>
+                          </div>
+                          </div>
+                      </div>
+                      </a>
+                  </div>
+                  {% endif %}
+              {% endfor %}
             </div>
         </div>
-
         {% if section.settings.show_progress_bar %}
-            <div class="slider-progress">
-                <span class="slider-progress-bar" style="background-color: {{ section.settings.progress_bar_color }}"></span>
-            </div>
+          <div class="slider-progress">
+              <span class="slider-progress-bar" style="background-color: {{ section.settings.progress_bar_color }}"></span>
+          </div>
         {% endif %}
-      
-        <div class="navigation-container navigation-container--{{ section.settings.arrows_position }}">
+      </div>
+      <div class="navigation-text-container navigation-text-container--{{ section.settings.arrows_position }}" {% if row_order == 'not-reverse' %}class="text-visible"{% endif %}>
+        {% if row_order == 'reverse' %}
+        <div class="cards-title"><h1 style="color: {{ section.settings.section_title_color }}; margin: 0;">{{ section.settings.section_title }}</h1></div>
+        {% endif %}
+        <div class="navigation-container">
             <div class="swiper-button-prev" 
                 style="background-color: {{ section.settings.arrows_background }}; color: {{ section.settings.arrows_color }}">
             </div>
@@ -281,6 +302,7 @@
                 style="background-color: {{ section.settings.arrows_background }}; color: {{ section.settings.arrows_color }}">
             </div>
         </div>
+      </div>
     </div>
     {% else %}
         <div class="placeholder-container" style="padding: {{ section.settings.padding }}px;">
@@ -303,20 +325,29 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.cards-slider-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
+}
+
+.cards-title {
+  display: flex;
+  justify-content: left;
 }
 
 .cards-order--reverse {
     flex-direction: column-reverse;
-    .slider-progress{
-        margin-top: 20px;
-    }
 }
 
 .cards-order--not-reverse {
     flex-direction: column;
     .slider-progress {
-        margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 }
 
@@ -324,8 +355,8 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin-bottom: 24px; /* Add space for progress bar */
-    margin-top: 24px; /* Add space for progress bar */
+    margin-bottom: 20px; /* Add space for progress bar */
+    margin-top: 14px; /* Add space for progress bar */
 }
 
 .cards-slider--small {
@@ -429,9 +460,40 @@
 }
   
 /* Navigation Styles */
+
+.navigation-text-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+}
+
+/* Arrow Positions */  
+.navigation-text-container--top-left {
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    .h1 {
+      text-align: right;
+    }
+}
+  
+.navigation-text-container--top-right {
+    justify-content: space-between;
+    flex-direction: row;
+}
+  
+.navigation-text-container--bottom-left {
+    justify-content: left;
+    flex-direction: row;
+}
+  
+.navigation-text-container--bottom-right {
+    justify-content: right;
+    flex-direction: row;
+}
+
 .navigation-container {
     position: relative;
-    width: 100%;
     height: 40px;
     gap: 10px;
     display: flex;
@@ -463,22 +525,6 @@
     font-size: 18px;
 }
   
-/* Arrow Positions */  
-.navigation-container--top-left {
-    justify-content: left;
-}
-  
-.navigation-container--top-right {
-    justify-content: right;
-}
-  
-.navigation-container--bottom-left {
-    justify-content: left;
-}
-  
-.navigation-container--bottom-right {
-    justify-content: right;
-}
   
 /* Progress Bar */
 .slider-progress {
