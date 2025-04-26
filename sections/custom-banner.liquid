@@ -1,0 +1,650 @@
+{% schema %}
+{
+  "name": "Custom Banner",
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": "Section Height",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "big",
+          "label": "Big"
+        },
+        {
+          "value": "vh",
+          "label": "Viewport Height (100vh)"
+        },
+        {
+          "value": "adapt",
+          "label": "Adapt to Content"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background Type",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "video",
+          "label": "Video"
+        }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image",
+      "info": "Recommended size: 1800 x 1000px"
+    },
+    {
+      "type": "video_url",
+      "id": "background_video",
+      "label": "Background Video",
+      "accept": ["youtube", "vimeo"],
+      "info": "Add a YouTube or Vimeo URL",
+      "placeholder": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_video",
+      "label": "Loop Video",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "mute_video",
+      "label": "Mute Video",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "select",
+      "id": "content_position_desktop",
+      "label": "Content Position (Desktop)",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "content_position_mobile",
+      "label": "Content Position (Mobile)",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "range",
+      "id": "space_between",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Between Text and Button",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title_text",
+          "label": "Title Text",
+          "default": "Your Title Here"
+        },
+        {
+          "type": "color_background",
+          "id": "title_color",
+          "label": "Title Color",
+          "default": "#000000"
+        },
+        {
+          "type": "font_picker",
+          "id": "title_font",
+          "label": "Title Font",
+          "default": "helvetica_n4"
+        },
+        {
+          "type": "select",
+          "id": "title_weight",
+          "label": "Font Weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "Regular"
+            },
+            {
+              "value": "500",
+              "label": "Medium"
+            },
+            {
+              "value": "600",
+              "label": "Semibold"
+            },
+            {
+              "value": "700",
+              "label": "Bold"
+            }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "select",
+          "id": "title_size",
+          "label": "Font Size",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            }
+          ],
+          "default": "h2"
+        }
+      ]
+    },
+    {
+      "type": "span",
+      "name": "Paragraph",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "span_text",
+          "label": "Paragraph Text",
+          "default": "Add your paragraph text here to describe your product, service, or promotion."
+        },
+        {
+          "type": "color",
+          "id": "span_color",
+          "label": "Text Color",
+          "default": "#666666"
+        },
+        {
+          "type": "font_picker",
+          "id": "span_font",
+          "label": "Font",
+          "default": "helvetica_n4"
+        },
+        {
+          "type": "select",
+          "id": "span_weight",
+          "label": "Font Weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "Regular"
+            },
+            {
+              "value": "500",
+              "label": "Medium"
+            },
+            {
+              "value": "600",
+              "label": "Semibold"
+            },
+            {
+              "value": "700",
+              "label": "Bold"
+            }
+          ],
+          "default": "400"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Text Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color",
+          "label": "Background Color",
+          "default": "#000000"
+        },
+        {
+          "type": "font_picker",
+          "id": "button_font",
+          "label": "Font",
+          "default": "helvetica_n4"
+        },
+        {
+          "type": "select",
+          "id": "button_weight",
+          "label": "Font Weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "Regular"
+            },
+            {
+              "value": "500",
+              "label": "Medium"
+            },
+            {
+              "value": "600",
+              "label": "Semibold"
+            },
+            {
+              "value": "700",
+              "label": "Bold"
+            }
+          ],
+          "default": "600"
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Border Radius",
+          "default": 4
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Banner",
+      "category": "Custom Content",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "title"
+        },
+        {
+          "type": "span"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="custom-banner custom-banner--{{ section.settings.section_height }} custom-banner--{{ section.settings.content_position_desktop }}-desktop custom-banner--{{ section.settings.content_position_mobile }}-mobile">
+  <div class="custom-banner__background">
+    {% if section.settings.background_type == 'image' and section.settings.background_image != blank %}
+      {% assign img_url = section.settings.background_image | img_url: '2000x' %}
+      <div class="custom-banner__image">
+        <img src="{{ img_url }}" alt="{{ section.settings.heading }}" loading="lazy">
+      </div>
+    {% elsif section.settings.background_type == 'video' and section.settings.background_video != blank %}
+      <div class="custom-banner__video-container">
+        {% if section.settings.background_video.type == 'youtube' %}
+          <div class="custom-banner__iframe-wrapper">
+            <iframe 
+              class="custom-banner__iframe"
+              src="https://www.youtube.com/embed/{{ section.settings.background_video.id }}?playsinline=1&controls=0&rel=0&autoplay=1&mute={{ section.settings.mute_video | default: 1 }}&loop={{ section.settings.loop_video | default: 1 }}&playlist={{ section.settings.background_video.id }}"
+              frameborder="0"
+              allowfullscreen
+              allow="autoplay; encrypted-media"
+            ></iframe>
+          </div>
+        {% elsif section.settings.background_video.type == 'vimeo' %}
+          <div class="custom-banner__iframe-wrapper">
+            <iframe 
+              class="custom-banner__iframe"
+              src="https://player.vimeo.com/video/{{ section.settings.background_video.id }}?background=1&autoplay=1&loop={{ section.settings.loop_video | default: 1 }}&byline=0&title=0{% if section.settings.mute_video %}&muted=1{% endif %}"
+              frameborder="0"
+              allowfullscreen
+              allow="autoplay; encrypted-media"
+            ></iframe>
+          </div>
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="custom-banner__placeholder">
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {% endif %}
+    
+    <div class="custom-banner__overlay"></div>
+  </div>
+  
+  <div class="custom-banner__content-container">
+    <div class="custom-banner__content" style="--space-between: {{ section.settings.space_between }}px">
+      <div class="custom-banner__text-content">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'title' %}
+              <h{{ block.settings.title_size | replace: 'h', '' }} 
+                class="custom-banner__title"
+                style="{% if block.settings.title_color contains 'gradient' %}background: {{ block.settings.title_color }};-webkit-background-clip: text;-webkit-text-fill-color: transparent;{% else %}color: {{ block.settings.title_color }};{% endif %}
+                       font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+                       font-weight: {{ block.settings.title_weight }};"
+                {{ block.shopify_attributes }}
+              >
+                {{ block.settings.title_text }}
+              </h{{ block.settings.title_size | replace: 'h', '' }}>
+            
+            {% when 'span' %}
+              <div class="custom-banner__paragraph"
+                style="color: {{ block.settings.span_color }};
+                       font-family: {{ block.settings.span_font.family }}, {{ block.settings.span_font.fallback_families }};
+                       font-weight: {{ block.settings.span_weight }};"
+                {{ block.shopify_attributes }}
+              >
+                {{ block.settings.span_text }}
+              </div>
+              
+          {% endcase %}
+        {% endfor %}
+      </div>
+      
+      <div class="custom-banner__button-container">
+        {% for block in section.blocks %}
+          {% if block.type == 'button' %}
+            <a href="{{ block.settings.button_link }}" 
+              class="custom-banner__button"
+              style="color: {{ block.settings.button_text_color }};
+                     background-color: {{ block.settings.button_bg_color }};
+                     font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
+                     font-weight: {{ block.settings.button_weight }};
+                     border-radius: {{ block.settings.button_radius }}px;"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.button_text }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Heights */
+  .custom-banner--small {
+    height: 400px;
+  }
+  
+  .custom-banner--medium {
+    height: 600px;
+  }
+  
+  .custom-banner--big {
+    height: 800px;
+  }
+  
+  .custom-banner--vh {
+    height: 100vh;
+  }
+  
+  .custom-banner--adapt {
+    min-height: 400px;
+  }
+  
+  /* Background */
+  .custom-banner__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .custom-banner__image,
+  .custom-banner__video-container,
+  .custom-banner__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .custom-banner__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .custom-banner__placeholder {
+    background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custom-banner__placeholder svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+  }
+  
+  .custom-banner__iframe-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .custom-banner__iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .custom-banner__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Content */
+  .custom-banner__content-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .custom-banner__content {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    gap: var(--space-between);
+  }
+  
+  /* Content position desktop */
+  .custom-banner--left-desktop .custom-banner__content {
+    margin-right: auto;
+  }
+  
+  .custom-banner--right-desktop .custom-banner__content {
+    margin-left: auto;
+  }
+  
+  /* Text elements */
+  .custom-banner__title {
+    margin: 0 0 10px;
+  }
+  
+  .custom-banner h1.custom-banner__title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+  }
+  
+  .custom-banner h2.custom-banner__title {
+    font-size: 2.8rem;
+    line-height: 1.2;
+  }
+  
+  .custom-banner h3.custom-banner__title {
+    font-size: 2.2rem;
+    line-height: 1.3;
+  }
+  
+  .custom-banner__paragraph {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  /* Button */
+  .custom-banner__button {
+    display: inline-block;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+    transition: opacity 0.3s ease;
+  }
+  
+  .custom-banner__button:hover {
+    opacity: 0.9;
+  }
+  
+  /* Mobile styles */
+  @media screen and (max-width: 768px) {
+    .custom-banner--small {
+      height: 300px;
+    }
+    
+    .custom-banner--medium {
+      height: 450px;
+    }
+    
+    .custom-banner--big {
+      height: 550px;
+    }
+    
+    .custom-banner__content {
+      max-width: 100%;
+    }
+    
+    .custom-banner h1.custom-banner__title {
+      font-size: 2.5rem;
+    }
+    
+    .custom-banner h2.custom-banner__title {
+      font-size: 2rem;
+    }
+    
+    .custom-banner h3.custom-banner__title {
+      font-size: 1.6rem;
+    }
+    
+    .custom-banner__paragraph {
+      font-size: 1rem;
+    }
+    
+    /* Mobile content positioning */
+    .custom-banner--top-mobile .custom-banner__content {
+      flex-direction: column;
+    }
+    
+    .custom-banner--bottom-mobile .custom-banner__content {
+      flex-direction: column-reverse;
+    }
+    
+    /* Content alignment on mobile */
+    .custom-banner--left-desktop .custom-banner__content,
+    .custom-banner--right-desktop .custom-banner__content {
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .custom-banner__button-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+</style>

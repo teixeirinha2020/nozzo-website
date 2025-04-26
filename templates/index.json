@@ -46,15 +46,15 @@
       "settings": {
         "image": "shopify://shop_images/silhouetted-couples-look-out-at-a-city-at-night.jpg",
         "image_overlay_opacity": 0,
-        "image_height": "medium",
+        "image_height": "large",
         "desktop_content_position": "middle-center",
         "show_text_box": true,
         "desktop_content_alignment": "center",
-        "color_scheme": "",
-        "image_behavior": "none",
+        "color_scheme": "scheme-4",
+        "image_behavior": "ambient",
         "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
+        "stack_images_on_mobile": false,
+        "show_text_below": false
       }
     },
     "image_banner_wi4AWT": {
@@ -191,7 +191,6 @@
         "slider_speed": 300,
         "margin_top": 20,
         "margin_bottom": 20,
-        "padding": 40,
         "card_border_radius": 20,
         "space_between_cards": 40,
         "show_progress_bar": true,
