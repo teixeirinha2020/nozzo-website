@@ -112,6 +112,7 @@
           "type": "product_card",
           "settings": {
             "product": "magnetic-strip",
+            "background_image": "shopify://shop_images/imagem_histrips.webp",
             "title": "",
             "title_color": "#ffffff",
             "price_text": "",
@@ -184,12 +185,17 @@
       "name": "Cards Slider",
       "settings": {
         "card_height": "large",
-        "arrows_position": "bottom-right",
-        "arrows_background": "#ffffff",
-        "arrows_color": "#000000",
+        "arrows_position": "top-right",
+        "arrows_background": "#b200ff",
+        "arrows_color": "#ffffff",
         "slider_speed": 300,
+        "margin_top": 20,
+        "margin_bottom": 20,
+        "padding": 40,
+        "card_border_radius": 20,
+        "space_between_cards": 40,
         "show_progress_bar": true,
-        "progress_bar_color": "#000000"
+        "progress_bar_color": "#ff0000"
       }
     }
   },

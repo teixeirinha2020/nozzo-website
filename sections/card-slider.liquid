@@ -90,16 +90,6 @@
     },
     {
         "type": "range",
-        "id": "padding",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "label": "Lateral Padding",
-        "unit": "px",
-        "default": 40
-    },
-    {
-        "type": "range",
         "id": "card_border_radius",
         "min": 0,
         "max": 50,
@@ -226,9 +216,9 @@
     {%  assign row_order = 'reverse' %}
 {% endif %}
 
-<div class="cards-slider-section" data-arrows-position="{{ section.settings.arrows_position }}" style="margin-top: {{ section.settings.margin_top }}px; margin-bottom: {{ section.settings.margin_bottom }}px;">
+<div class="cards-slider-section"  data-arrows-position="{{ section.settings.arrows_position }}" style="margin-top: {{ section.settings.margin_top }}px; margin-bottom: {{ section.settings.margin_bottom }}px;">
     {% if section.blocks.size > 0 %}
-    <div class="cards-slider-container cards-order--{{ row_order }}" style="padding: 0 {{ section.settings.padding }}px;">
+    <div class="cards-slider-container cards-order--{{ row_order }}">
         <div class="cards-slider cards-slider--{{ section.settings.card_height }} swiper-container">
             <div class="swiper-wrapper">
             {% for block in section.blocks %}
@@ -305,6 +295,7 @@
     width: 100%;
     position: relative;
     margin: 0 auto;
+    padding: 0 40px;
 }
 
 .cards-slider-container {
@@ -315,12 +306,18 @@
     align-items: center;
 }
 
-.cards-slider-order--reverse {
+.cards-order--reverse {
     flex-direction: column-reverse;
+    .slider-progress{
+        margin-top: 20px;
+    }
 }
 
-.cards-slider-order--not-reverse {
+.cards-order--not-reverse {
     flex-direction: column;
+    .slider-progress {
+        margin-bottom: 20px;
+    }
 }
 
 .cards-slider {
@@ -328,14 +325,15 @@
     width: 100%;
     overflow: hidden;
     margin-bottom: 24px; /* Add space for progress bar */
+    margin-top: 24px; /* Add space for progress bar */
 }
 
 .cards-slider--small {
-    height: 300px;
+    height: 500px;
 }
 
 .cards-slider--medium {
-    height: 500px;
+    height: 600px;
 }
   
 .cards-slider--large {
@@ -486,12 +484,11 @@
 .slider-progress {
     position: relative;
     width: 100%;
-    height: 4px;
+    height: 2px;
     background-color: rgba(0, 0, 0, 0.1);
     z-index: 10;
     border-radius: 2px;
     overflow: hidden;
-    margin-bottom: 20px;
   }
   
   .slider-progress-bar {
@@ -520,19 +517,19 @@
     /* Responsive adjustments */
     @media screen and (max-width: 1024px) {
         .cards-slider-section {
-            padding: 0 20px;
+            padding: 0 40px;
         }
         
         .cards-slider--small {
-            height: 250px;
-        }
-        
-        .cards-slider--medium {
             height: 350px;
         }
         
+        .cards-slider--medium {
+            height: 450px;
+        }
+        
         .cards-slider--large {
-            height: 400px;
+            height: 500px;
         }
         
         .card-slide__title {
@@ -552,6 +549,10 @@
             width: 35px;
             height: 35px;
         }
+
+        .navigation-container {
+            height: 35px;
+        }
         
         .swiper-button-prev:after,
         .swiper-button-next:after {
@@ -564,28 +565,23 @@
         .navigation-container--bottom-right {
             gap: 8px;
         }
-        
-        .navigation-container--top-left,
-        .navigation-container--top-right {
-            top: -50px;
-        }
     }
     
   @media screen and (max-width: 480px) {
       .cards-slider-section {
-          padding: 0 15px;
+          padding: 0 35px;
         }
         
         .cards-slider--small {
-            height: 200px;
-        }
-        
-        .cards-slider--medium {
             height: 300px;
         }
         
-        .cards-slider--large {
+        .cards-slider--medium {
             height: 350px;
+        }
+        
+        .cards-slider--large {
+            height: 400px;
         }
         
         .card-slide__title {
@@ -604,6 +600,10 @@
         .swiper-button-prev,
         .swiper-button-next {
             width: 30px;
+            height: 30px;
+        }
+
+        .navigation-container {
             height: 30px;
         }
         
@@ -635,6 +635,7 @@
         },
         1024: {
           slidesPerView: 3,
+        },
         1440: {
           slidesPerView: 4,
         }
