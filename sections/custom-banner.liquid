@@ -53,13 +53,31 @@
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Background Image",
+      "label": "Background Image (Desktop)",
       "info": "Recommended size: 1800 x 1000px"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background Image (Mobile)",
+      "info": "Recommended size: 800 x 1200px. If not selected, desktop image will be used."
+    },
+    {
+      "type": "url",
+      "id": "background_video_url",
+      "label": "Video URL (Desktop)",
+      "info": "Enter direct video URL (MP4 recommended for best compatibility)"
+    },
+    {
+      "type": "url",
+      "id": "background_video_url_mobile",
+      "label": "Video URL (Mobile)",
+      "info": "If not provided, desktop video will be used on mobile"
     },
     {
       "type": "video_url",
       "id": "background_video",
-      "label": "Background Video",
+      "label": "YouTube/Vimeo Video",
       "accept": ["youtube", "vimeo"],
       "info": "Add a YouTube or Vimeo URL",
       "placeholder": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
@@ -114,13 +132,87 @@
     },
     {
       "type": "range",
-      "id": "space_between",
+      "id": "space_between_desktop",
       "min": 10,
       "max": 100,
       "step": 5,
       "unit": "px",
-      "label": "Space Between Text and Button",
+      "label": "Space Between Elements (Desktop)",
       "default": 30
+    },
+    {
+      "type": "range",
+      "id": "space_between_mobile",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Between Elements (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Animation Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animations",
+      "label": "Enable GSAP Animations",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "animation_type",
+      "label": "Animation Type",
+      "options": [
+        {
+          "value": "fade",
+          "label": "Fade In"
+        },
+        {
+          "value": "slide_up",
+          "label": "Slide Up"
+        },
+        {
+          "value": "slide_left",
+          "label": "Slide from Left"
+        },
+        {
+          "value": "slide_right",
+          "label": "Slide from Right"
+        },
+        {
+          "value": "scale",
+          "label": "Scale In"
+        }
+      ],
+      "default": "slide_up"
+    },
+    {
+      "type": "select",
+      "id": "animation_trigger",
+      "label": "Animation Trigger",
+      "options": [
+        {
+          "value": "onload",
+          "label": "On Page Load"
+        },
+        {
+          "value": "scroll",
+          "label": "On Scroll"
+        }
+      ],
+      "default": "onload"
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Animation Delay Between Elements",
+      "default": 0.2
     }
   ],
   "blocks": [
@@ -177,6 +269,22 @@
           "label": "Font Size",
           "options": [
             {
+              "value": "ultra",
+              "label": "Ultra (Largest)"
+            },
+            {
+              "value": "mega",
+              "label": "Mega"
+            },
+            {
+              "value": "hero",
+              "label": "Hero"
+            },
+            {
+              "value": "display",
+              "label": "Display"
+            },
+            {
               "value": "h1",
               "label": "H1"
             },
@@ -187,6 +295,18 @@
             {
               "value": "h3",
               "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            },
+            {
+              "value": "h6",
+              "label": "H6 (Smallest)"
             }
           ],
           "default": "h2"
@@ -239,6 +359,42 @@
             }
           ],
           "default": "400"
+        },
+        {
+          "type": "select",
+          "id": "span_size",
+          "label": "Font Size",
+          "options": [
+            {
+              "value": "3xl",
+              "label": "3X Large"
+            },
+            {
+              "value": "2xl",
+              "label": "2X Large"
+            },
+            {
+              "value": "xl",
+              "label": "Extra Large"
+            },
+            {
+              "value": "lg",
+              "label": "Large"
+            },
+            {
+              "value": "md",
+              "label": "Medium"
+            },
+            {
+              "value": "sm",
+              "label": "Small"
+            },
+            {
+              "value": "xs",
+              "label": "Extra Small"
+            }
+          ],
+          "default": "md"
         }
       ]
     },
@@ -301,6 +457,38 @@
           "default": "600"
         },
         {
+          "type": "select",
+          "id": "button_size",
+          "label": "Font Size",
+          "options": [
+            {
+              "value": "2xl",
+              "label": "2X Large"
+            },
+            {
+              "value": "xl",
+              "label": "Extra Large"
+            },
+            {
+              "value": "lg",
+              "label": "Large"
+            },
+            {
+              "value": "md",
+              "label": "Medium"
+            },
+            {
+              "value": "sm",
+              "label": "Small"
+            },
+            {
+              "value": "xs",
+              "label": "Extra Small"
+            }
+          ],
+          "default": "md"
+        },
+        {
           "type": "range",
           "id": "button_radius",
           "min": 0,
@@ -309,6 +497,30 @@
           "unit": "px",
           "label": "Border Radius",
           "default": 4
+        },
+        {
+          "type": "select",
+          "id": "button_animation",
+          "label": "Button Animation",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "scale",
+              "label": "Scale Effect"
+            },
+            {
+              "value": "slide",
+              "label": "Slide Effect"
+            },
+            {
+              "value": "glow",
+              "label": "Glow Effect"
+            }
+          ],
+          "default": "none"
         }
       ]
     }
@@ -336,16 +548,83 @@
 }
 {% endschema %}
 
-<div class="custom-banner custom-banner--{{ section.settings.section_height }} custom-banner--{{ section.settings.content_position_desktop }}-desktop custom-banner--{{ section.settings.content_position_mobile }}-mobile">
+{%- if section.settings.enable_animations -%}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+{%- endif -%}
+
+<div id="CustomBanner-{{ section.id }}" class="custom-banner custom-banner--{{ section.settings.section_height }} custom-banner--{{ section.settings.content_position_desktop }}-desktop custom-banner--{{ section.settings.content_position_mobile }}-mobile"
+  data-section-id="{{ section.id }}"
+  data-enable-animations="{{ section.settings.enable_animations }}"
+  data-animation-type="{{ section.settings.animation_type }}"
+  data-animation-delay="{{ section.settings.animation_delay }}"
+  data-animation-trigger="{{ section.settings.animation_trigger }}"
+>
   <div class="custom-banner__background">
-    {% if section.settings.background_type == 'image' and section.settings.background_image != blank %}
-      {% assign img_url = section.settings.background_image | img_url: '2000x' %}
+    {% if section.settings.background_type == 'image' %}
       <div class="custom-banner__image">
-        <img src="{{ img_url }}" alt="{{ section.settings.heading }}" loading="lazy">
+        {% if section.settings.background_image != blank %}
+          {% assign desktop_img_url = section.settings.background_image | img_url: 'master' %}
+          <img class="custom-banner__image-desktop" 
+               src="{{ desktop_img_url }}" 
+               alt="{{ section.settings.heading | default: 'Banner' }}" 
+               loading="eager"
+               width="{{ section.settings.background_image.width }}"
+               height="{{ section.settings.background_image.height }}">
+        {% endif %}
+        
+        {% if section.settings.background_image_mobile != blank %}
+          {% assign mobile_img_url = section.settings.background_image_mobile | img_url: 'master' %}
+          <img class="custom-banner__image-mobile" 
+               src="{{ mobile_img_url }}" 
+               alt="{{ section.settings.heading | default: 'Banner' }}" 
+               loading="eager"
+               width="{{ section.settings.background_image_mobile.width }}"
+               height="{{ section.settings.background_image_mobile.height }}">
+        {% endif %}
       </div>
-    {% elsif section.settings.background_type == 'video' and section.settings.background_video != blank %}
+    {% elsif section.settings.background_type == 'video' %}
       <div class="custom-banner__video-container">
-        {% if section.settings.background_video.type == 'youtube' %}
+        {% if section.settings.background_video_url != blank %}
+          <video 
+            class="custom-banner__video custom-banner__video-desktop" 
+            autoplay 
+            playsinline
+            {% if section.settings.loop_video %}loop{% endif %} 
+            {% if section.settings.mute_video %}muted{% endif %}
+            preload="auto"
+          >
+            <source src="{{ section.settings.background_video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          
+          {% if section.settings.background_video_url_mobile != blank %}
+            <video 
+              class="custom-banner__video custom-banner__video-mobile" 
+              autoplay 
+              playsinline
+              {% if section.settings.loop_video %}loop{% endif %} 
+              {% if section.settings.mute_video %}muted{% endif %}
+              preload="auto"
+            >
+              <source src="{{ section.settings.background_video_url_mobile }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          {% else %}
+            <!-- Create a separate mobile video element that's a clone of desktop -->
+            <video 
+              class="custom-banner__video custom-banner__video-mobile custom-banner__video-mobile-fallback" 
+              autoplay 
+              playsinline
+              {% if section.settings.loop_video %}loop{% endif %} 
+              {% if section.settings.mute_video %}muted{% endif %}
+              preload="auto"
+            >
+              <source src="{{ section.settings.background_video_url }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          {% endif %}
+        {% elsif section.settings.background_video.type == 'youtube' %}
           <div class="custom-banner__iframe-wrapper">
             <iframe 
               class="custom-banner__iframe"
@@ -377,25 +656,42 @@
   </div>
   
   <div class="custom-banner__content-container">
-    <div class="custom-banner__content" style="--space-between: {{ section.settings.space_between }}px">
-      <div class="custom-banner__text-content">
+    <div class="custom-banner__content" style="--space-between-desktop: {{ section.settings.space_between_desktop }}px; --space-between-mobile: {{ section.settings.space_between_mobile }}px;">
+      <div class="custom-banner__text-content js-animate-element">
         {% for block in section.blocks %}
           {% case block.type %}
             {% when 'title' %}
-              <h{{ block.settings.title_size | replace: 'h', '' }} 
-                class="custom-banner__title"
+              {% assign title_tag = 'h2' %}
+              {% if block.settings.title_size == 'h1' %}
+                {% assign title_tag = 'h1' %}
+              {% elsif block.settings.title_size == 'h2' %}
+                {% assign title_tag = 'h2' %}
+              {% elsif block.settings.title_size == 'h3' %}
+                {% assign title_tag = 'h3' %}
+              {% elsif block.settings.title_size == 'h4' %}
+                {% assign title_tag = 'h4' %}
+              {% elsif block.settings.title_size == 'h5' %}
+                {% assign title_tag = 'h5' %}
+              {% elsif block.settings.title_size == 'h6' %}
+                {% assign title_tag = 'h6' %}
+              {% else %}
+                {% assign title_tag = 'div' %}
+              {% endif %}
+            
+              <{{ title_tag }} 
+                class="custom-banner__title custom-banner__title--{{ block.settings.title_size }} js-animate-child"
                 style="{% if block.settings.title_color contains 'gradient' %}background: {{ block.settings.title_color }};-webkit-background-clip: text;-webkit-text-fill-color: transparent;{% else %}color: {{ block.settings.title_color }};{% endif %}
-                       font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+                       font-family: {{ block.settings.title_font.family | escape }}, {{ block.settings.title_font.fallback_families | escape }};
                        font-weight: {{ block.settings.title_weight }};"
                 {{ block.shopify_attributes }}
               >
                 {{ block.settings.title_text }}
-              </h{{ block.settings.title_size | replace: 'h', '' }}>
+              </{{ title_tag }}>
             
             {% when 'span' %}
-              <div class="custom-banner__paragraph"
+              <div class="custom-banner__paragraph custom-banner__paragraph--{{ block.settings.span_size }} js-animate-child"
                 style="color: {{ block.settings.span_color }};
-                       font-family: {{ block.settings.span_font.family }}, {{ block.settings.span_font.fallback_families }};
+                       font-family: {{ block.settings.span_font.family | escape }}, {{ block.settings.span_font.fallback_families | escape }};
                        font-weight: {{ block.settings.span_weight }};"
                 {{ block.shopify_attributes }}
               >
@@ -406,14 +702,14 @@
         {% endfor %}
       </div>
       
-      <div class="custom-banner__button-container">
+      <div class="custom-banner__button-container js-animate-element">
         {% for block in section.blocks %}
           {% if block.type == 'button' %}
             <a href="{{ block.settings.button_link }}" 
-              class="custom-banner__button"
+              class="custom-banner__button custom-banner__button--{{ block.settings.button_size }} custom-banner__button--animation-{{ block.settings.button_animation }} js-animate-child"
               style="color: {{ block.settings.button_text_color }};
                      background-color: {{ block.settings.button_bg_color }};
-                     font-family: {{ block.settings.button_font.family }}, {{ block.settings.button_font.fallback_families }};
+                     font-family: {{ block.settings.button_font.family | escape }}, {{ block.settings.button_font.fallback_families | escape }};
                      font-weight: {{ block.settings.button_weight }};
                      border-radius: {{ block.settings.button_radius }}px;"
               {{ block.shopify_attributes }}
@@ -426,6 +722,108 @@
     </div>
   </div>
 </div>
+
+{% if section.settings.enable_animations %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function initBannerAnimations() {
+      const banner = document.getElementById('CustomBanner-{{ section.id }}');
+      if (!banner) return;
+      
+      const enableAnimations = banner.dataset.enableAnimations === 'true';
+      if (!enableAnimations) return;
+      
+      // Check if GSAP and ScrollTrigger are loaded
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        // Wait and try again in 500ms
+        setTimeout(initBannerAnimations, 500);
+        return;
+      }
+      
+      // Register ScrollTrigger plugin
+      gsap.registerPlugin(ScrollTrigger);
+      
+      // Get animation settings
+      const animationType = banner.dataset.animationType;
+      const animationDelay = parseFloat(banner.dataset.animationDelay);
+      const animationTrigger = banner.dataset.animationTrigger || 'onload'; // Default to onload
+      
+      // Set initial states based on animation type
+      const animateElements = banner.querySelectorAll('.js-animate-child');
+      animateElements.forEach((element, index) => {
+        switch (animationType) {
+          case 'fade':
+            gsap.set(element, { opacity: 0 });
+            break;
+          case 'slide_up':
+            gsap.set(element, { opacity: 0, y: 30 });
+            break;
+          case 'slide_left':
+            gsap.set(element, { opacity: 0, x: -30 });
+            break;
+          case 'slide_right':
+            gsap.set(element, { opacity: 0, x: 30 });
+            break;
+          case 'scale':
+            gsap.set(element, { opacity: 0, scale: 0.9 });
+            break;
+          default:
+            gsap.set(element, { opacity: 0 });
+        }
+      });
+      
+      // Create animation timeline
+      let tl = gsap.timeline();
+      
+      // Apply ScrollTrigger only if animation trigger is scroll
+      if (animationTrigger === 'scroll') {
+        tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: banner,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          }
+        });
+      }
+      
+      // Add animations to timeline
+      animateElements.forEach((element, index) => {
+        const delay = (animationTrigger === 'onload') ? 0.3 + (index * animationDelay) : index * animationDelay;
+        
+        switch (animationType) {
+          case 'fade':
+            tl.to(element, { opacity: 1, duration: 0.8, ease: "power2.out" }, delay);
+            break;
+          case 'slide_up':
+            tl.to(element, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, delay);
+            break;
+          case 'slide_left':
+            tl.to(element, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, delay);
+            break;
+          case 'slide_right':
+            tl.to(element, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, delay);
+            break;
+          case 'scale':
+            tl.to(element, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" }, delay);
+            break;
+          default:
+            tl.to(element, { opacity: 1, duration: 0.8, ease: "power2.out" }, delay);
+        }
+      });
+    }
+    
+    // Run initialization
+    initBannerAnimations();
+    
+    // Listen for Shopify section load/reload events
+    document.addEventListener('shopify:section:load', function(event) {
+      if (event.detail.sectionId === '{{ section.id }}') {
+        initBannerAnimations();
+      }
+    });
+  });
+</script>
+{% endif %}
 
 <style>
   .custom-banner {
@@ -478,6 +876,22 @@
   }
   
   .custom-banner__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .custom-banner__image-desktop {
+    display: block;
+  }
+  
+  .custom-banner__image-mobile,
+  .custom-banner__video-mobile {
+    display: none;
+  }
+  
+  .custom-banner__video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -539,7 +953,7 @@
     display: flex;
     flex-direction: column;
     max-width: 600px;
-    gap: var(--space-between);
+    gap: var(--space-between-desktop);
   }
   
   /* Content position desktop */
@@ -554,46 +968,174 @@
   /* Text elements */
   .custom-banner__title {
     margin: 0 0 10px;
-  }
-  
-  .custom-banner h1.custom-banner__title {
-    font-size: 3.5rem;
-    line-height: 1.1;
-  }
-  
-  .custom-banner h2.custom-banner__title {
-    font-size: 2.8rem;
     line-height: 1.2;
   }
   
-  .custom-banner h3.custom-banner__title {
-    font-size: 2.2rem;
+  /* Extended title sizes */
+  .custom-banner__title--ultra {
+    font-size: 6rem;
+    line-height: 0.95;
+  }
+  
+  .custom-banner__title--mega {
+    font-size: 5.2rem;
+    line-height: 0.95;
+  }
+  
+  .custom-banner__title--hero {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+  
+  .custom-banner__title--display {
+    font-size: 3.8rem;
+    line-height: 1.05;
+  }
+  
+  .custom-banner__title--h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+  
+  .custom-banner__title--h2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .custom-banner__title--h3 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .custom-banner__title--h4 {
+    font-size: 1.75rem;
     line-height: 1.3;
   }
   
+  .custom-banner__title--h5 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+  
+  .custom-banner__title--h6 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+  
   .custom-banner__paragraph {
-    font-size: 1.1rem;
-    line-height: 1.5;
     margin: 0;
+    line-height: 1.6;
+  }
+  
+  .custom-banner__paragraph--3xl {
+    font-size: 2rem;
+  }
+  
+  .custom-banner__paragraph--2xl {
+    font-size: 1.75rem;
+  }
+  
+  .custom-banner__paragraph--xl {
+    font-size: 1.5rem;
+  }
+  
+  .custom-banner__paragraph--lg {
+    font-size: 1.25rem;
+  }
+  
+  .custom-banner__paragraph--md {
+    font-size: 1rem;
+  }
+  
+  .custom-banner__paragraph--sm {
+    font-size: 0.875rem;
+  }
+  
+  .custom-banner__paragraph--xs {
+    font-size: 0.75rem;
   }
   
   /* Button */
-  .custom-banner__button {
-    display: inline-block;
-    padding: 12px 30px;
-    text-decoration: none;
-    font-size: 1rem;
-    line-height: 1.5;
-    text-align: center;
-    transition: opacity 0.3s ease;
+  .custom-banner__button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
   }
   
-  .custom-banner__button:hover {
-    opacity: 0.9;
+  .custom-banner__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 12px 30px;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    text-align: center;
+  }
+  
+  .custom-banner__button--2xl {
+    font-size: 1.5rem;
+    padding: 16px 40px;
+  }
+  
+  .custom-banner__button--xl {
+    font-size: 1.25rem;
+    padding: 14px 36px;
+  }
+  
+  .custom-banner__button--lg {
+    font-size: 1.125rem;
+    padding: 12px 32px;
+  }
+  
+  .custom-banner__button--md {
+    font-size: 1rem;
+    padding: 10px 28px;
+  }
+  
+  .custom-banner__button--sm {
+    font-size: 0.875rem;
+    padding: 8px 24px;
+  }
+  
+  .custom-banner__button--xs {
+    font-size: 0.75rem;
+    padding: 6px 20px;
+  }
+  
+  /* Button animations */
+  .custom-banner__button--animation-scale:hover {
+    transform: scale(1.05);
+  }
+  
+  .custom-banner__button--animation-slide {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .custom-banner__button--animation-slide:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    transition: height 0.3s ease;
+    z-index: -1;
+  }
+  
+  .custom-banner__button--animation-slide:hover:after {
+    height: 100%;
+  }
+  
+  .custom-banner__button--animation-glow:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
   }
   
   /* Mobile styles */
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 989px) {
     .custom-banner--small {
       height: 300px;
     }
@@ -608,43 +1150,84 @@
     
     .custom-banner__content {
       max-width: 100%;
+      gap: var(--space-between-mobile);
     }
     
-    .custom-banner h1.custom-banner__title {
+    .custom-banner__title--ultra {
+      font-size: 4rem;
+    }
+    
+    .custom-banner__title--mega {
+      font-size: 3.5rem;
+    }
+    
+    .custom-banner__title--hero {
+      font-size: 3rem;
+    }
+    
+    .custom-banner__title--display {
       font-size: 2.5rem;
     }
     
-    .custom-banner h2.custom-banner__title {
+    .custom-banner__title--h1 {
+      font-size: 2.2rem;
+    }
+    
+    .custom-banner__title--h2 {
       font-size: 2rem;
     }
     
-    .custom-banner h3.custom-banner__title {
-      font-size: 1.6rem;
+    .custom-banner__title--h3 {
+      font-size: 1.75rem;
     }
     
-    .custom-banner__paragraph {
-      font-size: 1rem;
+    .custom-banner__image-desktop,
+    .custom-banner__video-desktop {
+      display: none;
     }
     
-    /* Mobile content positioning */
+    .custom-banner__image-mobile,
+    .custom-banner__video-mobile {
+      display: block;
+    }
+    
+    /* Content position mobile */
     .custom-banner--top-mobile .custom-banner__content {
-      flex-direction: column;
+      margin: 40px 0 auto;
     }
     
     .custom-banner--bottom-mobile .custom-banner__content {
-      flex-direction: column-reverse;
+      margin: auto 0 40px;
+    }
+  }
+  
+  @media screen and (max-width: 749px) {
+    .custom-banner__content-container {
+      padding: 0 15px;
     }
     
-    /* Content alignment on mobile */
-    .custom-banner--left-desktop .custom-banner__content,
-    .custom-banner--right-desktop .custom-banner__content {
-      margin: 0 auto;
-      text-align: center;
+    .custom-banner__title--ultra {
+      font-size: 3rem;
     }
     
-    .custom-banner__button-container {
-      display: flex;
-      justify-content: center;
+    .custom-banner__title--mega {
+      font-size: 2.8rem;
+    }
+    
+    .custom-banner__title--hero {
+      font-size: 2.4rem;
+    }
+    
+    .custom-banner__paragraph--3xl {
+      font-size: 1.6rem;
+    }
+    
+    .custom-banner__paragraph--2xl {
+      font-size: 1.4rem;
+    }
+    
+    .custom-banner__paragraph--xl {
+      font-size: 1.2rem;
     }
   }
 </style>

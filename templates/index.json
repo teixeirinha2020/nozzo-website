@@ -9,6 +9,59 @@
  */
 {
   "sections": {
+    "custom_banner_AMNhVf": {
+      "type": "custom-banner",
+      "blocks": {
+        "title_PMTTXc": {
+          "type": "title",
+          "settings": {
+            "title_text": "Your Title Here",
+            "title_color": "#ffffff",
+            "title_font": "poppins_n4",
+            "title_weight": "600",
+            "title_size": "h1"
+          }
+        },
+        "span_gnp3Gr": {
+          "type": "span",
+          "settings": {
+            "span_text": "Add your paragraph text here to describe your product, service, or promotion.",
+            "span_color": "#666666",
+            "span_font": "helvetica_n4",
+            "span_weight": "400"
+          }
+        },
+        "button_xNJftR": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button_text_color": "#FFFFFF",
+            "button_bg_color": "#000000",
+            "button_font": "helvetica_n4",
+            "button_weight": "600",
+            "button_radius": 4
+          }
+        }
+      },
+      "block_order": [
+        "title_PMTTXc",
+        "span_gnp3Gr",
+        "button_xNJftR"
+      ],
+      "name": "Custom Banner",
+      "settings": {
+        "section_height": "vh",
+        "background_type": "image",
+        "background_image": "shopify://shop_images/silhouetted-couples-look-out-at-a-city-at-night.jpg",
+        "background_video": "",
+        "loop_video": false,
+        "mute_video": true,
+        "content_position_desktop": "left",
+        "content_position_mobile": "top",
+        "space_between": 70
+      }
+    },
     "image_banner_8rTC3T": {
       "type": "image-banner",
       "blocks": {
@@ -43,6 +96,7 @@
         "text_ffrLrg",
         "buttons_px8zrm"
       ],
+      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/silhouetted-couples-look-out-at-a-city-at-night.jpg",
         "image_overlay_opacity": 0,
@@ -91,6 +145,7 @@
         "text_iAbteg",
         "buttons_LkFaLi"
       ],
+      "disabled": true,
       "settings": {
         "image_2": "shopify://shop_images/silhouetted-couples-look-out-at-a-city-at-night.jpg",
         "image_overlay_opacity": 0,
@@ -199,6 +254,7 @@
     }
   },
   "order": [
+    "custom_banner_AMNhVf",
     "image_banner_8rTC3T",
     "image_banner_wi4AWT",
     "card_slider_cC6dPG"
