@@ -104,10 +104,98 @@
         "stack_images_on_mobile": true,
         "show_text_below": true
       }
+    },
+    "card_slider_cC6dPG": {
+      "type": "card-slider",
+      "blocks": {
+        "product_card_ENxJre": {
+          "type": "product_card",
+          "settings": {
+            "product": "magnetic-strip",
+            "title": "",
+            "title_color": "#ffffff",
+            "price_text": "",
+            "price_color": "#ffffff",
+            "button_text": "Shop Now",
+            "button_color": "#000000",
+            "button_text_color": "#ffffff"
+          }
+        },
+        "product_card_z9bfgL": {
+          "type": "product_card",
+          "settings": {
+            "product": "magnetic-strip",
+            "title": "",
+            "title_color": "#ffffff",
+            "price_text": "",
+            "price_color": "#ffffff",
+            "button_text": "Shop Now",
+            "button_color": "#000000",
+            "button_text_color": "#ffffff"
+          }
+        },
+        "product_card_33qLAn": {
+          "type": "product_card",
+          "settings": {
+            "product": "magnetic-strip",
+            "title": "",
+            "title_color": "#ffffff",
+            "price_text": "",
+            "price_color": "#ffffff",
+            "button_text": "Shop Now",
+            "button_color": "#000000",
+            "button_text_color": "#ffffff"
+          }
+        },
+        "product_card_iC6rDd": {
+          "type": "product_card",
+          "settings": {
+            "product": "magnetic-strip",
+            "title": "",
+            "title_color": "#ffffff",
+            "price_text": "",
+            "price_color": "#ffffff",
+            "button_text": "Shop Now",
+            "button_color": "#000000",
+            "button_text_color": "#ffffff"
+          }
+        },
+        "product_card_qQKzRz": {
+          "type": "product_card",
+          "settings": {
+            "product": "magnetic-strip",
+            "title": "",
+            "title_color": "#ffffff",
+            "price_text": "",
+            "price_color": "#ffffff",
+            "button_text": "Shop Now",
+            "button_color": "#000000",
+            "button_text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "product_card_ENxJre",
+        "product_card_z9bfgL",
+        "product_card_33qLAn",
+        "product_card_iC6rDd",
+        "product_card_qQKzRz"
+      ],
+      "name": "Cards Slider",
+      "settings": {
+        "card_height": "large",
+        "arrows_position": "bottom-right",
+        "arrows_background": "#ffffff",
+        "arrows_color": "#000000",
+        "slider_speed": 300,
+        "show_progress_bar": true,
+        "progress_bar_color": "#000000"
+      }
     }
   },
   "order": [
     "image_banner_8rTC3T",
-    "image_banner_wi4AWT"
+    "image_banner_wi4AWT",
+    "card_slider_cC6dPG"
   ]
 }

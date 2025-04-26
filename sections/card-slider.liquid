@@ -28,10 +28,6 @@
       "label": "Arrows Position",
       "options": [
         {
-          "value": "sides",
-          "label": "Sides"
-        },
-        {
           "value": "top-left",
           "label": "Top Left"
         },
@@ -48,7 +44,7 @@
           "label": "Bottom Right"
         }
       ],
-      "default": "sides"
+      "default": "bottom-right"
     },
     {
       "type": "color",
@@ -65,12 +61,62 @@
     {
       "type": "range",
       "id": "slider_speed",
-      "min": 3,
-      "max": 10,
-      "step": 1,
-      "unit": "s",
+      "min": 100,
+      "max": 5000,
+      "step": 100,
+      "unit": "ms",
       "label": "Slider Transition Speed",
-      "default": 5
+      "default": 300
+    },
+    {
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "label": "Margin Top",
+        "unit": "px",
+        "default": 20
+    },
+    {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "label": "Margin Bottom",
+        "unit": "px",
+        "default": 20
+    },
+    {
+        "type": "range",
+        "id": "padding",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "label": "Lateral Padding",
+        "unit": "px",
+        "default": 40
+    },
+    {
+        "type": "range",
+        "id": "card_border_radius",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "label": "Card Border Radius",
+        "unit": "px",
+        "default": 15
+    },
+    {
+        "type": "range",
+        "id": "space_between_cards",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "label": "Space Between Cards",
+        "unit": "px",
+        "default": 30
     },
     {
       "type": "header",
@@ -170,148 +216,178 @@
 }
 {% endschema %}
 
-<div class="cards-slider-section" data-arrows-position="{{ section.settings.arrows_position }}">
-  {% if section.blocks.size > 0 %}
-    <div class="cards-slider cards-slider--{{ section.settings.card_height }} swiper-container">
-      <div class="swiper-wrapper">
-        {% for block in section.blocks %}
-          {% if block.type == 'product_card' and block.settings.product != blank %}
-            {% assign product = block.settings.product %}
-            {% assign background_image = block.settings.background_image | default: product.featured_image %}
-            {% assign card_title = block.settings.title | default: product.title %}
-            {% assign button_text = block.settings.button_text | default: 'Shop Now' %}
-            
-            <div class="card-slide swiper-slide" {{ block.shopify_attributes }}>
-              <a href="{{ product.url }}" class="card-slide__link">
-                <div class="card-slide__content">
-                  <div class="card-slide__background-wrapper">
-                    <div class="card-slide__background">
-                      {% if background_image != blank %}
-                        {% assign img_url = background_image | img_url: '1200x' %}
-                        <img src="{{ img_url }}" alt="{{ card_title }}" loading="lazy">
-                      {% else %}
-                        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                      {% endif %}
+{% if section.settings.arrows_position == 'bottom-right' %}
+  {%  assign row_order = 'not-reverse' %}
+{% elsif section.settings.arrows_position == 'bottom-left' %}
+  {%  assign row_order = 'not-reverse' %}
+{% elsif section.settings.arrows_position == 'top-left' %}
+    {%  assign row_order = 'reverse' %}
+{% elsif section.settings.arrows_position == 'top-right' %}
+    {%  assign row_order = 'reverse' %}
+{% endif %}
+
+<div class="cards-slider-section" data-arrows-position="{{ section.settings.arrows_position }}" style="margin-top: {{ section.settings.margin_top }}px; margin-bottom: {{ section.settings.margin_bottom }}px;">
+    {% if section.blocks.size > 0 %}
+    <div class="cards-slider-container cards-order--{{ row_order }}" style="padding: 0 {{ section.settings.padding }}px;">
+        <div class="cards-slider cards-slider--{{ section.settings.card_height }} swiper-container">
+            <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+                {% if block.type == 'product_card' and block.settings.product != blank %}
+                {% assign product = block.settings.product %}
+                {% assign background_image = block.settings.background_image | default: product.featured_image %}
+                {% assign card_title = block.settings.title | default: product.title %}
+                {% assign button_text = block.settings.button_text | default: 'Shop Now' %}
+
+                <div class="card-slide swiper-slide" {{ block.shopify_attributes }}>
+                    <a href="{{ product.url }}" class="card-slide__link">
+                    <div class="card-slide__content">
+                        <div class="card-slide__background-wrapper">
+                        <div class="card-slide__background">
+                            {% if background_image != blank %}
+                            {% assign img_url = background_image | img_url: '1200x' %}
+                            <img src="{{ img_url }}" alt="{{ card_title }}" loading="lazy">
+                            {% else %}
+                            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                            {% endif %}
+                        </div>
+                        <div class="card-slide__overlay"></div>
+                        </div>
+                        
+                        <div class="card-slide__text-container">
+                        <h3 class="card-slide__title" style="color: {{ block.settings.title_color }}">{{ card_title }}</h3>
+                        
+                        {% if block.settings.price_text != blank %}
+                            <div class="card-slide__price" style="color: {{ block.settings.price_color }}">
+                            {{ block.settings.price_text }}
+                            </div>
+                        {% endif %}
+                        
+                        <div class="card-slide__button-wrapper">
+                            <span class="card-slide__button" 
+                            style="background-color: {{ block.settings.button_color }}; color: {{ block.settings.button_text_color }}">
+                            {{ button_text }}
+                            </span>
+                        </div>
+                        </div>
                     </div>
-                    <div class="card-slide__overlay"></div>
-                  </div>
-                  
-                  <div class="card-slide__text-container">
-                    <h3 class="card-slide__title" style="color: {{ block.settings.title_color }}">{{ card_title }}</h3>
-                    
-                    {% if block.settings.price_text != blank %}
-                      <div class="card-slide__price" style="color: {{ block.settings.price_color }}">
-                        {{ block.settings.price_text }}
-                      </div>
-                    {% endif %}
-                    
-                    <div class="card-slide__button-wrapper">
-                      <span class="card-slide__button" 
-                        style="background-color: {{ block.settings.button_color }}; color: {{ block.settings.button_text_color }}">
-                        {{ button_text }}
-                      </span>
-                    </div>
-                  </div>
+                    </a>
                 </div>
-              </a>
+                {% endif %}
+            {% endfor %}
             </div>
-          {% endif %}
-        {% endfor %}
-      </div>
+        </div>
+
+        {% if section.settings.show_progress_bar %}
+            <div class="slider-progress">
+                <span class="slider-progress-bar" style="background-color: {{ section.settings.progress_bar_color }}"></span>
+            </div>
+        {% endif %}
       
-      <div class="navigation-container navigation-container--{{ section.settings.arrows_position }}">
-        <div class="swiper-button-prev" 
-             style="background-color: {{ section.settings.arrows_background }}; color: {{ section.settings.arrows_color }}">
+        <div class="navigation-container navigation-container--{{ section.settings.arrows_position }}">
+            <div class="swiper-button-prev" 
+                style="background-color: {{ section.settings.arrows_background }}; color: {{ section.settings.arrows_color }}">
+            </div>
+            <div class="swiper-button-next" 
+                style="background-color: {{ section.settings.arrows_background }}; color: {{ section.settings.arrows_color }}">
+            </div>
         </div>
-        <div class="swiper-button-next" 
-             style="background-color: {{ section.settings.arrows_background }}; color: {{ section.settings.arrows_color }}">
-        </div>
-      </div>
-      
-      {% if section.settings.show_progress_bar %}
-        <div class="slider-progress">
-          <div class="slider-progress-bar" style="background-color: {{ section.settings.progress_bar_color }}"></div>
-        </div>
-      {% endif %}
     </div>
-  {% else %}
-    <div class="placeholder-container">
-      <div class="placeholder-message">
-        Add product cards to display your slider
-      </div>
-    </div>
-  {% endif %}
+    {% else %}
+        <div class="placeholder-container" style="padding: {{ section.settings.padding }}px;">
+            <div class="placeholder-message">Add product cards to display your slider</div>
+        </div>
+    {% endif %}
 </div>
 
-<style>
-  .cards-slider-section {
+{% stylesheet %}
+  
+.cards-slider-section {
     width: 100%;
-    overflow: hidden;
     position: relative;
     margin: 0 auto;
-  }
-  
-  .cards-slider {
+}
+
+.cards-slider-container {
     position: relative;
     width: 100%;
-  }
-  
-  .cards-slider--small {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards-slider-order--reverse {
+    flex-direction: column-reverse;
+}
+
+.cards-slider-order--not-reverse {
+    flex-direction: column;
+}
+
+.cards-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 24px; /* Add space for progress bar */
+}
+
+.cards-slider--small {
     height: 300px;
-  }
-  
-  .cards-slider--medium {
-    height: 400px;
-  }
-  
-  .cards-slider--large {
+}
+
+.cards-slider--medium {
     height: 500px;
-  }
+}
   
-  .card-slide {
+.cards-slider--large {
+    height: 700px;
+}
+  
+.card-slide {
     height: 100%;
     width: 100%;
     position: relative;
-  }
+    border-radius: 10px;
+    overflow: hidden;
+}
   
   .card-slide__link {
     display: block;
     height: 100%;
     width: 100%;
     text-decoration: none;
-  }
+}
   
-  .card-slide__content {
+.card-slide__content {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     position: relative;
-  }
+}
   
-  .card-slide__background-wrapper {
+.card-slide__background-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 1;
-  }
+}
   
-  .card-slide__background {
+.card-slide__background {
     height: 100%;
     width: 100%;
-  }
+}
   
-  .card-slide__background img {
+.card-slide__background img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     object-position: center;
-  }
+}
   
-  .card-slide__overlay {
+.card-slide__overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -319,49 +395,53 @@
     bottom: 0;
     background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
     z-index: 2;
-  }
+}
   
-  .card-slide__text-container {
+.card-slide__text-container {
     padding: 2rem;
     position: relative;
     z-index: 3;
-  }
+}
   
-  .card-slide__title {
+.card-slide__title {
     font-size: 1.8rem;
     margin: 0 0 0.5rem;
     font-weight: 600;
-  }
+}
   
-  .card-slide__price {
+.card-slide__price {
     font-size: 1.2rem;
     margin-bottom: 1rem;
-  }
+}
   
-  .card-slide__button-wrapper {
+.card-slide__button-wrapper {
     margin-top: 1rem;
-  }
+}
   
-  .card-slide__button {
+.card-slide__button {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     border-radius: 4px;
     font-weight: 500;
     transition: opacity 0.3s ease;
-  }
+}
   
-  .card-slide__button:hover {
+.card-slide__button:hover {
     opacity: 0.9;
-  }
+}
   
-  /* Navigation Styles */
-  .navigation-container {
-    position: absolute;
-    z-index: 10;
-  }
+/* Navigation Styles */
+.navigation-container {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+}
   
-  .swiper-button-prev,
-  .swiper-button-next {
+.swiper-button-prev,
+.swiper-button-next {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -371,187 +451,180 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.15);
     transition: opacity 0.3s ease;
     cursor: pointer;
-  }
+    position: initial;
+    margin-top: 0; /* Reset margin */
+}
   
-  .swiper-button-prev:hover,
-  .swiper-button-next:hover {
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
     opacity: 0.9;
-  }
+}
   
-  .swiper-button-prev:after,
-  .swiper-button-next:after {
+.swiper-button-prev:after,
+.swiper-button-next:after {
     font-size: 18px;
-  }
+}
   
-  /* Arrow Positions */
-  .navigation-container--sides {
-    width: 100%;
-    height: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
-  }
+/* Arrow Positions */  
+.navigation-container--top-left {
+    justify-content: left;
+}
   
-  .navigation-container--top-left {
-    top: 20px;
-    left: 20px;
-    display: flex;
-    gap: 10px;
-  }
+.navigation-container--top-right {
+    justify-content: right;
+}
   
-  .navigation-container--top-right {
-    top: 20px;
-    right: 20px;
-    display: flex;
-    gap: 10px;
-  }
+.navigation-container--bottom-left {
+    justify-content: left;
+}
   
-  .navigation-container--bottom-left {
-    bottom: 20px;
-    left: 20px;
-    display: flex;
-    gap: 10px;
-  }
+.navigation-container--bottom-right {
+    justify-content: right;
+}
   
-  .navigation-container--bottom-right {
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    gap: 10px;
-  }
-  
-  /* Progress Bar */
-  .slider-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+/* Progress Bar */
+.slider-progress {
+    position: relative;
     width: 100%;
     height: 4px;
     background-color: rgba(0, 0, 0, 0.1);
     z-index: 10;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 20px;
   }
   
   .slider-progress-bar {
-    height: 100%;
-    width: 0;
-    transition-property: transform;
-    transform-origin: 0 0;
-  }
-  
-  .placeholder-container {
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f8f8;
-    border: 2px dashed #ddd;
-  }
-  
-  .placeholder-message {
-    font-size: 1.2rem;
-    color: #888;
-  }
-  
-  /* Responsive adjustments */
-  @media screen and (max-width: 768px) {
-    .cards-slider--small {
-      height: 250px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%; /* Will be controlled by JS */
+      transition: width 0.3s ease;
     }
     
-    .cards-slider--medium {
-      height: 350px;
+    .placeholder-container {
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f8f8;
+        border: 2px dashed #ddd;
     }
     
-    .cards-slider--large {
-      height: 400px;
+    .placeholder-message {
+        font-size: 1.2rem;
+        color: #888;
     }
     
-    .card-slide__title {
-      font-size: 1.5rem;
+    /* Responsive adjustments */
+    @media screen and (max-width: 1024px) {
+        .cards-slider-section {
+            padding: 0 20px;
+        }
+        
+        .cards-slider--small {
+            height: 250px;
+        }
+        
+        .cards-slider--medium {
+            height: 350px;
+        }
+        
+        .cards-slider--large {
+            height: 400px;
+        }
+        
+        .card-slide__title {
+            font-size: 1.5rem;
+        }
+        
+        .card-slide__price {
+            font-size: 1rem;
+        }
+        
+        .card-slide__text-container {
+            padding: 1.5rem;
+        }
+        
+        .swiper-button-prev,
+        .swiper-button-next {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .swiper-button-prev:after,
+        .swiper-button-next:after {
+            font-size: 16px;
+        }
+        
+        .navigation-container--top-left,
+        .navigation-container--top-right,
+        .navigation-container--bottom-left,
+        .navigation-container--bottom-right {
+            gap: 8px;
+        }
+        
+        .navigation-container--top-left,
+        .navigation-container--top-right {
+            top: -50px;
+        }
     }
     
-    .card-slide__price {
-      font-size: 1rem;
-    }
-    
-    .card-slide__text-container {
-      padding: 1.5rem;
-    }
-    
-    .swiper-button-prev,
-    .swiper-button-next {
-      width: 35px;
-      height: 35px;
-    }
-    
-    .swiper-button-prev:after,
-    .swiper-button-next:after {
-      font-size: 16px;
-    }
-    
-    .navigation-container--top-left,
-    .navigation-container--top-right,
-    .navigation-container--bottom-left,
-    .navigation-container--bottom-right {
-      gap: 8px;
-    }
-  }
-  
   @media screen and (max-width: 480px) {
-    .cards-slider--small {
-      height: 200px;
+      .cards-slider-section {
+          padding: 0 15px;
+        }
+        
+        .cards-slider--small {
+            height: 200px;
+        }
+        
+        .cards-slider--medium {
+            height: 300px;
+        }
+        
+        .cards-slider--large {
+            height: 350px;
+        }
+        
+        .card-slide__title {
+            font-size: 1.2rem;
+        }
+        
+        .card-slide__button {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .card-slide__text-container {
+            padding: 1rem;
+        }
+        
+        .swiper-button-prev,
+        .swiper-button-next {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .swiper-button-prev:after,
+        .swiper-button-next:after {
+            font-size: 14px;
+        }
     }
-    
-    .cards-slider--medium {
-      height: 300px;
-    }
-    
-    .cards-slider--large {
-      height: 350px;
-    }
-    
-    .card-slide__title {
-      font-size: 1.2rem;
-    }
-    
-    .card-slide__button {
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-    }
-    
-    .card-slide__text-container {
-      padding: 1rem;
-    }
-    
-    .swiper-button-prev,
-    .swiper-button-next {
-      width: 30px;
-      height: 30px;
-    }
-    
-    .swiper-button-prev:after,
-    .swiper-button-next:after {
-      font-size: 14px;
-    }
-  }
-</style>
+{% endstylesheet %}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var cardsSlider = new Swiper('.cards-slider', {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      loop: true,
-      speed: {{ section.settings.slider_speed | times: 1000 }},
-      // Removed autoplay to only move on arrow click
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-      },
+    document.addEventListener('DOMContentLoaded', function() {
+        var cardsSlider = new Swiper('.cards-slider', {
+            slidesPerView: 1,
+            spaceBetween: {{ section.settings.space_between_cards }},
+            loop: false, // No infinite loop as requested
+            speed: {{ section.settings.slider_speed }}, //ms 
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -561,19 +634,32 @@
           slidesPerView: 2,
         },
         1024: {
-          slidesPerView: 3,
+          slidesPerView: 4,
         }
       }
     });
     
     {% if section.settings.show_progress_bar %}
-      // Progress bar functionality
+      // Fixed progress bar functionality
       var progressBar = document.querySelector('.slider-progress-bar');
-      var totalSlides = cardsSlider.slides.length - cardsSlider.loopedSlides * 2;
       
       function updateProgressBar() {
-        var progress = (cardsSlider.realIndex) / (totalSlides - 1);
-        progressBar.style.transform = 'scaleX(' + progress + ')';
+        if (!progressBar) return;
+        
+        // Calculate total slides and current position and current slidesPerView
+        var totalSlides = cardsSlider.slides.length;
+        var activeIndex = cardsSlider.activeIndex;
+        var slidesPerView = cardsSlider.params.slidesPerView;
+        console.log('Slides Per View:', slidesPerView);
+        console.log('Active Index:', activeIndex);
+        console.log('Total Slides:', totalSlides);
+        // When loop is false, use actual index
+        var progress = (100 / (totalSlides - slidesPerView))*activeIndex;
+        
+        // Ensure progress is between 0 and 100%
+        progress = Math.max(0, Math.min(100, progress));
+        // Update width instead of transform for a filling effect
+        progressBar.style.width = progress + '%';
       }
       
       // Initialize progress bar
