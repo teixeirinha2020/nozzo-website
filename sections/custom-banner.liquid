@@ -946,7 +946,13 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 0px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .custom-banner__content-container {
+      padding: 0 80px;
+    }
   }
   
   .custom-banner__content {
@@ -1074,33 +1080,33 @@
   }
   
   .custom-banner__button--2xl {
-    font-size: 1.5rem;
-    padding: 16px 40px;
+    font-size: 2rem;
+    padding: 14px 40px;
   }
   
   .custom-banner__button--xl {
-    font-size: 1.25rem;
-    padding: 14px 36px;
+    font-size: 1.8rem;
+    padding: 12px 36px;
   }
   
   .custom-banner__button--lg {
-    font-size: 1.125rem;
-    padding: 12px 32px;
+    font-size: 1.5rem;
+    padding: 10px 32px;
   }
   
   .custom-banner__button--md {
-    font-size: 1rem;
-    padding: 10px 28px;
+    font-size: 1.2rem;
+    padding: 8px 28px;
   }
   
   .custom-banner__button--sm {
-    font-size: 0.875rem;
-    padding: 8px 24px;
+    font-size: 1rem;
+    padding: 6px 24px;
   }
   
   .custom-banner__button--xs {
-    font-size: 0.75rem;
-    padding: 6px 20px;
+    font-size: 0.8rem;
+    padding: 4px 20px;
   }
   
   /* Button animations */
@@ -1228,6 +1234,13 @@
     
     .custom-banner__paragraph--xl {
       font-size: 1.2rem;
+    }
+
+    .custom-banner__text-content {
+      text-align: center;  
+    }
+    .custom-banner__button-container {
+      justify-content: center;
     }
   }
 </style>

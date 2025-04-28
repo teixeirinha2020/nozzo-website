@@ -14,38 +14,56 @@
       "blocks": {
         "title_PMTTXc": {
           "type": "title",
+          "disabled": true,
           "settings": {
-            "title_text": "Your Title Here",
+            "title_text": "Mais leve.",
             "title_color": "#ffffff",
             "title_font": "poppins_n4",
-            "title_weight": "600",
-            "title_size": "h1"
+            "title_weight": "700",
+            "title_size": "ultra"
+          }
+        },
+        "title_dcQQa7": {
+          "type": "title",
+          "disabled": true,
+          "settings": {
+            "title_text": "Mais elegante.",
+            "title_color": "#ffffff",
+            "title_font": "poppins_n4",
+            "title_weight": "700",
+            "title_size": "ultra"
           }
         },
         "span_gnp3Gr": {
           "type": "span",
+          "disabled": true,
           "settings": {
-            "span_text": "Add your paragraph text here to describe your product, service, or promotion.",
-            "span_color": "#666666",
-            "span_font": "helvetica_n4",
-            "span_weight": "400"
+            "span_text": "Feito para ti.",
+            "span_color": "#ffffff",
+            "span_font": "poppins_n4",
+            "span_weight": "400",
+            "span_size": "3xl"
           }
         },
         "button_xNJftR": {
           "type": "button",
+          "disabled": true,
           "settings": {
-            "button_text": "Shop Now",
-            "button_link": "",
-            "button_text_color": "#FFFFFF",
-            "button_bg_color": "#000000",
-            "button_font": "helvetica_n4",
-            "button_weight": "600",
-            "button_radius": 4
+            "button_text": "Descobre Mais",
+            "button_link": "shopify://products/magnetic-strip",
+            "button_text_color": "#ffffff",
+            "button_bg_color": "#0b93ff",
+            "button_font": "poppins_n4",
+            "button_weight": "700",
+            "button_size": "lg",
+            "button_radius": 20,
+            "button_animation": "slide"
           }
         }
       },
       "block_order": [
         "title_PMTTXc",
+        "title_dcQQa7",
         "span_gnp3Gr",
         "button_xNJftR"
       ],
@@ -53,13 +71,45 @@
       "settings": {
         "section_height": "vh",
         "background_type": "image",
-        "background_image": "shopify://shop_images/silhouetted-couples-look-out-at-a-city-at-night.jpg",
+        "background_image": "shopify://shop_images/pink_nasal_strip_histrips_image_19.webp",
+        "background_image_mobile": "shopify://shop_images/pink_nasal_strip_histrips_image_16.webp",
+        "background_video_url": "",
+        "background_video_url_mobile": "",
         "background_video": "",
         "loop_video": false,
         "mute_video": true,
         "content_position_desktop": "left",
         "content_position_mobile": "top",
-        "space_between": 70
+        "space_between_desktop": 10,
+        "space_between_mobile": 20,
+        "enable_animations": true,
+        "animation_type": "slide_up",
+        "animation_trigger": "onload",
+        "animation_delay": 0.2
+      }
+    },
+    "rich_text_JymLpj": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_GQGjWk": {
+          "type": "heading",
+          "settings": {
+            "heading": "A nossa marca muda a forma como <strong>respiras</strong>.",
+            "heading_size": "h0"
+          }
+        }
+      },
+      "block_order": [
+        "heading_GQGjWk"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 100,
+        "padding_bottom": 64
       }
     },
     "image_banner_8rTC3T": {
@@ -163,91 +213,126 @@
     "card_slider_cC6dPG": {
       "type": "card-slider",
       "blocks": {
-        "product_card_ENxJre": {
-          "type": "product_card",
+        "info_card_LKz7p3": {
+          "type": "info_card",
           "settings": {
-            "product": "magnetic-strip",
-            "background_image": "shopify://shop_images/imagem_histrips.webp",
-            "title": "",
+            "background_image": "shopify://shop_images/3.webp",
+            "icon": "heart",
+            "icon_color": "#ffffff",
+            "tag_text": "Dormir e Descansar",
+            "tag_text_color": "#ffffff",
+            "tag_background_color": "#000000",
+            "flip_button_color": "#ffffff",
+            "flip_button_background": "#000000",
+            "title": "Tem o melhor sono",
+            "styled_title": "da tua vida",
             "title_color": "#ffffff",
-            "price_text": "",
-            "price_color": "#ffffff",
-            "button_text": "Shop Now",
+            "styled_title_color": "#ffffff",
+            "description": "Optional description text",
+            "description_color": "#ffffff",
+            "back_overlay_color": "#000000",
+            "show_button": true,
+            "button_text": "Learn More",
+            "button_link": "",
             "button_color": "#000000",
             "button_text_color": "#ffffff"
           }
         },
-        "product_card_z9bfgL": {
-          "type": "product_card",
+        "info_card_hNYEik": {
+          "type": "info_card",
           "settings": {
-            "product": "magnetic-strip",
-            "title": "",
+            "background_image": "shopify://shop_images/1_fb80da72-9b72-406c-9e72-3c6829b1fa85.webp",
+            "icon": "check_mark",
+            "icon_color": "#ffffff",
+            "tag_text": "Conforto e Design",
+            "tag_text_color": "#ffffff",
+            "tag_background_color": "#000000",
+            "flip_button_color": "#ffffff",
+            "flip_button_background": "#000000",
+            "title": "Um design mais",
+            "styled_title": "confortável e duradouro.",
             "title_color": "#ffffff",
-            "price_text": "",
-            "price_color": "#ffffff",
-            "button_text": "Shop Now",
+            "styled_title_color": "#ffffff",
+            "description": "Our wellness products are designed to help you live a healthier, more vibrant life. Explore our collection and find what works for you.",
+            "description_color": "#ffffff",
+            "back_overlay_color": "#000000",
+            "show_button": true,
+            "button_text": "Learn More",
+            "button_link": "",
             "button_color": "#000000",
             "button_text_color": "#ffffff"
           }
         },
-        "product_card_33qLAn": {
-          "type": "product_card",
+        "info_card_wX9CH4": {
+          "type": "info_card",
           "settings": {
-            "product": "magnetic-strip",
-            "title": "",
+            "background_image": "shopify://shop_images/2.webp",
+            "icon": "apple",
+            "icon_color": "#ffffff",
+            "tag_text": "Atividade e Fitness",
+            "tag_text_color": "#ffffff",
+            "tag_background_color": "#000000",
+            "flip_button_color": "#ffffff",
+            "flip_button_background": "#000000",
+            "title": "Faz atividade física",
+            "styled_title": "com mais desempenho.",
             "title_color": "#ffffff",
-            "price_text": "",
-            "price_color": "#ffffff",
-            "button_text": "Shop Now",
+            "styled_title_color": "#ffffff",
+            "description": "Our wellness products are designed to help you live a healthier, more vibrant life. Explore our collection and find what works for you.",
+            "description_color": "#ffffff",
+            "back_overlay_color": "#000000",
+            "show_button": true,
+            "button_text": "Learn More",
+            "button_link": "",
             "button_color": "#000000",
             "button_text_color": "#ffffff"
           }
         },
-        "product_card_iC6rDd": {
-          "type": "product_card",
+        "info_card_eJykfD": {
+          "type": "info_card",
           "settings": {
-            "product": "magnetic-strip",
-            "title": "",
+            "background_image": "shopify://shop_images/4.webp",
+            "icon": "check_mark",
+            "icon_color": "#ffffff",
+            "tag_text": "Vida saudável",
+            "tag_text_color": "#ffffff",
+            "tag_background_color": "#000000",
+            "flip_button_color": "#ffffff",
+            "flip_button_background": "#000000",
+            "title": "Tem uma vida",
+            "styled_title": "mais saudável.",
             "title_color": "#ffffff",
-            "price_text": "",
-            "price_color": "#ffffff",
-            "button_text": "Shop Now",
-            "button_color": "#000000",
-            "button_text_color": "#ffffff"
-          }
-        },
-        "product_card_qQKzRz": {
-          "type": "product_card",
-          "settings": {
-            "product": "magnetic-strip",
-            "title": "",
-            "title_color": "#ffffff",
-            "price_text": "",
-            "price_color": "#ffffff",
-            "button_text": "Shop Now",
+            "styled_title_color": "#ffffff",
+            "description": "Our wellness products are designed to help you live a healthier, more vibrant life. Explore our collection and find what works for you.",
+            "description_color": "#ffffff",
+            "back_overlay_color": "#000000",
+            "show_button": true,
+            "button_text": "Learn More",
+            "button_link": "",
             "button_color": "#000000",
             "button_text_color": "#ffffff"
           }
         }
       },
       "block_order": [
-        "product_card_ENxJre",
-        "product_card_z9bfgL",
-        "product_card_33qLAn",
-        "product_card_iC6rDd",
-        "product_card_qQKzRz"
+        "info_card_LKz7p3",
+        "info_card_hNYEik",
+        "info_card_wX9CH4",
+        "info_card_eJykfD"
       ],
       "name": "Cards Slider",
       "settings": {
+        "section_title": "",
+        "section_title_color": "#000000",
         "card_height": "large",
-        "arrows_position": "top-right",
-        "arrows_background": "#b200ff",
+        "arrows_position": "bottom-right",
+        "arrows_background": "#050505",
         "arrows_color": "#ffffff",
         "slider_speed": 300,
         "margin_top": 20,
         "margin_bottom": 20,
         "card_border_radius": 20,
-        "space_between_cards": 40,
+        "space_between_cards": 20,
         "show_progress_bar": true,
         "progress_bar_color": "#ff0000"
       }
@@ -255,6 +340,7 @@
   },
   "order": [
     "custom_banner_AMNhVf",
+    "rich_text_JymLpj",
     "image_banner_8rTC3T",
     "image_banner_wi4AWT",
     "card_slider_cC6dPG"
