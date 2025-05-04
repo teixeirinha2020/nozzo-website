@@ -112,104 +112,6 @@
         "padding_bottom": 64
       }
     },
-    "image_banner_8rTC3T": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_JBdPYP": {
-          "type": "heading",
-          "settings": {
-            "heading": "Banner de imagem",
-            "heading_size": "h1"
-          }
-        },
-        "text_ffrLrg": {
-          "type": "text",
-          "settings": {
-            "text": "Dê informações aos clientes sobre a(s) imagem(s) ou o conteúdo do banner no modelo.",
-            "text_style": "body"
-          }
-        },
-        "buttons_px8zrm": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Etiqueta do botão",
-            "button_link_1": "",
-            "button_style_secondary_1": false,
-            "button_label_2": "Etiqueta do botão",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_JBdPYP",
-        "text_ffrLrg",
-        "buttons_px8zrm"
-      ],
-      "disabled": true,
-      "settings": {
-        "image": "shopify://shop_images/silhouetted-couples-look-out-at-a-city-at-night.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "large",
-        "desktop_content_position": "middle-center",
-        "show_text_box": true,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-4",
-        "image_behavior": "ambient",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
-    "image_banner_wi4AWT": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_XbqCqT": {
-          "type": "heading",
-          "settings": {
-            "heading": "Banner de imagem",
-            "heading_size": "h1"
-          }
-        },
-        "text_iAbteg": {
-          "type": "text",
-          "settings": {
-            "text": "Dê informações aos clientes sobre a(s) imagem(s) ou o conteúdo do banner no modelo.",
-            "text_style": "body"
-          }
-        },
-        "buttons_LkFaLi": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Etiqueta do botão",
-            "button_link_1": "",
-            "button_style_secondary_1": false,
-            "button_label_2": "Etiqueta do botão",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_XbqCqT",
-        "text_iAbteg",
-        "buttons_LkFaLi"
-      ],
-      "disabled": true,
-      "settings": {
-        "image_2": "shopify://shop_images/silhouetted-couples-look-out-at-a-city-at-night.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "medium",
-        "desktop_content_position": "middle-center",
-        "show_text_box": true,
-        "desktop_content_alignment": "center",
-        "color_scheme": "",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
-      }
-    },
     "card_slider_cC6dPG": {
       "type": "card-slider",
       "blocks": {
@@ -218,7 +120,7 @@
           "settings": {
             "background_image": "shopify://shop_images/3.webp",
             "icon": "heart",
-            "icon_color": "#ffffff",
+            "icon_color": "#ff0000",
             "tag_text": "Dormir e Descansar",
             "tag_text_color": "#ffffff",
             "tag_background_color": "#000000",
@@ -230,12 +132,7 @@
             "styled_title_color": "#ffffff",
             "description": "Optional description text",
             "description_color": "#ffffff",
-            "back_overlay_color": "#000000",
-            "show_button": true,
-            "button_text": "Learn More",
-            "button_link": "",
-            "button_color": "#000000",
-            "button_text_color": "#ffffff"
+            "back_overlay_color": "#000000"
           }
         },
         "info_card_hNYEik": {
@@ -255,12 +152,7 @@
             "styled_title_color": "#ffffff",
             "description": "Our wellness products are designed to help you live a healthier, more vibrant life. Explore our collection and find what works for you.",
             "description_color": "#ffffff",
-            "back_overlay_color": "#000000",
-            "show_button": true,
-            "button_text": "Learn More",
-            "button_link": "",
-            "button_color": "#000000",
-            "button_text_color": "#ffffff"
+            "back_overlay_color": "#000000"
           }
         },
         "info_card_wX9CH4": {
@@ -280,12 +172,7 @@
             "styled_title_color": "#ffffff",
             "description": "Our wellness products are designed to help you live a healthier, more vibrant life. Explore our collection and find what works for you.",
             "description_color": "#ffffff",
-            "back_overlay_color": "#000000",
-            "show_button": true,
-            "button_text": "Learn More",
-            "button_link": "",
-            "button_color": "#000000",
-            "button_text_color": "#ffffff"
+            "back_overlay_color": "#000000"
           }
         },
         "info_card_eJykfD": {
@@ -305,12 +192,7 @@
             "styled_title_color": "#ffffff",
             "description": "Our wellness products are designed to help you live a healthier, more vibrant life. Explore our collection and find what works for you.",
             "description_color": "#ffffff",
-            "back_overlay_color": "#000000",
-            "show_button": true,
-            "button_text": "Learn More",
-            "button_link": "",
-            "button_color": "#000000",
-            "button_text_color": "#ffffff"
+            "back_overlay_color": "#000000"
           }
         }
       },
@@ -334,15 +216,13 @@
         "card_border_radius": 20,
         "space_between_cards": 20,
         "show_progress_bar": true,
-        "progress_bar_color": "#ff0000"
+        "progress_bar_color": "#000000"
       }
     }
   },
   "order": [
     "custom_banner_AMNhVf",
     "rich_text_JymLpj",
-    "image_banner_8rTC3T",
-    "image_banner_wi4AWT",
     "card_slider_cC6dPG"
   ]
 }

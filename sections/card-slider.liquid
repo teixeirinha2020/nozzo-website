@@ -487,35 +487,6 @@
           "id": "back_overlay_color",
           "label": "Back Overlay Color",
           "default": "#000000"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_button",
-          "label": "Show Button",
-          "default": true
-        },
-        {
-          "type": "text",
-          "id": "button_text",
-          "label": "Button Text",
-          "default": "Learn More"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "Button Link"
-        },
-        {
-          "type": "color",
-          "id": "button_color",
-          "label": "Button Color",
-          "default": "#000000"
-        },
-        {
-          "type": "color",
-          "id": "button_text_color",
-          "label": "Button Text Color",
-          "default": "#ffffff"
         }
       ]
     }
@@ -657,7 +628,7 @@
                                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                               {% endif %}
                             </div>
-                            <div class="card-slide__overlay" style="background-color: {{ block.settings.back_overlay_color  | append: '4D'}}"></div>
+                            <div class="card-slide__overlay" style="background-color: {{ block.settings.back_overlay_color  | append: '4D'}}; display: inline; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);"></div>
                           </div>
                           
                           <!-- Close button in top right -->
@@ -667,31 +638,9 @@
                           
                           <!-- Description content -->
                           <div class="card-slide__text-container">
-                            <h1 class="card-slide__main-title" style="color: {{ block.settings.title_color }}">
-                              {{ block.settings.title }}
-                            </h1>
-                            
                             <div class="card-slide__description" style="color: {{ block.settings.description_color }}">
                               {{ block.settings.description }}
                             </div>
-                            
-                            {% if block.settings.show_button %}
-                              <div class="card-slide__button-wrapper">
-                                {% if block.settings.button_link != blank %}
-                                  <a href="{{ block.settings.button_link }}" class="card-slide__button-link">
-                                    <span class="card-slide__button" 
-                                      style="background-color: {{ block.settings.button_color }}; color: {{ block.settings.button_text_color }}">
-                                      {{ block.settings.button_text }}
-                                    </span>
-                                  </a>
-                                {% else %}
-                                  <span class="card-slide__button" 
-                                    style="background-color: {{ block.settings.button_color }}; color: {{ block.settings.button_text_color }}">
-                                    {{ block.settings.button_text }}
-                                  </span>
-                                {% endif %}
-                              </div>
-                            {% endif %}
                           </div>
                         </div>
                       </div>
@@ -905,14 +854,15 @@
 
 /* Title styling */
 .card-slide__main-title {
-  font-size: 4.2rem;
-  margin: 0 0 0.2rem;
+  font-size: 3.8rem;
+  margin: 0 0 -0.2rem;
   font-weight: normal;
   line-height: 1;
+  letter-spacing: -2px;
 }
 
 .card-slide__styled-title {
-  font-size: 4.2rem;
+  font-size: 4rem;
   margin: 0;
   font-weight: normal;
   font-family: 'Playfair Display', serif;
@@ -980,11 +930,16 @@
     font-weight: 600;
 }
   
-.card-slide__price, 
-.card-slide__description {
+.card-slide__price {
     font-size: 1.2rem;
     margin-bottom: 1rem;
     line-height: 1.4;
+}
+
+.card-slide__description {
+    font-size: 2.5rem;
+    line-height: 1;
+    font-weight: normal;
 }
   
 .card-slide__button-wrapper {
@@ -1128,7 +1083,8 @@
         }
         
         .card-slide__main-title {
-            font-size: 3rem;
+            font-size: 2.8rem;
+            letter-spacing: -1px;
         }
         
         .card-slide__styled-title {
@@ -1136,7 +1092,8 @@
         }
         
         .card-slide__description {
-            font-size: 1rem;
+            font-size: 2rem;
+
         }
         
         .card-slide__subtitle {
@@ -1210,11 +1167,12 @@
         }
         
         .card-slide__main-title {
-            font-size: 2.6rem;
+            font-size: 2.4rem;
+            letter-spacing: 0px;
         }
         
         .card-slide__styled-title {
-            font-size: 2.6rem;
+            font-size: 2.8rem;
         }
         
         .card-slide__subtitle {
