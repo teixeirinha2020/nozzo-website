@@ -4,8 +4,6 @@
   Available layouts: 1 product or 2 products side by side
 {% endcomment %}
 
-{{ 'product-grid.css' | asset_url | stylesheet_tag }}
-
 <div class="product-grid-section"
   style="--card-border-radius: {{ section.settings.card_border_radius }}px;">
   <div class="product-grid product-grid--{{ section.settings.grid_layout }} height--{{ section.settings.card_height }}">
@@ -28,19 +26,19 @@
                   {{ block.settings.title | default: product.title }}
                 </h3>
                 <p class="product-card__price" style="color: {{ block.settings.price_color }}">
-                  {{ block.settings.price_text | default: 'From ' | append: product.price | money }}
+                  Desde {{ block.settings.price_text | money }}
                 </p>
             </div>
             <div class="product-card__buttons">
               <a href="{{ product.url }}" 
-                class="button {% if block.settings.button_style == 'outline' %}button--outline{% endif %}"
-                style="color: {{ block.settings.button_text_color }}; background-color: {% if block.settings.button_style == 'outline' %}transparent{% else %}{{ block.settings.button_background_color }}{% endif %}; border-color: {{ block.settings.button_background_color }};">
+                class="button-grid {% if block.settings.button_style == 'outline' %}button--outline{% endif %}"
+                style="color: {{ block.settings.button_text_color }}; background-color: {% if block.settings.button_style == 'outline' %}transparent{% else %}{{ block.settings.button_background_color }}{% endif %}; {% if block.settings.button_style == 'outline' %}border-color: {{ block.settings.button_background_color }};{% endif %}">
                 {{ block.settings.button_text | default: 'Shop' }}
               </a>
               {% if block.settings.second_button_enabled %}
                 <a href="{{ block.settings.second_button_link }}" 
-                  class="button {% if block.settings.second_button_style == 'outline' %}button--outline{% endif %}"
-                  style="color: {{ block.settings.second_button_text_color }}; background-color: {% if block.settings.second_button_style == 'outline' %}transparent{% else %}{{ block.settings.second_button_background_color }}{% endif %}; border-color: {{ block.settings.second_button_background_color }};">
+                  class="button-grid {% if block.settings.second_button_style == 'outline' %}button--outline{% endif %}"
+                  style="color: {{ block.settings.second_button_text_color }}; background-color: {% if block.settings.second_button_style == 'outline' %}transparent{% else %}{{ block.settings.second_button_background_color }}{% endif %}; {% if block.settings.second_button_style == 'outline' %}border-color: {{ block.settings.second_button_background_color }};{% endif %}">
                   {{ block.settings.second_button_text | default: 'Explore' }}
                 </a>
               {% endif %}
@@ -119,10 +117,10 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 30px 30px;
+  padding: 30px;
   display: flex;
   flex-direction: row;
-  align-items: end;
+  align-items: flex-end;
   justify-content: space-between;
   z-index: 2;
 }
@@ -130,7 +128,7 @@
 .product-card__texts {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0px;
 }
 
 .product-card__content::before {
@@ -163,10 +161,11 @@
 }
 
 /* Button styles */
-.button {
+.button-grid {
   display: inline-block;
+  min-width: 100px;
   padding: 12px 25px;
-  border: 1px solid;
+  border: none;
   border-radius: 30px;
   font-size: 14px;
   font-weight: 500;
@@ -174,10 +173,14 @@
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: none;
+  outline: none;
 }
 
 .button--outline {
   background-color: transparent !important;
+  border: 1px solid;
 }
 
 /* Height variations */
@@ -204,6 +207,9 @@
   
   .product-card__content {
     padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
   }
   
   .height--small .product-card__inner {
