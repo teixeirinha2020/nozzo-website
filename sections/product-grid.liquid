@@ -4,8 +4,8 @@
   Available layouts: 1 product or 2 products side by side
 {% endcomment %}
 
-<div class="product-grid-section"
-  style="--card-border-radius: {{ section.settings.card_border_radius }}px;">
+<div class="product-grid-section" 
+  style="--card-border-radius: {{ section.settings.card_border_radius }}px; margin-top: {{ section.settings.margin_top }}px; margin-bottom: {{ section.settings.margin_bottom }}; background-color: {{ section.settings.background_color }};">
   <div class="product-grid product-grid--{{ section.settings.grid_layout }} height--{{ section.settings.card_height }}">
     {% for block in section.blocks %}
       {% assign product = all_products[block.settings.product] %}
@@ -26,7 +26,7 @@
                   {{ block.settings.title | default: product.title }}
                 </h3>
                 <p class="product-card__price" style="color: {{ block.settings.price_color }}">
-                  Desde {{ block.settings.price_text | money }}
+                  {{ block.settings.price_text }} {{ block.settings.product.price | money }}
                 </p>
             </div>
             <div class="product-card__buttons">
@@ -178,6 +178,11 @@
   outline: none;
 }
 
+
+.button-grid:hover {
+  opacity: 0.8;
+}
+
 .button--outline {
   background-color: transparent !important;
   border: 1px solid;
@@ -283,6 +288,33 @@
       "unit": "px",
       "label": "Card Border Radius",
       "default": 8
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10,
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#ffffff",
+      "label": "Background Color"
+
     }
   ],
   "blocks": [
@@ -317,7 +349,7 @@
           "type": "text",
           "id": "price_text",
           "label": "Price Text",
-          "default": "From "
+          "default": "Desde"
         },
         {
           "type": "color",
