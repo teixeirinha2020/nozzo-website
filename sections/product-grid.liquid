@@ -1,0 +1,422 @@
+{% comment %}
+  Product Grid Section
+  This section displays products in a responsive grid format with customizable settings
+  Available layouts: 1 product or 2 products side by side
+{% endcomment %}
+
+{{ 'product-grid.css' | asset_url | stylesheet_tag }}
+
+<div class="product-grid-section"
+  style="--card-border-radius: {{ section.settings.card_border_radius }}px;">
+  <div class="product-grid product-grid--{{ section.settings.grid_layout }} height--{{ section.settings.card_height }}">
+    {% for block in section.blocks %}
+      {% assign product = all_products[block.settings.product] %}
+      <div class="product-card" {{ block.shopify_attributes }}>
+        <div class="product-card__inner">
+          <div class="product-card__media">
+            {% if block.settings.background_image != blank %}
+              <img src="{{ block.settings.background_image | img_url: '1000x' }}" alt="{{ block.settings.title | escape }}">
+            {% elsif product.featured_image != blank %}
+              <img src="{{ product.featured_image | img_url: '1000x' }}" alt="{{ product.title | escape }}">
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+          <div class="product-card__content">
+            <div class="product-card__texts">
+                <h3 class="product-card__title" style="color: {{ block.settings.title_color }}">
+                  {{ block.settings.title | default: product.title }}
+                </h3>
+                <p class="product-card__price" style="color: {{ block.settings.price_color }}">
+                  {{ block.settings.price_text | default: 'From ' | append: product.price | money }}
+                </p>
+            </div>
+            <div class="product-card__buttons">
+              <a href="{{ product.url }}" 
+                class="button {% if block.settings.button_style == 'outline' %}button--outline{% endif %}"
+                style="color: {{ block.settings.button_text_color }}; background-color: {% if block.settings.button_style == 'outline' %}transparent{% else %}{{ block.settings.button_background_color }}{% endif %}; border-color: {{ block.settings.button_background_color }};">
+                {{ block.settings.button_text | default: 'Shop' }}
+              </a>
+              {% if block.settings.second_button_enabled %}
+                <a href="{{ block.settings.second_button_link }}" 
+                  class="button {% if block.settings.second_button_style == 'outline' %}button--outline{% endif %}"
+                  style="color: {{ block.settings.second_button_text_color }}; background-color: {% if block.settings.second_button_style == 'outline' %}transparent{% else %}{{ block.settings.second_button_background_color }}{% endif %}; border-color: {{ block.settings.second_button_background_color }};">
+                  {{ block.settings.second_button_text | default: 'Explore' }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% style %}
+.product-grid-section {
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1800px;
+  width: 100%;
+}
+
+.product-grid {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Grid layouts */
+.product-grid--one {
+  grid-template-columns: 1fr;
+}
+
+.product-grid--two {
+  grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 768px) {
+  .product-grid--two {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Card styles */
+.product-card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.product-card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+}
+
+.product-card__media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.product-card__media img,
+.product-card__media .placeholder-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.product-card__texts {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.product-card__content::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0));
+  z-index: -1;
+}
+
+.product-card__title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.product-card__price {
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: initial;
+}
+
+.product-card__buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Button styles */
+.button {
+  display: inline-block;
+  padding: 12px 25px;
+  border: 1px solid;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button--outline {
+  background-color: transparent !important;
+}
+
+/* Height variations */
+.height--small .product-card__inner {
+  height: 300px;
+}
+
+.height--medium .product-card__inner {
+  height: 400px;
+}
+
+.height--large .product-card__inner {
+  height: 500px;
+}
+
+.height--big .product-card__inner {
+  height: 600px;
+}
+
+@media screen and (max-width: 767px) {
+  .product-card__title {
+    font-size: 24px;
+  }
+  
+  .product-card__content {
+    padding: 20px;
+  }
+  
+  .height--small .product-card__inner {
+    height: 250px;
+  }
+  
+  .height--medium .product-card__inner {
+    height: 300px;
+  }
+  
+  .height--large .product-card__inner {
+    height: 350px;
+  }
+  
+  .height--big .product-card__inner {
+    height: 400px;
+  }
+} 
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Product Grid",
+  "settings": [
+    {
+      "type": "select",
+      "id": "grid_layout",
+      "label": "Grid Layout",
+      "options": [
+        {
+          "value": "one",
+          "label": "1 Product"
+        },
+        {
+          "value": "two",
+          "label": "2 Products"
+        }
+      ],
+      "default": "two"
+    },
+    {
+      "type": "select",
+      "id": "card_height",
+      "label": "Card Height",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "big",
+          "label": "Big"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 8
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product Card",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Background Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "info": "Leave blank to use product title"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "price_text",
+          "label": "Price Text",
+          "default": "From "
+        },
+        {
+          "type": "color",
+          "id": "price_color",
+          "label": "Price Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "button_background_color",
+          "label": "Button Background Color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button Style",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Normal"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            }
+          ],
+          "default": "normal"
+        },
+        {
+          "type": "header",
+          "content": "Second Button (Optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "second_button_enabled",
+          "label": "Enable Second Button",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "second_button_text",
+          "label": "Second Button Text",
+          "default": "Explore"
+        },
+        {
+          "type": "url",
+          "id": "second_button_link",
+          "label": "Second Button Link"
+        },
+        {
+          "type": "color",
+          "id": "second_button_text_color",
+          "label": "Second Button Text Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "second_button_background_color",
+          "label": "Second Button Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "select",
+          "id": "second_button_style",
+          "label": "Second Button Style",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Normal"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            }
+          ],
+          "default": "outline"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Grid",
+      "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

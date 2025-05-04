@@ -88,6 +88,61 @@
         "animation_delay": 0.2
       }
     },
+    "product_grid_aJ3pdM": {
+      "type": "product-grid",
+      "blocks": {
+        "product_bC8P39": {
+          "type": "product",
+          "settings": {
+            "product": "magnetic-strip",
+            "title": "",
+            "title_color": "#ffffff",
+            "price_text": "From",
+            "price_color": "#ffffff",
+            "button_text": "Shop",
+            "button_text_color": "#ffffff",
+            "button_background_color": "#000000",
+            "button_style": "normal",
+            "second_button_enabled": false,
+            "second_button_text": "Explore",
+            "second_button_link": "",
+            "second_button_text_color": "#000000",
+            "second_button_background_color": "#ffffff",
+            "second_button_style": "normal"
+          }
+        },
+        "product_UGLa4P": {
+          "type": "product",
+          "settings": {
+            "product": "magnetic-strip",
+            "title": "",
+            "title_color": "#ffffff",
+            "price_text": "From",
+            "price_color": "#ffffff",
+            "button_text": "Shop",
+            "button_text_color": "#ffffff",
+            "button_background_color": "#000000",
+            "button_style": "normal",
+            "second_button_enabled": false,
+            "second_button_text": "Explore",
+            "second_button_link": "",
+            "second_button_text_color": "#000000",
+            "second_button_background_color": "#ffffff",
+            "second_button_style": "outline"
+          }
+        }
+      },
+      "block_order": [
+        "product_bC8P39",
+        "product_UGLa4P"
+      ],
+      "name": "Product Grid",
+      "settings": {
+        "grid_layout": "two",
+        "card_height": "large",
+        "card_border_radius": 8
+      }
+    },
     "rich_text_JymLpj": {
       "type": "rich-text",
       "blocks": {
@@ -127,7 +182,7 @@
             "flip_button_color": "#ffffff",
             "flip_button_background": "#000000",
             "title": "Tem o melhor sono",
-            "styled_title": "da tua vida",
+            "styled_title": "da tua vida.",
             "title_color": "#ffffff",
             "styled_title_color": "#ffffff",
             "description": "Optional description text",
@@ -146,8 +201,8 @@
             "tag_background_color": "#000000",
             "flip_button_color": "#ffffff",
             "flip_button_background": "#000000",
-            "title": "Um design mais",
-            "styled_title": "confortável e duradouro.",
+            "title": "Um design",
+            "styled_title": "mais confortável.",
             "title_color": "#ffffff",
             "styled_title_color": "#ffffff",
             "description": "Our wellness products are designed to help you live a healthier, more vibrant life. Explore our collection and find what works for you.",
@@ -222,6 +277,7 @@
   },
   "order": [
     "custom_banner_AMNhVf",
+    "product_grid_aJ3pdM",
     "rich_text_JymLpj",
     "card_slider_cC6dPG"
   ]
