@@ -14,10 +14,9 @@
       "blocks": {
         "title_PMTTXc": {
           "type": "title",
-          "disabled": true,
           "settings": {
             "title_text": "Mais leve.",
-            "title_color": "#ffffff",
+            "title_color": "linear-gradient(100deg, rgba(255, 31, 236, 1) 2%, rgba(82, 137, 255, 1) 50%, rgba(52, 42, 244, 1) 100%)",
             "title_font": "poppins_n4",
             "title_weight": "700",
             "title_size": "ultra"
@@ -25,10 +24,9 @@
         },
         "title_dcQQa7": {
           "type": "title",
-          "disabled": true,
           "settings": {
             "title_text": "Mais elegante.",
-            "title_color": "#ffffff",
+            "title_color": "linear-gradient(169deg, #ff1fec 2%, #5289ff 50%, #342af4 100%)",
             "title_font": "poppins_n4",
             "title_weight": "700",
             "title_size": "ultra"
@@ -36,10 +34,9 @@
         },
         "span_gnp3Gr": {
           "type": "span",
-          "disabled": true,
           "settings": {
             "span_text": "Feito para ti.",
-            "span_color": "#ffffff",
+            "span_color": "#0e50ff",
             "span_font": "poppins_n4",
             "span_weight": "400",
             "span_size": "3xl"
@@ -47,16 +44,15 @@
         },
         "button_xNJftR": {
           "type": "button",
-          "disabled": true,
           "settings": {
             "button_text": "Descobre Mais",
             "button_link": "shopify://products/magnetic-strip",
             "button_text_color": "#ffffff",
-            "button_bg_color": "#0b93ff",
+            "button_bg_color": "#001542",
             "button_font": "poppins_n4",
             "button_weight": "700",
             "button_size": "lg",
-            "button_radius": 20,
+            "button_radius": 30,
             "button_animation": "slide"
           }
         }
@@ -71,15 +67,15 @@
       "settings": {
         "section_height": "vh",
         "background_type": "image",
-        "background_image": "shopify://shop_images/pink_nasal_strip_histrips_image_19.webp",
-        "background_image_mobile": "shopify://shop_images/pink_nasal_strip_histrips_image_16.webp",
+        "background_image": "shopify://shop_images/magnetic_strips_bk.webp",
+        "background_image_mobile": "shopify://shop_images/magnetic_strips_bk_mobile.webp",
         "background_video_url": "",
         "background_video_url_mobile": "",
         "background_video": "",
         "loop_video": false,
         "mute_video": true,
         "content_position_desktop": "left",
-        "content_position_mobile": "top",
+        "content_position_mobile": "bottom",
         "space_between_desktop": 10,
         "space_between_mobile": 20,
         "enable_animations": true,
@@ -95,12 +91,13 @@
           "type": "product",
           "settings": {
             "product": "magnetic-strip",
-            "title": "",
-            "title_color": "#ffffff",
+            "background_image": "shopify://shop_images/white_magnetic_strip_bk.png",
+            "title": "Black Magnetic Strip",
+            "title_color": "#000000",
             "price_text": "Desde",
-            "price_color": "#ffffff",
+            "price_color": "#000000",
             "button_text": "Shop",
-            "button_text_color": "#ffffff",
+            "button_text_color": "#f0e5b2",
             "button_background_color": "#000000",
             "button_style": "normal",
             "second_button_enabled": false,
@@ -115,13 +112,14 @@
           "type": "product",
           "settings": {
             "product": "magnetic-strip",
-            "title": "",
+            "background_image": "shopify://shop_images/white_magnetic_strip_bk_blue_aad9ab1d-2185-44d6-8c0e-2f493146ba4a.png",
+            "title": "White Magnetic Strip",
             "title_color": "#ffffff",
-            "price_text": "From",
+            "price_text": "Desde",
             "price_color": "#ffffff",
             "button_text": "Shop",
-            "button_text_color": "#ffffff",
-            "button_background_color": "#000000",
+            "button_text_color": "#14449e",
+            "button_background_color": "#ffffff",
             "button_style": "normal",
             "second_button_enabled": false,
             "second_button_text": "Explore",
@@ -140,7 +138,10 @@
       "settings": {
         "grid_layout": "two",
         "card_height": "large",
-        "card_border_radius": 8
+        "card_border_radius": 20,
+        "margin_top": 0,
+        "margin_bottom": 10,
+        "background_color": "#ffffff"
       }
     },
     "rich_text_JymLpj": {
@@ -150,12 +151,33 @@
           "type": "heading",
           "settings": {
             "heading": "A nossa marca muda a forma como <strong>respiras</strong>.",
-            "heading_size": "h0"
+            "heading_size": "h1"
+          }
+        },
+        "caption_Brdrjp": {
+          "type": "caption",
+          "settings": {
+            "caption": "Descobre mais sobre a nossa marca no Blog!",
+            "text_style": "subtitle",
+            "text_size": "medium"
+          }
+        },
+        "button_cQFnKV": {
+          "type": "button",
+          "settings": {
+            "button_label": "Blog",
+            "button_link": "shopify://blogs/novidades",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
           }
         }
       },
       "block_order": [
-        "heading_GQGjWk"
+        "heading_GQGjWk",
+        "caption_Brdrjp",
+        "button_cQFnKV"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
@@ -163,8 +185,8 @@
         "content_alignment": "center",
         "color_scheme": "",
         "full_width": true,
-        "padding_top": 100,
-        "padding_bottom": 64
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "card_slider_cC6dPG": {
@@ -266,12 +288,117 @@
         "arrows_background": "#050505",
         "arrows_color": "#ffffff",
         "slider_speed": 300,
-        "margin_top": 20,
-        "margin_bottom": 20,
+        "margin_top": 10,
+        "margin_bottom": 10,
         "card_border_radius": 20,
         "space_between_cards": 20,
         "show_progress_bar": true,
         "progress_bar_color": "#000000"
+      }
+    },
+    "collapsible_content_gXRUWp": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_AMttyY": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Linha recolhível",
+            "icon": "check_mark",
+            "row_content": "<p>oioioi</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Dwzz7r": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Linha recolhível",
+            "icon": "check_mark",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_zRprtf": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Linha recolhível",
+            "icon": "check_mark",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_Uy9iRn": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Linha recolhível",
+            "icon": "check_mark",
+            "row_content": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_AMttyY",
+        "collapsible_row_Dwzz7r",
+        "collapsible_row_zRprtf",
+        "collapsible_row_Uy9iRn"
+      ],
+      "custom_css": [
+        ".collapsible-row-layout .accordion summary,.collapsible-row-layout .accordion .accordion__content {padding: 1.8rem 2.2rem;}",
+        ".collapsible-row-layout .accordion {border-radius: 30px;}",
+        ".collapsible-content__header {display: flex; flex-direction: column-reverse;}"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "Obtem soluções rápidas para as tuas dúvidas mais comuns, desde o envio até ao método de aplicação das nossas strips.",
+        "heading": "Tens Questões Sobre a Nozzo?",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "row",
+        "color_scheme": "",
+        "container_color_scheme": "scheme-2",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 40,
+        "padding_bottom": 28
+      }
+    },
+    "rich_text_XFQhhn": {
+      "type": "rich-text",
+      "blocks": {
+        "text_V9cef8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tempo médio de resposta: 24-48 horas. Horário: Segunda-Sexta, 9:00-18:00.</p>"
+          }
+        },
+        "button_nFVURi": {
+          "type": "button",
+          "settings": {
+            "button_label": "Suporte",
+            "button_link": "shopify://pages/contact",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "text_V9cef8",
+        "button_nFVURi"
+      ],
+      "custom_css": [
+        ".button {border-radius: 30px;}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     }
   },
@@ -279,6 +406,8 @@
     "custom_banner_AMNhVf",
     "product_grid_aJ3pdM",
     "rich_text_JymLpj",
-    "card_slider_cC6dPG"
+    "card_slider_cC6dPG",
+    "collapsible_content_gXRUWp",
+    "rich_text_XFQhhn"
   ]
 }
