@@ -103,7 +103,6 @@
     margin: 0 auto;
     overflow: hidden;
     border-radius: {{ section.settings.border_radius }}px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   }
 
   @media screen and (min-width: 1440px) {
@@ -146,19 +145,19 @@
     }
     
     .image-comparison-container.small {
-      height: 200px;
+      height: 250px;
     }
     
     .image-comparison-container.medium {
-      height: 300px;
+      height: 350px;
     }
     
     .image-comparison-container.large {
-      height: 400px;
+      height: 450px;
     }
     
     .image-comparison-container.extra_large {
-      height: 500px;
+      height: 550px;
     }
   }
 
@@ -240,7 +239,7 @@
     position: absolute;
     top: 0;
     left: 50%;
-    width: 4px;
+    width: 2px;
     height: 100%;
     background-color: white;
     transform: translateX(-50%);
@@ -255,7 +254,6 @@
     height: 40px;
     border-radius: 50%;
     background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 3;
     display: flex;
     align-items: center;
@@ -314,7 +312,7 @@
         </div>
         
         <!-- Slider divider line -->
-        <div class="slider-divider" id="slider-divider-{{ section.id }}"></div>
+        <div class="slider-divider" style="display: initial;" id="slider-divider-{{ section.id }}"></div>
         
         <!-- Slider handle -->
         <div class="slider-handle" id="slider-handle-{{ section.id }}">

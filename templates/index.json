@@ -185,8 +185,8 @@
         "content_alignment": "center",
         "color_scheme": "",
         "full_width": true,
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "card_slider_cC6dPG": {
@@ -296,19 +296,78 @@
         "progress_bar_color": "#000000"
       }
     },
+    "rich_text_pBErWX": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_hxD4jA": {
+          "type": "heading",
+          "settings": {
+            "heading": "Uso das Magnetic Strips",
+            "heading_size": "h1"
+          }
+        },
+        "text_anaXQJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Mais do que uma simples strip. Feita com um íman superpotente e um adesivo ultra-resistente, garante máxima fixação, durabilidade e versatilidade em qualquer situação.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_hxD4jA",
+        "text_anaXQJ"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": false,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
     "image_comparison_jgALhE": {
       "type": "image-comparison",
       "name": "Image Comparison",
       "settings": {
         "height": "medium",
-        "border_radius": 12,
-        "image_1": "shopify://shop_images/nozzo-session-1-hd-311.jpg",
-        "image_2": "shopify://shop_images/white_magnetic_strip_bk_blue_aad9ab1d-2185-44d6-8c0e-2f493146ba4a.png",
+        "border_radius": 20,
+        "image_1": "shopify://shop_images/white_magnetic_strip_bk_blue_aad9ab1d-2185-44d6-8c0e-2f493146ba4a.png",
+        "image_2": "shopify://shop_images/nozzo-session-1-hd-311.jpg",
         "section_bg_color": "#ffffff",
-        "text_1": "Before",
-        "text_2": "After",
+        "text_1": "Como Funciona?",
+        "text_2": "Strips Em Ação!",
         "color_text_1": "#ffffff",
         "color_text_2": "#ffffff"
+      }
+    },
+    "rich_text_nhbWKg": {
+      "type": "rich-text",
+      "blocks": {
+        "button_3KgEtR": {
+          "type": "button",
+          "settings": {
+            "button_label": "Compra Já",
+            "button_link": "shopify://products/magnetic-strip",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "button_3KgEtR"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 8,
+        "padding_bottom": 20
       }
     },
     "collapsible_content_gXRUWp": {
@@ -422,7 +481,9 @@
     "product_grid_aJ3pdM",
     "rich_text_JymLpj",
     "card_slider_cC6dPG",
+    "rich_text_pBErWX",
     "image_comparison_jgALhE",
+    "rich_text_nhbWKg",
     "collapsible_content_gXRUWp",
     "rich_text_XFQhhn"
   ]
