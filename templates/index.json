@@ -195,7 +195,7 @@
         "info_card_LKz7p3": {
           "type": "info_card",
           "settings": {
-            "background_image": "shopify://shop_images/3.webp",
+            "background_image": "shopify://shop_images/nozzo-session-1-hd-2.jpg",
             "icon": "heart",
             "icon_color": "#ff0000",
             "tag_text": "Dormir e Descansar",
@@ -215,9 +215,9 @@
         "info_card_hNYEik": {
           "type": "info_card",
           "settings": {
-            "background_image": "shopify://shop_images/1_fb80da72-9b72-406c-9e72-3c6829b1fa85.webp",
+            "background_image": "shopify://shop_images/nozzo-session-1-hd-84.jpg",
             "icon": "check_mark",
-            "icon_color": "#ffffff",
+            "icon_color": "#4cff00",
             "tag_text": "Conforto e Design",
             "tag_text_color": "#ffffff",
             "tag_background_color": "#000000",
@@ -235,7 +235,7 @@
         "info_card_wX9CH4": {
           "type": "info_card",
           "settings": {
-            "background_image": "shopify://shop_images/2.webp",
+            "background_image": "shopify://shop_images/nozzo-session-1-hd-152.jpg",
             "icon": "apple",
             "icon_color": "#ffffff",
             "tag_text": "Atividade e Fitness",
@@ -255,7 +255,7 @@
         "info_card_eJykfD": {
           "type": "info_card",
           "settings": {
-            "background_image": "shopify://shop_images/4.webp",
+            "background_image": "shopify://shop_images/nozzo-session-1-hd-311.jpg",
             "icon": "check_mark",
             "icon_color": "#ffffff",
             "tag_text": "Vida saudável",

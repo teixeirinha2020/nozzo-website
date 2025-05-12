@@ -1,0 +1,391 @@
+{% schema %}
+{
+  "name": "Image Comparison",
+  "tag": "section",
+  "class": "image-comparison-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Section Height",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "extra_large",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border Radius",
+      "default": 12
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1 (Before)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2 (After)"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "Text 1",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Text 2",
+      "default": "After"
+    },
+    {
+      "type": "color",
+      "id": "color_text_1",
+      "label": "Text 1 Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_text_2",
+      "label": "Text 2 Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Comparison"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .image-comparison-section-wrapper {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  .image-comparison-card {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: {{ section.settings.border_radius }}px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  @media screen and (min-width: 1440px) {
+    .image-comparison-card {
+      max-width: 80%;
+    }
+  }
+
+  @media screen and (min-width: 1920px) {
+    .image-comparison-card {
+      max-width: 75%;
+    }
+  }
+
+  .image-comparison-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .image-comparison-container.small {
+    height: 300px;
+  }
+
+  .image-comparison-container.medium {
+    height: 450px;
+  }
+
+  .image-comparison-container.large {
+    height: 600px;
+  }
+
+  .image-comparison-container.extra_large {
+    height: 750px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .image-comparison-section-wrapper {
+      padding: 20px 10px;
+    }
+    
+    .image-comparison-container.small {
+      height: 200px;
+    }
+    
+    .image-comparison-container.medium {
+      height: 300px;
+    }
+    
+    .image-comparison-container.large {
+      height: 400px;
+    }
+    
+    .image-comparison-container.extra_large {
+      height: 500px;
+    }
+  }
+
+  /* First image (Before) - occupies the full container */
+  .image-before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .image-before img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Second image (After) - will be clipped by the clip-path */
+  .image-after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: inset(0 0 0 50%); /* Initially show only right half */
+    overflow: hidden;
+    z-index: 2; /* Higher than before image */
+  }
+
+  .image-after img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Text labels */
+  .image-label {
+    position: absolute;
+    bottom: 20px;
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 16px;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+  }
+
+  .label-before {
+    left: 20px;
+    color: {{ section.settings.color_text_1 }};
+    z-index: 1; /* Lower z-index so it doesn't overlay the after image */
+  }
+
+  .label-after {
+    right: 20px;
+    color: {{ section.settings.color_text_2 }};
+  }
+
+  /* Slider handle */
+  .slider-divider {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background-color: white;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .slider-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    cursor: ew-resize;
+  }
+
+  .slider-handle-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slider-handle-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: #ff6cb7;
+  }
+</style>
+
+<div class="image-comparison-section-wrapper">
+  <div class="image-comparison-card">
+    <div id="image-comparison-{{ section.id }}" class="image-comparison-container {{ section.settings.height }}" data-section-id="{{ section.id }}">
+      {% if section.settings.image_1 != blank and section.settings.image_2 != blank %}
+        <!-- Before Image (Full width, will be covered partially by After) -->
+        <div class="image-before">
+          {% if section.settings.image_1 != blank %}
+            {{ section.settings.image_1 | image_url: width: 2000 | image_tag: loading: 'lazy', alt: section.settings.text_1 }}
+          {% else %}
+            <div style="width: 100%; height: 100%; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+              <p>Before Image</p>
+            </div>
+          {% endif %}
+          
+          {% if section.settings.text_1 != blank %}
+            <div class="image-label label-before">{{ section.settings.text_1 }}</div>
+          {% endif %}
+        </div>
+        
+        <!-- After Image (Initially clipped to show only right half) -->
+        <div class="image-after" id="image-after-{{ section.id }}">
+          {% if section.settings.image_2 != blank %}
+            {{ section.settings.image_2 | image_url: width: 2000 | image_tag: loading: 'lazy', alt: section.settings.text_2 }}
+          {% else %}
+            <div style="width: 100%; height: 100%; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center;">
+              <p>After Image</p>
+            </div>
+          {% endif %}
+          
+          {% if section.settings.text_2 != blank %}
+            <div class="image-label label-after">{{ section.settings.text_2 }}</div>
+          {% endif %}
+        </div>
+        
+        <!-- Slider divider line -->
+        <div class="slider-divider" id="slider-divider-{{ section.id }}"></div>
+        
+        <!-- Slider handle -->
+        <div class="slider-handle" id="slider-handle-{{ section.id }}">
+          <div class="slider-handle-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M7.293 4.293L1.586 10H18v4H1.586l5.707 5.707-1.414 1.414L0 12l5.879-9.121z"/>
+              <path d="M16.707 4.293L22.414 10H23v4h-0.586l-5.707 5.707 1.414 1.414L24 12l-5.879-9.121z"/>
+            </svg>
+          </div>
+        </div>
+      {% else %}
+        <div style="padding: 40px; text-align: center;">
+          <p>Please select both comparison images in the section settings</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    initImageComparison('{{ section.id }}');
+  });
+
+  function initImageComparison(sectionId) {
+    const container = document.getElementById(`image-comparison-${sectionId}`);
+    if (!container) return;
+    
+    const slider = document.getElementById(`slider-handle-${sectionId}`);
+    const divider = document.getElementById(`slider-divider-${sectionId}`);
+    const afterImage = document.getElementById(`image-after-${sectionId}`);
+    
+    let isDragging = false;
+    
+    // Touch events
+    slider.addEventListener('touchstart', startDragging);
+    container.addEventListener('touchmove', drag);
+    container.addEventListener('touchend', stopDragging);
+    
+    // Mouse events
+    slider.addEventListener('mousedown', startDragging);
+    container.addEventListener('mousemove', drag);
+    container.addEventListener('mouseup', stopDragging);
+    document.addEventListener('mouseup', stopDragging);
+    
+    // Initial position
+    moveSliderTo(50);
+    
+    function startDragging(e) {
+      e.preventDefault();
+      isDragging = true;
+    }
+    
+    function stopDragging() {
+      isDragging = false;
+    }
+    
+    function drag(e) {
+      if (!isDragging) return;
+      
+      const rect = container.getBoundingClientRect();
+      let clientX;
+      
+      if (e.type === 'touchmove') {
+        clientX = e.touches[0].clientX;
+      } else {
+        clientX = e.clientX;
+      }
+      
+      const position = ((clientX - rect.left) / rect.width) * 100;
+      moveSliderTo(position);
+    }
+    
+    function moveSliderTo(position) {
+      // Clamp position between 0.5% and 99.5% to allow almost full sliding
+      const clampedPosition = Math.max(0.5, Math.min(99.5, position));
+      
+      // Update slider position
+      slider.style.left = `${clampedPosition}%`;
+      divider.style.left = `${clampedPosition}%`;
+      
+      // Update clip path to reveal the right amount of the "after" image
+      // When position is 0%, show none of the after image
+      // When position is 100%, show all of the after image
+      afterImage.style.clipPath = `inset(0 0 0 ${clampedPosition}%)`;
+    }
+  }
+</script>

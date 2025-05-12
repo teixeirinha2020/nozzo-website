@@ -30,12 +30,14 @@
         ".footer-block__heading {margin-bottom: 1.2rem;}",
         ".svg-wrapper {width: 50px; height: 50px;}",
         ".list-social__item .icon {width: 50px; height: 50px;}",
-        ".list-social__item {border: 1px solid white; border-radius: 5px;}"
+        ".list-social__item {border: 1px solid white; border-radius: 5px;}",
+        ".footer-block--newsletter {flex-direction: column; align-items: center; gap: 2rem; justify-content: center;}",
+        ".footer-block__newsletter {margin-right: 0; justify-content: center; align-items: center; display: flex;}"
       ],
       "settings": {
         "color_scheme": "scheme-4",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_heading": "Junta-te à nossa comunidade para ficares a par dos lançamentos mais recentes e muito mais!",
         "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": true,
