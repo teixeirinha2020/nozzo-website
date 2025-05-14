@@ -144,40 +144,26 @@
         "background_color": "#ffffff"
       }
     },
-    "rich_text_JymLpj": {
+    "rich_text_87hh3h": {
       "type": "rich-text",
       "blocks": {
-        "heading_GQGjWk": {
+        "heading_AY7Vp4": {
           "type": "heading",
           "settings": {
-            "heading": "A nossa marca muda a forma como <strong>respiras</strong>.",
+            "heading": "<em>Melhora o teu desempenho em 30%</em>",
             "heading_size": "h1"
           }
         },
-        "caption_Brdrjp": {
-          "type": "caption",
+        "text_XQ6Jd4": {
+          "type": "text",
           "settings": {
-            "caption": "Descobre mais sobre a nossa marca no Blog!",
-            "text_style": "subtitle",
-            "text_size": "medium"
-          }
-        },
-        "button_cQFnKV": {
-          "type": "button",
-          "settings": {
-            "button_label": "Blog",
-            "button_link": "shopify://blogs/novidades",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "text": "<p>O produto de performance que faz realmente diferença.</p>"
           }
         }
       },
       "block_order": [
-        "heading_GQGjWk",
-        "caption_Brdrjp",
-        "button_cQFnKV"
+        "heading_AY7Vp4",
+        "text_XQ6Jd4"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
@@ -185,8 +171,8 @@
         "content_alignment": "center",
         "color_scheme": "",
         "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 40
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "card_slider_cC6dPG": {
@@ -370,6 +356,52 @@
         "padding_bottom": 20
       }
     },
+    "rich_text_JymLpj": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_GQGjWk": {
+          "type": "heading",
+          "settings": {
+            "heading": "A nossa marca muda a forma como <strong>respiras</strong>!",
+            "heading_size": "h1"
+          }
+        },
+        "caption_Brdrjp": {
+          "type": "caption",
+          "settings": {
+            "caption": "Descobre mais sobre a nossa marca no Blog!",
+            "text_style": "subtitle",
+            "text_size": "medium"
+          }
+        },
+        "button_cQFnKV": {
+          "type": "button",
+          "settings": {
+            "button_label": "Blog",
+            "button_link": "shopify://blogs/novidades",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_GQGjWk",
+        "caption_Brdrjp",
+        "button_cQFnKV"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
     "collapsible_content_gXRUWp": {
       "type": "collapsible-content",
       "blocks": {
@@ -479,11 +511,12 @@
   "order": [
     "custom_banner_AMNhVf",
     "product_grid_aJ3pdM",
-    "rich_text_JymLpj",
+    "rich_text_87hh3h",
     "card_slider_cC6dPG",
     "rich_text_pBErWX",
     "image_comparison_jgALhE",
     "rich_text_nhbWKg",
+    "rich_text_JymLpj",
     "collapsible_content_gXRUWp",
     "rich_text_XFQhhn"
   ]

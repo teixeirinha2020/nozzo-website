@@ -12,16 +12,16 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {}
+        },
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "Melhora a tua vida por apenas <strong>0,83</strong><em><strong>€ </strong></em>por sticker.",
+            "text_style": "body"
+          }
         },
         "price": {
           "type": "price",
@@ -57,8 +57,8 @@
         }
       },
       "block_order": [
-        "vendor",
         "title",
+        "vendor",
         "price",
         "variant_picker",
         "quantity_selector",
@@ -66,20 +66,24 @@
         "description",
         "share"
       ],
+      "custom_css": [
+        ".global-media-settings {border: none;}",
+        ".globo-color-swatch--watermarks {display: none;}"
+      ],
       "settings": {
         "enable_sticky_info": true,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "gallery_layout": "stacked",
+        "gallery_layout": "thumbnail_slider",
         "media_position": "left",
-        "image_zoom": "lightbox",
+        "image_zoom": "none",
         "mobile_thumbnails": "hide",
         "hide_variants": true,
         "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 12
+        "padding_top": 84,
+        "padding_bottom": 32
       }
     },
     "related-products": {

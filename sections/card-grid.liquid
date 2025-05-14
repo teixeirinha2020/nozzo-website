@@ -1,0 +1,403 @@
+{% schema %}
+{
+  "name": "Image Grid",
+  "tag": "section",
+  "class": "image-grid-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "space_between_cards",
+      "label": "Space Between Cards (px)",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card Border Radius (px)",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card_1x1",
+      "name": "Card (1x1)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (Optional)"
+        },
+        {
+          "type": "select",
+          "id": "position_x",
+          "label": "Position X",
+          "options": [
+            { "value": "0", "label": "Column 1" },
+            { "value": "1", "label": "Column 2" }
+          ],
+          "default": "0"
+        },
+        {
+          "type": "select",
+          "id": "position_y",
+          "label": "Position Y",
+          "options": [
+            { "value": "0", "label": "Row 1" },
+            { "value": "1", "label": "Row 2" },
+            { "value": "2", "label": "Row 3" },
+            { "value": "3", "label": "Row 4" }
+          ],
+          "default": "0"
+        }
+      ]
+    },
+    {
+      "type": "card_1x2",
+      "name": "Card (1x2)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (Optional)"
+        },
+        {
+          "type": "select",
+          "id": "position_x",
+          "label": "Position X",
+          "options": [
+            { "value": "0", "label": "Column 1" },
+            { "value": "1", "label": "Column 2" }
+          ],
+          "default": "0"
+        },
+        {
+          "type": "select",
+          "id": "position_y",
+          "label": "Position Y (Starting row)",
+          "options": [
+            { "value": "0", "label": "Row 1" },
+            { "value": "1", "label": "Row 2" },
+            { "value": "2", "label": "Row 3" }
+          ],
+          "default": "0"
+        }
+      ]
+    },
+    {
+      "type": "card_2x1",
+      "name": "Card (2x1)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (Optional)"
+        },
+        {
+          "type": "select",
+          "id": "position_y",
+          "label": "Position Y",
+          "options": [
+            { "value": "0", "label": "Row 1" },
+            { "value": "1", "label": "Row 2" },
+            { "value": "2", "label": "Row 3" },
+            { "value": "3", "label": "Row 4" }
+          ],
+          "default": "0"
+        }
+      ]
+    },
+    {
+      "type": "card_2x2",
+      "name": "Card (2x2)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (Optional)"
+        },
+        {
+          "type": "select",
+          "id": "position_y",
+          "label": "Position Y (Starting row)",
+          "options": [
+            { "value": "0", "label": "Row 1" },
+            { "value": "1", "label": "Row 2" },
+            { "value": "2", "label": "Row 3" }
+          ],
+          "default": "0"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Grid",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .image-grid-section {
+    background-color: {{ section.settings.background_color }};
+    padding: 20px 0;
+  }
+  
+  .image-grid__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: {{ section.settings.space_between_cards }}px;
+    margin-bottom: 20px;
+    position: relative;
+    aspect-ratio: 1/2;
+  }
+  
+  .image-grid__card {
+    position: relative;
+    border-radius: {{ section.settings.card_border_radius }}px;
+    overflow: hidden;
+  }
+  
+  .image-grid__card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  /* Card size classes */
+  .image-grid__card--1x1 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  .image-grid__card--1x2 {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+  
+  .image-grid__card--2x1 {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  
+  .image-grid__card--2x2 {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .image-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      aspect-ratio: 2/1;
+    }
+    
+    /* Mobile card size classes */
+    .image-grid__card--1x1 {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+    
+    .image-grid__card--1x2 {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+    
+    .image-grid__card--2x1 {
+      grid-column: span 1;
+      grid-row: span 2;
+    }
+    
+    .image-grid__card--2x2 {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+  }
+</style>
+
+<div class="image-grid__container">
+  <div class="image-grid">
+    {% comment %} Initialize the grid positions tracker {% endcomment %}
+    {%- assign grid_positions = "" | split: "" -%}
+    {% for i in (0..7) %}
+      {%- assign grid_positions = grid_positions | concat: "empty" | split: "," -%}
+    {% endfor %}
+    
+    {% comment %} Sort blocks by position {% endcomment %}
+    {%- assign sorted_blocks = section.blocks | sort: "settings.position_y" -%}
+    
+    {% comment %} Generate all cards {% endcomment %}
+    {% for block in sorted_blocks %}
+      {% case block.type %}
+        {% when 'card_1x1' %}
+          {% assign pos_x = block.settings.position_x | plus: 0 %}
+          {% assign pos_y = block.settings.position_y | plus: 0 %}
+          {% assign grid_index = pos_y | times: 2 | plus: pos_x %}
+          
+          {% comment %} Check if position is available {% endcomment %}
+          {% if grid_positions[grid_index] == "empty" %}
+            {% assign grid_positions[grid_index] = "filled" %}
+            
+            <div class="image-grid__card image-grid__card--1x1" 
+                 style="grid-column: {{ pos_x | plus: 1 }}; grid-row: {{ pos_y | plus: 1 }};"
+                 {{ block.shopify_attributes }}>
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">
+              {% endif %}
+              
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+              {% else %}
+                {{ 'lifestyle-1' | placeholder_svg_tag }}
+              {% endif %}
+              
+              {% if block.settings.link != blank %}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+          
+        {% when 'card_1x2' %}
+          {% assign pos_x = block.settings.position_x | plus: 0 %}
+          {% assign pos_y = block.settings.position_y | plus: 0 %}
+          {% assign grid_index_1 = pos_y | times: 2 | plus: pos_x %}
+          {% assign grid_index_2 = grid_index_1 | plus: 2 %}
+          
+          {% comment %} Check if positions are available {% endcomment %}
+          {% if pos_y < 3 and grid_positions[grid_index_1] == "empty" and grid_positions[grid_index_2] == "empty" %}
+            {% assign grid_positions[grid_index_1] = "filled" %}
+            {% assign grid_positions[grid_index_2] = "filled" %}
+            
+            <div class="image-grid__card image-grid__card--1x2" 
+                 style="grid-column: {{ pos_x | plus: 1 }}; grid-row: {{ pos_y | plus: 1 }} / span 2;"
+                 {{ block.shopify_attributes }}>
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">
+              {% endif %}
+              
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+              {% else %}
+                {{ 'lifestyle-1' | placeholder_svg_tag }}
+              {% endif %}
+              
+              {% if block.settings.link != blank %}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+          
+        {% when 'card_2x1' %}
+          {% assign pos_y = block.settings.position_y | plus: 0 %}
+          {% assign grid_index_1 = pos_y | times: 2 %}
+          {% assign grid_index_2 = grid_index_1 | plus: 1 %}
+          
+          {% comment %} Check if positions are available {% endcomment %}
+          {% if grid_positions[grid_index_1] == "empty" and grid_positions[grid_index_2] == "empty" %}
+            {% assign grid_positions[grid_index_1] = "filled" %}
+            {% assign grid_positions[grid_index_2] = "filled" %}
+            
+            <div class="image-grid__card image-grid__card--2x1" 
+                 style="grid-column: 1 / span 2; grid-row: {{ pos_y | plus: 1 }};"
+                 {{ block.shopify_attributes }}>
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">
+              {% endif %}
+              
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+              {% else %}
+                {{ 'lifestyle-1' | placeholder_svg_tag }}
+              {% endif %}
+              
+              {% if block.settings.link != blank %}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+          
+        {% when 'card_2x2' %}
+          {% assign pos_y = block.settings.position_y | plus: 0 %}
+          {% assign grid_index_1 = pos_y | times: 2 %}
+          {% assign grid_index_2 = grid_index_1 | plus: 1 %}
+          {% assign grid_index_3 = grid_index_1 | plus: 2 %}
+          {% assign grid_index_4 = grid_index_3 | plus: 1 %}
+          
+          {% comment %} Check if positions are available {% endcomment %}
+          {% if pos_y < 3 and grid_positions[grid_index_1] == "empty" and grid_positions[grid_index_2] == "empty" and grid_positions[grid_index_3] == "empty" and grid_positions[grid_index_4] == "empty" %}
+            {% assign grid_positions[grid_index_1] = "filled" %}
+            {% assign grid_positions[grid_index_2] = "filled" %}
+            {% assign grid_positions[grid_index_3] = "filled" %}
+            {% assign grid_positions[grid_index_4] = "filled" %}
+            
+            <div class="image-grid__card image-grid__card--2x2" 
+                 style="grid-column: 1 / span 2; grid-row: {{ pos_y | plus: 1 }} / span 2;"
+                 {{ block.shopify_attributes }}>
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">
+              {% endif %}
+              
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+              {% else %}
+                {{ 'lifestyle-1' | placeholder_svg_tag }}
+              {% endif %}
+              
+              {% if block.settings.link != blank %}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+{% javascript %}
+document.addEventListener('shopify:section:load', function(event) {
+  if (event.target.classList.contains('image-grid-section')) {
+    // Any JS initialization needed for the grid
+  }
+});
+{% endjavascript %}
