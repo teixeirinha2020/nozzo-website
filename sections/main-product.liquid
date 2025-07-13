@@ -733,6 +733,38 @@
                             </div>
                           </div>
                         {%- endif -%}
+                        {%- if block.settings.video_4 != blank -%}
+                          <div class="swiper-slide">
+                            <div class="athlete-video-card" data-index="3">
+                              <div class="athlete-video-thumb-wrapper">
+                                <img class="athlete-video-thumb" src="{{ block.settings.video_4.preview_image | img_url: '360x' }}" alt="Video thumbnail" width="180" height="320" />
+                                <button class="athlete-video-play" aria-label="Play video">
+                                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.7)"/>
+                                    <path d="M19 16L32 24L19 32V16Z" fill="white"/>
+                                  </svg>
+                                </button>
+                              </div>
+                              <span class="athlete-video-src" data-src="{{ block.settings.video_4.sources[1].url }}" style="display:none;"></span>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                        {%- if block.settings.video_5 != blank -%}
+                          <div class="swiper-slide">
+                            <div class="athlete-video-card" data-index="4">
+                              <div class="athlete-video-thumb-wrapper">
+                                <img class="athlete-video-thumb" src="{{ block.settings.video_5.preview_image | img_url: '360x' }}" alt="Video thumbnail" width="180" height="320" />
+                                <button class="athlete-video-play" aria-label="Play video">
+                                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.7)"/>
+                                    <path d="M19 16L32 24L19 32V16Z" fill="white"/>
+                                  </svg>
+                                </button>
+                              </div>
+                              <span class="athlete-video-src" data-src="{{ block.settings.video_5.sources[1].url }}" style="display:none;"></span>
+                            </div>
+                          </div>
+                        {%- endif -%}
                       </div>
                       <div class="swiper-button-prev athlete-swiper-arrow"></div>
                       <div class="swiper-button-next athlete-swiper-arrow"></div>
@@ -2887,6 +2919,16 @@
           "type": "video",
           "id": "video_3",
           "label": "Video 3"
+        },
+        {
+          "type": "video",
+          "id": "video_4",
+          "label": "Video 4"
+        },
+        {
+          "type": "video",
+          "id": "video_5",
+          "label": "Video 5"
         }
       ]
     }
