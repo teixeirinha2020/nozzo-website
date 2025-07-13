@@ -233,6 +233,7 @@ product-info {
 
 .product__text {
   margin-bottom: 0;
+  font-weight: 300;
 }
 
 a.product__text {

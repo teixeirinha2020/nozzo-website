@@ -1,0 +1,926 @@
+
+
+<div class="image-comparison-section section-{{ section.id }}-padding" style="background-color: {{ section.settings.background_color }};">
+  <div class="page-width">
+    
+    {%- if section.settings.heading != blank -%}
+      <h2 class="image-comparison-heading h1" style="color: {{ section.settings.heading_color }};">
+        {{ section.settings.heading }}
+      </h2>
+    {%- endif -%}
+
+    <div class="image-comparison-container">
+      
+      <!-- Image Comparator -->
+      <div class="image-comparator-wrapper">
+        <div class="image-comparator image-comparator--{{ section.settings.image_format }}" id="comparator-{{ section.id }}">
+          
+          <!-- Before Image (Left/Top) -->
+          <div class="comparison-image comparison-image--before">
+            {%- if section.settings.image_before != blank -%}
+              <img
+                src="{{ section.settings.image_before | image_url: width: 800 }}"
+                srcset="{{ section.settings.image_before | image_url: width: 400 }} 400w,
+                        {{ section.settings.image_before | image_url: width: 600 }} 600w,
+                        {{ section.settings.image_before | image_url: width: 800 }} 800w"
+                sizes="(min-width: 990px) 50vw, 90vw"
+                alt="{{ section.settings.image_before.alt | escape }}"
+                loading="lazy"
+                width="{{ section.settings.image_before.width }}"
+                height="{{ section.settings.image_before.height }}"
+              >
+            {%- else -%}
+              <div class="comparison-placeholder">
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <!-- After Image (Right/Bottom) -->
+          <div class="comparison-image comparison-image--after">
+            {%- if section.settings.image_after != blank -%}
+              <img
+                src="{{ section.settings.image_after | image_url: width: 800 }}"
+                srcset="{{ section.settings.image_after | image_url: width: 400 }} 400w,
+                        {{ section.settings.image_after | image_url: width: 600 }} 600w,
+                        {{ section.settings.image_after | image_url: width: 800 }} 800w"
+                sizes="(min-width: 990px) 50vw, 90vw"
+                alt="{{ section.settings.image_after.alt | escape }}"
+                loading="lazy"
+                width="{{ section.settings.image_after.width }}"
+                height="{{ section.settings.image_after.height }}"
+              >
+            {%- else -%}
+              <div class="comparison-placeholder">
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <!-- Slider Control -->
+          <div class="comparison-slider" id="slider-{{ section.id }}">
+            <div class="comparison-slider-button">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Features Grid -->
+      {%- if section.blocks.size > 0 -%}
+        <div class="image-comparison-features">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'feature' -%}
+                <div class="feature-item" {{ block.shopify_attributes }}>
+                  {%- if block.settings.icon != 'none' -%}
+                    <div class="feature-icon" style="color: {{ block.settings.icon_color }};">
+                      {% render 'icon-accordion', icon: block.settings.icon %}
+                    </div>
+                  {%- endif -%}
+                  
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="feature-title" style="color: {{ block.settings.title_color }};">
+                      {{ block.settings.title }}
+                    </h3>
+                  {%- endif -%}
+                  
+                  {%- if block.settings.text != blank -%}
+                    <div class="feature-text rte" style="color: {{ block.settings.text_color }};">
+                      {{ block.settings.text }}
+                    </div>
+                  {%- endif -%}
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const comparator = document.getElementById('comparator-{{ section.id }}');
+    const slider = document.getElementById('slider-{{ section.id }}');
+    
+    if (!comparator || !slider) return;
+    
+    const afterImage = comparator.querySelector('.comparison-image--after');
+    let isResizing = false;
+    
+    function updateComparison(percentage) {
+      percentage = Math.max(0, Math.min(100, percentage));
+      
+      if (comparator.classList.contains('image-comparator--circle') || 
+          comparator.classList.contains('image-comparator--square')) {
+        // For circle and square, use clip-path
+        afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+        slider.style.left = `${percentage}%`;
+      } else {
+        // For rectangles, use width
+        afterImage.style.width = `${percentage}%`;
+        slider.style.left = `${percentage}%`;
+      }
+    }
+    
+    function handleInteraction(clientX) {
+      const rect = comparator.getBoundingClientRect();
+      const percentage = ((clientX - rect.left) / rect.width) * 100;
+      updateComparison(percentage);
+    }
+    
+    // Mouse events
+    slider.addEventListener('mousedown', function(e) {
+      isResizing = true;
+      document.body.style.cursor = 'ew-resize';
+      e.preventDefault();
+    });
+    
+    document.addEventListener('mousemove', function(e) {
+      if (!isResizing) return;
+      handleInteraction(e.clientX);
+    });
+    
+    document.addEventListener('mouseup', function() {
+      isResizing = false;
+      document.body.style.cursor = '';
+    });
+    
+    // Touch events
+    slider.addEventListener('touchstart', function(e) {
+      isResizing = true;
+      e.preventDefault();
+    });
+    
+    document.addEventListener('touchmove', function(e) {
+      if (!isResizing) return;
+      e.preventDefault();
+      const touch = e.touches[0];
+      handleInteraction(touch.clientX);
+    });
+    
+    document.addEventListener('touchend', function() {
+      isResizing = false;
+    });
+    
+    // Click on comparator
+    comparator.addEventListener('click', function(e) {
+      if (e.target === slider || slider.contains(e.target)) return;
+      handleInteraction(e.clientX);
+    });
+    
+    // Initialize at 50%
+    updateComparison(50);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Image Comparison",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "See the Difference"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Image Comparison"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "Before image (left/top)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "After image (right/bottom)"
+    },
+    {
+      "type": "select",
+      "id": "image_format",
+      "options": [
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "rectangle",
+          "label": "Rectangle"
+        },
+        {
+          "value": "wide-rectangle",
+          "label": "Wide Rectangle"
+        }
+      ],
+      "default": "circle",
+      "label": "Image format"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "apple",
+              "label": "Apple"
+            },
+            {
+              "value": "banana",
+              "label": "Banana"
+            },
+            {
+              "value": "bottle",
+              "label": "Bottle"
+            },
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "carrot",
+              "label": "Carrot"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check_mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "clipboard",
+              "label": "Clipboard"
+            },
+            {
+              "value": "dairy",
+              "label": "Dairy"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "fire",
+              "label": "Fire"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "Lightning bolt"
+            },
+            {
+              "value": "lipstick",
+              "label": "Lipstick"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map_pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "paw_print",
+              "label": "Paw print"
+            },
+            {
+              "value": "pepper",
+              "label": "Pepper"
+            },
+            {
+              "value": "perfume",
+              "label": "Perfume"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "plant",
+              "label": "Plant"
+            },
+            {
+              "value": "price_tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question_mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "serving_dish",
+              "label": "Serving dish"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "silhouette",
+              "label": "Silhouette"
+            },
+            {
+              "value": "snowflake",
+              "label": "Snowflake"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "stopwatch",
+              "label": "Stopwatch"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            },
+            {
+              "value": "verified_grey",
+              "label": "Verified"
+            }
+          ],
+          "default": "heart",
+          "label": "Icon"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon color",
+          "default": "#121212"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature title"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title color",
+          "default": "#121212"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Add details about your feature here.</p>"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#666666"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Comparison",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Easy to Use",
+            "text": "<p>Apply patches on both side of your nose and pop it on</p>",
+            "icon": "check_mark"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Long Lasting",
+            "text": "<p>Designed to be reusable and last up to years</p>",
+            "icon": "stopwatch"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Loved by Many",
+            "text": "<p>Popular amongst biohackers, athletes and runners</p>",
+            "icon": "heart"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Durable & Firm",
+            "text": "<p>Unlike traditional nose-strips, these give proper stability</p>",
+            "icon": "verified_grey"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+/* Image Comparison Section */
+.image-comparison-section {
+  padding: 36px 0;
+}
+
+.image-comparison-heading {
+  text-align: center;
+  margin: 0 0 4rem 0;
+  font-size: 5.2rem;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.02em;
+}
+
+.image-comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+/* Image Comparator */
+.image-comparator-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-comparator {
+  position: relative;
+  max-width: 50rem;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Image Format Variations */
+.image-comparator--circle {
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.image-comparator--square {
+  aspect-ratio: 1;
+  border-radius: 1rem;
+}
+
+.image-comparator--rectangle {
+  aspect-ratio: 4/5;
+  border-radius: 1rem;
+}
+
+.image-comparator--wide-rectangle {
+  aspect-ratio: 16/9;
+  border-radius: 1rem;
+}
+
+/* Comparison Images */
+.comparison-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.comparison-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.comparison-image--before {
+  z-index: 1;
+}
+
+.comparison-image--after {
+  z-index: 2;
+  width: 50%;
+}
+
+/* Circle and Square specific clipping */
+.image-comparator--circle .comparison-image--after,
+.image-comparator--square .comparison-image--after {
+  width: 100%;
+  clip-path: inset(0 50% 0 0);
+}
+
+/* Placeholder */
+.comparison-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comparison-placeholder svg {
+  width: 4rem;
+  height: 4rem;
+  opacity: 0.3;
+}
+
+/* Slider Control */
+.comparison-slider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0.4rem;
+  height: 100%;
+  background: white;
+  cursor: ew-resize;
+  z-index: 10;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease;
+}
+
+.comparison-slider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -1rem;
+  width: 2.4rem;
+  height: 100%;
+  background: transparent;
+}
+
+.comparison-slider-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4rem;
+  height: 4rem;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comparison-slider-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.comparison-slider-button svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  color: #666;
+}
+
+.comparison-slider-button svg:first-child {
+  margin-right: -0.4rem;
+}
+
+.comparison-slider-button svg:last-child {
+  margin-left: -0.4rem;
+}
+
+/* Features Grid */
+.image-comparison-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.feature-item {
+  text-align: center;
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+.feature-icon {
+  width: 5rem;
+  height: 5rem;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon svg {
+  width: 5rem;
+  height: 5rem;
+  fill: currentColor;
+}
+
+.feature-icon span {
+  width: 5rem;
+  height: 5rem;
+}
+
+.feature-title {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin: 0 0 1rem 0;
+  line-height: normal;
+}
+
+.feature-text {
+  font-size: 1.6rem;
+  line-height: normal;
+  margin: 0;
+}
+
+.feature-text p {
+  margin: 0 0 1rem 0;
+}
+
+.feature-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1199px) {
+  .image-comparison-container {
+    gap: 4rem;
+  }
+  
+  .image-comparison-heading {
+    font-size: 2.8rem;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .image-comparison-container {
+    gap: 3rem;
+  }
+  
+  .image-comparison-heading {
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+  }
+  
+  .image-comparator {
+    max-width: 40rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .image-comparison-section {
+    padding: 3rem 0;
+  }
+
+  .image-comparison-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .image-comparison-heading {
+    font-size: 4rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .image-comparator {
+    max-width: 35rem;
+    order: 1;
+  }
+
+  .image-comparison-features {
+    order: 2;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .feature-item {
+    max-width: none;
+  }
+
+  .feature-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-icon svg {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .feature-title {
+    font-size: 2.2rem;
+    margin-bottom: 0;
+  }
+
+  .feature-text {
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      width:80%;
+    }
+  }
+
+}
+
+@media screen and (max-width: 479px) {
+  .image-comparison-container {
+    gap: 4rem;
+  }
+  
+  .image-comparison-heading {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+  }
+
+  .image-comparator {
+    max-width: 36rem;
+  }
+
+  .image-comparison-features {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .comparison-slider-button {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  .comparison-slider-button svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .comparison-slider-button {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+  
+  .comparison-slider::before {
+    width: 3.2rem;
+    left: -1.4rem;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .comparison-slider {
+    background: #000;
+  }
+  
+  .comparison-slider-button {
+    border: 2px solid #000;
+  }
+  
+  .feature-icon {
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .comparison-slider,
+  .comparison-slider-button {
+    transition: none;
+  }
+}
+
+/* Section padding custom properties */
+.section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+}
+
+@media screen and (min-width: 750px) {
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+}
+</style>

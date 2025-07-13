@@ -9,8 +9,9 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/logo_2_res_baixa.png",
+    "logo": "shopify://shop_images/logo_mais_junto_branco_png.png",
     "logo_width": 110,
+    "favicon": "shopify://shop_images/favicon.jpg",
     "type_header_font": "poppins_n4",
     "heading_scale": 100,
     "type_body_font": "poppins_n4",
@@ -122,22 +123,25 @@
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
     "currency_code_enabled": true,
-    "cart_type": "notification",
+    "cart_type": "drawer",
     "show_vendor": false,
-    "show_cart_note": false,
+    "show_cart_note": true,
     "cart_drawer_collection": "",
-    "cart_color_scheme": "scheme-1",
+    "cart_color_scheme": "scheme-4",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
         "settings": {
-          "color_scheme": "scheme-1"
+          "color_scheme": "scheme-4"
         }
       },
       "main-password-footer": {
         "type": "main-password-footer",
+        "custom_css": [
+          ".password__footer-caption {display: none !important;}"
+        ],
         "settings": {
-          "color_scheme": "scheme-1"
+          "color_scheme": "scheme-4"
         }
       }
     },
@@ -149,6 +153,21 @@
         "settings": {
           "customCssGCW": ""
         }
+      },
+      "2104245418471043333": {
+        "type": "shopify://apps/17track/blocks/app-embed/1519e068-e330-4e0b-92dd-0a3263bfceda",
+        "disabled": false,
+        "settings": {}
+      },
+      "8208493610395315515": {
+        "type": "shopify://apps/dondy-whatsapp-chat-marketing/blocks/app-block/7f5a70cb-e171-4cc7-ac02-e2220203abd6",
+        "disabled": false,
+        "settings": {}
+      },
+      "17368511000352060744": {
+        "type": "shopify://apps/goaffpro-affiliate-marketing/blocks/goaffpro-embedded-pixel/2f4d802b-86c2-47e4-8096-ae1aa3efbab2",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
@@ -402,6 +421,9 @@
     }
   },
   "platform_customizations": {
-    "custom_css": []
+    "custom_css": [
+      ".powered-by {display: none;}",
+      "@media screen and (max-width: 480px) {, chat-input {bottom: 0; }}"
+    ]
   }
 }

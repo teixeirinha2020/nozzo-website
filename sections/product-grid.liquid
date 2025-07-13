@@ -9,7 +9,7 @@
   <div class="product-grid product-grid--{{ section.settings.grid_layout }} height--{{ section.settings.card_height }}">
     {% for block in section.blocks %}
       {% assign product = all_products[block.settings.product] %}
-      <div class="product-card" {{ block.shopify_attributes }}>
+      <div class="product-card" {{ block.shopify_attributes }} onclick="window.location.href='{{ block.settings.card_link | default: product.url }}'" style="cursor: pointer;">
         <div class="product-card__inner">
           <div class="product-card__media">
             {% if block.settings.background_image != blank %}
@@ -30,7 +30,7 @@
                 </p>
             </div>
             <div class="product-card__buttons">
-              <a href="{{ product.url }}" 
+              <a href="{{ block.settings.card_link | default: product.url }}" 
                 class="button-grid {% if block.settings.button_style == 'outline' %}button--outline{% endif %}"
                 style="color: {{ block.settings.button_text_color }}; background-color: {% if block.settings.button_style == 'outline' %}transparent{% else %}{{ block.settings.button_background_color }}{% endif %}; {% if block.settings.button_style == 'outline' %}border-color: {{ block.settings.button_background_color }};{% endif %}">
                 {{ block.settings.button_text | default: 'Shop' }}
@@ -330,6 +330,12 @@
           "type": "product",
           "id": "product",
           "label": "Select Product"
+        },
+        {
+          "type": "url",
+          "id": "card_link",
+          "label": "Custom Card Link",
+          "info": "Leave blank to use product URL"
         },
         {
           "type": "image_picker",

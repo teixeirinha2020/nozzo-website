@@ -91,6 +91,7 @@
           "type": "product",
           "settings": {
             "product": "magnetic-strip",
+            "card_link": "",
             "background_image": "shopify://shop_images/white_magnetic_strip_bk.png",
             "title": "Black Magnetic Strip",
             "title_color": "#000000",
@@ -112,6 +113,7 @@
           "type": "product",
           "settings": {
             "product": "magnetic-strip",
+            "card_link": "https://nozzo.shop/products/magnetic-strip?variant=50520507253083",
             "background_image": "shopify://shop_images/white_magnetic_strip_bk_blue_aad9ab1d-2185-44d6-8c0e-2f493146ba4a.png",
             "title": "White Magnetic Strip",
             "title_color": "#ffffff",
@@ -181,9 +183,9 @@
         "info_card_LKz7p3": {
           "type": "info_card",
           "settings": {
-            "background_image": "shopify://shop_images/nozzo-session-1-hd-2.jpg",
-            "icon": "heart",
-            "icon_color": "#ff0000",
+            "background_image": "shopify://shop_images/para-site-53.jpg",
+            "icon": "star",
+            "icon_color": "#ffd203",
             "tag_text": "Dormir e Descansar",
             "tag_text_color": "#ffffff",
             "tag_background_color": "#000000",
@@ -193,7 +195,7 @@
             "styled_title": "da tua vida.",
             "title_color": "#ffffff",
             "styled_title_color": "#ffffff",
-            "description": "Optional description text",
+            "description": "O teu corpo foi feito para respirar pelo nariz — e isso muda tudo.",
             "description_color": "#ffffff",
             "back_overlay_color": "#000000"
           }
@@ -201,9 +203,9 @@
         "info_card_hNYEik": {
           "type": "info_card",
           "settings": {
-            "background_image": "shopify://shop_images/nozzo-session-1-hd-84.jpg",
-            "icon": "check_mark",
-            "icon_color": "#4cff00",
+            "background_image": "shopify://shop_images/para-site-84.jpg",
+            "icon": "leaf",
+            "icon_color": "#3fd200",
             "tag_text": "Conforto e Design",
             "tag_text_color": "#ffffff",
             "tag_background_color": "#000000",
@@ -213,7 +215,7 @@
             "styled_title": "mais confortável.",
             "title_color": "#ffffff",
             "styled_title_color": "#ffffff",
-            "description": "Our wellness products are designed to help you live a healthier, more vibrant life. Explore our collection and find what works for you.",
+            "description": "Respira melhor.\nSem desconforto, sem distrações — só performance e estilo.",
             "description_color": "#ffffff",
             "back_overlay_color": "#000000"
           }
@@ -221,9 +223,9 @@
         "info_card_wX9CH4": {
           "type": "info_card",
           "settings": {
-            "background_image": "shopify://shop_images/nozzo-session-1-hd-152.jpg",
-            "icon": "apple",
-            "icon_color": "#ffffff",
+            "background_image": "shopify://shop_images/para-site-152.jpg",
+            "icon": "lightning_bolt",
+            "icon_color": "#f7ff00",
             "tag_text": "Atividade e Fitness",
             "tag_text_color": "#ffffff",
             "tag_background_color": "#000000",
@@ -233,7 +235,7 @@
             "styled_title": "com mais desempenho.",
             "title_color": "#ffffff",
             "styled_title_color": "#ffffff",
-            "description": "Our wellness products are designed to help you live a healthier, more vibrant life. Explore our collection and find what works for you.",
+            "description": "Mais oxigénio, mais desempenho.\nSente a diferença nos treinos — do foco à recuperação.",
             "description_color": "#ffffff",
             "back_overlay_color": "#000000"
           }
@@ -241,9 +243,9 @@
         "info_card_eJykfD": {
           "type": "info_card",
           "settings": {
-            "background_image": "shopify://shop_images/nozzo-session-1-hd-311.jpg",
-            "icon": "check_mark",
-            "icon_color": "#ffffff",
+            "background_image": "shopify://shop_images/para-site-311.jpg",
+            "icon": "apple",
+            "icon_color": "#ff0000",
             "tag_text": "Vida saudável",
             "tag_text_color": "#ffffff",
             "tag_background_color": "#000000",
@@ -253,7 +255,7 @@
             "styled_title": "mais saudável.",
             "title_color": "#ffffff",
             "styled_title_color": "#ffffff",
-            "description": "Our wellness products are designed to help you live a healthier, more vibrant life. Explore our collection and find what works for you.",
+            "description": "Começa por respirar como deve ser.\nMais saúde, mais energia, melhor qualidade de vida.",
             "description_color": "#ffffff",
             "back_overlay_color": "#000000"
           }
@@ -295,7 +297,7 @@
         "text_anaXQJ": {
           "type": "text",
           "settings": {
-            "text": "<p>Mais do que uma simples strip. Feita com um íman superpotente e um adesivo ultra-resistente, garante máxima fixação, durabilidade e versatilidade em qualquer situação.</p>"
+            "text": "<p>Mais do que uma simples strip. Feita com um íman superpotente e um adesivo ultra-resistente, garante máxima fixação, durabilidade e versatilidade em qualquer situação.<br/><br/><br/><strong>FALTA MOSTRAR COMO COLOCAR</strong></p>"
           }
         }
       },
@@ -313,19 +315,70 @@
         "padding_bottom": 20
       }
     },
-    "image_comparison_jgALhE": {
-      "type": "image-comparison",
+    "image_comparison_2_gtnJFR": {
+      "type": "image-comparison-2",
+      "blocks": {
+        "feature_YEAUib": {
+          "type": "feature",
+          "settings": {
+            "icon": "check_mark",
+            "icon_color": "#f01c7c",
+            "title": "Fácil de Usar",
+            "title_color": "#000000",
+            "text": "<p>Aplica os stickers em ambos os lados do nariz e depois encaixa-o.</p>",
+            "text_color": "#000000"
+          }
+        },
+        "feature_TE8UAd": {
+          "type": "feature",
+          "settings": {
+            "icon": "stopwatch",
+            "icon_color": "#f01c7c",
+            "title": "Duradouro",
+            "title_color": "#000000",
+            "text": "<p>Desenhado para durar até 24 horas sem descolar.</p>",
+            "text_color": "#000000"
+          }
+        },
+        "feature_z6PbVd": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "icon_color": "#f01c7c",
+            "title": "Adorado por Muitos",
+            "title_color": "#000000",
+            "text": "<p>Popular entre biohackers, atletas e corredores.</p>",
+            "text_color": "#000000"
+          }
+        },
+        "feature_VrBXUA": {
+          "type": "feature",
+          "settings": {
+            "icon": "star",
+            "icon_color": "#f01c7c",
+            "title": "Resistente e Firme",
+            "title_color": "#000000",
+            "text": "<p>Ao contrário das tiras nasais tradicionais, estas fazem realmente efeito.</p>",
+            "text_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "feature_YEAUib",
+        "feature_TE8UAd",
+        "feature_z6PbVd",
+        "feature_VrBXUA"
+      ],
       "name": "Image Comparison",
       "settings": {
-        "height": "medium",
-        "border_radius": 20,
-        "image_1": "shopify://shop_images/white_magnetic_strip_bk_blue_aad9ab1d-2185-44d6-8c0e-2f493146ba4a.png",
-        "image_2": "shopify://shop_images/nozzo-session-1-hd-311.jpg",
-        "section_bg_color": "#ffffff",
-        "text_1": "Como Funciona?",
-        "text_2": "Strips Em Ação!",
-        "color_text_1": "#ffffff",
-        "color_text_2": "#ffffff"
+        "background_color": "#ffffff",
+        "heading": "Vê a diferença!",
+        "heading_color": "#000000",
+        "image_before": "shopify://shop_images/A9146A3F-9D18-4314-84D1-35E5A10ED6CD.heic",
+        "image_after": "shopify://shop_images/E262A930-7600-4AB1-A4AD-25D8C62B5AE9.heic",
+        "image_format": "circle",
+        "padding_top": 36,
+        "padding_bottom": 100
       }
     },
     "rich_text_nhbWKg": {
@@ -402,51 +455,61 @@
         "padding_bottom": 40
       }
     },
-    "collapsible_content_gXRUWp": {
+    "collapsible_content_ykxH7F": {
       "type": "collapsible-content",
       "blocks": {
-        "collapsible_row_AMttyY": {
+        "collapsible_row_egfAix": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Linha recolhível",
-            "icon": "check_mark",
-            "row_content": "<p>oioioi</p>",
+            "heading": "Quanto tempo demora a chegar o meu pedido?",
+            "icon": "question_mark",
+            "row_content": "<p>Encomenda até às 15:00 → envio <strong>no próprio dia</strong><br/><br/>Encomenda pós 15:00 → envio <strong>no dia útil seguinte</strong><br/><br/>24-48h (Continente) | <strong>24-72h (Ilhas)</strong><br/><br/>Sexta feira após as 15:00 → envio <strong>segunda-feira</strong><br/></p><p>🔔 Detalhes de envio mostrados no checkout e no e-mail de confirmação.</p>",
             "page": ""
           }
         },
-        "collapsible_row_Dwzz7r": {
+        "collapsible_row_LyLJKE": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Linha recolhível",
-            "icon": "check_mark",
-            "row_content": "",
+            "heading": "O que são as Magnetic Strips?",
+            "icon": "question_mark",
+            "row_content": "<p><strong>São bandas nasais magnéticas compostas por adesivos descartáveis e peças reutilizáveis com ímanes.</strong><br/><br/>Cada adesivo cola-se ao lado do nariz e, com a ajuda dos ímanes, <strong>expande suavemente as narinas</strong>, facilitando o fluxo de ar.</p><p>O objetivo? <strong>Forçar a respiração nasal</strong>, o que melhora o <strong>sono</strong>, a <strong>energia</strong>, o <strong>foco</strong> e até o <strong>hálito matinal</strong>.</p>",
             "page": ""
           }
         },
-        "collapsible_row_zRprtf": {
+        "collapsible_row_L4JXaf": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Linha recolhível",
-            "icon": "check_mark",
-            "row_content": "",
+            "heading": "O que vem no Pacote e como Aplicar?",
+            "icon": "question_mark",
+            "row_content": "<p><strong>Cada pack inclui 60 adesivos descartáveis e 4 peças plásticas reutilizáveis com ímanes.</strong><br/><br/>Aplicas um adesivo em cada narina e depois encaixas os ímanes por fora — <strong>eles atraem-se e expandem suavemente as narinas</strong>, melhorando o fluxo de ar.</p><p><strong>O resultado?</strong> Respiração nasal imediata, <strong>mais oxigénio</strong>, <strong>menos ressonar</strong>, <strong>melhor sono</strong> e <strong>mais energia</strong>.</p><p>📦 <strong>Inclui manual de instruções detalhado.</strong><br/><br/>🎥 <strong>Vê os tutoriais nas nossas redes sociais</strong>: <a href=\"https://instagram.com/nozzo.co\">@nozzo.co</a><br/></p>",
             "page": ""
           }
         },
-        "collapsible_row_Uy9iRn": {
+        "collapsible_row_GwLr88": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Linha recolhível",
-            "icon": "check_mark",
-            "row_content": "",
+            "heading": "As Magnetic Strips são seguras de usar?",
+            "icon": "question_mark",
+            "row_content": "<p>Sim, são seguras quando usadas corretamente.<br/><br/>Os adesivos são feitos com materiais testados dermatologicamente e os ímanes aplicam apenas uma <strong>pressão leve e confortável</strong> para abrir suavemente as narinas.</p><p>❗ <strong>Nota:</strong> Não é recomendado aplicar em pele queimada, ferida ou muito irritada.<br/><br/>Nesses casos, espera pela recuperação total antes de usar.</p><p>📦 O pack inclui um <strong>manual de instruções</strong>, e podes ver vídeos tutoriais nas nossas redes sociais: <a href=\"https://instagram.com/nozzo.co\">@nozzo.co</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_dAeBrk": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Outras questões?",
+            "icon": "question_mark",
+            "row_content": "<p>Podes contactar-nos através do email nozzo.geral@gmail.com , temos muito gosto em ajudar-te.</p>",
             "page": ""
           }
         }
       },
       "block_order": [
-        "collapsible_row_AMttyY",
-        "collapsible_row_Dwzz7r",
-        "collapsible_row_zRprtf",
-        "collapsible_row_Uy9iRn"
+        "collapsible_row_egfAix",
+        "collapsible_row_LyLJKE",
+        "collapsible_row_L4JXaf",
+        "collapsible_row_GwLr88",
+        "collapsible_row_dAeBrk"
       ],
       "custom_css": [
         ".collapsible-row-layout .accordion summary,.collapsible-row-layout .accordion .accordion__content {padding: 1.8rem 2.2rem;}",
@@ -460,7 +523,7 @@
         "heading_size": "h1",
         "heading_alignment": "center",
         "layout": "row",
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "container_color_scheme": "scheme-2",
         "open_first_collapsible_row": false,
         "image_ratio": "adapt",
@@ -475,7 +538,7 @@
         "text_V9cef8": {
           "type": "text",
           "settings": {
-            "text": "<p>Tempo médio de resposta: 24-48 horas. Horário: Segunda-Sexta, 9:00-18:00.</p>"
+            "text": "<p>Tempo médio de resposta: imediato. Horário: Segunda-Domingo, 9:00-18:00.</p>"
           }
         },
         "button_nFVURi": {
@@ -514,10 +577,10 @@
     "rich_text_87hh3h",
     "card_slider_cC6dPG",
     "rich_text_pBErWX",
-    "image_comparison_jgALhE",
+    "image_comparison_2_gtnJFR",
     "rich_text_nhbWKg",
     "rich_text_JymLpj",
-    "collapsible_content_gXRUWp",
+    "collapsible_content_ykxH7F",
     "rich_text_XFQhhn"
   ]
 }

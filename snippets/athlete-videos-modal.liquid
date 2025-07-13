@@ -1,0 +1,436 @@
+<!-- Modal HTML -->
+<div id="athlete-videos-modal-overlay" style="display:none; position:fixed; z-index:2147483647; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.92); align-items:center; justify-content:center;">
+  <div class="athlete-videos-modal" style="position:relative; max-width:90vw; max-height:90vh; display:flex; align-items:center; justify-content:center;">
+    <button class="athlete-videos-modal-close" aria-label="Fechar vídeo" style="position:absolute;top:-10px;right:-10px;width:40px;height:40px;font-size:1.5rem;background:rgba(0,0,0,0.8);border:none;border-radius:50%;color:#fff;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;">&times;</button>
+    <button class="athlete-videos-modal-prev" aria-label="Vídeo anterior" style="position:absolute;left:-25px;top:50%;transform:translateY(-50%);width:50px;height:50px;font-size:1.5rem;background:rgba(0,0,0,0.8);border:none;border-radius:50%;color:#fff;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;">&#8592;</button>
+    <button class="athlete-videos-modal-mute-toggle" aria-label="Ativar/desativar som">
+      <span class="icon-unmuted">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+      </span>
+      <span class="icon-muted">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"></path></svg>
+      </span>
+    </button>
+    <video class="athlete-videos-modal-player" src="" loop autoplay playsinline muted style="max-width:80vw;max-height:80vh;border-radius:16px;background:#000;box-shadow:0 10px 40px rgba(0,0,0,0.5);width:100%;height:auto;display:block;"></video>
+    <div class="athlete-videos-modal-error" style="display:none; max-width:80vw; max-height:80vh; border-radius:16px; background:#000; box-shadow:0 10px 40px rgba(0,0,0,0.5); width:100%; height:auto; display:flex; align-items:center; justify-content:center; color:#fff; padding:2rem; text-align:center;">
+      <div>
+        <h3 style="margin-bottom:1rem;">Erro ao carregar vídeo</h3>
+        <p>O vídeo não pôde ser carregado. Verifique a sua ligação à internet e tente novamente.</p>
+        <button class="athlete-videos-modal-retry" style="margin-top:1rem; padding:0.5rem 1rem; background:#fff; color:#000; border:none; border-radius:4px; cursor:pointer;">Tentar novamente</button>
+      </div>
+    </div>
+    <button class="athlete-videos-modal-next" aria-label="Próximo vídeo" style="position:absolute;right:-25px;top:50%;transform:translateY(-50%);width:50px;height:50px;font-size:1.5rem;background:rgba(0,0,0,0.8);border:none;border-radius:50%;color:#fff;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;">&#8594;</button>
+  </div>
+</div>
+
+<!-- HLS.js para suporte universal a vídeos HLS -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
+
+<script>
+window.athleteVideosModal = (function() {
+  var overlay = document.getElementById('athlete-videos-modal-overlay');
+  if (!overlay) {
+    console.error('Modal overlay não encontrado');
+    return function() {};
+  }
+  
+  var player = overlay.querySelector('.athlete-videos-modal-player');
+  var closeBtn = overlay.querySelector('.athlete-videos-modal-close');
+  var prevBtn = overlay.querySelector('.athlete-videos-modal-prev');
+  var nextBtn = overlay.querySelector('.athlete-videos-modal-next');
+  var errorDiv = overlay.querySelector('.athlete-videos-modal-error');
+  var retryBtn = overlay.querySelector('.athlete-videos-modal-retry');
+  var muteBtn = overlay.querySelector('.athlete-videos-modal-mute-toggle');
+  var iconMuted = muteBtn ? muteBtn.querySelector('.icon-muted') : null;
+  var iconUnmuted = muteBtn ? muteBtn.querySelector('.icon-unmuted') : null;
+  var videos = [];
+  var current = 0;
+  
+  function openModal(videoList, idx) {
+    if (!videoList || videoList.length === 0) {
+      return;
+    }
+    
+    // Filtrar vídeos vazios ou inválidos
+    videos = videoList.filter(function(video) {
+      return video && video.trim() !== '';
+    });
+    
+    if (videos.length === 0) {
+      return;
+    }
+    
+    current = idx || 0;
+    if (current >= videos.length) {
+      current = 0;
+    }
+    
+    showVideo(current);
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeModal() {
+    overlay.style.display = 'none';
+    if (player) {
+      player.pause();
+      player.src = '';
+    }
+    document.body.style.overflow = '';
+  }
+  
+  function showVideo(idx) {
+    if (!videos[idx] || !player) {
+      showError();
+      return;
+    }
+    
+    // Verificar se o URL está completo
+    var videoUrl = videos[idx];
+    if (videoUrl.startsWith('/') && !videoUrl.startsWith('//')) {
+      videoUrl = window.location.origin + videoUrl;
+    }
+    
+    // Verificar se é HLS (.m3u8) e se o browser suporta
+    var isHLS = videoUrl.includes('.m3u8');
+    
+    // Esconder erro e mostrar player
+    if (errorDiv) errorDiv.style.display = 'none';
+    if (player) player.style.display = 'block';
+    
+    // Limpar o player primeiro
+    player.pause();
+    player.src = '';
+    
+    // Se for HLS e o browser não suportar nativamente, usar HLS.js
+    if (isHLS && !player.canPlayType('application/vnd.apple.mpegurl') && window.Hls) {
+      var hls = new window.Hls();
+      hls.loadSource(videoUrl);
+      hls.attachMedia(player);
+      hls.on(window.Hls.Events.MANIFEST_PARSED, function() {
+        player.muted = true;
+        updateMuteIcon();
+        var playPromise = player.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function(error) {
+            // Silenciosamente ignora erros de autoplay
+          });
+        }
+      });
+      hls.on(window.Hls.Events.ERROR, function(event, data) {
+        showError();
+      });
+    } else {
+      // Método padrão para vídeos normais ou HLS nativo
+      player.src = videoUrl;
+      player.currentTime = 0;
+      player.muted = true; // Força muted para autoplay funcionar
+      updateMuteIcon();
+      
+      player.addEventListener('error', function(e) {
+        showError();
+      });
+      
+      setTimeout(function() { 
+        var playPromise = player.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function(error) {
+            // Silenciosamente ignora erros de autoplay
+          });
+        }
+      }, 200);
+    }
+  }
+  
+  function showError() {
+    if (player) player.style.display = 'none';
+    if (errorDiv) errorDiv.style.display = 'flex';
+  }
+  
+  function updateMuteIcon() {
+    if (!muteBtn || !iconMuted || !iconUnmuted) return;
+    if (player.muted) {
+      iconMuted.style.display = 'flex';
+      iconUnmuted.style.display = 'none';
+    } else {
+      iconMuted.style.display = 'none';
+      iconUnmuted.style.display = 'flex';
+    }
+  }
+
+  function toggleMute() {
+    player.muted = !player.muted;
+    updateMuteIcon();
+  }
+  
+  function showPrev() {
+    current = (current - 1 + videos.length) % videos.length;
+    showVideo(current);
+  }
+  
+  function showNext() {
+    current = (current + 1) % videos.length;
+    showVideo(current);
+  }
+  
+  // Event listeners
+  if (closeBtn) closeBtn.onclick = closeModal;
+  if (prevBtn) prevBtn.onclick = showPrev;
+  if (nextBtn) nextBtn.onclick = showNext;
+  if (retryBtn) retryBtn.onclick = function() { showVideo(current); };
+  if (muteBtn) muteBtn.onclick = toggleMute;
+  
+  if (overlay) {
+    overlay.onclick = function(e) { 
+      if (e.target === overlay) closeModal(); 
+    };
+  }
+  
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (overlay && overlay.style.display === 'flex') {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+      e.preventDefault();
+    }
+  });
+  
+  // Permite unmute ao clicar no vídeo
+  if (player) {
+    player.addEventListener('click', toggleMute);
+  }
+  
+  return openModal;
+})();
+</script>
+
+<style>
+.athlete-videos-section { 
+  text-align: center; 
+  margin: 2rem 0; 
+}
+
+.athlete-videos-title { 
+  font-size: 1.3rem; 
+  font-weight: 500; 
+  margin-bottom: 1rem; 
+  color: #333; 
+}
+
+.athlete-videos-swiper { 
+  position: relative; 
+}
+
+.swiper-slide { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.athlete-videos-cards { 
+  display: block; 
+}
+
+.athlete-video-card { 
+  background: #111; 
+  border-radius: 16px; 
+  overflow: hidden; 
+  width: 180px; 
+  height: 320px; 
+  position: relative; 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
+  cursor: pointer; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.athlete-video-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+}
+
+.athlete-video-thumb-wrapper { 
+  width: 100%; 
+  height: 100%; 
+  position: relative; 
+}
+
+.athlete-video-thumb { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  filter: brightness(0.85); 
+  pointer-events: none; 
+  transition: filter 0.3s ease;
+}
+
+.athlete-video-card:hover .athlete-video-thumb {
+  filter: brightness(1);
+}
+
+.athlete-video-play { 
+  position: absolute; 
+  left: 50%; 
+  top: 50%; 
+  transform: translate(-50%,-50%); 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  transition: transform 0.3s ease;
+}
+
+.athlete-video-play:hover {
+  transform: translate(-50%,-50%) scale(1.1);
+}
+
+/* Botões do swiper */
+.athlete-swiper-arrow.swiper-button-prev,
+.athlete-swiper-arrow.swiper-button-next {
+  color: #fff !important;
+  background: rgba(0,0,0,0.8) !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  margin-top: 0 !important;
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 10 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: initial !important;
+}
+
+.athlete-swiper-arrow.swiper-button-prev { 
+  left: 25px !important; 
+}
+
+.athlete-swiper-arrow.swiper-button-next { 
+  right: 25px !important; 
+}
+
+.athlete-swiper-arrow:hover {
+  background: rgba(0,0,0,0.9) !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+.athlete-swiper-arrow:after { 
+  font-size: 16px !important; 
+  font-weight: bold !important;
+}
+
+.athlete-swiper-arrow.swiper-button-disabled {
+  opacity: 0.5 !important;
+}
+
+/* Modal */
+#athlete-videos-modal-overlay { 
+  backdrop-filter: blur(5px);
+}
+
+.athlete-videos-modal { 
+  position: relative; 
+  background: transparent; 
+  border-radius: 20px; 
+  max-width: 90vw; 
+  max-height: 90vh; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.athlete-videos-modal-player { 
+  max-width: 80vw; 
+  max-height: 80vh; 
+  min-height: 300px;
+  border-radius: 16px; 
+  background: #000; 
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.athlete-videos-modal-close { 
+  transition: all 0.3s ease;
+}
+
+.athlete-videos-modal-close:hover {
+  background: rgba(255,0,0,0.8) !important;
+  transform: scale(1.1);
+}
+
+.athlete-videos-modal-prev, 
+.athlete-videos-modal-next { 
+  transition: all 0.3s ease;
+}
+
+.athlete-videos-modal-prev:hover, 
+.athlete-videos-modal-next:hover {
+  background: rgba(0,0,0,0.9) !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+.athlete-videos-modal-prev { left: -25px; }
+.athlete-videos-modal-next { right: -25px; }
+
+.athlete-videos-modal-mute-toggle {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0,0,0,0.4);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.athlete-videos-modal-mute-toggle:hover {
+  background: rgba(0,0,0,0.7);
+}
+
+@media (max-width: 750px) {
+  .athlete-videos-swiper { 
+    width: 90vw;
+  }
+  
+  .athlete-swiper-arrow.swiper-button-prev { 
+    left: 25px !important; 
+  }
+  
+  .athlete-swiper-arrow.swiper-button-next { 
+    right: 25px !important; 
+  }
+  
+  .athlete-videos-section { 
+    margin: 1rem 0; 
+  }
+  
+  .athlete-videos-modal-player { 
+    max-width: 95vw; 
+    max-height: 70vh; 
+  }
+  
+  .athlete-videos-modal-prev { 
+    left: -15px; 
+  }
+  
+  .athlete-videos-modal-next { 
+    right: -15px; 
+  }
+  
+  .athlete-videos-modal-close { 
+    top: -15px; 
+    right: -15px; 
+  }
+}
+</style>

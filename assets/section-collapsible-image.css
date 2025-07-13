@@ -1,0 +1,355 @@
+/* Collapsible Image Section Styles */
+.collapsible-image-section {
+  padding: 5rem 0;
+}
+
+.collapsible-image-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.collapsible-image-container.image-second {
+  grid-template-columns: 1fr 1fr;
+}
+
+.collapsible-image-container.image-second .collapsible-image-media {
+  order: 2;
+}
+
+.collapsible-image-container.image-second .collapsible-image-content {
+  order: 1;
+}
+
+/* Image Styles */
+.collapsible-image-media .media--square {
+  aspect-ratio: 1;
+  border-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+}
+
+.collapsible-image-media .media--square img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: transparent;
+}
+
+.collapsible-image-media .media--placeholder {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collapsible-image-media .media--placeholder svg {
+  width: 4rem;
+  height: 4rem;
+  opacity: 0.3;
+}
+
+/* Content Styles */
+.collapsible-image-heading {
+  margin: 0 0 1.5rem 0;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.collapsible-image-text {
+  margin: 0 0 2rem 0;
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+.collapsible-image-text p {
+  margin: 0 0 1rem 0;
+}
+
+.collapsible-image-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Collapsible Tabs */
+.collapsible-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.collapsible-tab {
+  border: 1px solid rgba(18, 18, 18, 0.08);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  background: white;
+  transition: box-shadow 0.2s ease;
+}
+
+.collapsible-tab:hover {
+  box-shadow: 0 2px 8px rgba(18, 18, 18, 0.06);
+}
+
+/* Tab Heading */
+.collapsible-tab-heading {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  cursor: pointer;
+  gap: 1rem;
+  background: transparent;
+  transition: background-color 0.2s ease;
+  list-style: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  position: relative;
+}
+
+.collapsible-tab-heading::-webkit-details-marker {
+  display: none;
+}
+
+.collapsible-tab-heading::marker {
+  content: '';
+}
+
+.collapsible-tab-heading:hover {
+  background-color: rgba(18, 18, 18, 0.02);
+}
+
+.collapsible-tab-heading:focus {
+  outline: 2px solid rgba(18, 18, 18, 0.2);
+  outline-offset: -2px;
+}
+
+/* Tab Icon */
+.collapsible-tab-icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collapsible-tab-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+/* Tab Title */
+.collapsible-tab-title {
+  flex-grow: 1;
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin: 0;
+  text-align: left;
+  line-height: 1.3;
+}
+
+/* Tab Toggle Icons */
+.collapsible-tab-toggle {
+  flex-shrink: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  position: relative;
+  color: rgba(18, 18, 18, 0.6);
+}
+
+.collapsible-tab-toggle svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.collapsible-tab-toggle .icon-plus {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.collapsible-tab-toggle .icon-minus {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.collapsible-tab[open] .collapsible-tab-toggle .icon-plus {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.collapsible-tab[open] .collapsible-tab-toggle .icon-minus {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* Tab Content */
+.collapsible-tab-content {
+  padding: 0 1.5rem 1.5rem 4.5rem;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: rgba(18, 18, 18, 0.7);
+  animation: slideDown 0.3s ease-out;
+}
+
+.collapsible-tab-content p {
+  margin: 0 0 1rem 0;
+}
+
+.collapsible-tab-content p:last-child {
+  margin-bottom: 0;
+}
+
+.collapsible-tab-content ul,
+.collapsible-tab-content ol {
+  margin: 0 0 1rem 1.5rem;
+  padding: 0;
+}
+
+.collapsible-tab-content li {
+  margin-bottom: 0.5rem;
+}
+
+.collapsible-tab-content strong {
+  font-weight: 600;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 989px) {
+  .collapsible-image-container {
+    gap: 3rem;
+  }
+  
+  .collapsible-image-heading {
+    font-size: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .collapsible-image-section {
+    padding: 3rem 0;
+  }
+
+  .collapsible-image-container {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+
+  /* Force image first on mobile regardless of desktop layout */
+  .collapsible-image-container .collapsible-image-media {
+    order: 1;
+  }
+
+  .collapsible-image-container .collapsible-image-content {
+    order: 2;
+  }
+
+  .collapsible-image-heading {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .collapsible-image-text {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .collapsible-tab-heading {
+    padding: 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .collapsible-tab-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .collapsible-tab-title {
+    font-size: 1.4rem;
+  }
+
+  .collapsible-tab-toggle {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .collapsible-tab-content {
+    padding: 0 1.2rem 1.2rem 3.8rem;
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .collapsible-image-container {
+    gap: 1.5rem;
+  }
+
+  .collapsible-image-heading {
+    font-size: 1.8rem;
+  }
+
+  .collapsible-tab-heading {
+    padding: 1rem;
+  }
+
+  .collapsible-tab-content {
+    padding: 0 1rem 1rem 3.3rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .collapsible-tab {
+    border-color: rgba(18, 18, 18, 0.3);
+  }
+  
+  .collapsible-tab-toggle {
+    color: rgba(18, 18, 18, 0.8);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .collapsible-tab-toggle svg,
+  .collapsible-tab-content {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Focus styles for better accessibility */
+.collapsible-tab-heading:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .collapsible-tab[open] .collapsible-tab-content {
+    display: block !important;
+  }
+  
+  .collapsible-tab-toggle {
+    display: none;
+  }
+}

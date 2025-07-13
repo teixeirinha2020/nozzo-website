@@ -1,0 +1,627 @@
+{{ 'section-collapsible-image.css' | asset_url | stylesheet_tag }}
+
+<div class="collapsible-image-section section-{{ section.id }}-padding" style="background-color: {{ section.settings.background-color }}">
+  <div class="page-width">
+    <div class="collapsible-image-container{% if section.settings.layout == 'image_first' %} image-first{% else %} image-second{% endif %}">
+      
+      <!-- Image Section -->
+      <div class="collapsible-image-media">
+        {%- if section.settings.image != blank -%}
+          <div class="media media--square">
+            <img
+              srcset="{%- if section.settings.image.width >= 375 -%}{{ section.settings.image | image_url: width: 375 }} 375w,{%- endif -%}
+                      {%- if section.settings.image.width >= 550 -%}{{ section.settings.image | image_url: width: 550 }} 550w,{%- endif -%}
+                      {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+                      {{ section.settings.image | image_url }} {{ section.settings.image.width }}w"
+              src="{{ section.settings.image | image_url: width: 550 }}"
+              sizes="(min-width: 990px) 50vw, 100vw"
+              alt="{{ section.settings.image.alt | escape }}"
+              loading="lazy"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+            >
+          </div>
+        {%- else -%}
+          <div class="media media--square media--placeholder">
+            {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Content Section -->
+      <div class="collapsible-image-content">
+        
+        {%- if section.settings.heading != blank -%}
+          <h2 class="collapsible-image-heading h2" style="color: {{ section.settings.heading_color }};">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="collapsible-image-text rte" style="color: {{ section.settings.text_color }};">
+            {{ section.settings.text }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="collapsible-tabs">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'collapsible_tab' -%}
+                  <details class="collapsible-tab" {{ block.shopify_attributes }} style="background-color: {{ block.settings.background-color }};">
+                    <summary class="collapsible-tab-heading">
+                      <div class="collapsible-tab-icon" style="color: {{ block.settings.icon_color }};">
+                        {%- if block.settings.icon != 'none' -%}
+                          {% render 'icon-accordion', icon: block.settings.icon %}
+                        {%- endif -%}
+                      </div>
+                      <h3 class="collapsible-tab-title" style="color: {{ block.settings.heading_color }};">
+                        {{ block.settings.heading | default: 'Tab heading' }}
+                      </h3>
+                      <div class="collapsible-tab-toggle">
+                        <svg class="icon icon-plus" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path style="color: {{ block.settings.icon_toggle_color }};" d="M8 1V15M1 8H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="icon icon-minus" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path style="color: {{ block.settings.icon_toggle_color }};" d="M1 8H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </div>
+                    </summary>
+                    <div class="collapsible-tab-content rte" style="color: {{ block.settings.content_color }};">
+                      {{ block.settings.content }}
+                    </div>
+                  </details>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .collapsible-image-section {
+    padding: 5rem 0;
+  }
+
+  .collapsible-image-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .collapsible-image-container.image-second {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .collapsible-image-container.image-second .collapsible-image-media {
+    order: 2;
+  }
+
+  .collapsible-image-container.image-second .collapsible-image-content {
+    order: 1;
+  }
+
+  .media--square {
+    aspect-ratio: 1;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .media--square img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .media--placeholder {
+    background-color: rgba(18, 18, 18, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .media--placeholder svg {
+    width: 4rem;
+    height: 4rem;
+    opacity: 0.3;
+  }
+
+  .collapsible-image-heading {
+    margin: 0 0 1rem 0;
+    font-size: 2.4rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .collapsible-image-text {
+    margin: 0 0 2rem 0;
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+
+  .collapsible-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .collapsible-tab {
+    border: 1px solid rgba(18, 18, 18, 0.08);
+    border-radius: 0.8rem;
+    overflow: hidden;
+  }
+
+  .collapsible-tab-heading {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    gap: 1rem;
+    background: transparent;
+    transition: background-color 0.2s ease;
+    list-style: none;
+  }
+
+  .collapsible-tab-heading::-webkit-details-marker {
+    display: none;
+  }
+
+  .collapsible-tab-heading:hover {
+    background-color: rgba(18, 18, 18, 0.02);
+  }
+
+  .collapsible-tab-icon {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .collapsible-tab-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .collapsible-tab-title {
+    flex-grow: 1;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 0;
+    text-align: left;
+  }
+
+  .collapsible-tab-toggle {
+    flex-shrink: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    position: relative;
+  }
+
+  .collapsible-tab-toggle .icon-plus {
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .collapsible-tab-toggle .icon-minus {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .collapsible-tab[open] .collapsible-tab-toggle .icon-plus {
+    opacity: 0;
+  }
+
+  .collapsible-tab[open] .collapsible-tab-toggle .icon-minus {
+    opacity: 1;
+  }
+
+  .collapsible-tab-content {
+    padding: 1.5rem 1.5rem 1.5rem 4.5rem;
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+
+  /* Mobile Styles */
+  @media screen and (max-width: 749px) {
+    .collapsible-image-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .collapsible-image-container.image-second .collapsible-image-media {
+      order: 1;
+    }
+
+    .collapsible-image-container.image-second .collapsible-image-content {
+      order: 2;
+    }
+
+    .collapsible-image-heading {
+      font-size: 3rem;
+    }
+
+    .collapsible-tab-heading {
+      padding: 1.2rem;
+    }
+
+    .collapsible-tab-content {
+      padding: 1.2rem 1.2rem 1.2rem 3.7rem;
+    }
+  }
+
+  /* Section padding custom property support */
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collapsible Image Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+        "type": "color",
+        "id": "background-color",
+        "label": "Background Color",
+        "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "Image left, content right"
+        },
+        {
+          "value": "image_second",
+          "label": "Content left, image right"
+        }
+      ],
+      "default": "image_first",
+      "label": "Desktop layout"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Collapsible content"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Add some text to tell customers more about your product.</p>"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collapsible_tab",
+      "name": "Collapsible tab",
+      "settings": [
+        {
+            "type": "color",
+            "id": "background-color",
+            "label": "Background Color",
+            "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Collapsible tab"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading color",
+          "default": "#121212"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab content",
+          "default": "<p>Add content for your collapsible tab here.</p>"
+        },
+        {
+          "type": "color",
+          "id": "content_color",
+          "label": "Content color",
+          "default": "#666666"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "apple",
+              "label": "Apple"
+            },
+            {
+              "value": "banana",
+              "label": "Banana"
+            },
+            {
+              "value": "bottle",
+              "label": "Bottle"
+            },
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "carrot",
+              "label": "Carrot"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check_mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "clipboard",
+              "label": "Clipboard"
+            },
+            {
+              "value": "dairy",
+              "label": "Dairy"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "fire",
+              "label": "Fire"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "Lightning bolt"
+            },
+            {
+              "value": "lipstick",
+              "label": "Lipstick"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map_pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "paw_print",
+              "label": "Paw print"
+            },
+            {
+              "value": "pepper",
+              "label": "Pepper"
+            },
+            {
+              "value": "perfume",
+              "label": "Perfume"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "plant",
+              "label": "Plant"
+            },
+            {
+              "value": "price_tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question_mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "serving_dish",
+              "label": "Serving dish"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "silhouette",
+              "label": "Silhouette"
+            },
+            {
+              "value": "snowflake",
+              "label": "Snowflake"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "stopwatch",
+              "label": "Stopwatch"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            },
+            {
+              "value": "verified_grey",
+              "label": "Verified"
+            }
+          ],
+          "default": "heart",
+          "label": "Icon"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon color",
+          "default": "#121212"
+        },
+        {
+            "type": "color",
+            "id": "icon_toggle_color",
+            "label": "Toggle Icon Color",
+            "default": "#000000"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collapsible Image Section",
+      "blocks": [
+        {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Maximize Recovery",
+            "content": "<p>Helps sharpen your focus and boost your endurance while you are up and at 'em.</p>",
+            "icon": "lightning_bolt"
+          }
+        },
+        {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Lower Heart Rate",
+            "content": "<p>Optimize your cardiovascular health with our advanced technology.</p>",
+            "icon": "heart"
+          }
+        },
+        {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Boost Oxygen Absorption",
+            "content": "<p>Increase airflow and enhance your performance with every breath.</p>",
+            "icon": "leaf"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,359 @@
+{% assign base_price = product.selected_or_first_available_variant.price %}
+{% assign current_variant_id = product.selected_or_first_available_variant.id %}
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div class="buy-more-save-more" data-variant-id="{{ current_variant_id }}">
+  {% if block.settings.mini_heading != blank %}
+    <h3 class="mini-heading">
+      {{ block.settings.mini_heading }}
+    </h3>
+  {% endif %}
+
+  <div class="quantity-options">
+    {% assign option_count = block.settings.number_of_options | default: 1 %}
+    {% for i in (1..option_count) %}
+      {% assign title_setting = 'option_' | append: i | append: '_title' %}
+      {% assign title_color_setting = 'option_' | append: i | append: '_title_color' %}
+      {% assign price_color_setting = 'option_' | append: i | append: '_price_color' %}
+      {% assign border_color_setting = 'option_' | append: i | append: '_border_color' %}
+      {% assign badge_text_color_setting = 'option_' | append: i | append: '_badge_text_color' %}
+      
+      {% assign quantity = i %}
+      {% assign total_price = base_price | times: quantity %}
+      
+      {% case quantity %}
+        {% when 1 %}
+          {% assign discounted_price = block.settings.price_1_unit %}
+          {% assign original_price = total_price %}
+          {% assign discount_percentage = total_price | minus: discounted_price | times: 100.0 | divided_by: total_price | round %}
+        {% when 2 %}
+          {% assign discounted_price = block.settings.price_2_units %}
+          {% assign original_price = total_price %}
+          {% assign discount_percentage = total_price | minus: discounted_price | times: 100.0 | divided_by: total_price | round %}
+        {% when 3 %}
+          {% assign discounted_price = block.settings.price_3_units %}
+          {% assign original_price = total_price %}
+          {% assign discount_percentage = total_price | minus: discounted_price | times: 100.0 | divided_by: total_price | round %}
+        {% when 4 %}
+          {% assign discounted_price = block.settings.price_4_units %}
+          {% assign original_price = total_price %}
+          {% assign discount_percentage = total_price | minus: discounted_price | times: 100.0 | divided_by: total_price | round %}
+      {% endcase %}
+
+      <label class="quantity-option{% if forloop.index == 2 %} most-popular{% endif %}">
+        <input type="radio" name="quantity-choice" value="{{ quantity }}" {% if forloop.index == 2 %}checked{% endif %}>
+        <div class="option-content" style="border-color: {{ block.settings[border_color_setting] }}">
+          {% if forloop.index == 2 %}
+            <div class="popular-badge">
+              Mais Popular
+            </div>
+          {% endif %}
+
+          <div class="option-header">
+            <div class="title-and-badge">
+              {% if block.settings[title_setting] != blank %}
+                <h4 style="color: {{ block.settings[title_color_setting] }}">
+                  {{ block.settings[title_setting] }}
+                </h4>
+              {% endif %}
+              {% if discount_percentage > 0 %}
+                <div class="discount-badge-v2" style="background: {{ block.settings.discount_badge_bg_color }}; color: {{ block.settings[badge_text_color_setting] }}">
+                  -{{ discount_percentage }}%
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="price-info">
+            <div class="price-amount" style="color: {{ block.settings[price_color_setting] }}">
+              €{{ discounted_price | divided_by: 100.0 | round: 2 }}
+            </div>
+            {% if discount_percentage > 0 %}
+              <s class="original-price">€{{ original_price | divided_by: 100.0 | round: 2 }}</s>
+            {% endif %}
+          </div>
+        </div>
+      </label>
+    {% endfor %}
+  </div>
+
+  <button type="button" class="add-to-cart-btn" style="background: {{ block.settings.add_to_cart_bg_color }}; color: {{ block.settings.add_to_cart_text_color }}">
+    <span class="cart-icon">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 128 128" style="enable-background:new 0 0 128 128" xml:space="preserve"><path fill="currentColor" d="M45.3 81.2h78V43.7L35.9 25.4l-3.1-12.9-12.6-4.2c0-.2.1-.3.1-.5 0-4.3-3.5-7.8-7.8-7.8S4.7 3.5 4.7 7.8s3.5 7.8 7.8 7.8c1.8 0 3.4-.6 4.7-1.6l9.4 4.7L39 78l-12.5 9.4V103l5.7 7.1c-1.6 1.9-2.5 4.3-2.5 7 0 6 4.9 10.9 10.9 10.9s10.9-4.9 10.9-10.9-4.9-10.9-10.9-10.9c-.9 0-1.8.1-2.6.3l-2.1-3.4h65.6l3.6 6c-2.2 2-3.6 4.9-3.6 8.1 0 6 4.9 10.9 10.9 10.9s10.9-4.9 10.9-10.9-4.9-10.9-10.9-10.9h-.3l-1.3-3.1h12.5V97H32.8v-6.2l12.5-9.6zm0-6.3-4.6-21.4.6 3L59.8 58l3.8 17H45.3zm21.8 0-3.7-16.7 18.1 1.4 1.4 15.3H67.1zm18.8 0-1.4-15 17 1.3v13.7H85.9zm31.2-15.6v15.6h-12.5V61.5l12.5 1v-3.2l-12.5-1V44.4l12.5 2.4v12.5zM35.9 31.2l65.6 12.6V58l-17.3-1.4-1.5-16.4-3.1-.6 1.6 16.8-18.5-1.5-4.3-19.3-3.7-.7 4.4 19.7-18.5-1.5-4.7-21.9zm76.5 81.2c2.6 0 4.7 2.1 4.7 4.7s-2.1 4.7-4.7 4.7-4.7-2.1-4.7-4.7 2.1-4.7 4.7-4.7zm-71.8 0c2.6 0 4.7 2.1 4.7 4.7s-2.1 4.7-4.7 4.7-4.7-2.1-4.7-4.7 2.1-4.7 4.7-4.7z"/></svg>
+    </span>
+    <span class="button-text">{{ block.settings.add_to_cart_text }}</span>
+  </button>
+</div>
+
+<style>
+  .buy-more-save-more {
+    font-family: 'Poppins', sans-serif;
+    max-width: 100%;
+    margin: 20px 0;
+  }
+
+  .mini-heading {
+    text-align: left;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: {{ block.settings.mini_heading_color }};
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .quantity-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .quantity-option {
+    cursor: pointer;
+    position: relative;
+    display: block;
+  }
+
+  .quantity-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .option-content {
+    border: 2.5px solid #F01C7C;
+    border-radius: 8px;
+    padding: 10px 20px;
+    position: relative;
+    background: white;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .quantity-option input[type="radio"]:checked + .option-content {
+    border-color: #690a35 !important;
+    border-width: 4px;
+  }
+
+  /* Base bullet style for unselected state */
+  .option-content:before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: rgba(189, 189, 189, 0.658);
+    border-radius: 50%;
+    border: 2px solid rgba(248, 248, 248, 0.733);
+    outline: 2px solid rgba(189, 189, 189, 0.658);
+    transition: all 0.2s ease;
+  }
+
+  /* Selected state bullet */
+  .quantity-option input[type="radio"]:checked + .option-content:before {
+    background: #F01C7C;
+    border: 2px solid white;
+    outline: 2px solid #F01C7C;
+  }
+
+  .option-header {
+    flex: 1;
+    display: flex !important;
+    align-items: center;
+    padding-left: 33px;
+  }
+
+  .title-and-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .title-and-badge h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+  }
+
+  .discount-badge-v2 {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+    background: #000000;
+    color: white;
+  }
+
+  .price-info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .price-amount {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: normal;
+  }
+
+  .original-price {
+    font-size: 12px;
+    color: #9CA3AF;
+    text-decoration: line-through;
+    line-height: normal;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    border: none;
+    padding: 16px;
+    border-radius: {{ settings.inputs_radius }}px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .add-to-cart-btn .cart-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .add-to-cart-btn .cart-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  .add-to-cart-btn:hover {
+    opacity: 0.9;
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -17px;
+    right: -15px;
+    background: #F01C7C;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.7em;
+    font-weight: 500;
+    z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+</style>
+
+<script>
+  // Function to update variant ID when variant changes
+  function updateVariantId() {
+    const variantIdField = document.querySelector('form[action*="/cart/add"] [name="id"]');
+    const buyMoreSaveMore = document.querySelector('.buy-more-save-more');
+    
+    if (variantIdField && buyMoreSaveMore) {
+      buyMoreSaveMore.dataset.variantId = variantIdField.value;
+    }
+  }
+
+  // Listen for variant changes
+  document.addEventListener('change', function(event) {
+    if (event.target.matches('form[action*="/cart/add"] [name="id"]')) {
+      updateVariantId();
+    }
+  });
+
+  // Listen for variant changes via URL
+  document.addEventListener('variantChange', updateVariantId);
+
+  document.querySelector('.add-to-cart-btn').addEventListener('click', async () => {
+    const selectedOption = document.querySelector('input[name="quantity-choice"]:checked');
+    if (!selectedOption) return;
+    
+    const quantity = parseInt(selectedOption.value);
+    const variantId = parseInt(document.querySelector('.buy-more-save-more').dataset.variantId);
+    
+    const formData = {
+      'items': [{
+        'id': variantId,
+        'quantity': quantity,
+        'properties': {
+          '_discount_quantity': quantity
+        }
+      }]
+    };
+
+    try {
+      const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        const cartData = await response.json();
+        
+        // Get sections to render
+        const sectionsToRender = [
+          {
+            id: 'cart-drawer',
+            section: 'cart-drawer',
+            selector: '.drawer__inner'
+          },
+          {
+            id: 'cart-icon-bubble',
+            section: 'cart-icon-bubble',
+            selector: '.shopify-section'
+          }
+        ];
+
+        // Fetch the sections HTML
+        const sectionsResponse = await fetch(`${window.location.pathname}?sections=${sectionsToRender.map(section => section.section).join(',')}`);
+        const sectionsJson = await sectionsResponse.json();
+
+        // Find cart drawer
+        const cartDrawer = document.querySelector('cart-drawer');
+        if (cartDrawer) {
+          // Update sections data
+          cartData.sections = sectionsJson;
+          
+          // Remove is-empty class if present
+          cartDrawer.classList.remove('is-empty');
+          
+          // Render new contents
+          cartDrawer.renderContents(cartData);
+
+          // Ensure drawer is visible
+          cartDrawer.setAttribute('open', '');
+          cartDrawer.classList.add('animate', 'active');
+          document.body.classList.add('overflow-hidden');
+        }
+
+        // Update cart count in header
+        const cartIconBubble = document.getElementById('cart-icon-bubble');
+        if (cartIconBubble && sectionsJson['cart-icon-bubble']) {
+          cartIconBubble.innerHTML = sectionsJson['cart-icon-bubble'];
+        }
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  });
+</script> 

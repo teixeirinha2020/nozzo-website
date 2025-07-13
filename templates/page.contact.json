@@ -11,9 +11,69 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "rich_text_8AxBVx": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_wakchk": {
+          "type": "heading",
+          "settings": {
+            "heading": "Suporte",
+            "heading_size": "h1"
+          }
+        },
+        "text_bacQnh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Para qualquer dúvida ou questão, preenche o formulário seguinte. Podes também contactar-nos através das nossas redes sociais: <strong>@nozzo.co</strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wakchk",
+        "text_bacQnh"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 96,
+        "padding_bottom": 24
+      }
+    },
+    "custom_banner_7HAgbe": {
+      "type": "custom-banner",
+      "custom_css": [
+        ".custom-banner {border-radius: 0;}",
+        ".custom-banner__image img {object-fit: contain;}",
+        ".custom-banner__image,.custom-banner__video-container,.custom-banner__placeholder {background-color: #000000;}"
+      ],
+      "name": "Custom Banner",
+      "settings": {
+        "section_height": "adapt",
+        "background_type": "image",
+        "background_image": "shopify://shop_images/banner.png",
+        "background_image_mobile": "shopify://shop_images/banner_mobile_050e862d-5860-48f7-9dc2-37f81acc24fa.png",
+        "background_video_url": "",
+        "background_video_url_mobile": "",
+        "background_video": "",
+        "loop_video": true,
+        "mute_video": true,
+        "content_position_desktop": "left",
+        "content_position_mobile": "top",
+        "space_between_desktop": 30,
+        "space_between_mobile": 20,
+        "enable_animations": true,
+        "animation_type": "slide_up",
+        "animation_trigger": "onload",
+        "animation_delay": 0.2
       }
     },
     "form": {
@@ -21,7 +81,7 @@
       "settings": {
         "heading": "",
         "heading_size": "h1",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -29,6 +89,8 @@
   },
   "order": [
     "main",
+    "rich_text_8AxBVx",
+    "custom_banner_7HAgbe",
     "form"
   ]
 }

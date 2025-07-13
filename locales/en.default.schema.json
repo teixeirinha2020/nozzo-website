@@ -2256,7 +2256,10 @@
               },
               "options__44": {
                 "label": "Washing"
-              }
+              },
+              "options__45": {
+                "label": "Verified Grey"
+              },
             }
           }
         },
@@ -2372,6 +2375,16 @@
             },
             "heading_3": {
               "label": "Third heading",
+              "default": "Heading"
+            },
+            "icon_4": {
+              "label": "Fourth icon"
+            },
+            "image_4": {
+              "label": "Fourth image"
+            },
+            "heading_4": {
+              "label": "Fourth heading",
               "default": "Heading"
             }
           }
@@ -3417,7 +3430,10 @@
               },
               "options__44": {
                 "label": "Washing"
-              }
+              },
+              "options__45": {
+                "label": "Verified Grey"
+              },
             }
           }
         }

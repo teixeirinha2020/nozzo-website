@@ -111,7 +111,13 @@
                     product: product,
                     use_variant: true,
                     show_badges: true,
-                    price_class: 'price--large'
+                    price_class: 'price--large',
+                    enable_custom_sale: block.settings.enable_custom_sale,
+                    custom_sale_price: block.settings.custom_sale_price,
+                    sale_price_color: block.settings.sale_price_color,
+                    sale_badge_text: block.settings.sale_badge_text,
+                    sale_badge_bg_color: block.settings.sale_badge_bg_color,
+                    sale_badge_text_color: block.settings.sale_badge_text_color
                   -%}
                 </div>
                 {%- if product.quantity_price_breaks_configured? -%}
@@ -228,218 +234,228 @@
                   </details>
                 </div>
               {%- when 'quantity_selector' -%}
-                <div
-                  id="Quantity-Form-{{ section.id }}"
-                  class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
-                  {{ block.shopify_attributes }}
-                >
-                  {% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
-                  {% # theme-check-disable %}
-                  {%- assign cart_qty = cart
-                    | item_count_for_variant: product.selected_or_first_available_variant.id
-                  -%}
-                  {% # theme-check-enable %}
-                  <label class="quantity__label form__label" for="Quantity-{{ section.id }}">
-                    {{ 'products.product.quantity.label' | t }}
-                    <span class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %}">
-                      {%- render 'loading-spinner' -%}
-                      <span
-                        >(
-                        {{- 'products.product.quantity.in_cart_html' | t: quantity: cart_qty -}}
-                        )</span
-                      >
-                    </span>
-                  </label>
-                  <div class="price-per-item__container">
-                    <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
-                      <button class="quantity__button" name="minus" type="button">
-                        <span class="visually-hidden">
-                          {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
-                        </span>
-                        <span class="svg-wrapper">
-                          {{- 'icon-minus.svg' | inline_asset_content -}}
-                        </span>
-                      </button>
-                      <input
-                        class="quantity__input"
-                        type="number"
-                        name="quantity"
-                        id="Quantity-{{ section.id }}"
-                        data-cart-quantity="{{ cart_qty }}"
-                        data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                        min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                        {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
-                          data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                          max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-                        {% endif %}
-                        step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
-                        value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-                        form="{{ product_form_id }}"
-                      >
-                      <button class="quantity__button" name="plus" type="button">
-                        <span class="visually-hidden">
-                          {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
-                        </span>
-                        <span class="svg-wrapper">
-                          {{- 'icon-plus.svg' | inline_asset_content -}}
-                        </span>
-                      </button>
-                    </quantity-input>
-                    {%- liquid
-                      assign volume_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity' | reverse
-                      assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.min
-                      if cart_qty > 0
-                        assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.increment
-                      endif
+                {% assign has_buy_more_save_more = false %}
+                {% for block in section.blocks %}
+                  {% if block.type == 'buy_more_save_more' %}
+                    {% assign has_buy_more_save_more = true %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+                
+                {% unless has_buy_more_save_more %}
+                  <div
+                    id="Quantity-Form-{{ section.id }}"
+                    class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
+                    {{ block.shopify_attributes }}
+                  >
+                    {% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
+                    {% # theme-check-disable %}
+                    {%- assign cart_qty = cart
+                      | item_count_for_variant: product.selected_or_first_available_variant.id
                     -%}
-                    {%- if product.quantity_price_breaks_configured? -%}
-                      <price-per-item
-                        id="Price-Per-Item-{{ section.id }}"
-                        data-section-id="{{ section.id }}"
-                        data-variant-id="{{ product.selected_or_first_available_variant.id }}"
-                      >
-                        {%- if product.selected_or_first_available_variant.quantity_price_breaks.size > 0 -%}
-                          {%- assign variant_price_compare = product.selected_or_first_available_variant.compare_at_price -%}
-                          <div class="price-per-item">
-                            {%- if variant_price_compare -%}
-                              <dl class="price-per-item--current">
-                                <dt class="visually-hidden">
-                                  {{ 'products.product.price.regular_price' | t }}
-                                </dt>
-                                <dd>
-                                  <s class="variant-item__old-price">
-                                    {{ variant_price_compare | money_with_currency }}
-                                  </s>
-                                </dd>
-                              </dl>
-                            {%- endif -%}
-                            {%- if current_qty_for_volume_pricing < volume_pricing_array.last.minimum_quantity -%}
-                              {%- assign variant_price = product.selected_or_first_available_variant.price
-                                | money_with_currency
-                              -%}
-                              <span class="price-per-item--current">
-                                {{- 'products.product.volume_pricing.price_at_each' | t: price: variant_price -}}
-                              </span>
-                            {%- else -%}
-                              {%- for price_break in volume_pricing_array -%}
-                                {%- if current_qty_for_volume_pricing >= price_break.minimum_quantity -%}
-                                  {%- assign price_break_price = price_break.price | money_with_currency -%}
-                                  <span class="price-per-item--current">
-                                    {{-
-                                      'products.product.volume_pricing.price_at_each'
-                                      | t: price: price_break_price
-                                    -}}
-                                  </span>
-                                  {%- break -%}
-                                {%- endif -%}
-                              {%- endfor -%}
-                            {%- endif -%}
-                          </div>
-                        {%- else -%}
-                          {%- assign variant_price = product.selected_or_first_available_variant.price
-                            | money_with_currency
-                          -%}
-                          {%- assign variant_price_compare = product.selected_or_first_available_variant.compare_at_price -%}
-                          <div class="price-per-item">
-                            {%- if variant_price_compare -%}
-                              <dl class="price-per-item--current">
-                                <dt class="visually-hidden">
-                                  {{ 'products.product.price.regular_price' | t }}
-                                </dt>
-                                <dd>
-                                  <s class="variant-item__old-price">
-                                    {{ variant_price_compare | money_with_currency }}
-                                  </s>
-                                </dd>
-                                <dt class="visually-hidden">
-                                  {{ 'products.product.price.sale_price' | t }}
-                                </dt>
-                                <dd>
-                                  <span class="price-per-item--current">
-                                    {{- 'products.product.volume_pricing.price_at_each' | t: price: variant_price -}}
-                                  </span>
-                                </dd>
-                              </dl>
-                            {%- else -%}
-                              <span class="price-per-item--current">
-                                {{- 'products.product.volume_pricing.price_at_each' | t: price: variant_price -}}
-                              </span>
-                            {%- endif -%}
-                          </div>
-                        {%- endif -%}
-                      </price-per-item>
-                    {%- endif -%}
-                  </div>
-                  <div class="quantity__rules caption" id="Quantity-Rules-{{ section.id }}">
-                    {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
-                      <span class="divider">
-                        {{-
-                          'products.product.quantity.multiples_of'
-                          | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment
-                        -}}
+                    {% # theme-check-enable %}
+                    <label class="quantity__label form__label" for="Quantity-{{ section.id }}">
+                      {{ 'products.product.quantity.label' | t }}
+                      <span class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %}">
+                        {%- render 'loading-spinner' -%}
+                        <span
+                          >(
+                          {{- 'products.product.quantity.in_cart_html' | t: quantity: cart_qty -}}
+                          )</span
+                        >
                       </span>
-                    {%- endif -%}
-                    {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
-                      <span class="divider">
-                        {{-
-                          'products.product.quantity.minimum_of'
-                          | t: quantity: product.selected_or_first_available_variant.quantity_rule.min
-                        -}}
-                      </span>
-                    {%- endif -%}
-                    {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
-                      <span class="divider">
-                        {{-
-                          'products.product.quantity.maximum_of'
-                          | t: quantity: product.selected_or_first_available_variant.quantity_rule.max
-                        -}}
-                      </span>
-                    {%- endif -%}
-                  </div>
-                  {%- if product.quantity_price_breaks_configured? -%}
-                    <volume-pricing class="parent-display" id="Volume-{{ section.id }}">
-                      {%- if product.selected_or_first_available_variant.quantity_price_breaks.size > 0 -%}
-                        <span class="caption-large">{{ 'products.product.volume_pricing.title' | t }}</span>
-                        <ul class="list-unstyled">
-                          <li>
-                            <span>{{ product.selected_or_first_available_variant.quantity_rule.min }}+</span>
-                            {%- assign price = product.selected_or_first_available_variant.price
+                    </label>
+                    <div class="price-per-item__container">
+                      <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
+                        <button class="quantity__button" name="minus" type="button">
+                          <span class="visually-hidden">
+                            {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+                          </span>
+                          <span class="svg-wrapper">
+                            {{- 'icon-minus.svg' | inline_asset_content -}}
+                          </span>
+                        </button>
+                        <input
+                          class="quantity__input"
+                          type="number"
+                          name="quantity"
+                          id="Quantity-{{ section.id }}"
+                          data-cart-quantity="{{ cart_qty }}"
+                          data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                          min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                          {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                            data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                            max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                          {% endif %}
+                          step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                          value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                          form="{{ product_form_id }}"
+                        >
+                        <button class="quantity__button" name="plus" type="button">
+                          <span class="visually-hidden">
+                            {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+                          </span>
+                          <span class="svg-wrapper">
+                            {{- 'icon-plus.svg' | inline_asset_content -}}
+                          </span>
+                        </button>
+                      </quantity-input>
+                      {%- liquid
+                        assign volume_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity' | reverse
+                        assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.min
+                        if cart_qty > 0
+                          assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.increment
+                        endif
+                      -%}
+                      {%- if product.quantity_price_breaks_configured? -%}
+                        <price-per-item
+                          id="Price-Per-Item-{{ section.id }}"
+                          data-section-id="{{ section.id }}"
+                          data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                        >
+                          {%- if product.selected_or_first_available_variant.quantity_price_breaks.size > 0 -%}
+                            {%- assign variant_price_compare = product.selected_or_first_available_variant.compare_at_price -%}
+                            <div class="price-per-item">
+                              {%- if variant_price_compare -%}
+                                <dl class="price-per-item--current">
+                                  <dt class="visually-hidden">
+                                    {{ 'products.product.price.regular_price' | t }}
+                                  </dt>
+                                  <dd>
+                                    <s class="variant-item__old-price">
+                                      {{ variant_price_compare | money_with_currency }}
+                                    </s> 
+                                  </dd>
+                                </dl>
+                              {%- endif -%}
+                              {%- if current_qty_for_volume_pricing < volume_pricing_array.last.minimum_quantity -%}
+                                {%- assign variant_price = product.selected_or_first_available_variant.price
+                                  | money_with_currency
+                                -%}
+                                <span class="price-per-item--current">
+                                  {{- 'products.product.volume_pricing.price_at_each' | t: price: variant_price -}}
+                                </span>
+                              {%- else -%}
+                                {%- for price_break in volume_pricing_array -%}
+                                  {%- if current_qty_for_volume_pricing >= price_break.minimum_quantity -%}
+                                    {%- assign price_break_price = price_break.price | money_with_currency -%}
+                                    <span class="price-per-item--current">
+                                      {{-
+                                        'products.product.volume_pricing.price_at_each'
+                                        | t: price: price_break_price
+                                      -}}
+                                    </span>
+                                    {%- break -%}
+                                  {%- endif -%}
+                                {%- endfor -%}
+                              {%- endif -%}
+                            </div>
+                          {%- else -%}
+                            {%- assign variant_price = product.selected_or_first_available_variant.price
                               | money_with_currency
                             -%}
-                            <span data-text="{{ 'products.product.volume_pricing.price_at_each' | t: price: variant_price }}">
-                              {{- 'sections.quick_order_list.each' | t: money: price -}}
-                            </span>
-                          </li>
-                          {%- for price_break in product.selected_or_first_available_variant.quantity_price_breaks -%}
-                            {%- assign price_break_price = price_break.price | money_with_currency -%}
-                            <li class="{%- if forloop.index >= 3 -%}show-more-item hidden{%- endif -%}">
-                              <span>
-                                {{- price_break.minimum_quantity -}}
-                                <span aria-hidden="true">+</span></span
-                              >
-                              <span data-text="{{ 'products.product.volume_pricing.price_at_each' | t: price: price_break_price }}">
-                                {{- 'sections.quick_order_list.each' | t: money: price_break_price -}}
+                            {%- assign variant_price_compare = product.selected_or_first_available_variant.compare_at_price -%}
+                            <div class="price-per-item">
+                              {%- if variant_price_compare -%}
+                                <dl class="price-per-item--current">
+                                  <dt class="visually-hidden">
+                                    {{ 'products.product.price.regular_price' | t }}
+                                  </dt>
+                                  <dd>
+                                    <s class="variant-item__old-price">
+                                      {{ variant_price_compare | money_with_currency }}
+                                     </s>
+                                  </dd>
+                                  <dt class="visually-hidden">
+                                    {{ 'products.product.price.sale_price' | t }}
+                                  </dt>
+                                  <dd>
+                                    <span class="price-per-item--current">
+                                      {{- 'products.product.volume_pricing.price_at_each' | t: price: variant_price -}}
+                                    </span>
+                                  </dd>
+                                </dl>
+                              {%- else -%}
+                                <span class="price-per-item--current">
+                                  {{- 'products.product.volume_pricing.price_at_each' | t: price: variant_price -}}
+                                </span>
+                              {%- endif -%}
+                            </div>
+                          {%- endif -%}
+                        </price-per-item>
+                      {%- endif -%}
+                    </div>
+                    <div class="quantity__rules caption" id="Quantity-Rules-{{ section.id }}">
+                      {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+                        <span class="divider">
+                          {{-
+                            'products.product.quantity.multiples_of'
+                            | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment
+                          -}}
+                        </span>
+                      {%- endif -%}
+                      {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+                        <span class="divider">
+                          {{-
+                            'products.product.quantity.minimum_of'
+                            | t: quantity: product.selected_or_first_available_variant.quantity_rule.min
+                          -}}
+                        </span>
+                      {%- endif -%}
+                      {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+                        <span class="divider">
+                          {{-
+                            'products.product.quantity.maximum_of'
+                            | t: quantity: product.selected_or_first_available_variant.quantity_rule.max
+                          -}}
+                        </span>
+                      {%- endif -%}
+                    </div>
+                    {%- if product.quantity_price_breaks_configured? -%}
+                      <volume-pricing class="parent-display" id="Volume-{{ section.id }}">
+                        {%- if product.selected_or_first_available_variant.quantity_price_breaks.size > 0 -%}
+                          <span class="caption-large">{{ 'products.product.volume_pricing.title' | t }}</span>
+                          <ul class="list-unstyled">
+                            <li>
+                              <span>{{ product.selected_or_first_available_variant.quantity_rule.min }}+</span>
+                              {%- assign price = product.selected_or_first_available_variant.price
+                                | money_with_currency
+                              -%}
+                              <span data-text="{{ 'products.product.volume_pricing.price_at_each' | t: price: variant_price }}">
+                                {{- 'sections.quick_order_list.each' | t: money: price -}}
                               </span>
                             </li>
-                          {%- endfor -%}
-                        </ul>
-                        {%- if product.selected_or_first_available_variant.quantity_price_breaks.size >= 3 -%}
-                          <show-more-button>
-                            <button
-                              class="button-show-more link underlined-link"
-                              id="Show-More-{{ section.id }}"
-                              type="button"
-                            >
-                              <span class="label-show-more label-text"
-                                ><span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
-                              </span>
-                            </button>
-                          </show-more-button>
+                            {%- for price_break in product.selected_or_first_available_variant.quantity_price_breaks -%}
+                              {%- assign price_break_price = price_break.price | money_with_currency -%}
+                              <li class="{%- if forloop.index >= 3 -%}show-more-item hidden{%- endif -%}">
+                                <span>
+                                  {{- price_break.minimum_quantity -}}
+                                  <span aria-hidden="true">+</span></span
+                                >
+                                <span data-text="{{ 'products.product.volume_pricing.price_at_each' | t: price: price_break_price }}">
+                                  {{- 'sections.quick_order_list.each' | t: money: price_break_price -}}
+                                </span>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                          {%- if product.selected_or_first_available_variant.quantity_price_breaks.size >= 3 -%}
+                            <show-more-button>
+                              <button
+                                class="button-show-more link underlined-link"
+                                id="Show-More-{{ section.id }}"
+                                type="button"
+                              >
+                                <span class="label-show-more label-text"
+                                  ><span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
+                                </span>
+                              </button>
+                            </show-more-button>
+                          {%- endif -%}
                         {%- endif -%}
-                      {%- endif -%}
-                    </volume-pricing>
-                  {%- endif -%}
-                </div>
+                      </volume-pricing>
+                    {%- endif -%}
+                  </div>
+                {% endunless %}
               {%- when 'popup' -%}
                 <modal-opener
                   class="product-popup-modal__opener quick-add-hidden"
@@ -464,13 +480,17 @@
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
-                {%- render 'buy-buttons',
-                  block: block,
-                  product: product,
-                  product_form_id: product_form_id,
-                  section_id: section.id,
-                  show_pickup_availability: true
-                -%}
+                {% unless has_buy_more_save_more %}
+                  {%- render 'buy-buttons',
+                    block: block,
+                    product: product,
+                    product_form_id: product_form_id,
+                    section_id: section.id,
+                    show_pickup_availability: true
+                  -%}
+                {% endunless %}
+              {%- when 'buy_more_save_more' -%}
+                {% render 'buy-more-save-more', block: block, product: product %}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -660,6 +680,305 @@
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
+                {%- when 'athlete_videos' -%}
+                  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+                  <div class="athlete-videos-section">
+                    <div class="swiper athlete-videos-swiper">
+                      <div class="swiper-wrapper">
+                        {%- if block.settings.video_1 != blank -%}
+                          <div class="swiper-slide">
+                            <div class="athlete-video-card" data-index="0">
+                              <div class="athlete-video-thumb-wrapper">
+                                <img class="athlete-video-thumb" src="{{ block.settings.video_1.preview_image | img_url: '360x' }}" alt="Video thumbnail" width="180" height="320" />
+                                <button class="athlete-video-play" aria-label="Play video">
+                                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.7)"/>
+                                    <path d="M19 16L32 24L19 32V16Z" fill="white"/>
+                                  </svg>
+                                </button>
+                              </div>
+                              <span class="athlete-video-src" data-src="{{ block.settings.video_1.sources[1].url }}" style="display:none;"></span>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                        {%- if block.settings.video_2 != blank -%}
+                          <div class="swiper-slide">
+                            <div class="athlete-video-card" data-index="1">
+                              <div class="athlete-video-thumb-wrapper">
+                                <img class="athlete-video-thumb" src="{{ block.settings.video_2.preview_image | img_url: '360x' }}" alt="Video thumbnail" width="180" height="320" />
+                                <button class="athlete-video-play" aria-label="Play video">
+                                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.7)"/>
+                                    <path d="M19 16L32 24L19 32V16Z" fill="white"/>
+                                  </svg>
+                                </button>
+                              </div>
+                              <span class="athlete-video-src" data-src="{{ block.settings.video_2.sources[1].url }}" style="display:none;"></span>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                        {%- if block.settings.video_3 != blank -%}
+                          <div class="swiper-slide">
+                            <div class="athlete-video-card" data-index="2">
+                              <div class="athlete-video-thumb-wrapper">
+                                <img class="athlete-video-thumb" src="{{ block.settings.video_3.preview_image | img_url: '360x' }}" alt="Video thumbnail" width="180" height="320" />
+                                <button class="athlete-video-play" aria-label="Play video">
+                                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.7)"/>
+                                    <path d="M19 16L32 24L19 32V16Z" fill="white"/>
+                                  </svg>
+                                </button>
+                              </div>
+                              <span class="athlete-video-src" data-src="{{ block.settings.video_3.sources[1].url }}" style="display:none;"></span>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                      </div>
+                      <div class="swiper-button-prev athlete-swiper-arrow"></div>
+                      <div class="swiper-button-next athlete-swiper-arrow"></div>
+                    </div>
+                    <!-- Removido o modal inline -->
+                  </div>
+                  <style>
+                    .athlete-videos-section { text-align: center; margin: 2rem 0; }
+                    .athlete-videos-title { font-size: 1.3rem; font-weight: 500; margin-bottom: 1rem; color: #333; }
+                    .athlete-videos-swiper { 
+                      position: relative; 
+                    }
+                    .swiper-slide { display: flex; justify-content: center; align-items: center; }
+                    .athlete-videos-cards { display: block; }
+                    .athlete-video-card { 
+                      background: #111; 
+                      border-radius: 16px; 
+                      overflow: hidden; 
+                      width: 180px; 
+                      height: 320px; 
+                      position: relative; 
+                      box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
+                      cursor: pointer; 
+                      transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    }
+                    .athlete-video-card:hover {
+                      transform: translateY(-2px);
+                      box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+                    }
+                    .athlete-video-thumb-wrapper { width: 100%; height: 100%; position: relative; }
+                    .athlete-video-thumb { 
+                      width: 100%; 
+                      height: 100%; 
+                      object-fit: cover; 
+                      filter: brightness(0.85); 
+                      pointer-events: none; 
+                      transition: filter 0.3s ease;
+                    }
+                    .athlete-video-card:hover .athlete-video-thumb {
+                      filter: brightness(1);
+                    }
+                    .athlete-video-play { 
+                      position: absolute; 
+                      left: 50%; 
+                      top: 50%; 
+                      transform: translate(-50%,-50%); 
+                      background: none; 
+                      border: none; 
+                      cursor: pointer; 
+                      transition: transform 0.3s ease;
+                    }
+                    .athlete-video-play:hover {
+                      transform: translate(-50%,-50%) scale(1.1);
+                    }
+                    
+                    /* Botões do swiper melhorados */
+                    .athlete-swiper-arrow.swiper-button-prev,
+                    .athlete-swiper-arrow.swiper-button-next {
+                      color: #fff !important;
+                      background: rgba(0,0,0,0.8) !important;
+                      border-radius: 50% !important;
+                      width: 40px !important;
+                      height: 40px !important;
+                      margin-top: 0 !important;
+                      position: absolute !important;
+                      top: 50% !important;
+                      transform: translateY(-50%) !important;
+                      z-index: 10 !important;
+                      transition: all 0.3s ease !important;
+                      box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+                      opacity: 1 !important;
+                      visibility: visible !important;
+                      display: initial !important;
+                    }
+                    .athlete-swiper-arrow.swiper-button-prev { 
+                      left: 25px !important; 
+                    }
+                    .athlete-swiper-arrow.swiper-button-next { 
+                      right: 25px !important; 
+                    }
+                    .athlete-swiper-arrow:hover {
+                      background: rgba(0,0,0,0.9) !important;
+                      transform: translateY(-50%) scale(1.1) !important;
+                    }
+                    .athlete-swiper-arrow:after { 
+                      font-size: 16px !important; 
+                      font-weight: bold !important;
+                    }
+                    .athlete-swiper-arrow.swiper-button-disabled {
+                      opacity: 0.5 !important;
+                    }
+                    
+                    /* Modal melhorado */
+                    .athlete-video-modal-overlay { 
+                      position: fixed !important; 
+                      z-index: 2147483648; 
+                      left: 0; 
+                      top: 0; 
+                      width: 100vw; 
+                      height: 100vh; 
+                      background: rgba(0,0,0,0.9); 
+                      display: flex; 
+                      align-items: center; 
+                      justify-content: center; 
+                      backdrop-filter: blur(5px);
+                    }
+                    .athlete-video-modal { 
+                      position: relative; 
+                      background: transparent; 
+                      border-radius: 20px; 
+                      max-width: 90vw; 
+                      max-height: 90vh; 
+                      display: flex; 
+                      align-items: center; 
+                      justify-content: center; 
+                    }
+                    .athlete-video-modal-player { 
+                      max-width: 80vw; 
+                      max-height: 80vh; 
+                      border-radius: 16px; 
+                      background: #000; 
+                      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+                    }
+                    .athlete-video-modal-close { 
+                      position: absolute; 
+                      top: -10px; 
+                      right: -10px; 
+                      width: 40px;
+                      height: 40px;
+                      font-size: 1.5rem; 
+                      background: rgba(0,0,0,0.8); 
+                      border: none; 
+                      border-radius: 50%;
+                      color: #fff; 
+                      cursor: pointer; 
+                      z-index: 2; 
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      transition: all 0.3s ease;
+                    }
+                    .athlete-video-modal-close:hover {
+                      background: rgba(255,0,0,0.8);
+                      transform: scale(1.1);
+                    }
+                    .athlete-video-modal-prev, .athlete-video-modal-next { 
+                      position: absolute; 
+                      top: 50%; 
+                      transform: translateY(-50%); 
+                      width: 50px;
+                      height: 50px;
+                      font-size: 1.5rem; 
+                      background: rgba(0,0,0,0.8); 
+                      border: none; 
+                      border-radius: 50%;
+                      color: #fff; 
+                      cursor: pointer; 
+                      z-index: 2; 
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      transition: all 0.3s ease;
+                    }
+                    .athlete-video-modal-prev:hover, .athlete-video-modal-next:hover {
+                      background: rgba(0,0,0,0.9);
+                      transform: translateY(-50%) scale(1.1);
+                    }
+                    .athlete-video-modal-prev { left: -25px; }
+                    .athlete-video-modal-next { right: -25px; }
+                    
+                    @media (max-width: 750px) {
+                      .athlete-videos-swiper { 
+                        width: 90vw; 
+                      }
+                      .athlete-swiper-arrow.swiper-button-prev { left: 25px !important; }
+                      .athlete-swiper-arrow.swiper-button-next { right: 25px !important; }
+                      .athlete-videos-section { margin: 1rem 0; }
+                      .athlete-video-modal-player { 
+                        max-width: 95vw; 
+                        max-height: 70vh; 
+                      }
+                      .athlete-video-modal-prev { left: -15px; }
+                      .athlete-video-modal-next { right: -15px; }
+                      .athlete-video-modal-close { 
+                        top: -15px; 
+                        right: -15px; 
+                      }
+                    }
+                  </style>
+                  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+                  <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                    setTimeout(function() {
+                      var swiper = new Swiper('.athlete-videos-swiper', {
+                        slidesPerView: 1,
+                        spaceBetween: 16,
+                        navigation: {
+                          nextEl: '.athlete-swiper-arrow.swiper-button-next',
+                          prevEl: '.athlete-swiper-arrow.swiper-button-prev',
+                        },
+                        loop: true,
+                        centeredSlides: true,
+                        grabCursor: true,
+                        touchRatio: 1,
+                        touchAngle: 45,
+                        allowTouchMove: true,
+                      });
+                      
+                      var section = document.querySelector('.athlete-videos-section');
+                      if (!section) {
+                        return;
+                      }
+                      
+                      var cards = section.querySelectorAll('.athlete-video-card');
+                      
+                      // Coletar URLs dos vídeos
+                      var videos = [];
+                      cards.forEach(function(card, index) {
+                        var srcElement = card.querySelector('.athlete-video-src');
+                        if (srcElement) {
+                          var videoSrc = srcElement.getAttribute('data-src');
+                          
+                          if (videoSrc && videoSrc.trim() !== '') {
+                            // Converter URL relativo para absoluto, mas ignorar URLs protocol-relative
+                            if (videoSrc.startsWith('/') && !videoSrc.startsWith('//')) {
+                              videoSrc = window.location.origin + videoSrc;
+                            }
+                            videos.push(videoSrc);
+                          }
+                        }
+                      });
+                      
+                      // Ao clicar num card, abrir o modal global
+                      cards.forEach(function(card, index) {
+                        card.addEventListener('click', function(e) {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          
+                          if (window.athleteVideosModal) {
+                            window.athleteVideosModal(videos, index);
+                          }
+                        });
+                      });
+                    }, 100);
+                  });
+                  </script>
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -671,6 +990,7 @@
     </div>
 
     {% render 'product-media-modal', variant_images: variant_images %}
+    {% render 'athlete-videos-modal' %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
     {%- for block in popups -%}
@@ -773,7 +1093,49 @@
     {
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Custom Sale Price"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_custom_sale",
+          "label": "Enable custom sale price",
+          "default": false
+        },
+        {
+          "type": "number",
+          "id": "custom_sale_price",
+          "label": "Custom sale price",
+          "info": "Enter the price in cents (e.g., 1999 for €19.99)"
+        },
+        {
+          "type": "color",
+          "id": "sale_price_color",
+          "label": "Sale price color",
+          "default": "#ff0000"
+        },
+        {
+          "type": "text",
+          "id": "sale_badge_text",
+          "label": "Sale badge text",
+          "default": "EM PROMOÇÃO"
+        },
+        {
+          "type": "color",
+          "id": "sale_badge_bg_color",
+          "label": "Sale badge background color",
+          "default": "#ff0000"
+        },
+        {
+          "type": "color",
+          "id": "sale_badge_text_color",
+          "label": "Sale badge text color",
+          "default": "#ffffff"
+        }
+      ]
     },
     {
       "type": "sku",
@@ -1664,6 +2026,10 @@
             {
               "value": "washing",
               "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            },
+            {
+              "value": "verified_grey",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__45.label"
             }
           ],
           "default": "heart",
@@ -1860,6 +2226,10 @@
             {
               "value": "washing",
               "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            },
+            {
+              "value": "verified_grey",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__45.label"
             }
           ],
           "default": "return",
@@ -2056,6 +2426,10 @@
             {
               "value": "washing",
               "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            },
+            {
+              "value": "verified_grey",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__45.label"
             }
           ],
           "default": "truck",
@@ -2072,6 +2446,447 @@
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        },
+        {
+          "type": "select",
+          "id": "icon_4",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__1.label"
+            },
+            {
+              "value": "apple",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__2.label"
+            },
+            {
+              "value": "banana",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__3.label"
+            },
+            {
+              "value": "bottle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__5.label"
+            },
+            {
+              "value": "carrot",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__6.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__7.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__8.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__9.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__10.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__11.label"
+            },
+            {
+              "value": "dryer",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__12.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__13.label"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__14.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__15.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__16.label"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__17.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__18.label"
+            },
+            {
+              "value": "leather",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__19.label"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__20.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__21.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__22.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__23.label"
+            },
+            {
+              "value": "nut_free",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__24.label"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__25.label"
+            },
+            {
+              "value": "paw_print",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__26.label"
+            },
+            {
+              "value": "pepper",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__27.label"
+            },
+            {
+              "value": "perfume",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__28.label"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__29.label"
+            },
+            {
+              "value": "plant",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__30.label"
+            },
+            {
+              "value": "price_tag",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__31.label"
+            },
+            {
+              "value": "question_mark",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__32.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__33.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__34.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__35.label"
+            },
+            {
+              "value": "serving_dish",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__36.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__37.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__38.label"
+            },
+            {
+              "value": "silhouette",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__39.label"
+            },
+            {
+              "value": "snowflake",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__40.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__41.label"
+            },
+            {
+              "value": "stopwatch",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__42.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__43.label"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__44.label"
+            },
+            {
+              "value": "verified_grey",
+              "label": "t:sections.main-product.blocks.collapsible_tab.settings.icon.options__45.label"
+            }
+          ],
+          "default": "truck",
+          "label": "t:sections.main-product.blocks.icon_with_text.settings.icon_4.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "t:sections.main-product.blocks.icon_with_text.settings.image_4.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading_4",
+          "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_4.default",
+          "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_4.label",
+          "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        }
+      ]
+    },
+    {
+      "type": "buy_more_save_more",
+      "name": "Buy More Save More",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "mini_heading",
+          "label": "Mini heading",
+          "default": "Buy More Save More"
+        },
+        {
+          "type": "color",
+          "id": "mini_heading_color",
+          "label": "Mini heading color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "range",
+          "id": "number_of_options",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "label": "Number of options",
+          "default": 4
+        },
+        {
+          "type": "header",
+          "content": "Price Settings"
+        },
+        {
+          "type": "number",
+          "id": "price_1_unit",
+          "label": "Price for 1 unit",
+          "info": "Enter the price in cents (e.g., 1999 for €19.99)"
+        },
+        {
+          "type": "number",
+          "id": "price_2_units",
+          "label": "Price for 2 units",
+          "info": "Enter the price in cents (e.g., 3499 for €34.99)"
+        },
+        {
+          "type": "number",
+          "id": "price_3_units",
+          "label": "Price for 3 units",
+          "info": "Enter the price in cents (e.g., 4999 for €49.99)"
+        },
+        {
+          "type": "number",
+          "id": "price_4_units",
+          "label": "Price for 4 units",
+          "info": "Enter the price in cents (e.g., 6499 for €64.99)"
+        },
+        {
+          "type": "header",
+          "content": "Add to Cart Button"
+        },
+        {
+          "type": "text",
+          "id": "add_to_cart_text",
+          "label": "Add to cart button text",
+          "default": "ADICIONAR AO CARRINHO"
+        },
+        {
+          "type": "color",
+          "id": "add_to_cart_bg_color",
+          "label": "Add to cart button background",
+          "default": "#00c853"
+        },
+        {
+          "type": "color",
+          "id": "add_to_cart_text_color",
+          "label": "Add to cart button text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "discount_badge_bg_color",
+          "label": "Discount badge background color",
+          "default": "#ff0000"
+        },
+        {
+          "type": "header",
+          "content": "Option 1 Settings"
+        },
+        {
+          "type": "text",
+          "id": "option_1_title",
+          "label": "Option 1 title",
+          "default": "1x Pack"
+        },
+        {
+          "type": "color",
+          "id": "option_1_title_color",
+          "label": "Option 1 title color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "color",
+          "id": "option_1_price_color",
+          "label": "Option 1 price color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "color",
+          "id": "option_1_border_color",
+          "label": "Option 1 border color",
+          "default": "#e5e5e5"
+        },
+        {
+          "type": "color",
+          "id": "option_1_badge_text_color",
+          "label": "Option 1 badge text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Option 2 Settings"
+        },
+        {
+          "type": "text",
+          "id": "option_2_title",
+          "label": "Option 2 title",
+          "default": "2x Pack"
+        },
+        {
+          "type": "color",
+          "id": "option_2_title_color",
+          "label": "Option 2 title color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "color",
+          "id": "option_2_price_color",
+          "label": "Option 2 price color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "color",
+          "id": "option_2_border_color",
+          "label": "Option 2 border color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "color",
+          "id": "option_2_badge_text_color",
+          "label": "Option 2 badge text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Option 3 Settings"
+        },
+        {
+          "type": "text",
+          "id": "option_3_title",
+          "label": "Option 3 title",
+          "default": "3x Pack"
+        },
+        {
+          "type": "color",
+          "id": "option_3_title_color",
+          "label": "Option 3 title color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "color",
+          "id": "option_3_price_color",
+          "label": "Option 3 price color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "color",
+          "id": "option_3_border_color",
+          "label": "Option 3 border color",
+          "default": "#e5e5e5"
+        },
+        {
+          "type": "color",
+          "id": "option_3_badge_text_color",
+          "label": "Option 3 badge text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Option 4 Settings"
+        },
+        {
+          "type": "text",
+          "id": "option_4_title",
+          "label": "Option 4 title",
+          "default": "4x Pack"
+        },
+        {
+          "type": "color",
+          "id": "option_4_title_color",
+          "label": "Option 4 title color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "color",
+          "id": "option_4_price_color",
+          "label": "Option 4 price color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "color",
+          "id": "option_4_border_color",
+          "label": "Option 4 border color",
+          "default": "#e5e5e5"
+        },
+        {
+          "type": "color",
+          "id": "option_4_badge_text_color",
+          "label": "Option 4 badge text color",
+          "default": "#ffffff"
+        }
+      ]
+    },
+    {
+      "type": "athlete_videos",
+      "name": "Athlete Videos",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video_1",
+          "label": "Video 1"
+        },
+        {
+          "type": "video",
+          "id": "video_2",
+          "label": "Video 2"
+        },
+        {
+          "type": "video",
+          "id": "video_3",
+          "label": "Video 3"
         }
       ]
     }

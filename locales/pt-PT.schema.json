@@ -1880,7 +1880,10 @@
               },
               "options__44": {
                 "label": "Lavar"
-              }
+              },
+              "options__45": {
+                "label": "Verificado Cinzento"
+              },
             }
           },
           "name": "Linha recolhível"
@@ -2012,6 +2015,16 @@
             },
             "heading_3": {
               "label": "Terceiro título",
+              "default": "Cabeçalho"
+            },
+            "icon_4": {
+              "label": "Quarto ícone"
+            },
+            "image_4": {
+              "label": "Quarta imagem"
+            },
+            "heading_4": {
+              "label": "Quarto título",
               "default": "Cabeçalho"
             }
           }
@@ -3179,7 +3192,10 @@
               },
               "options__44": {
                 "label": "Lavar"
-              }
+              },
+              "options__45": {
+                "label": "Verificação Cinzenta"
+              },
             }
           }
         }
