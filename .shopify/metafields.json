@@ -28,6 +28,26 @@
         "name": "boolean",
         "category": "TRUE_FALSE"
       }
+    },
+    {
+      "key": "rating_count",
+      "namespace": "reviews",
+      "name": "Contagem de classificação do produto",
+      "description": "Número total de classificações de clientes",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "rating",
+      "namespace": "reviews",
+      "name": "Classificação do produto",
+      "description": "Classificação média de clientes",
+      "type": {
+        "name": "rating",
+        "category": "RATING"
+      }
     }
   ],
   "variant": [
