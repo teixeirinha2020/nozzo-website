@@ -322,7 +322,8 @@
 }
 {% endschema %}
 
-<div id="CustomBanner-{{ section.id }}" class="custom-banner custom-banner--{{ section.settings.section_height }} custom-banner--{{ section.settings.content_position_desktop }}-desktop custom-banner--{{ section.settings.content_position_mobile }}-mobile"
+<div id="CustomBanner-{{ section.id }}"
+  class="custom-banner custom-banner--{{ section.settings.section_height }} custom-banner--content-align-{{ section.settings.content_justify }}"
   data-section-id="{{ section.id }}"
 >
   <div class="custom-banner__background">
@@ -383,19 +384,9 @@
     {% endif %}
     
     <div class="custom-banner__overlay"></div>
-    <button class="custom-banner__pause-btn" aria-label="Pause video" style="background: {{ section.settings.control_btn_bg_color }}; color: {{ section.settings.control_btn_icon_color }};">
-      <!-- Thinner Pause icon SVG -->
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="4" width="2" height="12" rx="0.7" fill="currentColor"/><rect x="13" y="4" width="2" height="12" rx="0.7" fill="currentColor"/></svg>
-      <span class="custom-banner__btn-text">Pause</span>
-    </button>
-    <button class="custom-banner__unmute-btn" aria-label="Unmute video" style="background: {{ section.settings.control_btn_bg_color }}; color: {{ section.settings.control_btn_icon_color }};">
-      <!-- Thinner Unmute icon SVG -->
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 8V12H7L12 17V3L7 8H4Z" fill="currentColor"/><path d="M14.5 10C14.5 8.4 15 7.25 16 6.25M16 13.75C15 12.75 14.5 11.6 14.5 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-      <span class="custom-banner__btn-text">Unmute</span>
-    </button>
   </div>
   
-  <div class="custom-banner__content-container">
+  <div class="custom-banner__content-container custom-banner__content--{{ section.settings.content_position_desktop | replace: '_', '-' }} custom-banner__content--mobile-{{ section.settings.content_position_mobile | replace: '_', '-' }}">
     <div class="custom-banner__content">
       <div class="custom-banner__text-content">
         {% for block in section.blocks %}
@@ -417,7 +408,6 @@
               {% else %}
                 {% assign title_tag = 'div' %}
               {% endif %}
-            
               <{{ title_tag }} 
                 class="custom-banner__title custom-banner__title--{{ block.settings.title_size }}"
                 style="{% if block.settings.title_color contains 'gradient' %}background: {{ block.settings.title_color }};-webkit-background-clip: text;-webkit-text-fill-color: transparent;{% else %}color: {{ block.settings.title_color }};{% endif %}
@@ -427,9 +417,8 @@
               >
                 {{ block.settings.title_text }}
               </{{ title_tag }}>
-            
             {% when 'span' %}
-              <div class="custom-banner__paragraph custom-banner__paragraph--{{ block.settings.span_size }}{% if block.settings.span_justify %} custom-banner__paragraph--justify{% endif %}"
+              <div class="custom-banner__paragraph custom-banner__paragraph--{{ block.settings.span_size }}"
                 style="color: {{ block.settings.span_color }};
                        font-family: {{ block.settings.span_font.family | escape }}, {{ block.settings.span_font.fallback_families | escape }};
                        font-weight: {{ block.settings.span_weight }};"
@@ -437,11 +426,9 @@
               >
                 {{ block.settings.span_text }}
               </div>
-              
           {% endcase %}
         {% endfor %}
       </div>
-      
       <div class="custom-banner__button-container">
         {% for block in section.blocks %}
           {% if block.type == 'button' %}
@@ -461,6 +448,19 @@
       </div>
     </div>
   </div>
+
+  <div class="custom-banner__controls">
+      <button class="custom-banner__pause-btn" aria-label="Pause video" style="background: {{ section.settings.control_btn_bg_color }}; color: {{ section.settings.control_btn_icon_color }};">
+        <!-- Thinner Pause icon SVG -->
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="4" width="2" height="12" rx="0.7" fill="currentColor"/><rect x="13" y="4" width="2" height="12" rx="0.7" fill="currentColor"/></svg>
+        <span class="custom-banner__btn-text">Pause</span>
+      </button>
+      <button class="custom-banner__unmute-btn" aria-label="Unmute video" style="background: {{ section.settings.control_btn_bg_color }}; color: {{ section.settings.control_btn_icon_color }};">
+        <!-- Thinner Unmute icon SVG -->
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 8V12H7L12 17V3L7 8H4Z" fill="currentColor"/><path d="M14.5 10C14.5 8.4 15 7.25 16 6.25M16 13.75C15 12.75 14.5 11.6 14.5 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <span class="custom-banner__btn-text">Unmute</span>
+      </button>
+    </div>
 </div>
 
 <style>
@@ -583,60 +583,56 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
-    padding: 0 0px;
+    padding: 150px 0px;
+    height: 100%;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1440px) {
     .custom-banner__content-container {
-      padding: 0 80px;
+      padding: 150px 50px;
     }
   }
   
   .custom-banner__content {
     display: flex;
     flex-direction: column;
+    width: auto;
     max-width: 600px;
     gap: 24px;
   }
-  
-  /* Content position desktop */
-  .custom-banner--top_left-desktop .custom-banner__content {
-    margin-right: auto;
+  /* Content position classes (desktop) */
+  .custom-banner__content--top-left { justify-content: flex-start; align-items: flex-start; }
+  .custom-banner__content--top-center { justify-content: flex-start; align-items: center; }
+  .custom-banner__content--top-right { justify-content: flex-start; align-items: flex-end; }
+  .custom-banner__content--middle-left { justify-content: center; align-items: flex-start; }
+  .custom-banner__content--middle-center { justify-content: center; align-items: center; }
+  .custom-banner__content--middle-right { justify-content: center; align-items: flex-end; }
+  .custom-banner__content--bottom-left { justify-content: flex-end; align-items: flex-start; }
+  .custom-banner__content--bottom-center { justify-content: flex-end; align-items: center; }
+  .custom-banner__content--bottom-right { justify-content: flex-end; align-items: flex-end; }
+  /* Mobile content position classes */
+  @media (max-width: 749px) {
+    .custom-banner__content--mobile-top-left { justify-content: flex-start; align-items: flex-start; }
+    .custom-banner__content--mobile-top-center { justify-content: flex-start; align-items: center; }
+    .custom-banner__content--mobile-top-right { justify-content: flex-start; align-items: flex-end; }
+    .custom-banner__content--mobile-middle-left { justify-content: center; align-items: flex-start; }
+    .custom-banner__content--mobile-middle-center { justify-content: center; align-items: center; }
+    .custom-banner__content--mobile-middle-right { justify-content: center; align-items: flex-end; }
+    .custom-banner__content--mobile-bottom-left { justify-content: flex-end; align-items: flex-start; }
+    .custom-banner__content--mobile-bottom-center { justify-content: flex-end; align-items: center; }
+    .custom-banner__content--mobile-bottom-right { justify-content: flex-end; align-items: flex-end; }
   }
-  
-  .custom-banner--top_center-desktop .custom-banner__content {
-    margin-left: auto;
-  }
-  
-  .custom-banner--top_right-desktop .custom-banner__content {
-    margin-left: auto;
-  }
-  
-  .custom-banner--middle_left-desktop .custom-banner__content {
-    margin-right: auto;
-  }
-  
-  .custom-banner--middle_center-desktop .custom-banner__content {
-    margin-left: auto;
-  }
-  
-  .custom-banner--middle_right-desktop .custom-banner__content {
-    margin-left: auto;
-  }
-  
-  .custom-banner--bottom_left-desktop .custom-banner__content {
-    margin-right: auto;
-  }
-  
-  .custom-banner--bottom_center-desktop .custom-banner__content {
-    margin-left: auto;
-  }
-  
-  .custom-banner--bottom_right-desktop .custom-banner__content {
-    margin-left: auto;
-  }
+  /* Text alignment for text and button containers */
+  .custom-banner--content-align-left .custom-banner__text-content,
+  .custom-banner--content-align-left .custom-banner__button-container { text-align: left; justify-content: flex-start; }
+  .custom-banner--content-align-center .custom-banner__text-content,
+  .custom-banner--content-align-center .custom-banner__button-container { text-align: center; justify-content: center; }
+  .custom-banner--content-align-right .custom-banner__text-content,
+  .custom-banner--content-align-right .custom-banner__button-container { text-align: right; justify-content: flex-end; }
   
   /* Text elements */
   .custom-banner__title {
@@ -920,31 +916,34 @@
   }
 
   /* Pause and Unmute Buttons */
-  .custom-banner__pause-btn, .custom-banner__unmute-btn {
+  .custom-banner__controls {
     position: absolute;
-    bottom: 20px;
-    background: rgba(0,0,0,0.5);
-    border: none;
-    border-radius: 50%;
-    width: 44px;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+    z-index: 10;
+  }
+  .custom-banner__pause-btn, .custom-banner__unmute-btn {
+    border-radius: 999px;
+    min-width: 0;
+    width: auto;
     height: 44px;
+    padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    cursor: pointer;
-    z-index: 3;
-    transition: background 0.2s;
-    flex-direction: row;
-    gap: 8px;
     font-size: 1rem;
     font-weight: 500;
+    border: none;
+    cursor: pointer;
+    gap: 10px;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
-  .custom-banner__pause-btn:hover {
-    background: rgba(0,0,0,0.7);
-  }
-  .custom-banner__unmute-btn:hover {
-    background: rgba(0,0,0,0.7);
+  .custom-banner__pause-btn:hover, .custom-banner__unmute-btn:hover {
+    filter: brightness(0.95);
   }
   .custom-banner__btn-text {
     display: inline-block;
@@ -960,10 +959,9 @@ document.addEventListener('DOMContentLoaded', function() {
   var banner = document.getElementById('CustomBanner-{{ section.id }}');
   if (!banner) return;
 
+  // Find controls anywhere in the section
   var pauseBtn = banner.querySelector('.custom-banner__pause-btn');
   var unmuteBtn = banner.querySelector('.custom-banner__unmute-btn');
-  var desktopVideo = banner.querySelector('.custom-banner__video-desktop');
-  var mobileVideo = banner.querySelector('.custom-banner__video-mobile');
 
   function getVideos() {
     // Return all video elements in the banner
@@ -971,38 +969,42 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Pause/Play toggle
-  pauseBtn.addEventListener('click', function() {
-    var videos = getVideos();
-    var isPaused = videos.every(function(video) { return video.paused; });
-    if (isPaused) {
-      videos.forEach(function(video) { video.play(); });
-      pauseBtn.querySelector('.custom-banner__btn-text').textContent = 'Pause';
-    } else {
-      videos.forEach(function(video) { video.pause(); });
-      pauseBtn.querySelector('.custom-banner__btn-text').textContent = 'Play';
-    }
-  });
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', function() {
+      var videos = getVideos();
+      var isPaused = videos.every(function(video) { return video.paused; });
+      if (isPaused) {
+        videos.forEach(function(video) { video.play(); });
+        pauseBtn.querySelector('.custom-banner__btn-text').textContent = 'Pause';
+      } else {
+        videos.forEach(function(video) { video.pause(); });
+        pauseBtn.querySelector('.custom-banner__btn-text').textContent = 'Play';
+      }
+    });
+  }
 
   // Mute/Unmute toggle
-  unmuteBtn.addEventListener('click', function() {
-    var videos = getVideos();
-    var isMuted = videos.every(function(video) { return video.muted; });
-    if (isMuted) {
-      videos.forEach(function(video) { video.muted = false; });
-      unmuteBtn.querySelector('.custom-banner__btn-text').textContent = 'Mute';
-    } else {
-      videos.forEach(function(video) { video.muted = true; });
-      unmuteBtn.querySelector('.custom-banner__btn-text').textContent = 'Unmute';
-    }
-  });
+  if (unmuteBtn) {
+    unmuteBtn.addEventListener('click', function() {
+      var videos = getVideos();
+      var isMuted = videos.every(function(video) { return video.muted; });
+      if (isMuted) {
+        videos.forEach(function(video) { video.muted = false; });
+        unmuteBtn.querySelector('.custom-banner__btn-text').textContent = 'Mute';
+      } else {
+        videos.forEach(function(video) { video.muted = true; });
+        unmuteBtn.querySelector('.custom-banner__btn-text').textContent = 'Unmute';
+      }
+    });
+  }
 
   // Set initial button text based on video state
   function setInitialButtonStates() {
     var videos = getVideos();
     var isPaused = videos.every(function(video) { return video.paused; });
     var isMuted = videos.every(function(video) { return video.muted; });
-    pauseBtn.querySelector('.custom-banner__btn-text').textContent = isPaused ? 'Play' : 'Pause';
-    unmuteBtn.querySelector('.custom-banner__btn-text').textContent = isMuted ? 'Unmute' : 'Mute';
+    if (pauseBtn) pauseBtn.querySelector('.custom-banner__btn-text').textContent = isPaused ? 'Play' : 'Pause';
+    if (unmuteBtn) unmuteBtn.querySelector('.custom-banner__btn-text').textContent = isMuted ? 'Unmute' : 'Mute';
   }
 
   setInitialButtonStates();

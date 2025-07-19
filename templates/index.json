@@ -39,7 +39,8 @@
             "span_color": "#0e50ff",
             "span_font": "poppins_n4",
             "span_weight": "400",
-            "span_size": "3xl"
+            "span_size": "3xl",
+            "span_justify": false
           }
         },
         "button_xNJftR": {
@@ -52,8 +53,7 @@
             "button_font": "poppins_n4",
             "button_weight": "700",
             "button_size": "lg",
-            "button_radius": 30,
-            "button_animation": "slide"
+            "button_radius": 30
           }
         }
       },
@@ -66,22 +66,13 @@
       "name": "Custom Banner",
       "settings": {
         "section_height": "vh",
-        "background_type": "image",
-        "background_image": "shopify://shop_images/magnetic_strips_bk.webp",
-        "background_image_mobile": "shopify://shop_images/magnetic_strips_bk_mobile.webp",
-        "background_video_url": "",
-        "background_video_url_mobile": "",
-        "background_video": "",
-        "loop_video": false,
-        "mute_video": true,
-        "content_position_desktop": "left",
+        "background_video_url_desktop": "https://res.cloudinary.com/eightsleep/video/upload/v1747183973/Homepage_hero_desktop_2_kedlf9.mp4",
+        "background_video_url_mobile": "https://res.cloudinary.com/eightsleep/video/upload/v1747183973/Homepage_hero_desktop_2_kedlf9.mp4",
+        "content_position_desktop": "top_left",
         "content_position_mobile": "bottom",
-        "space_between_desktop": 10,
-        "space_between_mobile": 20,
-        "enable_animations": true,
-        "animation_type": "slide_up",
-        "animation_trigger": "onload",
-        "animation_delay": 0.2
+        "content_justify": "center",
+        "control_btn_bg_color": "#222222",
+        "control_btn_icon_color": "#ffffff"
       }
     },
     "card_slider_cC6dPG": {
