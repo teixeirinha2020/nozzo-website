@@ -40,24 +40,12 @@
           "label": "Background Image (Desktop)",
           "info": "Recommended: 1800x1000px"
         },
-        {
-          "type": "image_picker",
-          "id": "background_image_mobile",
-          "label": "Background Image (Mobile)",
-          "info": "Recommended: 800x1200px. If not selected, desktop image will be used."
-        },
-        {
-          "type": "url",
-          "id": "background_image_url_desktop",
-          "label": "Fallback Image URL (Desktop)",
-          "info": "Used if image picker fails."
-        },
-        {
-          "type": "url",
-          "id": "background_image_url_mobile",
-          "label": "Fallback Image URL (Mobile)",
-          "info": "Used if image picker fails. If not provided, desktop fallback will be used."
-        },
+            {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background Image (Mobile)",
+      "info": "Recommended: 800x1200px. If not selected, desktop image will be used."
+    },
         {
           "type": "header",
           "content": "Content Settings"
@@ -314,45 +302,31 @@
       class="custom-image-banner custom-image-banner--{{ section.settings.section_height }} custom-image-banner--content-align-{{ section.settings.content_justify }}"
       data-section-id="{{ section.id }}"
     >
-      <div class="custom-image-banner__background">
-        {% if section.settings.background_image_desktop != blank or section.settings.background_image_mobile != blank or section.settings.background_image_url_desktop != blank or section.settings.background_image_url_mobile != blank %}
-          <div class="custom-image-banner__image-container">
-            {% if section.settings.background_image_desktop != blank %}
-              <img 
-                class="custom-image-banner__image custom-image-banner__image-desktop" 
-                src="{{ section.settings.background_image_desktop | image_url: width: 1800 }}"
-                alt="{{ section.settings.background_image_desktop.alt | escape }}"
-                loading="lazy"
-                width="{{ section.settings.background_image_desktop.width }}"
-                height="{{ section.settings.background_image_desktop.height }}"
-              >
-            {% elsif section.settings.background_image_url_desktop != blank %}
-              <img 
-                class="custom-image-banner__image custom-image-banner__image-desktop" 
-                src="{{ section.settings.background_image_url_desktop }}"
-                alt="Background image"
-                loading="lazy"
-              >
-            {% endif %}
-            
-            {% if section.settings.background_image_mobile != blank %}
-              <img 
-                class="custom-image-banner__image custom-image-banner__image-mobile" 
-                src="{{ section.settings.background_image_mobile | image_url: width: 800 }}"
-                alt="{{ section.settings.background_image_mobile.alt | escape }}"
-                loading="lazy"
-                width="{{ section.settings.background_image_mobile.width }}"
-                height="{{ section.settings.background_image_mobile.height }}"
-              >
-            {% elsif section.settings.background_image_url_mobile != blank %}
-              <img 
-                class="custom-image-banner__image custom-image-banner__image-mobile" 
-                src="{{ section.settings.background_image_url_mobile }}"
-                alt="Background image"
-                loading="lazy"
-              >
-            {% endif %}
-          </div>
+        <div class="custom-image-banner__background">
+    {% if section.settings.background_image_desktop != blank or section.settings.background_image_mobile != blank %}
+      <div class="custom-image-banner__image-container">
+        {% if section.settings.background_image_desktop != blank %}
+          <img 
+            class="custom-image-banner__image custom-image-banner__image-desktop" 
+            src="{{ section.settings.background_image_desktop | image_url: width: 1800 }}"
+            alt="{{ section.settings.background_image_desktop.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.background_image_desktop.width }}"
+            height="{{ section.settings.background_image_desktop.height }}"
+          >
+        {% endif %}
+        
+        {% if section.settings.background_image_mobile != blank %}
+          <img 
+            class="custom-image-banner__image custom-image-banner__image-mobile" 
+            src="{{ section.settings.background_image_mobile | image_url: width: 800 }}"
+            alt="{{ section.settings.background_image_mobile.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.background_image_mobile.width }}"
+            height="{{ section.settings.background_image_mobile.height }}"
+          >
+        {% endif %}
+      </div>
         {% else %}
           <div class="custom-image-banner__placeholder">
             {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -513,30 +487,66 @@
         background: rgba(0, 0, 0, 0.1);
       }
       
-      /* Content */
-      .custom-image-banner__content-container {
-        position: relative;
-        z-index: 2;
-        width: 100%;
-        max-width: 1440px;
-        display: flex;
-        flex-direction: column;
-        margin: 0 auto;
-        padding: 150px 0px;
-        height: 100%;
-      }
+        /* Content */
+  .custom-image-banner__content-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    height: 100%;
+  }
+
+  /* Height-specific padding */
+  .custom-image-banner--small .custom-image-banner__content-container {
+    padding: 60px 0px;
+  }
+  
+  .custom-image-banner--medium .custom-image-banner__content-container {
+    padding: 80px 0px;
+  }
+  
+  .custom-image-banner--big .custom-image-banner__content-container {
+    padding: 100px 0px;
+  }
+  
+  .custom-image-banner--vh .custom-image-banner__content-container {
+    padding: 120px 0px;
+  }
+  
+  .custom-image-banner--adapt .custom-image-banner__content-container {
+    padding: 80px 0px;
+  }
+
+  @media screen and (max-width: 1440px) {
+    .custom-image-banner--small .custom-image-banner__content-container {
+      padding: 60px 50px;
+    }
     
-      @media screen and (max-width: 1440px) {
-        .custom-image-banner__content-container {
-          padding: 150px 50px;
-        }
-      }
+    .custom-image-banner--medium .custom-image-banner__content-container {
+      padding: 80px 50px;
+    }
+    
+    .custom-image-banner--big .custom-image-banner__content-container {
+      padding: 100px 50px;
+    }
+    
+    .custom-image-banner--vh .custom-image-banner__content-container {
+      padding: 120px 50px;
+    }
+    
+    .custom-image-banner--adapt .custom-image-banner__content-container {
+      padding: 80px 50px;
+    }
+  }
       
       .custom-image-banner__content {
         display: flex;
         flex-direction: column;
         width: auto;
-        max-width: 600px;
+        max-width: 500px;
         gap: 24px;
       }
       

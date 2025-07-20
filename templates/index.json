@@ -113,7 +113,7 @@
         "content_alignment": "center",
         "color_scheme": "",
         "full_width": true,
-        "padding_top": 72,
+        "padding_top": 56,
         "padding_bottom": 0
       }
     },
@@ -177,7 +177,49 @@
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 32,
-        "padding_bottom": 72
+        "padding_bottom": 56
+      }
+    },
+    "custom_image_banner_VXarQQ": {
+      "type": "custom-image-banner",
+      "blocks": {
+        "title_HAUHhM": {
+          "type": "title",
+          "settings": {
+            "title_text": "92% dos utilizadores",
+            "title_color": "#ffffff",
+            "title_font": "poppins_n4",
+            "title_weight": "400",
+            "title_size": "hero"
+          }
+        },
+        "span_xRRyBM": {
+          "type": "span",
+          "settings": {
+            "span_text": "disseram que o Magnetic Nose Strip ajudou a aliviar os problemas de sono, como o ressonar e a apneia do sono, do que outros dilatadores nasais.",
+            "span_color": "#ffffff",
+            "span_font": "poppins_n4",
+            "span_weight": "400",
+            "span_size": "lg",
+            "span_justify": false
+          }
+        }
+      },
+      "block_order": [
+        "title_HAUHhM",
+        "span_xRRyBM"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 989px) {.custom-image-banner--adapt {height: 80vh; }}"
+      ],
+      "name": "Custom Image Banner",
+      "settings": {
+        "section_height": "adapt",
+        "background_image_desktop": "shopify://shop_images/DSC02978_vmnnkf.avif",
+        "background_image_mobile": "shopify://shop_images/Screenshot_1.jpg",
+        "content_position_desktop": "middle_right",
+        "content_position_mobile": "middle_center",
+        "content_justify": "center"
       }
     },
     "card_slider_cC6dPG": {
@@ -270,6 +312,7 @@
         "info_card_wX9CH4",
         "info_card_eJykfD"
       ],
+      "disabled": true,
       "name": "Cards Slider",
       "settings": {
         "section_title": "",
@@ -376,6 +419,7 @@
     "custom_banner_AMNhVf",
     "rich_text_bHm6VE",
     "multicolumn_AGCWwC",
+    "custom_image_banner_VXarQQ",
     "card_slider_cC6dPG",
     "rich_text_JymLpj",
     "rich_text_XFQhhn"
