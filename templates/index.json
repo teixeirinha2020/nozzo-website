@@ -68,11 +68,116 @@
         "section_height": "vh",
         "background_video_url_desktop": "https://res.cloudinary.com/eightsleep/video/upload/v1747183973/Homepage_hero_desktop_2_kedlf9.mp4",
         "background_video_url_mobile": "https://res.cloudinary.com/eightsleep/video/upload/v1747183973/Homepage_hero_desktop_2_kedlf9.mp4",
-        "content_position_desktop": "top_left",
-        "content_position_mobile": "bottom",
+        "content_position_desktop": "middle_center",
+        "content_position_mobile": "middle_center",
         "content_justify": "center",
-        "control_btn_bg_color": "#222222",
+        "control_btn_bg_color": "#121212",
         "control_btn_icon_color": "#ffffff"
+      }
+    },
+    "rich_text_bHm6VE": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_cYGAja": {
+          "type": "heading",
+          "settings": {
+            "heading": "Três Pilares.",
+            "heading_size": "h1"
+          }
+        },
+        "heading_NVjJ9J": {
+          "type": "heading",
+          "settings": {
+            "heading": "O essencial para o teu bem-estar.",
+            "heading_size": "h1"
+          }
+        },
+        "text_TRKM9i": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Combina ciência e simplicidade para desbloqueares o teu verdadeiro potencial. Mais oxigénio, mais sono, mais desempenho — tudo começa aqui.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cYGAja",
+        "heading_NVjJ9J",
+        "text_TRKM9i"
+      ],
+      "custom_css": [
+        ".rich-text__heading {margin-top: 0px;}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 72,
+        "padding_bottom": 0
+      }
+    },
+    "multicolumn_AGCWwC": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_yxhMRn": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Intake_After.webp",
+            "title": "Respiração",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_WHaMCb": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/para-site-53.jpg",
+            "title": "Sono",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_YckVwc": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/foto-165.jpg",
+            "title": "Performance",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_yxhMRn",
+        "column_WHaMCb",
+        "column_YckVwc"
+      ],
+      "custom_css": [
+        ".media {border-radius: 10px 10px;}",
+        ".multicolumn-card {border-radius: 10px;}",
+        ".multicolumn-card__info {padding: 0; padding-left: 3.2rem; position: relative; top: -40px;}",
+        "@media screen and (max-width: 749px) {.multicolumn-card__info {padding-left: 1.5rem; }"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-6055e9ff-b0da-4cec-a3a0-ec68cd40c0a0",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 32,
+        "padding_bottom": 72
       }
     },
     "card_slider_cC6dPG": {
@@ -269,6 +374,8 @@
   },
   "order": [
     "custom_banner_AMNhVf",
+    "rich_text_bHm6VE",
+    "multicolumn_AGCWwC",
     "card_slider_cC6dPG",
     "rich_text_JymLpj",
     "rich_text_XFQhhn"

@@ -1,0 +1,809 @@
+{% schema %}
+    {
+      "name": "Custom Image Banner",
+      "settings": [
+        {
+          "type": "select",
+          "id": "section_height",
+          "label": "Section Height",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "big",
+              "label": "Big"
+            },
+            {
+              "value": "vh",
+              "label": "Viewport Height (100vh - 38px)"
+            },
+            {
+              "value": "adapt",
+              "label": "Adapt to Content"
+            }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "header",
+          "content": "Image Background Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "background_image_desktop",
+          "label": "Background Image (Desktop)",
+          "info": "Recommended: 1800x1000px"
+        },
+        {
+          "type": "image_picker",
+          "id": "background_image_mobile",
+          "label": "Background Image (Mobile)",
+          "info": "Recommended: 800x1200px. If not selected, desktop image will be used."
+        },
+        {
+          "type": "url",
+          "id": "background_image_url_desktop",
+          "label": "Fallback Image URL (Desktop)",
+          "info": "Used if image picker fails."
+        },
+        {
+          "type": "url",
+          "id": "background_image_url_mobile",
+          "label": "Fallback Image URL (Mobile)",
+          "info": "Used if image picker fails. If not provided, desktop fallback will be used."
+        },
+        {
+          "type": "header",
+          "content": "Content Settings"
+        },
+        {
+          "type": "select",
+          "id": "content_position_desktop",
+          "label": "Content Position (Desktop)",
+          "options": [
+            { "value": "top_left", "label": "Top Left Corner" },
+            { "value": "top_center", "label": "Top Center" },
+            { "value": "top_right", "label": "Top Right Corner" },
+            { "value": "middle_left", "label": "Middle Left" },
+            { "value": "middle_center", "label": "Middle Center" },
+            { "value": "middle_right", "label": "Middle Right" },
+            { "value": "bottom_left", "label": "Bottom Left Corner" },
+            { "value": "bottom_center", "label": "Bottom Center" },
+            { "value": "bottom_right", "label": "Bottom Right Corner" }
+          ],
+          "default": "middle_center"
+        },
+        {
+          "type": "select",
+          "id": "content_position_mobile",
+          "label": "Content Position (Mobile)",
+          "options": [
+            { "value": "top_left", "label": "Top Left Corner" },
+            { "value": "top_center", "label": "Top Center" },
+            { "value": "top_right", "label": "Top Right Corner" },
+            { "value": "middle_left", "label": "Middle Left" },
+            { "value": "middle_center", "label": "Middle Center" },
+            { "value": "middle_right", "label": "Middle Right" },
+            { "value": "bottom_left", "label": "Bottom Left Corner" },
+            { "value": "bottom_center", "label": "Bottom Center" },
+            { "value": "bottom_right", "label": "Bottom Right Corner" }
+          ],
+          "default": "middle_center"
+        },
+        {
+          "type": "select",
+          "id": "content_justify",
+          "label": "Content Justification",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "center"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "title",
+          "name": "Title",
+          "limit": 2,
+          "settings": [
+            {
+              "type": "text",
+              "id": "title_text",
+              "label": "Title Text",
+              "default": "Your Title Here"
+            },
+            {
+              "type": "color_background",
+              "id": "title_color",
+              "label": "Title Color",
+              "default": "#000000"
+            },
+            {
+              "type": "font_picker",
+              "id": "title_font",
+              "label": "Title Font",
+              "default": "helvetica_n4"
+            },
+            {
+              "type": "select",
+              "id": "title_weight",
+              "label": "Font Weight",
+              "options": [
+                { "value": "400", "label": "Regular" },
+                { "value": "500", "label": "Medium" },
+                { "value": "600", "label": "Semibold" },
+                { "value": "700", "label": "Bold" }
+              ],
+              "default": "700"
+            },
+            {
+              "type": "select",
+              "id": "title_size",
+              "label": "Font Size",
+              "options": [
+                { "value": "ultra", "label": "Ultra (Largest)" },
+                { "value": "mega", "label": "Mega" },
+                { "value": "hero", "label": "Hero" },
+                { "value": "display", "label": "Display" },
+                { "value": "h1", "label": "H1" },
+                { "value": "h2", "label": "H2" },
+                { "value": "h3", "label": "H3" },
+                { "value": "h4", "label": "H4" },
+                { "value": "h5", "label": "H5" },
+                { "value": "h6", "label": "H6 (Smallest)" }
+              ],
+              "default": "h2"
+            }
+          ]
+        },
+        {
+          "type": "span",
+          "name": "Paragraph",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "textarea",
+              "id": "span_text",
+              "label": "Paragraph Text",
+              "default": "Add your paragraph text here to describe your product, service, or promotion."
+            },
+            {
+              "type": "color",
+              "id": "span_color",
+              "label": "Text Color",
+              "default": "#666666"
+            },
+            {
+              "type": "font_picker",
+              "id": "span_font",
+              "label": "Font",
+              "default": "helvetica_n4"
+            },
+            {
+              "type": "select",
+              "id": "span_weight",
+              "label": "Font Weight",
+              "options": [
+                { "value": "400", "label": "Regular" },
+                { "value": "500", "label": "Medium" },
+                { "value": "600", "label": "Semibold" },
+                { "value": "700", "label": "Bold" }
+              ],
+              "default": "400"
+            },
+            {
+              "type": "select",
+              "id": "span_size",
+              "label": "Font Size",
+              "options": [
+                { "value": "3xl", "label": "3X Large" },
+                { "value": "2xl", "label": "2X Large" },
+                { "value": "xl", "label": "Extra Large" },
+                { "value": "lg", "label": "Large" },
+                { "value": "md", "label": "Medium" },
+                { "value": "sm", "label": "Small" },
+                { "value": "xs", "label": "Extra Small" }
+              ],
+              "default": "md"
+            },
+            {
+              "type": "checkbox",
+              "id": "span_justify",
+              "label": "Justify Text",
+              "default": false
+            }
+          ]
+        },
+        {
+          "type": "button",
+          "name": "Button",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "button_text",
+              "label": "Button Text",
+              "default": "Shop Now"
+            },
+            {
+              "type": "url",
+              "id": "button_link",
+              "label": "Button Link"
+            },
+            {
+              "type": "color",
+              "id": "button_text_color",
+              "label": "Text Color",
+              "default": "#FFFFFF"
+            },
+            {
+              "type": "color",
+              "id": "button_bg_color",
+              "label": "Background Color",
+              "default": "#000000"
+            },
+            {
+              "type": "font_picker",
+              "id": "button_font",
+              "label": "Font",
+              "default": "helvetica_n4"
+            },
+            {
+              "type": "select",
+              "id": "button_weight",
+              "label": "Font Weight",
+              "options": [
+                { "value": "400", "label": "Regular" },
+                { "value": "500", "label": "Medium" },
+                { "value": "600", "label": "Semibold" },
+                { "value": "700", "label": "Bold" }
+              ],
+              "default": "600"
+            },
+            {
+              "type": "select",
+              "id": "button_size",
+              "label": "Font Size",
+              "options": [
+                { "value": "2xl", "label": "2X Large" },
+                { "value": "xl", "label": "Extra Large" },
+                { "value": "lg", "label": "Large" },
+                { "value": "md", "label": "Medium" },
+                { "value": "sm", "label": "Small" },
+                { "value": "xs", "label": "Extra Small" }
+              ],
+              "default": "md"
+            },
+            {
+              "type": "range",
+              "id": "button_radius",
+              "min": 0,
+              "max": 40,
+              "step": 2,
+              "unit": "px",
+              "label": "Border Radius",
+              "default": 4
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Custom Image Banner",
+          "category": "Custom Content",
+          "blocks": [
+            { "type": "title" },
+            { "type": "title" },
+            { "type": "span" },
+            { "type": "button" }
+          ]
+        }
+      ]
+    }
+    {% endschema %}
+    
+    <div id="CustomImageBanner-{{ section.id }}"
+      class="custom-image-banner custom-image-banner--{{ section.settings.section_height }} custom-image-banner--content-align-{{ section.settings.content_justify }}"
+      data-section-id="{{ section.id }}"
+    >
+      <div class="custom-image-banner__background">
+        {% if section.settings.background_image_desktop != blank or section.settings.background_image_mobile != blank or section.settings.background_image_url_desktop != blank or section.settings.background_image_url_mobile != blank %}
+          <div class="custom-image-banner__image-container">
+            {% if section.settings.background_image_desktop != blank %}
+              <img 
+                class="custom-image-banner__image custom-image-banner__image-desktop" 
+                src="{{ section.settings.background_image_desktop | image_url: width: 1800 }}"
+                alt="{{ section.settings.background_image_desktop.alt | escape }}"
+                loading="lazy"
+                width="{{ section.settings.background_image_desktop.width }}"
+                height="{{ section.settings.background_image_desktop.height }}"
+              >
+            {% elsif section.settings.background_image_url_desktop != blank %}
+              <img 
+                class="custom-image-banner__image custom-image-banner__image-desktop" 
+                src="{{ section.settings.background_image_url_desktop }}"
+                alt="Background image"
+                loading="lazy"
+              >
+            {% endif %}
+            
+            {% if section.settings.background_image_mobile != blank %}
+              <img 
+                class="custom-image-banner__image custom-image-banner__image-mobile" 
+                src="{{ section.settings.background_image_mobile | image_url: width: 800 }}"
+                alt="{{ section.settings.background_image_mobile.alt | escape }}"
+                loading="lazy"
+                width="{{ section.settings.background_image_mobile.width }}"
+                height="{{ section.settings.background_image_mobile.height }}"
+              >
+            {% elsif section.settings.background_image_url_mobile != blank %}
+              <img 
+                class="custom-image-banner__image custom-image-banner__image-mobile" 
+                src="{{ section.settings.background_image_url_mobile }}"
+                alt="Background image"
+                loading="lazy"
+              >
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="custom-image-banner__placeholder">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endif %}
+        
+        <div class="custom-image-banner__overlay"></div>
+      </div>
+      
+      <div class="custom-image-banner__content-container custom-image-banner__content--{{ section.settings.content_position_desktop | replace: '_', '-' }} custom-image-banner__content--mobile-{{ section.settings.content_position_mobile | replace: '_', '-' }}">
+        <div class="custom-image-banner__content">
+          <div class="custom-image-banner__text-content">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'title' %}
+                  {% assign title_tag = 'h2' %}
+                  {% if block.settings.title_size == 'h1' %}
+                    {% assign title_tag = 'h1' %}
+                  {% elsif block.settings.title_size == 'h2' %}
+                    {% assign title_tag = 'h2' %}
+                  {% elsif block.settings.title_size == 'h3' %}
+                    {% assign title_tag = 'h3' %}
+                  {% elsif block.settings.title_size == 'h4' %}
+                    {% assign title_tag = 'h4' %}
+                  {% elsif block.settings.title_size == 'h5' %}
+                    {% assign title_tag = 'h5' %}
+                  {% elsif block.settings.title_size == 'h6' %}
+                    {% assign title_tag = 'h6' %}
+                  {% else %}
+                    {% assign title_tag = 'div' %}
+                  {% endif %}
+                  <{{ title_tag }} 
+                    class="custom-image-banner__title custom-image-banner__title--{{ block.settings.title_size }}"
+                    style="{% if block.settings.title_color contains 'gradient' %}background: {{ block.settings.title_color }};-webkit-background-clip: text;-webkit-text-fill-color: transparent;{% else %}color: {{ block.settings.title_color }};{% endif %}
+                           font-family: {{ block.settings.title_font.family | escape }}, {{ block.settings.title_font.fallback_families | escape }};
+                           font-weight: {{ block.settings.title_weight }};"
+                    {{ block.shopify_attributes }}
+                  >
+                    {{ block.settings.title_text }}
+                  </{{ title_tag }}>
+                {% when 'span' %}
+                  <div class="custom-image-banner__paragraph custom-image-banner__paragraph--{{ block.settings.span_size }}{% if block.settings.span_justify %} custom-image-banner__paragraph--justify{% endif %}"
+                    style="color: {{ block.settings.span_color }};
+                           font-family: {{ block.settings.span_font.family | escape }}, {{ block.settings.span_font.fallback_families | escape }};
+                           font-weight: {{ block.settings.span_weight }};"
+                    {{ block.shopify_attributes }}
+                  >
+                    {{ block.settings.span_text }}
+                  </div>
+              {% endcase %}
+            {% endfor %}
+          </div>
+          <div class="custom-image-banner__button-container">
+            {% for block in section.blocks %}
+              {% if block.type == 'button' %}
+                <a href="{{ block.settings.button_link }}" 
+                  class="custom-image-banner__button custom-image-banner__button--{{ block.settings.button_size }}"
+                  style="color: {{ block.settings.button_text_color }};
+                         background-color: {{ block.settings.button_bg_color }};
+                         font-family: {{ block.settings.button_font.family | escape }}, {{ block.settings.button_font.fallback_families | escape }};
+                         font-weight: {{ block.settings.button_weight }};
+                         border-radius: {{ block.settings.button_radius }}px;"
+                  {{ block.shopify_attributes }}
+                >
+                  {{ block.settings.button_text }}
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <style>
+      .custom-image-banner {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        /* No border radius */
+      }
+      
+      /* Heights */
+      .custom-image-banner--small {
+        height: 400px;
+      }
+      
+      .custom-image-banner--medium {
+        height: 600px;
+      }
+      
+      .custom-image-banner--big {
+        height: 800px;
+      }
+      
+      .custom-image-banner--vh {
+        height: calc(100vh - 38px);
+      }
+      
+      .custom-image-banner--adapt {
+        min-height: 400px;
+      }
+      
+      /* Background */
+      .custom-image-banner__background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      
+      .custom-image-banner__image-container,
+      .custom-image-banner__placeholder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .custom-image-banner__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      
+      .custom-image-banner__image-desktop {
+        display: block;
+      }
+      
+      .custom-image-banner__image-mobile {
+        display: none;
+      }
+      
+      .custom-image-banner__placeholder {
+        background-color: #f8f8f8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .custom-image-banner__placeholder svg {
+        width: 100%;
+        height: 100%;
+        opacity: 0.2;
+      }
+      
+      .custom-image-banner__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+      }
+      
+      /* Content */
+      .custom-image-banner__content-container {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 1440px;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 150px 0px;
+        height: 100%;
+      }
+    
+      @media screen and (max-width: 1440px) {
+        .custom-image-banner__content-container {
+          padding: 150px 50px;
+        }
+      }
+      
+      .custom-image-banner__content {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        max-width: 600px;
+        gap: 24px;
+      }
+      
+      /* Content position classes (desktop) */
+      .custom-image-banner__content--top-left { justify-content: flex-start; align-items: flex-start; }
+      .custom-image-banner__content--top-center { justify-content: flex-start; align-items: center; }
+      .custom-image-banner__content--top-right { justify-content: flex-start; align-items: flex-end; }
+      .custom-image-banner__content--middle-left { justify-content: center; align-items: flex-start; }
+      .custom-image-banner__content--middle-center { justify-content: center; align-items: center; }
+      .custom-image-banner__content--middle-right { justify-content: center; align-items: flex-end; }
+      .custom-image-banner__content--bottom-left { justify-content: flex-end; align-items: flex-start; }
+      .custom-image-banner__content--bottom-center { justify-content: flex-end; align-items: center; }
+      .custom-image-banner__content--bottom-right { justify-content: flex-end; align-items: flex-end; }
+      
+      /* Mobile content position classes */
+      @media (max-width: 749px) {
+        .custom-image-banner__content--mobile-top-left { justify-content: flex-start; align-items: flex-start; }
+        .custom-image-banner__content--mobile-top-center { justify-content: flex-start; align-items: center; }
+        .custom-image-banner__content--mobile-top-right { justify-content: flex-start; align-items: flex-end; }
+        .custom-image-banner__content--mobile-middle-left { justify-content: center; align-items: flex-start; }
+        .custom-image-banner__content--mobile-middle-center { justify-content: center; align-items: center; }
+        .custom-image-banner__content--mobile-middle-right { justify-content: center; align-items: flex-end; }
+        .custom-image-banner__content--mobile-bottom-left { justify-content: flex-end; align-items: flex-start; }
+        .custom-image-banner__content--mobile-bottom-center { justify-content: flex-end; align-items: center; }
+        .custom-image-banner__content--mobile-bottom-right { justify-content: flex-end; align-items: flex-end; }
+      }
+      
+      /* Text alignment for text and button containers */
+      .custom-image-banner--content-align-left .custom-image-banner__text-content,
+      .custom-image-banner--content-align-left .custom-image-banner__button-container { text-align: left; justify-content: flex-start; }
+      .custom-image-banner--content-align-center .custom-image-banner__text-content,
+      .custom-image-banner--content-align-center .custom-image-banner__button-container { text-align: center; justify-content: center; }
+      .custom-image-banner--content-align-right .custom-image-banner__text-content,
+      .custom-image-banner--content-align-right .custom-image-banner__button-container { text-align: right; justify-content: flex-end; }
+      
+      /* Text elements */
+      .custom-image-banner__title {
+        padding: 0 0 10px;
+        line-height: 1.2;
+      }
+      
+      /* Extended title sizes */
+      .custom-image-banner__title--ultra {
+        font-size: 6rem;
+        line-height: 0.95;
+      }
+      
+      .custom-image-banner__title--mega {
+        font-size: 5.2rem;
+        line-height: 0.95;
+      }
+      
+      .custom-image-banner__title--hero {
+        font-size: 4.5rem;
+        line-height: 1;
+      }
+      
+      .custom-image-banner__title--display {
+        font-size: 3.8rem;
+        line-height: 1.05;
+      }
+      
+      .custom-image-banner__title--h1 {
+        font-size: 3rem;
+        line-height: 1.1;
+      }
+      
+      .custom-image-banner__title--h2 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+      }
+      
+      .custom-image-banner__title--h3 {
+        font-size: 2rem;
+        line-height: 1.2;
+      }
+      
+      .custom-image-banner__title--h4 {
+        font-size: 1.75rem;
+        line-height: 1.3;
+      }
+      
+      .custom-image-banner__title--h5 {
+        font-size: 1.5rem;
+        line-height: 1.4;
+      }
+      
+      .custom-image-banner__title--h6 {
+        font-size: 1.25rem;
+        line-height: 1.4;
+      }
+      
+      .custom-image-banner__paragraph {
+        margin: 0;
+        line-height: 1.6;
+      }
+      
+      .custom-image-banner__paragraph--3xl {
+        font-size: 2rem;
+      }
+      
+      .custom-image-banner__paragraph--2xl {
+        font-size: 1.75rem;
+      }
+      
+      .custom-image-banner__paragraph--xl {
+        font-size: 1.5rem;
+      }
+      
+      .custom-image-banner__paragraph--lg {
+        font-size: 1.25rem;
+      }
+      
+      .custom-image-banner__paragraph--md {
+        font-size: 1rem;
+      }
+      
+      .custom-image-banner__paragraph--sm {
+        font-size: 0.875rem;
+      }
+      
+      .custom-image-banner__paragraph--xs {
+        font-size: 0.75rem;
+      }
+      
+      .custom-image-banner__paragraph--justify {
+        text-align: justify;
+      }
+      
+      /* Button */
+      .custom-image-banner__button-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      
+      .custom-image-banner__button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        padding: 12px 30px;
+        transition: all 0.3s ease;
+        min-width: 150px;
+        text-align: center;
+      }
+      
+      .custom-image-banner__button--2xl {
+        font-size: 2rem;
+        padding: 14px 40px;
+      }
+      
+      .custom-image-banner__button--xl {
+        font-size: 1.8rem;
+        padding: 12px 36px;
+      }
+      
+      .custom-image-banner__button--lg {
+        font-size: 1.5rem;
+        padding: 10px 32px;
+      }
+      
+      .custom-image-banner__button--md {
+        font-size: 1.2rem;
+        padding: 8px 28px;
+      }
+      
+      .custom-image-banner__button--sm {
+        font-size: 1rem;
+        padding: 6px 24px;
+      }
+      
+      .custom-image-banner__button--xs {
+        font-size: 0.8rem;
+        padding: 4px 20px;
+      }
+      
+      /* Mobile styles */
+      @media screen and (max-width: 989px) {
+        .custom-image-banner--small {
+          height: 300px;
+        }
+        
+        .custom-image-banner--medium {
+          height: 450px;
+        }
+        
+        .custom-image-banner--big {
+          height: 550px;
+        }
+        
+        .custom-image-banner__content {
+          max-width: 100%;
+          gap: var(--space-between-mobile);
+        }
+        
+        .custom-image-banner__title--ultra {
+          font-size: 4rem;
+        }
+        
+        .custom-image-banner__title--mega {
+          font-size: 3.5rem;
+        }
+        
+        .custom-image-banner__title--hero {
+          font-size: 3rem;
+        }
+        
+        .custom-image-banner__title--display {
+          font-size: 2.5rem;
+        }
+        
+        .custom-image-banner__title--h1 {
+          font-size: 2.2rem;
+        }
+        
+        .custom-image-banner__title--h2 {
+          font-size: 2rem;
+        }
+        
+        .custom-image-banner__title--h3 {
+          font-size: 1.75rem;
+        }
+        
+        .custom-image-banner__image-desktop {
+          display: none;
+        }
+        
+        .custom-image-banner__image-mobile {
+          display: block;
+        }
+      }
+      
+      @media screen and (max-width: 749px) {
+        .custom-image-banner__content-container {
+          padding: 0 15px;
+        }
+        
+        .custom-image-banner__title--ultra {
+          font-size: 3rem;
+        }
+        
+        .custom-image-banner__title--mega {
+          font-size: 2.8rem;
+        }
+        
+        .custom-image-banner__title--hero {
+          font-size: 2.4rem;
+        }
+        
+        .custom-image-banner__paragraph--3xl {
+          font-size: 1.6rem;
+        }
+        
+        .custom-image-banner__paragraph--2xl {
+          font-size: 1.4rem;
+        }
+        
+        .custom-image-banner__paragraph--xl {
+          font-size: 1.2rem;
+        }
+    
+        .custom-image-banner__text-content {
+          text-align: center;  
+        }
+        .custom-image-banner__button-container {
+          justify-content: center;
+        }
+      }
+    </style> 
