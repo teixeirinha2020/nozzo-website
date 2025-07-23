@@ -1,305 +1,298 @@
 {% schema %}
-{
-  "name": "Glass Timeline Benefits",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "The best sleep you've ever had"
-    },
-    {
-      "type": "color",
-      "id": "title_color",
-      "label": "Title Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "textarea",
-      "id": "paragraph",
-      "label": "Paragraph",
-      "default": "The Pod is clinically proven to deliver real results for your sleep, every night"
-    },
-    {
-      "type": "color",
-      "id": "paragraph_color",
-      "label": "Paragraph Color",
-      "default": "#bfc9db"
-    },
-    {
-      "type": "color_background",
-      "id": "background_gradient",
-      "label": "Background Gradient",
-      "default": "linear-gradient(135deg, #1a2236 0%, #3a4256 100%)"
-    },
-    {
-      "type": "textarea",
-      "id": "custom_css_gradient",
-      "label": "Custom CSS Gradient (optional)",
-      "info": "Overrides the gradient picker if filled. Use valid CSS background value."
-    },
-    {
-      "type": "color",
-      "id": "timeline_color",
-      "label": "Timeline Line & Bullet Color",
-      "default": "#ffffff"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "benefit",
-      "name": "Benefit",
-      "limit": 4,
-      "settings": [
-        {
-          "type": "text",
-          "id": "small_text",
-          "label": "Small Text (e.g. Up to 44%)",
-          "default": "Up to 44%"
-        },
-        {
-          "type": "text",
-          "id": "main_text",
-          "label": "Main Text",
-          "default": "Less time to fall asleep"
-        },
-        {
-          "type": "color",
-          "id": "box_color",
-          "label": "Benefit Box Overlay Color",
-          "default": "rgba(36, 45, 66, 0.45)"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Glass Timeline Benefits",
-      "category": "Custom Content",
-      "blocks": [
-        { "type": "benefit" },
-        { "type": "benefit" },
-        { "type": "benefit" },
-        { "type": "benefit" }
-      ]
-    }
-  ]
-}
-{% endschema %}
-
-<style>
-.glass-timeline-benefits-section {
-  width: 100%;
-  min-height: 600px;
-  padding: 60px 0 0 0;
-  background: var(--background-gradient, linear-gradient(135deg, #1a2236 0%, #3a4256 100%));
-  position: relative;
-  overflow: hidden;
-}
-.glass-timeline-benefits__container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.glass-timeline-benefits__title {
-  font-size: 2.8rem;
-  font-weight: 300;
-  margin-bottom: 12px;
-  letter-spacing: -0.01em;
-  text-align: center;
-}
-.glass-timeline-benefits__paragraph {
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin-bottom: 12px;
-  color: #bfc9db;
-  text-align: center;
-}
-.glass-timeline-benefits__benefits-list {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  min-height: 320px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.glass-timeline-benefits__benefit {
-  position: absolute;
-  width: 25%;
-  left: calc((100% / 4) * (var(--benefit-index, 0)));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 1;
-}
-.glass-timeline-benefits__benefit-box {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-  z-index: 2;
-  background: var(--benefit-box-color, rgba(36,45,66,0.45));
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.18);
-  padding: 24px 32px;
-  min-width: 180px;
-  max-width: 240px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  color: #fff;
-}
-.glass-timeline-benefits__line {
-  position: absolute;
-  left: 50%;
-  width: 4px !important;
-  background: var(--timeline-color, #fff);
-  opacity: 0.18;
-  border-radius: 2px;
-  z-index: 0;
-  display: block !important;
-}
-.glass-timeline-benefits__bullet {
-  position: absolute;
-  left: 50%;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--timeline-color, #fff);
-  border: 3px solid #fff;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
-  z-index: 2;
-  transform: translate(-50%, 0);
-  display: block !important;
-}
-.glass-timeline-benefits__tick {
-  width: 1px;
-  height: 8px;
-  background: #fff;
-  opacity: 0.18;
-  border-radius: 1px;
-  display: block !important;
-}
-.glass-timeline-benefits__tick--large {
-  height: 14px;
-  opacity: 0.5;
-  display: block !important;
-}
-.glass-timeline-benefits__ticks {
-  position: absolute;
-  left: 0;
-  bottom: 2px;
-  width: 100%;
-  height: 14px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  pointer-events: none;
-  z-index: 3;
-}
-@media (max-width: 900px) {
-  .glass-timeline-benefits__container {
-    padding: 0 8px;
+  {
+    "name": "Glass Timeline Benefits",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "The best sleep you've ever had"
+      },
+      {
+        "type": "color",
+        "id": "title_color",
+        "label": "Title Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "The Pod is clinically proven to deliver real results for your sleep, every night"
+      },
+      {
+        "type": "color",
+        "id": "subtitle_color",
+        "label": "Subtitle Color",
+        "default": "#cccccc"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background Gradient",
+        "default": "radial-gradient(ellipse at center, #1c1e2b 0%, #0f101b 60%, #090a13 100%)"
+      },
+      {
+        "type": "color",
+        "id": "timeline_color",
+        "label": "Timeline Line & Bullet Color",
+        "default": "#ffffff"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "benefit",
+        "name": "Benefit",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "text",
+            "id": "small_text",
+            "label": "Small Text (e.g., Up to 44%)",
+            "default": "Up to 44%"
+          },
+          {
+            "type": "text",
+            "id": "main_text",
+            "label": "Main Text",
+            "default": "Less time to fall asleep"
+          },
+          {
+            "type": "color",
+            "id": "box_color",
+            "label": "Benefit Box Background Overlay",
+            "default": "rgba(255, 255, 255, 0.04)"
+          },
+          {
+            "type": "range",
+            "id": "benefit_height",
+            "label": "Choose the Benefit Box Height (50-200)",
+            "unit": "px",
+            "min": 50,
+            "max": 200,
+            "step": 2,
+            "default": 124
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Glass Timeline Benefits",
+        "category": "Custom Content",
+        "blocks": [
+          { "type": "benefit" },
+          { "type": "benefit" },
+          { "type": "benefit" },
+          { "type": "benefit" }
+        ]
+      }
+    ]
   }
-  .glass-timeline-benefits__title,
-  .glass-timeline-benefits__paragraph {
+  {% endschema %}
+  
+  <style>
+  .glass-timeline {
+    background: {{ section.settings.background_gradient }};
+    padding: 4rem 5.5rem 0;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .glass-timeline__container {
+    max-width: 1440px;
+    margin-inline: auto;
     text-align: center;
-  }
-  .glass-timeline-benefits__benefits-list {
-    height: auto;
-    min-height: 0;
-    max-width: 100%;
     display: flex;
     flex-direction: column;
-    position: static;
+    align-items: center;
   }
-  .glass-timeline-benefits__benefit {
+  .glass-timeline__title {
+    font-size: 6rem;
+    letter-spacing: -1px;
+    max-width: 50%;
+    font-weight: 300;
+    color: {{ section.settings.title_color }};
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .glass-timeline__subtitle {
+    font-size: 1.6rem;
+    letter-spacing: -0.5px;
+    max-width: 60%;
+    color: {{ section.settings.subtitle_color }};
+    font-weight: 300;
+    margin-bottom: 3.5rem;
+    line-height: 1;
+  }
+  .glass-timeline__timeline {
     position: relative;
-    width: 100%;
-    left: 0;
-    margin-bottom: 60px;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    width: 100%;
+    min-height: 400px;
   }
-  .glass-timeline-benefits__benefit-box {
+  .glass-timeline__benefit {
     position: relative;
-    left: 0;
-    top: 0;
-    transform: none;
-    margin-left: 0;
-    margin-bottom: 0;
-    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
   }
-  .glass-timeline-benefits__line {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 60px !important;
-    height: 4px !important;
-    min-height: 4px;
-    background: var(--timeline-color, #fff);
-    opacity: 0.18;
-    border-radius: 2px;
-    z-index: 0;
+
+  .glass-timeline__line-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+  }
+
+  .glass-timeline__box {
+    background: var(--box-color, rgba(255,255,255,0.05));
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: .5rem;
+    border: 1.418px solid rgba(255, 255, 255, .02);
+    background: rgba(255, 255, 255, .02);
+    box-shadow: 2.836px 2.836px 90.745px 0 rgba(0, 0, 0, .55);
+    -webkit-backdrop-filter: blur(8.5px);
+    backdrop-filter: blur(8.5px);
+    min-width: 100px;
+    max-width: 300px;
+    gap:12px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    margin-left: 9px;
+  }
+  .glass-timeline__box:hover {
+    transform: translateY(-6px);
+  }
+  .glass-timeline__small {
+    font-size: 2rem;
+    font-weight: 300;
+    opacity: .8;
+    line-height: normal;
+    letter-spacing: -0.5px;
+  }
+  .glass-timeline__main {
+    font-size: 2.7rem;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    width: 10ch;
+  }
+  
+  /* Timeline parts */
+  .glass-timeline__bullet,
+  .glass-timeline__line,
+  .glass-timeline__tick,
+  .glass-timeline__tick--large {
     display: block !important;
   }
-  .glass-timeline-benefits__bullet {
-    position: absolute;
-    left: 60px;
-    top: calc(50% - 9px);
+  .glass-timeline__bullet {
     width: 18px;
     height: 18px;
+    background: {{ section.settings.timeline_color }};
     border-radius: 50%;
-    background: var(--timeline-color, #fff);
+    margin-top: -9px;
     border: 3px solid #fff;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+    box-shadow: 0 0 8px rgba(0,0,0,0.25);
     z-index: 2;
-    transform: none;
-    display: block !important;
   }
-}
-</style>
-
-<div class="glass-timeline-benefits-section" style="background: {{ section.settings.custom_css_gradient | default: section.settings.background_gradient }};">
-  <div class="glass-timeline-benefits__container">
-    <h2 class="glass-timeline-benefits__title" style="color: {{ section.settings.title_color }};">
-      {{ section.settings.title }}
-    </h2>
-    <p class="glass-timeline-benefits__paragraph" style="color: {{ section.settings.paragraph_color }};">
-      {{ section.settings.paragraph }}
-    </p>
-    <div class="glass-timeline-benefits__benefits-list">
-      {% assign box_tops = '40,100,60,120' | split: ',' %}
-      {% for block in section.blocks %}
-        {% assign idx = forloop.index0 %}
-        {% assign box_top = box_tops[idx] | default: '40' %}
-        {% assign box_height = 90 %}
-        {% assign bullet_size = 18 %}
-        {% assign bullet_top = box_top | plus: box_height | plus: 16 %}
-        {% assign line_top = bullet_top | plus: bullet_size | minus: 2 %}
-        {% assign line_height = 400 | minus: line_top %}
-        <div class="glass-timeline-benefits__benefit" style="left: calc((100% / 4) * {{ idx }}); z-index:2;">
-          <div class="glass-timeline-benefits__benefit-box" style="--benefit-box-color: {{ block.settings.box_color }}; top: {{ box_top }}px; z-index:3;">
-            <span class="glass-timeline-benefits__benefit-small">{{ block.settings.small_text }}</span>
-            <span class="glass-timeline-benefits__benefit-main">{{ block.settings.main_text }}</span>
+  .glass-timeline__line {
+    width: 2px;
+    background: {{ section.settings.timeline_color }};
+  }
+  .glass-timeline__ticks {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    height: 14px;
+    padding: 0 1rem;
+    z-index: 0;
+  }
+  .glass-timeline__tick {
+    width: 1px;
+    height: 10px;
+    background: #fff;
+  }
+  .glass-timeline__tick--large {
+    height: 16px;
+  }
+  
+  /* Mobile */
+  @media (max-width: 768px) {
+    .glass-timeline__title {
+      font-size: 2.4rem;
+    }
+    .glass-timeline__subtitle {
+      font-size: 1rem;
+    }
+    .glass-timeline__timeline {
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: auto;
+    }
+    .glass-timeline__benefit {
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    .glass-timeline__box {
+      margin-right: 1rem;
+      margin-bottom: 0;
+    }
+    .glass-timeline__line {
+      width: 60px;
+      height: 2px;
+    }
+    .glass-timeline__bullet {
+      margin-top: 0;
+      margin-left: -9px;
+    }
+  }
+  </style>
+  
+  <div class="glass-timeline">
+    <div class="glass-timeline__container">
+      <h2 class="glass-timeline__title">{{ section.settings.title }}</h2>
+      <p class="glass-timeline__subtitle">{{ section.settings.subtitle }}</p>
+  
+      <div class="glass-timeline__timeline">
+        {% for block in section.blocks %}
+          <div class="glass-timeline__benefit">
+            <div class="glass-timeline__box" style="--box-color: {{ block.settings.box_color }}">
+              <div class="glass-timeline__small">{{ block.settings.small_text }}</div>
+              <div class="glass-timeline__main">{{ block.settings.main_text }}</div>
+            </div>
+            <div class="glass-timeline__line-container">
+              <div class="glass-timeline__bullet"></div>
+              <div class="glass-timeline__line" style="height: {{ block.settings.benefit_height }}px;"></div>
+            </div>
           </div>
-          <div class="glass-timeline-benefits__bullet" style="top: {{ bullet_top }}px; z-index:4;"></div>
-          <div class="glass-timeline-benefits__line" style="top: {{ line_top }}px; height: {{ line_height }}px; z-index:1;"></div>
-        </div>
-      {% endfor %}
-      <div class="glass-timeline-benefits__ticks">
-        {% for i in (1..32) %}
-          {% if i == 10 or i == 22 %}
-            <div class="glass-timeline-benefits__tick glass-timeline-benefits__tick--large"></div>
+        {% endfor %}
+      </div>
+  
+      <div class="glass-timeline__ticks">
+        {% assign total_ticks = section.blocks.size | times: 4 %}
+        {% assign middle_tick = total_ticks | divided_by: 2 %}
+        {% assign second_last_tick = total_ticks | minus: 1 %}
+        {% for i in (1..total_ticks) %}
+          {% if i == middle_tick or i == second_last_tick %}
+            <div class="glass-timeline__tick glass-timeline__tick--large"></div>
           {% else %}
-            <div class="glass-timeline-benefits__tick"></div>
+            <div class="glass-timeline__tick"></div>
           {% endif %}
         {% endfor %}
       </div>
     </div>
   </div>
-</div> 
+  
