@@ -315,12 +315,12 @@
             <div class="glass-timeline__line height-{{ block.settings.benefit_height }}"></div>
             <style>
               .height-{{ block.settings.benefit_height }} {
-                height: calc({{ block.settings.benefit_height }}px - 30px);
+                height: calc({{ block.settings.benefit_height }}px / 2);
                 width: 1px;
               }
               @media (max-width: 768px) {
                 .height-{{ block.settings.benefit_height }} {
-                  width: calc({{ block.settings.benefit_height }}px - 30px);
+                  width: calc({{ block.settings.benefit_height }}px / 2);
                   height: 1px;
                 }
               }

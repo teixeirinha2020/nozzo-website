@@ -469,8 +469,9 @@
         "title_color": "#ffffff",
         "subtitle": "The Pod is clinically proven to deliver real results for your sleep, every night",
         "subtitle_color": "#ffffff",
-        "background_gradient": "linear-gradient(135deg, rgba(26, 34, 54, 1), rgba(58, 66, 86, 1) 100%)",
-        "timeline_color": "#ffffff"
+        "background_gradient": "linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0))",
+        "timeline_color": "#ffffff",
+        "ticks_count": 20
       }
     }
   },
