@@ -425,7 +425,8 @@
           "settings": {
             "small_text": "Up to 44%",
             "main_text": "Less time to fall asleep",
-            "box_color": "rgba(36, 45, 66, 0.45)"
+            "box_color": "#fc000073",
+            "benefit_height": 100
           }
         },
         "benefit_zmwiMR": {
@@ -433,7 +434,8 @@
           "settings": {
             "small_text": "Up to 44%",
             "main_text": "Less time to fall asleep",
-            "box_color": "rgba(36, 45, 66, 0.45)"
+            "box_color": "#242d4273",
+            "benefit_height": 200
           }
         },
         "benefit_7LMxTT": {
@@ -441,7 +443,8 @@
           "settings": {
             "small_text": "Up to 44%",
             "main_text": "Less time to fall asleep",
-            "box_color": "rgba(36, 45, 66, 0.45)"
+            "box_color": "#242d4273",
+            "benefit_height": 124
           }
         },
         "benefit_ajhqMr": {
@@ -449,7 +452,8 @@
           "settings": {
             "small_text": "Up to 44%",
             "main_text": "Less time to fall asleep",
-            "box_color": "rgba(36, 45, 66, 0.45)"
+            "box_color": "#242d4273",
+            "benefit_height": 50
           }
         }
       },
@@ -463,10 +467,9 @@
       "settings": {
         "title": "The best sleep you've ever had",
         "title_color": "#ffffff",
-        "paragraph": "The Pod is clinically proven to deliver real results for your sleep, every night",
-        "paragraph_color": "#bfc9db",
+        "subtitle": "The Pod is clinically proven to deliver real results for your sleep, every night",
+        "subtitle_color": "#ffffff",
         "background_gradient": "linear-gradient(135deg, rgba(26, 34, 54, 1), rgba(58, 66, 86, 1) 100%)",
-        "custom_css_gradient": "",
         "timeline_color": "#ffffff"
       }
     }
