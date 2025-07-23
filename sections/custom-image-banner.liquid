@@ -125,10 +125,15 @@
               "id": "title_weight",
               "label": "Font Weight",
               "options": [
-                { "value": "400", "label": "Regular" },
-                { "value": "500", "label": "Medium" },
-                { "value": "600", "label": "Semibold" },
-                { "value": "700", "label": "Bold" }
+                { "value": "100", "label": "Thin (100)" },
+                { "value": "200", "label": "Extra Light (200)" },
+                { "value": "300", "label": "Light (300)" },
+                { "value": "400", "label": "Regular (400)" },
+                { "value": "500", "label": "Medium (500)" },
+                { "value": "600", "label": "Semibold (600)" },
+                { "value": "700", "label": "Bold (700)" },
+                { "value": "800", "label": "Extra Bold (800)" },
+                { "value": "900", "label": "Black (900)" }
               ],
               "default": "700"
             },
@@ -180,10 +185,15 @@
               "id": "span_weight",
               "label": "Font Weight",
               "options": [
-                { "value": "400", "label": "Regular" },
-                { "value": "500", "label": "Medium" },
-                { "value": "600", "label": "Semibold" },
-                { "value": "700", "label": "Bold" }
+                { "value": "100", "label": "Thin (100)" },
+                { "value": "200", "label": "Extra Light (200)" },
+                { "value": "300", "label": "Light (300)" },
+                { "value": "400", "label": "Regular (400)" },
+                { "value": "500", "label": "Medium (500)" },
+                { "value": "600", "label": "Semibold (600)" },
+                { "value": "700", "label": "Bold (700)" },
+                { "value": "800", "label": "Extra Bold (800)" },
+                { "value": "900", "label": "Black (900)" }
               ],
               "default": "400"
             },
@@ -546,7 +556,7 @@
         display: flex;
         flex-direction: column;
         width: auto;
-        max-width: 500px;
+        max-width: 550px;
         gap: 24px;
       }
       
@@ -586,6 +596,7 @@
       .custom-image-banner__title {
         padding: 0 0 10px;
         line-height: 1.2;
+        letter-spacing: normal;
       }
       
       /* Extended title sizes */
@@ -641,7 +652,8 @@
       
       .custom-image-banner__paragraph {
         margin: 0;
-        line-height: 1.6;
+        line-height: 1.2;
+        letter-spacing: normal;
       }
       
       .custom-image-banner__paragraph--3xl {

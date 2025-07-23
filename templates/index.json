@@ -105,7 +105,10 @@
         "text_TRKM9i"
       ],
       "custom_css": [
-        ".rich-text__heading {margin-top: 0px;}"
+        "no.rich-text__heading {margin-top: 0px; margin-bottom: 0px;}",
+        "p {line-height: 1.2; font-weight: 300; letter-spacing: normal;}",
+        "h2 {font-weight: 300; letter-spacing: normal; line-height: 0.9;}",
+        "@media screen and (max-width: 489px) {p {line-height: 1.2; }}"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
@@ -124,7 +127,7 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/Intake_After.webp",
-            "title": "Respiração",
+            "title": "RESPIRAÇÃO",
             "text": "",
             "link_label": "",
             "link": ""
@@ -134,7 +137,7 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/para-site-53.jpg",
-            "title": "Sono",
+            "title": "SONO",
             "text": "",
             "link_label": "",
             "link": ""
@@ -144,7 +147,7 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/foto-165.jpg",
-            "title": "Performance",
+            "title": "PERFORMANCE",
             "text": "",
             "link_label": "",
             "link": ""
@@ -160,7 +163,7 @@
         ".media {border-radius: 10px 10px;}",
         ".multicolumn-card {border-radius: 10px;}",
         ".multicolumn-card__info {padding: 0; padding-left: 3.2rem; position: relative; top: -40px;}",
-        "@media screen and (max-width: 749px) {.multicolumn-card__info {padding-left: 1.5rem; }"
+        "@media screen and (max-width: 749px) {.multicolumn-card__info {padding-left: 1.5rem; }}"
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
@@ -189,8 +192,8 @@
             "title_text": "92% dos utilizadores",
             "title_color": "#ffffff",
             "title_font": "poppins_n4",
-            "title_weight": "400",
-            "title_size": "hero"
+            "title_weight": "300",
+            "title_size": "mega"
           }
         },
         "span_xRRyBM": {
@@ -199,7 +202,7 @@
             "span_text": "disseram que o Magnetic Nose Strip ajudou a aliviar os problemas de sono, como o ressonar e a apneia do sono, do que outros dilatadores nasais.",
             "span_color": "#ffffff",
             "span_font": "poppins_n4",
-            "span_weight": "400",
+            "span_weight": "300",
             "span_size": "lg",
             "span_justify": false
           }
@@ -210,7 +213,7 @@
         "span_xRRyBM"
       ],
       "custom_css": [
-        "@media screen and (max-width: 989px) {.custom-image-banner--adapt {height: 80vh; }}"
+        "@media screen and (max-width: 989px) {.custom-image-banner--adapt {height: 90vh; }}"
       ],
       "name": "Custom Image Banner",
       "settings": {
@@ -413,6 +416,59 @@
         "padding_top": 40,
         "padding_bottom": 52
       }
+    },
+    "glass_timeline_benefits_qFUPH7": {
+      "type": "glass-timeline-benefits",
+      "blocks": {
+        "benefit_BcVCUi": {
+          "type": "benefit",
+          "settings": {
+            "small_text": "Up to 44%",
+            "main_text": "Less time to fall asleep",
+            "box_color": "rgba(36, 45, 66, 0.45)"
+          }
+        },
+        "benefit_zmwiMR": {
+          "type": "benefit",
+          "settings": {
+            "small_text": "Up to 44%",
+            "main_text": "Less time to fall asleep",
+            "box_color": "rgba(36, 45, 66, 0.45)"
+          }
+        },
+        "benefit_7LMxTT": {
+          "type": "benefit",
+          "settings": {
+            "small_text": "Up to 44%",
+            "main_text": "Less time to fall asleep",
+            "box_color": "rgba(36, 45, 66, 0.45)"
+          }
+        },
+        "benefit_ajhqMr": {
+          "type": "benefit",
+          "settings": {
+            "small_text": "Up to 44%",
+            "main_text": "Less time to fall asleep",
+            "box_color": "rgba(36, 45, 66, 0.45)"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_BcVCUi",
+        "benefit_zmwiMR",
+        "benefit_7LMxTT",
+        "benefit_ajhqMr"
+      ],
+      "name": "Glass Timeline Benefits",
+      "settings": {
+        "title": "The best sleep you've ever had",
+        "title_color": "#ffffff",
+        "paragraph": "The Pod is clinically proven to deliver real results for your sleep, every night",
+        "paragraph_color": "#bfc9db",
+        "background_gradient": "linear-gradient(135deg, rgba(26, 34, 54, 1), rgba(58, 66, 86, 1) 100%)",
+        "custom_css_gradient": "",
+        "timeline_color": "#ffffff"
+      }
     }
   },
   "order": [
@@ -422,6 +478,7 @@
     "custom_image_banner_VXarQQ",
     "card_slider_cC6dPG",
     "rich_text_JymLpj",
-    "rich_text_XFQhhn"
+    "rich_text_XFQhhn",
+    "glass_timeline_benefits_qFUPH7"
   ]
 }
