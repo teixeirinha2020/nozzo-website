@@ -589,7 +589,8 @@ details > * {
   --duration-extended: 3s;
   --ease-out-slow: cubic-bezier(0, 0, 0.3, 1);
   --animation-slide-in: slideIn var(--duration-extra-long) var(--ease-out-slow) forwards;
-  --animation-slide-in-x: slideInX var(--duration-extra-longer) var(--ease-out-slow) forwards;
+  --animation-slide-in-x: slideInX var(--duration-extra-extra-longer) var(--ease-out-slow) forwards;
+  --animation-slide-in-y: slideInY var(--duration-extra-extra-longer) var(--ease-out-slow) forwards;
   --animation-fade-in: fadeIn var(--duration-extra-long) var(--ease-out-slow);
 }
 
@@ -3316,7 +3317,7 @@ details-disclosure > details {
   }
 
   .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in-y-desktop-x-mobile {
-    animation: var(--animation-slide-in);
+    animation: var(--animation-slide-in-y);
     animation-delay: calc(var(--animation-order) * 75ms);
   }
 
@@ -3363,11 +3364,22 @@ details-disclosure > details {
 
   @keyframes slideInX {
     from {
-      transform: translateX(-2.5rem);
+      transform: translateX(-25rem);
       opacity: 0.01;
     }
     to {
       transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInY {
+    from {
+      transform: translateY(25rem);
+      opacity: 0.01;
+    }
+    to {
+      transform: translateY(0);
       opacity: 1;
     }
   }
