@@ -585,9 +585,11 @@ details > * {
   --duration-long: 500ms;
   --duration-extra-long: 600ms;
   --duration-extra-longer: 750ms;
+  --duration-extra-extra-longer: 1s;
   --duration-extended: 3s;
   --ease-out-slow: cubic-bezier(0, 0, 0.3, 1);
   --animation-slide-in: slideIn var(--duration-extra-long) var(--ease-out-slow) forwards;
+  --animation-slide-in-x: slideInX var(--duration-extra-longer) var(--ease-out-slow) forwards;
   --animation-fade-in: fadeIn var(--duration-extra-long) var(--ease-out-slow);
 }
 
@@ -2308,6 +2310,8 @@ input[type='checkbox'] {
     opacity: 0;
     transform: translateX(var(--announcement-translate-to));
   }
+
+
 }
 
 /* section-header */
@@ -3306,6 +3310,23 @@ details-disclosure > details {
     animation-delay: calc(var(--animation-order) * 75ms);
   }
 
+  .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in-x {
+    animation: var(--animation-slide-in-x);
+    animation-delay: calc(var(--animation-order) * 75ms);
+  }
+
+  .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in-y-desktop-x-mobile {
+    animation: var(--animation-slide-in);
+    animation-delay: calc(var(--animation-order) * 75ms);
+  }
+
+  @media screen and (max-width: 768px) {
+    .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in-y-desktop-x-mobile {
+      animation: var(--animation-slide-in-x);
+      animation-delay: calc(var(--animation-order) * 75ms);
+    }
+  }
+
   .scroll-trigger.scroll-trigger--design-mode.animate--fade-in,
   .scroll-trigger.scroll-trigger--design-mode.animate--slide-in,
   .scroll-trigger.scroll-trigger--design-mode .slider,
@@ -3339,6 +3360,29 @@ details-disclosure > details {
       opacity: 1;
     }
   }
+
+  @keyframes slideInX {
+    from {
+      transform: translateX(-2.5rem);
+      opacity: 0.01;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideOutX {
+    from {
+      transform: translateX(2rem);
+      opacity: 0.01;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
 }
 
 /* Element Hovers: Vertical Lift, 3d Lift */

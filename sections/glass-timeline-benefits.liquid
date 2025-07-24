@@ -101,6 +101,8 @@
 {% endschema %}
 
 {% style %}
+
+
 .glass-timeline {
   background: {{ section.settings.background_gradient }};
   padding: 4rem 5.5rem 0;
@@ -118,6 +120,7 @@
 .glass-timeline__title {
   font-size: 6rem;
   letter-spacing: -1px;
+  text-align: center;
   max-width: 500px;
   font-weight: 300;
   color: {{ section.settings.title_color }};
@@ -132,6 +135,7 @@
   font-weight: 300;
   margin-bottom: 3.5rem;
   line-height: 1;
+  text-align: center;
 }
 .glass-timeline__timeline {
   position: relative;
@@ -300,12 +304,27 @@
 
 <div class="glass-timeline">
   <div class="glass-timeline__container">
-    <h2 class="glass-timeline__title">{{ section.settings.title }}</h2>
-    <p class="glass-timeline__subtitle">{{ section.settings.subtitle }}</p>
+    <h2 class="glass-timeline__title {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+	{% if settings.animations_reveal_on_scroll %}
+		data-cascade
+		style="--animation-order: 1;"
+	{% endif %}
+	>{{ section.settings.title }}</h2>
+    <p class="glass-timeline__subtitle {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+	{% if settings.animations_reveal_on_scroll %}
+		data-cascade
+		style="--animation-order: 2;"
+	{% endif %}
+	>{{ section.settings.subtitle }}</p>
 
     <div class="glass-timeline__timeline">
       {% for block in section.blocks %}
-        <div class="glass-timeline__benefit">
+        <div class="glass-timeline__benefit {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in-y-desktop-x-mobile{% endif %}"
+		{% if settings.animations_reveal_on_scroll %}
+			data-cascade
+			style="--animation-order: {{ forloop.index | plus: 2 }}; animation-delay: 0.5s;"
+		{% endif %}
+		>
           <div class="glass-timeline__box" style="--box-color: {{ block.settings.box_color }}">
             <div class="glass-timeline__small">{{ block.settings.small_text }}</div>
             <div class="glass-timeline__main">{{ block.settings.main_text }}</div>
@@ -315,12 +334,12 @@
             <div class="glass-timeline__line height-{{ block.settings.benefit_height }}"></div>
             <style>
               .height-{{ block.settings.benefit_height }} {
-                height: calc({{ block.settings.benefit_height }}px / 2);
+                height: {{ block.settings.benefit_height }}px;
                 width: 1px;
               }
               @media (max-width: 768px) {
                 .height-{{ block.settings.benefit_height }} {
-                  width: calc({{ block.settings.benefit_height }}px / 2);
+                  width: calc({{ block.settings.benefit_height }}px - 30px);
                   height: 1px;
                 }
               }
