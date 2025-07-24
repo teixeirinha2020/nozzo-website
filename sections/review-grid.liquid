@@ -1,0 +1,876 @@
+{% comment %}
+  Grid Of Reviews Section
+  Custom section for displaying various types of review blocks
+{% endcomment %}
+
+<style>
+    .trusted-reviews-section {
+      padding: 60px 20px;
+      background-color: {{ section.settings.background_color | default: '#ffffff' }};
+    }
+  
+    .trusted-reviews-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  
+    .trusted-reviews-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+  
+    .trusted-reviews-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #000;
+      line-height: 1.2;
+    }
+  
+    .trusted-reviews-subtitle {
+      font-size: 1.25rem;
+      color: {{ section.settings.subtitle_color | default: '#999999' }};
+      font-weight: 300;
+      margin-bottom: 30px;
+    }
+  
+    .trusted-reviews-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background-color: {{ section.settings.button_bg_color | default: '#000000' }};
+      color: {{ section.settings.button_text_color | default: '#ffffff' }};
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+  
+    .trusted-reviews-button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+  
+    .trusted-reviews-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr;
+    }
+  
+    @media (min-width: 576px) {
+      .trusted-reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  
+    @media (min-width: 1024px) {
+      .trusted-reviews-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  
+    @media (min-width: 1280px) {
+      .trusted-reviews-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  
+    /* Video Block Styles */
+    .review-block-video {
+      position: relative;
+      border-radius: .75rem;
+      overflow: hidden;
+      cursor: pointer;
+      background: #000;
+      aspect-ratio: 9/16;
+    }
+  
+    .video-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+  
+    .video-cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 2;
+    }
+  
+    .video-element {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+    .video-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background:linear-gradient(180deg, rgba(0, 0, 0, 0) 40.63%, #000 94%);
+      padding: 36px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      z-index: 2;
+    }
+  
+    .video-title {
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      width: 100%;
+      height: fit-content
+    }
+
+    .video-title h2 {
+        color: white;
+        font-weight: 300;
+        letter-spacing: -0.5px;
+        font-size: 2.8rem;
+        line-height: 0.8;
+        margin:0;
+
+    }
+  
+    .video-subtitle {
+        display: flex;
+        text-align: left;
+        width: 100%;
+        flex-direction: column;
+        height: fit-content
+    }
+
+    .video-subtitle p {
+        color: white;
+        font-weight: 300;
+        letter-spacing: -0.5px;
+        font-size: 1.8rem;
+        line-height: 0.8;
+        margin: 0;
+    }
+  
+    .video-play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;;
+      background: transparent;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      transition: all 0.3s ease;
+    }
+  
+    .video-play-button:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  
+    .video-play-button svg {
+      width: auto;
+      height: 6rem;
+      filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, .25));
+    }
+  
+    .video-mute-button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 35px;
+      height: 35px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 4;
+      cursor: pointer;
+    }
+  
+    .video-mute-button svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+    }
+  
+    .video-playing .video-cover,
+    .video-playing .video-play-button {
+      display: none;
+    }
+  
+    .video-playing .video-mute-button {
+      display: flex;
+    }
+  
+    /* Social Comment Block Styles */
+    .review-block-social {
+      background:rgb(241, 241, 241);
+      border-radius: .75rem;
+      padding: 16px;
+      border: 1px solid #e5e5e5;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      height: fit-content;
+      display: block;
+    }
+  
+    .review-block-social:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: inherit;
+    }
+  
+    .social-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+  
+    .social-profile-image {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  
+    .social-user-info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: start;
+        justify-content: center;
+        height: -webkit-fill-available;
+    }
+  
+    .social-user-name {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      font-size: 1.4rem;
+      color: black;
+      line-height: 0.8;
+      margin-bottom: 3px;
+    }
+  
+    .social-verify-badge {
+      width: 16px;
+      height: 16px;
+    }
+  
+    .social-username {
+      color: #8e8e8e;
+      font-size: 1.2rem;
+      line-height: 0.8;
+      letter-spacing: -0.5px;
+      font-weight: 300;
+    }
+  
+    .social-platform-icon {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .social-content {
+      font-size: 1.8rem;
+      line-height: 1.4;
+      font-weight: 300;
+      margin-bottom: 12px;
+      color: black;
+    }
+  
+    .social-date {
+      color: #8e8e8e;
+      font-weight: 300;
+      font-size: 1.2rem;
+      line-height: 0.8;
+      letter-spacing: -0.5px;
+    }
+  
+    /* Image Block Styles */
+    .review-block-image {
+      background: white;
+      border-radius: .75rem;
+      overflow: hidden;
+      border: 1px solid #e5e5e5;
+      aspect-ratio: 9/16;
+      transition: all 0.3s ease;
+    }
+  
+    .review-block-image:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+  
+    .image-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+  
+    .block-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+    .image-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background:linear-gradient(180deg, rgba(0, 0, 0, 0) 40.63%, #000 94%);
+      padding: 36px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      z-index: 2;
+    }
+  
+    .image-title {
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        width: 100%;
+        height: fit-content
+      }
+  
+      .image-title h2 {
+          color: white;
+          font-weight: 300;
+          letter-spacing: -0.5px;
+          font-size: 2.8rem;
+          line-height: 0.8;
+          margin:0;
+  
+      }
+    
+      .image-subtitle {
+          display: flex;
+          text-align: left;
+          width: 100%;
+          flex-direction: column;
+          height: fit-content
+      }
+  
+      .image-subtitle p {
+          color: white;
+          font-weight: 300;
+          letter-spacing: -0.5px;
+          font-size: 1.8rem;
+          line-height: 0.8;
+          margin: 0;
+      }
+
+      .image-icon {
+        width: 100px;
+        display: flex;
+        margin-bottom: 10px;
+    }
+  
+    /* Text with Image Block Styles */
+    .review-block-text {
+      background: white;
+      border-radius: .75rem;
+      padding: 20px;
+      border: 1px solid #e5e5e5;
+      transition: all 0.3s ease;
+    }
+  
+    .review-block-text:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+  
+    .text-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+  
+    .text-icon {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+  
+    .text-content {
+      flex: 1;
+    }
+  
+    .text-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #333;
+    }
+  
+    .text-subtitle {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+  
+    @media (max-width: 767px) {
+      .trusted-reviews-section {
+        padding: 40px 15px;
+      }
+  
+      .trusted-reviews-title {
+        font-size: 2rem;
+      }
+  
+      .trusted-reviews-subtitle {
+        font-size: 1.1rem;
+      }
+  
+      .trusted-reviews-grid {
+        gap: 15px;
+      }
+    }
+  </style>
+  
+  <div class="trusted-reviews-section">
+    <div class="trusted-reviews-container">
+      <div class="trusted-reviews-header">
+        <h2 class="trusted-reviews-title">{{ section.settings.title | default: 'Thousands of trusted reviews' }}</h2>
+        <p class="trusted-reviews-subtitle">{{ section.settings.subtitle | default: 'from extraordinary people like you' }}</p>
+        
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="trusted-reviews-button">
+            {{ section.settings.button_text }}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8.636 3.5a.5.5 0 0 0-.5.5v1.5H2.5a.5.5 0 0 0 0 1h5.636v1.5a.5.5 0 0 0 .854.354l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.354-.146z"/>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+  
+      <div class="trusted-reviews-grid">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'video' %}
+              <div class="review-block-video" data-video-block>
+                <div class="video-content">
+                  {% if block.settings.cover_image %}
+                    <img src="{{ block.settings.cover_image | image_url }}" alt="Video cover" class="video-cover">
+                  {% endif %}
+                  
+                  {% if block.settings.video %}
+                    <video class="video-element" muted loop preload="metadata">
+                      <source src="{{ block.settings.video.sources[0].url }}" type="{{ block.settings.video.sources[0].mime_type }}">
+                    </video>
+                  {% endif %}
+  
+                  <div class="video-play-button">
+                    <svg viewBox="0 0 50 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.8916 1.61031L45.5078 22.0275C46.8194 22.9021 47.8948 24.0965 48.6386 25.4864C49.3824 26.8763 49.7715 28.4284 49.7715 30.0048C49.7715 31.5812 49.3824 33.1333 48.6386 34.5232C47.8948 35.9131 46.8194 37.0979 45.5078 37.9725L14.8916 58.3897C13.4493 59.3519 11.7729 59.9046 10.0412 59.9887C8.30947 60.0728 6.58739 59.6852 5.05869 58.8673C3.52998 58.0494 2.252 56.8318 1.36109 55.3444C0.470179 53.8571 -0.000237311 52.1558 2.21654e-05 50.422V9.59716C-0.00371101 7.86176 0.464188 6.15797 1.3537 4.66789C2.24322 3.1778 3.52091 1.95742 5.05023 1.13719C6.57955 0.316964 8.30301 -0.0722825 10.0364 0.0110494C11.7698 0.0943813 13.448 0.647165 14.8916 1.61031Z" fill="#F2F4F6"></path></svg>
+                  </div>
+  
+                  <div class="video-mute-button" data-mute-toggle>
+                    <svg class="mute-icon" viewBox="0 0 24 24">
+                      <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                    </svg>
+                    <svg class="unmute-icon" style="display: none;" viewBox="0 0 24 24">
+                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                  </div>
+  
+                  {% if block.settings.title != blank or block.settings.subtitle != blank %}
+                    <div class="video-overlay">
+                      {% if block.settings.title != blank %}
+                        <div class="video-title"><h2>{{ block.settings.title }}</h2></div>
+                      {% endif %}
+                      {% if block.settings.subtitle != blank %}
+                        <div class="video-subtitle"><p>{{ block.settings.subtitle }}</p></div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+  
+            {% when 'social_comment' %}
+              <a href="{{ block.settings.post_link | default: '#' }}" class="review-block-social" target="_blank" rel="noopener">
+                <div class="social-header">
+                  {% if block.settings.profile_image %}
+                    <img src="{{ block.settings.profile_image | image_url: width: 80 }}" alt="{{ block.settings.name }}" class="social-profile-image">
+                  {% endif %}
+                  
+                  <div class="social-user-info">
+                    <div class="social-user-name">
+                      {{ block.settings.name | default: 'User Name' }}
+                      {% if block.settings.verified %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none"><path d="M11.8328 6.78451C11.8328 7.17703 11.7387 7.54104 11.5506 7.87435C11.3625 8.20766 11.1109 8.46861 10.7937 8.65062C10.8025 8.70982 10.8069 8.80192 10.8069 8.92691C10.8069 9.52117 10.6078 10.0255 10.2141 10.4422C9.81812 10.861 9.34125 11.0693 8.78344 11.0693C8.53406 11.0693 8.29562 11.0233 8.07031 10.9312C7.89531 11.2908 7.64375 11.5802 7.31344 11.8017C6.98531 12.0254 6.62437 12.135 6.23281 12.135C5.8325 12.135 5.46937 12.0276 5.14562 11.8083C4.81969 11.5912 4.57031 11.2996 4.39531 10.9312C4.17 11.0233 3.93375 11.0693 3.68219 11.0693C3.12437 11.0693 2.64531 10.861 2.245 10.4422C1.84469 10.0255 1.64562 9.51898 1.64562 8.92691C1.64562 8.86113 1.65437 8.76903 1.66969 8.65062C1.3525 8.46642 1.10094 8.20766 0.912812 7.87435C0.726875 7.54104 0.632812 7.17703 0.632812 6.78451C0.632812 6.36787 0.737812 5.98413 0.945625 5.63766C1.15344 5.29119 1.43344 5.03463 1.78344 4.86798C1.69156 4.61799 1.64562 4.36582 1.64562 4.11583C1.64562 3.52377 1.84469 3.01722 2.245 2.60058C2.64531 2.18394 3.12437 1.97343 3.68219 1.97343C3.93156 1.97343 4.17 2.01948 4.39531 2.11158C4.57031 1.75196 4.82187 1.4625 5.15219 1.24103C5.48031 1.01955 5.84125 0.907715 6.23281 0.907715C6.62437 0.907715 6.98531 1.01955 7.31344 1.23883C7.64156 1.46031 7.89531 1.74976 8.07031 2.10939C8.29562 2.01729 8.53187 1.97124 8.78344 1.97124C9.34125 1.97124 9.81812 2.17956 10.2141 2.59839C10.61 3.01722 10.8069 3.52157 10.8069 4.11364C10.8069 4.38994 10.7653 4.63992 10.6822 4.86578C11.0322 5.03244 11.3122 5.289 11.52 5.63547C11.7278 5.98413 11.8328 6.36787 11.8328 6.78451ZM5.99437 8.47519L8.30656 5.00393C8.36562 4.91183 8.38312 4.81096 8.36344 4.70351C8.34156 4.59606 8.28687 4.51054 8.195 4.45353C8.10312 4.39432 8.0025 4.37459 7.89531 4.38994C7.78594 4.40748 7.69844 4.46011 7.63281 4.55221L5.59625 7.62218L4.65781 6.68364C4.57469 6.60032 4.47844 6.56084 4.37125 6.56523C4.26187 6.56962 4.16781 6.60909 4.08469 6.68364C4.01031 6.7582 3.97312 6.85249 3.97312 6.96652C3.97312 7.07835 4.01031 7.17265 4.08469 7.24939L5.37312 8.54097L5.43656 8.59141C5.51094 8.64184 5.5875 8.66597 5.66187 8.66597C5.80844 8.66377 5.92 8.60237 5.99437 8.47519Z" fill="#5289FE"></path></svg>
+                      {% endif %}
+                    </div>
+                    {% if block.settings.username != blank %}
+                      <div class="social-username">{{ block.settings.username }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  {% case block.settings.social_platform %}
+                    {% when 'instagram' %}
+                      <svg class="social-platform-icon" viewBox="0 0 24 24" fill="#E4405F">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                      </svg>
+                    {% when 'x' %}
+                      <svg class="social-platform-icon" viewBox="0 0 24 24" fill="#000000">
+                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+                      </svg>
+                    {% when 'threads' %}
+                      <svg class="social-platform-icon" viewBox="0 0 24 24" fill="#000000">
+                        <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.055 7.164 1.43 1.781 3.632 2.695 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.743-1.757-.438-.505-.96-.764-1.550-.771-.551-.007-1.054.229-1.498.704-.118.127-.426.694-.426 1.713v.007c0 .593.095 1.171.283 1.718l-1.919.610c-.24-.743-.367-1.554-.367-2.328v-.007c0-1.44.436-2.543 1.298-3.278.805-.686 1.68-1.036 2.606-1.04.415-.002.83.06 1.235.185 1.034.319 1.898.098 2.58-.651.732-.805 1.207-1.917 1.416-3.312.218-1.459.058-2.807-.475-4.005C18.955 3.564 16.693 2.027 12.18 0h-.007z"/>
+                      </svg>
+                  {% endcase %}
+                </div>
+                
+                {% if block.settings.comment != blank %}
+                  <div class="social-content">{{ block.settings.comment }}</div>
+                {% endif %}
+                
+                {% if block.settings.date_time != blank %}
+                  <div class="social-date">{{ block.settings.date_time }}</div>
+                {% endif %}
+              </a>
+  
+            {% when 'image' %}
+              <div class="review-block-image">
+                <div class="image-content">
+                  {% if block.settings.image %}
+                    {{ block.settings.image | image_url: width: 1080 |  image_tag: alt: '1' , class: 'block-image' }}
+                  {% endif %}
+                  
+                  {% if block.settings.title != blank or block.settings.subtitle != blank %}
+                    <div class="image-overlay">
+                      {% if block.settings.icon_image %}
+                       {{ block.settings.icon_image | image_url: width: 100 | image_tag: class: 'image-icon' }}
+                      {% endif %}
+                      {% if block.settings.title != blank %}
+                        <div class="image-title"><h2>{{ block.settings.title }}</h2></div>
+                      {% endif %}
+                      {% if block.settings.subtitle != blank %}
+                        <div class="image-subtitle"><p>{{ block.settings.subtitle }}</p></div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+  
+            {% when 'text_with_image' %}
+              <div class="review-block-text">
+                <div class="text-header">
+                  {% if block.settings.image %}
+                    <img src="{{ block.settings.image | image_url: width: 100 }}" alt="Text block image" class="text-icon">
+                  {% endif %}
+                  
+                  <div class="text-content">
+                    {% if block.settings.title != blank %}
+                      <div class="text-title">{{ block.settings.title }}</div>
+                    {% endif %}
+                    {% if block.settings.subtitle != blank %}
+                      <div class="text-subtitle">{{ block.settings.subtitle }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Video functionality
+    const videoBlocks = document.querySelectorAll('[data-video-block]');
+    
+    videoBlocks.forEach(block => {
+      const video = block.querySelector('.video-element');
+      const cover = block.querySelector('.video-cover');
+      const playButton = block.querySelector('.video-play-button');
+      const muteButton = block.querySelector('[data-mute-toggle]');
+      const muteIcon = muteButton?.querySelector('.mute-icon');
+      const unmuteIcon = muteButton?.querySelector('.unmute-icon');
+      
+      if (!video) return;
+      
+      let isPlaying = false;
+      let isMuted = true;
+      
+      // Play/Pause functionality
+      block.addEventListener('click', function(e) {
+        if (e.target.closest('[data-mute-toggle]')) return;
+        
+        if (isPlaying) {
+          video.pause();
+          isPlaying = false;
+          block.classList.remove('video-playing');
+        } else {
+          video.play();
+          isPlaying = true;
+          block.classList.add('video-playing');
+        }
+      });
+      
+      // Mute/Unmute functionality
+      if (muteButton) {
+        muteButton.addEventListener('click', function(e) {
+          e.stopPropagation();
+          
+          if (isMuted) {
+            video.muted = false;
+            isMuted = false;
+            muteIcon.style.display = 'none';
+            unmuteIcon.style.display = 'block';
+          } else {
+            video.muted = true;
+            isMuted = true;
+            muteIcon.style.display = 'block';
+            unmuteIcon.style.display = 'none';
+          }
+        });
+      }
+      
+      // Reset when video ends
+      video.addEventListener('ended', function() {
+        isPlaying = false;
+        block.classList.remove('video-playing');
+      });
+    });
+  });
+  </script>
+  
+  {% schema %}
+  {
+    "name": "Trusted Reviews",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Thousands of trusted reviews"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "from extraordinary people like you"
+      },
+      {
+        "type": "color",
+        "id": "subtitle_color",
+        "label": "Subtitle Color",
+        "default": "#999999"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button Text Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "button_bg_color",
+        "label": "Button Background Color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Section Background Color",
+        "default": "#ffffff"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "video",
+        "name": "Video Block",
+        "settings": [
+          {
+            "type": "video",
+            "id": "video",
+            "label": "Video"
+          },
+          {
+            "type": "image_picker",
+            "id": "cover_image",
+            "label": "Cover Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          }
+        ]
+      },
+      {
+        "type": "social_comment",
+        "name": "Social Comment",
+        "settings": [
+          {
+            "type": "select",
+            "id": "social_platform",
+            "label": "Social Platform",
+            "options": [
+              {
+                "value": "instagram",
+                "label": "Instagram"
+              },
+              {
+                "value": "x",
+                "label": "X (Twitter)"
+              },
+              {
+                "value": "threads",
+                "label": "Threads"
+              }
+            ],
+            "default": "instagram"
+          },
+          {
+            "type": "url",
+            "id": "post_link",
+            "label": "Post Link"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Name",
+            "default": "User Name"
+          },
+          {
+            "type": "image_picker",
+            "id": "profile_image",
+            "label": "Profile Image"
+          },
+          {
+            "type": "checkbox",
+            "id": "verified",
+            "label": "Show Verified Badge",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "username",
+            "label": "Username (with @)"
+          },
+          {
+            "type": "textarea",
+            "id": "comment",
+            "label": "Comment Text"
+          },
+          {
+            "type": "text",
+            "id": "date_time",
+            "label": "Date and Time"
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "name": "Image Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Main Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_image",
+            "label": "Icon Image (optional)"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          }
+        ]
+      },
+      {
+        "type": "text_with_image",
+        "name": "Text with Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image (optional)"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "subtitle",
+            "label": "Subtitle/Description"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Grid of Reviews",
+        "blocks": [
+          {
+            "type": "video"
+          },
+          {
+            "type": "social_comment"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "text_with_image"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}

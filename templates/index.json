@@ -469,9 +469,70 @@
         "title_color": "#ffffff",
         "subtitle": "The Pod is clinically proven to deliver real results for your sleep, every night",
         "subtitle_color": "#ffffff",
-        "background_gradient": "linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0))",
+        "background_gradient": "linear-gradient(90deg, rgba(55, 65, 81, 1), rgba(17, 24, 39, 1) 50%, rgba(0, 0, 0, 1) 100%)",
         "timeline_color": "#ffffff",
         "ticks_count": 20
+      }
+    },
+    "review_grid_k8JwAL": {
+      "type": "review-grid",
+      "blocks": {
+        "video_9x78Fy": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/729e4e0b79bc48d0981d00420cb539f5.mp4",
+            "cover_image": "shopify://shop_images/fotos2-96.jpg",
+            "title": "text",
+            "subtitle": "text"
+          }
+        },
+        "social_comment_Kcxwdi": {
+          "type": "social_comment",
+          "settings": {
+            "social_platform": "instagram",
+            "post_link": "",
+            "name": "User Name",
+            "profile_image": "shopify://shop_images/Intake_After.webp",
+            "verified": true,
+            "username": "@hello",
+            "comment": "ththththhtth",
+            "date_time": "10 10 10 1010"
+          }
+        },
+        "image_R9hT98": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_1.jpg",
+            "icon_image": "shopify://shop_images/logo_mais_junto_2.png",
+            "title": "hello",
+            "subtitle": "heçllo"
+          }
+        },
+        "text_with_image_MLpTmN": {
+          "type": "text_with_image",
+          "settings": {
+            "image": "shopify://shop_images/Intake_After.webp",
+            "title": "ttttttt",
+            "subtitle": "ttttttt"
+          }
+        }
+      },
+      "block_order": [
+        "video_9x78Fy",
+        "social_comment_Kcxwdi",
+        "image_R9hT98",
+        "text_with_image_MLpTmN"
+      ],
+      "name": "Grid of Reviews",
+      "settings": {
+        "title": "Thousands of trusted reviews",
+        "subtitle": "from extraordinary people like you",
+        "subtitle_color": "#999999",
+        "button_text": "",
+        "button_link": "",
+        "button_text_color": "#ffffff",
+        "button_bg_color": "#000000",
+        "background_color": "#ffffff"
       }
     }
   },
@@ -483,6 +544,7 @@
     "card_slider_cC6dPG",
     "rich_text_JymLpj",
     "rich_text_XFQhhn",
-    "glass_timeline_benefits_qFUPH7"
+    "glass_timeline_benefits_qFUPH7",
+    "review_grid_k8JwAL"
   ]
 }
