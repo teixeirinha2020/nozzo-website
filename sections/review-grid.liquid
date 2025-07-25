@@ -10,28 +10,40 @@
     }
   
     .trusted-reviews-container {
-      max-width: 1200px;
+      max-width: 1440px;
       margin: 0 auto;
     }
   
     .trusted-reviews-header {
       text-align: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       margin-bottom: 40px;
+      text-align: left;
+    }
+
+    .trusted-reviews-titles-container {
+      display: flex;
+      flex-direction: column;
+      h
+    }
+
+    .trusted-reviews-button-container {
     }
   
     .trusted-reviews-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #000;
-      line-height: 1.2;
+      font-weight: 300;
+      margin: 0;
+      line-height: 1;
     }
   
     .trusted-reviews-subtitle {
-      font-size: 1.25rem;
       color: {{ section.settings.subtitle_color | default: '#999999' }};
       font-weight: 300;
       margin-bottom: 30px;
+      margin: 0;
+      line-height: 1;
     }
   
     .trusted-reviews-button {
@@ -52,29 +64,38 @@
       transform: translateY(-1px);
     }
   
-    .trusted-reviews-grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: 1fr;
-    }
-  
-    @media (min-width: 576px) {
-      .trusted-reviews-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .grid-sizer {
+        visibility: hidden;
       }
+    
+    .trusted-reviews-grid:after {
+        content: '';
+        display: block;
+        clear: both;
     }
-  
-    @media (min-width: 1024px) {
-      .trusted-reviews-grid {
-        grid-template-columns: repeat(3, 1fr);
+
+    .grid-item {
+        margin-bottom: 20px;
+    }
+    
+    .trusted-reviews-grid > .grid-sizer, .grid-item {
+        width: 100%; 
+             /* for four columns on desktop */
       }
-    }
-  
-    @media (min-width: 1280px) {
-      .trusted-reviews-grid {
-        grid-template-columns: repeat(4, 1fr);
+      
+      @media (min-width: 576px) {
+        .trusted-reviews-grid > .grid-sizer { width: 50%; }
+        .grid-item { width: calc(50% - 20px); }
       }
-    }
+      @media (min-width: 1024px) {
+        .trusted-reviews-grid > .grid-sizer { width: 33.3333333%; }
+        .grid-item { width: calc(33.3333333% - 20px); }
+      }
+      @media (min-width: 1280px) {
+        .trusted-reviews-grid > .grid-sizer { width: 25%; }
+        .grid-item { width: calc(25% - 20px); }
+      }
+
   
     /* Video Block Styles */
     .review-block-video {
@@ -109,6 +130,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      z-index: 1;
     }
   
     .video-overlay {
@@ -124,6 +146,11 @@
       justify-content: end;
       z-index: 2;
     }
+
+    .video-playing .video-overlay {
+      display: none;
+    }
+    
   
     .video-title {
       margin-bottom: 10px;
@@ -257,7 +284,7 @@
         width: 100%;
         align-items: start;
         justify-content: center;
-        height: -webkit-fill-available;
+        height: 45px;
     }
   
     .social-user-name {
@@ -385,15 +412,19 @@
 
       .image-icon {
         width: 100px;
+        height: auto;
         display: flex;
         margin-bottom: 10px;
     }
   
     /* Text with Image Block Styles */
     .review-block-text {
-      background: white;
+      background: rgb(241, 241, 241);
+      display: flex;
+      flex-direction: column;
+      height: fit-content;
       border-radius: .75rem;
-      padding: 20px;
+      padding: 16px;
       border: 1px solid #e5e5e5;
       transition: all 0.3s ease;
     }
@@ -407,13 +438,12 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 15px;
+      gap: 20px;
     }
   
     .text-icon {
-      width: 50px;
-      height: 50px;
+      width: 100%;
+      height: auto;
       object-fit: cover;
       border-radius: 8px;
       flex-shrink: 0;
@@ -424,67 +454,70 @@
     }
   
     .text-title {
-      font-weight: 600;
-      font-size: 1.1rem;
+      font-weight: 200;
+      letter-spacing: -0.1px;
+      font-size: 2.4rem;
+      line-height: 1.2;
       margin-bottom: 8px;
-      color: #333;
+      color: black;
     }
   
     .text-subtitle {
-      color: #666;
-      font-size: 0.95rem;
-      line-height: 1.4;
+      color: #636363;
+      font-size: 1.2rem;
+      letter-spacing: 0;
+      line-height: 0.8;
+      font-weight: 300;
+
     }
   
-    @media (max-width: 767px) {
-      .trusted-reviews-section {
-        padding: 40px 15px;
-      }
-  
-      .trusted-reviews-title {
-        font-size: 2rem;
-      }
-  
-      .trusted-reviews-subtitle {
-        font-size: 1.1rem;
-      }
-  
-      .trusted-reviews-grid {
-        gap: 15px;
-      }
-    }
   </style>
   
   <div class="trusted-reviews-section">
     <div class="trusted-reviews-container">
       <div class="trusted-reviews-header">
-        <h2 class="trusted-reviews-title">{{ section.settings.title | default: 'Thousands of trusted reviews' }}</h2>
-        <p class="trusted-reviews-subtitle">{{ section.settings.subtitle | default: 'from extraordinary people like you' }}</p>
-        
+        <div class="trusted-reviews-titles-container {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: 1;"
+          {% endif %}
+        >
+          <{{ section.settings.title_size }} class="trusted-reviews-title">{{ section.settings.title | default: 'Thousands of trusted reviews' }}</{{ section.settings.title_size }}>
+          <{{ section.settings.title_size }} class="trusted-reviews-subtitle">{{ section.settings.subtitle | default: 'from extraordinary people like you' }}</{{ section.settings.title_size }}>
+        </div>
         {% if section.settings.button_text != blank %}
-          <a href="{{ section.settings.button_link | default: '#' }}" class="trusted-reviews-button">
-            {{ section.settings.button_text }}
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M8.636 3.5a.5.5 0 0 0-.5.5v1.5H2.5a.5.5 0 0 0 0 1h5.636v1.5a.5.5 0 0 0 .854.354l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.354-.146z"/>
-            </svg>
-          </a>
+        <div class="trusted-reviews-button-container {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: 2;"
+          {% endif %}
+        >
+            <a href="{{ section.settings.button_link | default: '#' }}" class="trusted-reviews-button">
+              {{ section.settings.button_text }}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8.636 3.5a.5.5 0 0 0-.5.5v1.5H2.5a.5.5 0 0 0 0 1h5.636v1.5a.5.5 0 0 0 .854.354l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.354-.146z"/>
+              </svg>
+            </a>
+        </div>
         {% endif %}
       </div>
   
       <div class="trusted-reviews-grid">
+        <!-- sizer element for columnWidth -->
+        <div class="grid-sizer"></div>
         {% for block in section.blocks %}
           {% case block.type %}
             {% when 'video' %}
-              <div class="review-block-video" data-video-block>
+              <div class="review-block-video grid-item" data-video-block>
                 <div class="video-content">
                   {% if block.settings.cover_image %}
                     <img src="{{ block.settings.cover_image | image_url }}" alt="Video cover" class="video-cover">
                   {% endif %}
                   
                   {% if block.settings.video %}
-                    <video class="video-element" muted loop preload="metadata">
-                      <source src="{{ block.settings.video.sources[0].url }}" type="{{ block.settings.video.sources[0].mime_type }}">
-                    </video>
+                    
+                    {{ block.settings.video | video_tag: class: 'video-element' , muted: true , loop: true , playsinline: true , preload: 'metadata' }}
+
                   {% endif %}
   
                   <div class="video-play-button">
@@ -514,7 +547,7 @@
               </div>
   
             {% when 'social_comment' %}
-              <a href="{{ block.settings.post_link | default: '#' }}" class="review-block-social" target="_blank" rel="noopener">
+              <a href="{{ block.settings.post_link | default: '#' }}" class="review-block-social grid-item" target="_blank" rel="noopener">
                 <div class="social-header">
                   {% if block.settings.profile_image %}
                     <img src="{{ block.settings.profile_image | image_url: width: 80 }}" alt="{{ block.settings.name }}" class="social-profile-image">
@@ -558,7 +591,7 @@
               </a>
   
             {% when 'image' %}
-              <div class="review-block-image">
+              <div class="review-block-image grid-item">
                 <div class="image-content">
                   {% if block.settings.image %}
                     {{ block.settings.image | image_url: width: 1080 |  image_tag: alt: '1' , class: 'block-image' }}
@@ -567,7 +600,7 @@
                   {% if block.settings.title != blank or block.settings.subtitle != blank %}
                     <div class="image-overlay">
                       {% if block.settings.icon_image %}
-                       {{ block.settings.icon_image | image_url: width: 100 | image_tag: class: 'image-icon' }}
+                       {{ block.settings.icon_image | image_url: width: 1000 | image_tag: class: 'image-icon' }}
                       {% endif %}
                       {% if block.settings.title != blank %}
                         <div class="image-title"><h2>{{ block.settings.title }}</h2></div>
@@ -581,10 +614,10 @@
               </div>
   
             {% when 'text_with_image' %}
-              <div class="review-block-text">
+              <div class="review-block-text grid-item">
                 <div class="text-header">
                   {% if block.settings.image %}
-                    <img src="{{ block.settings.image | image_url: width: 100 }}" alt="Text block image" class="text-icon">
+                    <img src="{{ block.settings.image | image_url: width: 1000 }}" alt="Text block image" class="text-icon">
                   {% endif %}
                   
                   <div class="text-content">
@@ -602,7 +635,68 @@
       </div>
     </div>
   </div>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js" async></script>
+<script>
+  // Replace your existing masonry script with this:
+function initMasonry() {
+    const grid = document.querySelector('.trusted-reviews-grid');
+    if (grid && window.Masonry) {
+      // Wait for images to load before initializing masonry
+      const images = grid.querySelectorAll('img');
+      let loadedImages = 0;
+      const totalImages = images.length;
+      
+      function checkAllImagesLoaded() {
+        loadedImages++;
+        if (loadedImages === totalImages) {
+          initMasonryGrid();
+        }
+      }
+      
+      function initMasonryGrid() {
+        new Masonry(grid, {
+          itemSelector: '.grid-item',
+          columnWidth: '.grid-sizer',
+          percentPosition: true,
+          gutter: 20
+        });
+      }
+      
+      if (totalImages === 0) {
+        // No images, initialize immediately
+        initMasonryGrid();
+      } else {
+        // Wait for all images to load
+        images.forEach(img => {
+          if (img.complete) {
+            checkAllImagesLoaded();
+          } else {
+            img.addEventListener('load', checkAllImagesLoaded);
+            img.addEventListener('error', checkAllImagesLoaded); // Handle broken images
+          }
+        });
+      }
+    } else if (!window.Masonry) {
+      // Masonry not loaded yet, try again in 100ms
+      setTimeout(initMasonry, 100);
+    }
+  }
   
+  document.addEventListener('DOMContentLoaded', initMasonry);
+  
+  // Also try to reinitialize when the window is resized
+  window.addEventListener('resize', function() {
+    const grid = document.querySelector('.trusted-reviews-grid');
+    if (grid && window.Masonry) {
+      // Get the masonry instance and relayout
+      const msnry = Masonry.data(grid);
+      if (msnry) {
+        msnry.layout();
+      }
+    }
+  });
+</script>
+
   <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Video functionality
@@ -617,7 +711,9 @@
       const unmuteIcon = muteButton?.querySelector('.unmute-icon');
       
       if (!video) return;
-      
+      video.playsInline        = true;
+      video.webkitPlaysInline  = true;
+
       let isPlaying = false;
       let isMuted = true;
       
@@ -674,6 +770,34 @@
         "label": "Title",
         "default": "Thousands of trusted reviews"
       },
+      {
+      "type": "select",
+          "id": "title_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            },
+            {
+              "value": "hxl",
+              "label": "t:sections.all.heading_size.options__4.label"
+            },
+            {
+              "value": "hxxl",
+              "label": "t:sections.all.heading_size.options__5.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
+        },
       {
         "type": "text",
         "id": "subtitle",

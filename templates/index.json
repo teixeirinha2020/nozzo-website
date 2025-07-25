@@ -503,7 +503,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/Screenshot_1.jpg",
-            "icon_image": "shopify://shop_images/logo_mais_junto_2.png",
+            "icon_image": "shopify://shop_images/Men_s_Health_svg.png",
             "title": "hello",
             "subtitle": "heçllo"
           }
