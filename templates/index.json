@@ -333,88 +333,55 @@
         "progress_bar_color": "#000000"
       }
     },
-    "rich_text_JymLpj": {
-      "type": "rich-text",
+    "product_cards_V7Pdfh": {
+      "type": "product-cards",
       "blocks": {
-        "heading_GQGjWk": {
-          "type": "heading",
+        "card_R3WhAN": {
+          "type": "card",
           "settings": {
-            "heading": "A nossa marca muda a forma como <strong>respiras</strong>!",
-            "heading_size": "h1"
+            "redirect_button_text": "Strips",
+            "subheading_text": "Nasal Strips",
+            "heading_text": "Breathe the Way You Were Meant To!",
+            "paragraph_text": "Increase oxygenation by 40%. More oxygen means better performance, stamina, sleep, recovery, focus.",
+            "button_text": "Shop Now",
+            "button_link": ""
           }
         },
-        "caption_Brdrjp": {
-          "type": "caption",
+        "card_p8tPCx": {
+          "type": "card",
           "settings": {
-            "caption": "Descobre mais sobre a nossa marca no Blog!",
-            "text_style": "subtitle",
-            "text_size": "medium"
+            "redirect_button_text": "Tape",
+            "subheading_text": "Mouth Tape",
+            "heading_text": "Reclaim Your Sleep, Define Your Jawline",
+            "paragraph_text": "HiStrips Mouth Tape eliminates mouth breathing at night preventing snoring, dry throat, disrupted rest, and morning brain fog.",
+            "button_text": "Learn More",
+            "button_link": ""
           }
         },
-        "button_cQFnKV": {
-          "type": "button",
+        "card_YkzaH4": {
+          "type": "card",
           "settings": {
-            "button_label": "Blog",
-            "button_link": "shopify://blogs/novidades",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "redirect_button_text": "Sticks",
+            "subheading_text": "Breathing Sticks",
+            "heading_text": "Instant Nasal Relief",
+            "paragraph_text": "Fast-acting nasal breathing enhancement for immediate relief and improved airflow throughout the day.",
+            "button_text": "Try Now",
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "heading_GQGjWk",
-        "caption_Brdrjp",
-        "button_cQFnKV"
+        "card_R3WhAN",
+        "card_p8tPCx",
+        "card_YkzaH4"
       ],
-      "disabled": true,
-      "name": "t:sections.rich-text.presets.name",
+      "name": "Interactive Product Cards",
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 40
-      }
-    },
-    "rich_text_XFQhhn": {
-      "type": "rich-text",
-      "blocks": {
-        "text_V9cef8": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Tempo médio de resposta: imediato. Horário: Segunda-Domingo, 9:00-18:00.</p>"
-          }
-        },
-        "button_nFVURi": {
-          "type": "button",
-          "settings": {
-            "button_label": "Suporte",
-            "button_link": "shopify://pages/contact",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "text_V9cef8",
-        "button_nFVURi"
-      ],
-      "custom_css": [
-        ".button {border-radius: 30px;}"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "color_scheme": "background-1",
+        "auto_advance": false,
+        "auto_advance_delay": 5,
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     },
     "glass_timeline_benefits_qFUPH7": {
@@ -535,6 +502,90 @@
         "button_bg_color": "#000000",
         "background_color": "#ffffff"
       }
+    },
+    "rich_text_XFQhhn": {
+      "type": "rich-text",
+      "blocks": {
+        "text_V9cef8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tempo médio de resposta: imediato. Horário: Segunda-Domingo, 9:00-18:00.</p>"
+          }
+        },
+        "button_nFVURi": {
+          "type": "button",
+          "settings": {
+            "button_label": "Suporte",
+            "button_link": "shopify://pages/contact",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "text_V9cef8",
+        "button_nFVURi"
+      ],
+      "custom_css": [
+        ".button {border-radius: 30px;}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "rich_text_JymLpj": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_GQGjWk": {
+          "type": "heading",
+          "settings": {
+            "heading": "A nossa marca muda a forma como <strong>respiras</strong>!",
+            "heading_size": "h1"
+          }
+        },
+        "caption_Brdrjp": {
+          "type": "caption",
+          "settings": {
+            "caption": "Descobre mais sobre a nossa marca no Blog!",
+            "text_style": "subtitle",
+            "text_size": "medium"
+          }
+        },
+        "button_cQFnKV": {
+          "type": "button",
+          "settings": {
+            "button_label": "Blog",
+            "button_link": "shopify://blogs/novidades",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_GQGjWk",
+        "caption_Brdrjp",
+        "button_cQFnKV"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
@@ -543,9 +594,10 @@
     "multicolumn_AGCWwC",
     "custom_image_banner_VXarQQ",
     "card_slider_cC6dPG",
-    "rich_text_JymLpj",
-    "rich_text_XFQhhn",
+    "product_cards_V7Pdfh",
     "glass_timeline_benefits_qFUPH7",
-    "review_grid_k8JwAL"
+    "review_grid_k8JwAL",
+    "rich_text_XFQhhn",
+    "rich_text_JymLpj"
   ]
 }
