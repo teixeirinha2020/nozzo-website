@@ -1,0 +1,762 @@
+<div class="product-cards-section color-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    <!-- Navigation Tabs -->
+    <div class="product-cards-navigation">
+      {% for block in section.blocks %}
+        <button 
+          class="nav-tab {% if forloop.first %}active{% endif %}" 
+          data-tab="{{ forloop.index0 }}"
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.redirect_button_text | default: 'Product ' | append: forloop.index }}
+        </button>
+      {% endfor %}
+    </div>
+
+    <!-- Cards Container -->
+    <div class="product-cards-container">
+      <div class="product-cards-wrapper" data-current-slide="0">
+        {% for block in section.blocks %}
+          <div class="product-card {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}">
+            <div class="card-content">
+              <div class="card-image">
+                {% if block.settings.image %}
+                  <img 
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    alt="{{ block.settings.image.alt | escape }}"
+                    loading="lazy"
+                    width="400"
+                    height="400"
+                  >
+                {% else %}
+                  <div class="placeholder-image">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                      <rect width="100" height="100" fill="currentColor" opacity="0.1"/>
+                      <path d="M30 40h40v20H30z" fill="currentColor" opacity="0.3"/>
+                    </svg>
+                  </div>
+                {% endif %}
+              </div>
+              
+              <div class="card-info">
+                {% if block.settings.subheading_text != blank %}
+                  <p class="card-subheading">{{ block.settings.subheading_text }}</p>
+                {% endif %}
+                
+                {% if block.settings.heading_text != blank %}
+                  <h3 class="card-heading">{{ block.settings.heading_text }}</h3>
+                {% endif %}
+                
+                {% if block.settings.paragraph_text != blank %}
+                  <p class="card-description">{{ block.settings.paragraph_text }}</p>
+                {% endif %}
+                
+                {% if block.settings.button_text != blank %}
+                  <a href="{{ block.settings.button_link | default: '#' }}" class="card-button">
+                    {{ block.settings.button_text }}
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Mobile Navigation Dots -->
+      <div class="mobile-dots">
+        {% for block in section.blocks %}
+          <button class="dot {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}"></button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Touch/Drag Instructions -->
+    <div class="drag-hint">
+      <p>Swipe or drag to explore products</p>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+  if (!section) return;
+
+  const wrapper = section.querySelector('.product-cards-wrapper');
+  const cards = section.querySelectorAll('.product-card');
+  const navTabs = section.querySelectorAll('.nav-tab');
+  const dots = section.querySelectorAll('.dot');
+  let currentSlide = 0;
+  let isAnimating = false;
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
+
+  // Initialize
+  updateActiveElements(0);
+
+  // Navigation tabs click
+  navTabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+      if (!isAnimating && currentSlide !== index) {
+        goToSlide(index);
+      }
+    });
+  });
+
+  // Dots click
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      if (!isAnimating && currentSlide !== index) {
+        goToSlide(index);
+      }
+    });
+  });
+
+  // Touch/Mouse events for dragging
+  wrapper.addEventListener('mousedown', handleStart);
+  wrapper.addEventListener('touchstart', handleStart, { passive: true });
+  wrapper.addEventListener('mousemove', handleMove);
+  wrapper.addEventListener('touchmove', handleMove, { passive: true });
+  wrapper.addEventListener('mouseup', handleEnd);
+  wrapper.addEventListener('touchend', handleEnd);
+  wrapper.addEventListener('mouseleave', handleEnd);
+
+  function handleStart(e) {
+    if (isAnimating) return;
+    isDragging = true;
+    startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+    wrapper.style.transition = 'none';
+    wrapper.style.cursor = 'grabbing';
+  }
+
+  function handleMove(e) {
+    if (!isDragging || isAnimating) return;
+    e.preventDefault();
+    currentX = (e.type === 'mousemove' ? e.clientX : e.touches[0].clientX) - startX;
+    const maxDrag = wrapper.offsetWidth * 0.3;
+    currentX = Math.max(-maxDrag, Math.min(maxDrag, currentX));
+    wrapper.style.transform = `translateX(calc(-${currentSlide * 100}% + ${currentX}px))`;
+  }
+
+  function handleEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    wrapper.style.cursor = 'grab';
+    
+    const threshold = wrapper.offsetWidth * 0.15;
+    let newSlide = currentSlide;
+
+    if (Math.abs(currentX) > threshold) {
+      if (currentX > 0 && currentSlide > 0) {
+        newSlide = currentSlide - 1;
+      } else if (currentX < 0 && currentSlide < cards.length - 1) {
+        newSlide = currentSlide + 1;
+      }
+    }
+
+    goToSlide(newSlide);
+    currentX = 0;
+  }
+
+  function goToSlide(index) {
+    if (isAnimating || index === currentSlide) return;
+    
+    isAnimating = true;
+    currentSlide = index;
+    
+    wrapper.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+    
+    updateActiveElements(index);
+    
+    setTimeout(() => {
+      isAnimating = false;
+    }, 600);
+  }
+
+  function updateActiveElements(index) {
+    // Update cards
+    cards.forEach((card, i) => {
+      card.classList.toggle('active', i === index);
+      if (i === index) {
+        card.style.animationDelay = '0.2s';
+      }
+    });
+
+    // Update navigation tabs
+    navTabs.forEach((tab, i) => {
+      tab.classList.toggle('active', i === index);
+    });
+
+    // Update dots
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+
+    // Update wrapper data attribute
+    wrapper.setAttribute('data-current-slide', index);
+  }
+
+  // Keyboard navigation
+  section.addEventListener('keydown', (e) => {
+    if (isAnimating) return;
+    
+    if (e.key === 'ArrowLeft' && currentSlide > 0) {
+      goToSlide(currentSlide - 1);
+    } else if (e.key === 'ArrowRight' && currentSlide < cards.length - 1) {
+      goToSlide(currentSlide + 1);
+    }
+  });
+
+  // Auto-advance (optional)
+  {% if section.settings.auto_advance %}
+  let autoAdvanceInterval = setInterval(() => {
+    if (!isDragging && !isAnimating) {
+      const nextSlide = currentSlide === cards.length - 1 ? 0 : currentSlide + 1;
+      goToSlide(nextSlide);
+    }
+  }, (({{ section.settings.auto_advance_delay | default: 5000 }})*1000));
+
+  // Pause auto-advance on hover
+  section.addEventListener('mouseenter', () => clearInterval(autoAdvanceInterval));
+  section.addEventListener('mouseleave', () => {
+    autoAdvanceInterval = setInterval(() => {
+      if (!isDragging && !isAnimating) {
+        const nextSlide = currentSlide === cards.length - 1 ? 0 : currentSlide + 1;
+        goToSlide(nextSlide);
+      }
+    }, (({{ section.settings.auto_advance_delay | default: 5000 }})*1000));
+  });
+  {% endif %}
+});
+</script>
+
+<style>
+.product-cards-section {
+  padding: 60px 0;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  position: relative;
+  overflow: hidden;
+}
+
+.product-cards-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.nav-tab {
+  background: transparent;
+  border: 2px solid rgba(var(--color-foreground), 0.2);
+  color: rgb(var(--color-foreground));
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgb(var(--color-foreground));
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.nav-tab:hover::before,
+.nav-tab.active::before {
+  left: 0;
+}
+
+.nav-tab:hover,
+.nav-tab.active {
+  color: rgb(var(--color-background));
+  border-color: rgb(var(--color-foreground));
+  transform: translateY(-2px);
+}
+
+.product-cards-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.product-cards-wrapper {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: grab;
+  user-select: none;
+}
+
+.product-card {
+  min-width: 100%;
+  opacity: 0.6;
+  transform: scale(0.95);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.product-card.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-content {
+  background: rgb(var(--color-background));
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.card-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.product-card.active .card-content {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+  height: 400px;
+  background: #000;
+  border-radius: 24px 24px 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card.active .card-image img {
+  transform: scale(1.05);
+}
+
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--color-foreground), 0.05);
+  color: rgba(var(--color-foreground), 0.3);
+}
+
+.card-info {
+  padding: 40px;
+  text-align: left;
+}
+
+.card-subheading {
+  font-size: 14px;
+  color: rgba(var(--color-foreground), 0.7);
+  margin: 0 0 12px 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.product-card.active .card-subheading {
+  animation-delay: 0.1s;
+}
+
+.card-heading {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+  color: rgb(var(--color-foreground));
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.product-card.active .card-heading {
+  animation-delay: 0.2s;
+}
+
+.card-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.8);
+  margin: 0 0 30px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.product-card.active .card-description {
+  animation-delay: 0.3s;
+}
+
+.card-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  padding: 16px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.product-card.active .card-button {
+  animation-delay: 0.4s;
+}
+
+.card-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s;
+}
+
+.card-button:hover::before {
+  left: 100%;
+}
+
+.card-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-button svg {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-button:hover svg {
+  transform: translateX(4px);
+}
+
+.mobile-dots {
+  display: none;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(var(--color-foreground), 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dot.active {
+  background: rgb(var(--color-foreground));
+  transform: scale(1.2);
+}
+
+.drag-hint {
+  text-align: center;
+  margin-top: 20px;
+  opacity: 0.6;
+}
+
+.drag-hint p {
+  font-size: 14px;
+  color: rgba(var(--color-foreground), 0.6);
+  margin: 0;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  .product-cards-section {
+    padding: 40px 0;
+  }
+
+  .product-cards-navigation {
+    display: none;
+  }
+
+  .mobile-dots {
+    display: flex;
+  }
+
+  .card-content {
+    border-radius: 16px;
+  }
+
+  .card-image {
+    height: 300px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .card-info {
+    padding: 30px 24px;
+  }
+
+  .card-heading {
+    font-size: 24px;
+  }
+
+  .nav-tab {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .product-card {
+    padding: 0 10px;
+  }
+
+  .card-info {
+    padding: 24px 20px;
+  }
+
+  .card-heading {
+    font-size: 20px;
+  }
+
+  .card-description {
+    font-size: 14px;
+  }
+
+  .card-button {
+    padding: 14px 28px;
+    font-size: 14px;
+  }
+}
+
+/* Color Scheme Variations */
+.color-accent-1 {
+  background: rgb(var(--color-base-accent-1));
+  color: rgb(var(--color-base-text));
+}
+
+.color-accent-2 {
+  background: rgb(var(--color-base-accent-2));
+  color: rgb(var(--color-base-text));
+}
+
+.color-inverse {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+</style>
+
+{% schema %}
+{
+  "name": "Interactive Product Cards",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_advance",
+      "default": false,
+      "label": "Auto-advance slides"
+    },
+    {
+      "type": "range",
+      "id": "auto_advance_delay",
+      "unit": "s",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "label": "Auto-advance delay (s)",
+      "info": "Only applies when auto-advance is enabled"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "redirect_button_text",
+          "default": "Product",
+          "label": "Navigation tab text",
+          "info": "Text shown in the navigation tabs at the top"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image"
+        },
+        {
+          "type": "text",
+          "id": "subheading_text",
+          "default": "New Product",
+          "label": "Subheading text"
+        },
+        {
+          "type": "text",
+          "id": "heading_text",
+          "default": "Amazing Product Name",
+          "label": "Heading text"
+        },
+        {
+          "type": "textarea",
+          "id": "paragraph_text",
+          "default": "Discover the perfect solution for your needs. This innovative product combines style, functionality, and quality to deliver an exceptional experience.",
+          "label": "Description text"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "default": "Learn More",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Interactive Product Cards",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "redirect_button_text": "Strips",
+            "subheading_text": "Nasal Strips",
+            "heading_text": "Breathe the Way You Were Meant To!",
+            "paragraph_text": "Increase oxygenation by 40%. More oxygen means better performance, stamina, sleep, recovery, focus.",
+            "button_text": "Shop Now"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "redirect_button_text": "Tape",
+            "subheading_text": "Mouth Tape",
+            "heading_text": "Reclaim Your Sleep, Define Your Jawline",
+            "paragraph_text": "HiStrips Mouth Tape eliminates mouth breathing at night preventing snoring, dry throat, disrupted rest, and morning brain fog.",
+            "button_text": "Learn More"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "redirect_button_text": "Sticks",
+            "subheading_text": "Breathing Sticks",
+            "heading_text": "Instant Nasal Relief",
+            "paragraph_text": "Fast-acting nasal breathing enhancement for immediate relief and improved airflow throughout the day.",
+            "button_text": "Try Now"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
