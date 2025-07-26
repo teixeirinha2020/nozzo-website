@@ -350,6 +350,8 @@
         <div class="custom-image-banner__content">
           <div class="custom-image-banner__text-content">
             {% for block in section.blocks %}
+              {% assign count = 0 %}
+              {% assign count = forloop.index %}
               {% case block.type %}
                 {% when 'title' %}
                   {% assign title_tag = 'h2' %}
@@ -369,22 +371,21 @@
                     {% assign title_tag = 'div' %}
                   {% endif %}
                   <{{ title_tag }} 
-                    class="custom-image-banner__title custom-image-banner__title--{{ block.settings.title_size }}"
-                    style="{% if block.settings.title_color contains 'gradient' %}background: {{ block.settings.title_color }};-webkit-background-clip: text;-webkit-text-fill-color: transparent;{% else %}color: {{ block.settings.title_color }};{% endif %}
-                           font-family: {{ block.settings.title_font.family | escape }}, {{ block.settings.title_font.fallback_families | escape }};
-                           font-weight: {{ block.settings.title_weight }};"
-                    {{ block.shopify_attributes }}
+                    class="custom-image-banner__title {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    style="{% if settings.animations_reveal_on_scroll %} --animation-order: {{ forloop.index }};{% endif %}"
+                    {% if settings.animations_reveal_on_scroll %} data-cascade {% endif %}
                   >
-                    {{ block.settings.title_text }}
+                    <h1 class="custom-image-banner__title--{{ block.settings.title_size }}" style="{% if block.settings.title_color contains 'gradient' %}background: {{ block.settings.title_color }};-webkit-background-clip: text;-webkit-text-fill-color: transparent;{% else %}color: {{ block.settings.title_color }};{% endif %} font-family: {{ block.settings.title_font.family | escape }}, {{ block.settings.title_font.fallback_families | escape }}; font-weight: {{ block.settings.title_weight }};">{{ block.settings.title_text }}</h1>
                   </{{ title_tag }}>
                 {% when 'span' %}
-                  <div class="custom-image-banner__paragraph custom-image-banner__paragraph--{{ block.settings.span_size }}{% if block.settings.span_justify %} custom-image-banner__paragraph--justify{% endif %}"
-                    style="color: {{ block.settings.span_color }};
-                           font-family: {{ block.settings.span_font.family | escape }}, {{ block.settings.span_font.fallback_families | escape }};
-                           font-weight: {{ block.settings.span_weight }};"
-                    {{ block.shopify_attributes }}
+                  <div 
+                    class="custom-image-banner__paragraph {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    style="{% if settings.animations_reveal_on_scroll %} --animation-order: {{ forloop.index }};{% endif %}"
+                    {% if settings.animations_reveal_on_scroll %} data-cascade {% endif %}
                   >
-                    {{ block.settings.span_text }}
+                    <p class="custom-image-banner__paragraph--{{ block.settings.span_size }}{% if block.settings.span_justify %} custom-image-banner__paragraph--justify{% endif %} "
+                    style="color: {{ block.settings.span_color }}; font-family: {{ block.settings.span_font.family | escape }}, {{ block.settings.span_font.fallback_families | escape }}; font-weight: {{ block.settings.span_weight }};"
+                    >{{ block.settings.span_text }}</p>
                   </div>
               {% endcase %}
             {% endfor %}
@@ -393,13 +394,17 @@
             {% for block in section.blocks %}
               {% if block.type == 'button' %}
                 <a href="{{ block.settings.button_link }}" 
-                  class="custom-image-banner__button custom-image-banner__button--{{ block.settings.button_size }}"
+                  class="custom-image-banner__button custom-image-banner__button--{{ block.settings.button_size }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                   style="color: {{ block.settings.button_text_color }};
                          background-color: {{ block.settings.button_bg_color }};
                          font-family: {{ block.settings.button_font.family | escape }}, {{ block.settings.button_font.fallback_families | escape }};
                          font-weight: {{ block.settings.button_weight }};
                          border-radius: {{ block.settings.button_radius }}px;"
                   {{ block.shopify_attributes }}
+                  {% if settings.animations_reveal_on_scroll %}
+                    data-cascade
+                    style="--animation-order: {{ count | plus: forloop.index }};"
+                  {% endif %}
                 >
                   {{ block.settings.button_text }}
                 </a>
@@ -551,6 +556,28 @@
       padding: 80px 50px;
     }
   }
+
+  @media screen and (max-width: 989px) {
+    .custom-image-banner--small .custom-image-banner__content-container {
+      padding: 30px 25px;
+    }
+    
+    .custom-image-banner--medium .custom-image-banner__content-container {
+      padding: 40px 25px;
+    }
+    
+    .custom-image-banner--big .custom-image-banner__content-container {
+      padding: 50px 25px;
+    }
+    
+    .custom-image-banner--vh .custom-image-banner__content-container {
+      padding: 60px 25px;
+    }
+    
+    .custom-image-banner--adapt .custom-image-banner__content-container {
+      padding: 40px 25px;
+    }
+  }
       
       .custom-image-banner__content {
         display: flex;
@@ -597,6 +624,10 @@
         padding: 0 0 10px;
         line-height: 1.2;
         letter-spacing: normal;
+      }
+
+      .custom-image-banner__title h1 {
+        margin: 0;
       }
       
       /* Extended title sizes */
@@ -657,31 +688,31 @@
       }
       
       .custom-image-banner__paragraph--3xl {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
       
       .custom-image-banner__paragraph--2xl {
-        font-size: 1.75rem;
+        font-size: 2.25rem;
       }
       
       .custom-image-banner__paragraph--xl {
-        font-size: 1.5rem;
+        font-size: 2rem;
       }
       
       .custom-image-banner__paragraph--lg {
-        font-size: 1.25rem;
+        font-size: 1.75rem;
       }
       
       .custom-image-banner__paragraph--md {
-        font-size: 1rem;
+        font-size: 1.5rem;
       }
       
       .custom-image-banner__paragraph--sm {
-        font-size: 0.875rem;
+        font-size: 1.2rem;
       }
       
       .custom-image-banner__paragraph--xs {
-        font-size: 0.75rem;
+        font-size: 1rem;
       }
       
       .custom-image-banner__paragraph--justify {
@@ -756,31 +787,31 @@
         }
         
         .custom-image-banner__title--ultra {
-          font-size: 4rem;
+          font-size: 4.2rem;
         }
         
         .custom-image-banner__title--mega {
-          font-size: 3.5rem;
+          font-size: 3.7rem;
         }
         
         .custom-image-banner__title--hero {
-          font-size: 3rem;
+          font-size: 3.2rem;
         }
         
         .custom-image-banner__title--display {
-          font-size: 2.5rem;
+          font-size: 2.7rem;
         }
         
         .custom-image-banner__title--h1 {
-          font-size: 2.2rem;
+          font-size: 2.4rem;
         }
         
         .custom-image-banner__title--h2 {
-          font-size: 2rem;
+          font-size: 2.2rem;
         }
         
         .custom-image-banner__title--h3 {
-          font-size: 1.75rem;
+          font-size: 1.95rem;
         }
         
         .custom-image-banner__image-desktop {
@@ -798,34 +829,52 @@
         }
         
         .custom-image-banner__title--ultra {
-          font-size: 3rem;
+          font-size: 3.4rem;
         }
         
         .custom-image-banner__title--mega {
-          font-size: 2.8rem;
+          font-size: 3.2rem;
         }
         
         .custom-image-banner__title--hero {
-          font-size: 2.4rem;
+          font-size: 2.8rem;
         }
         
-        .custom-image-banner__paragraph--3xl {
-          font-size: 1.6rem;
-        }
-        
-        .custom-image-banner__paragraph--2xl {
-          font-size: 1.4rem;
-        }
-        
-        .custom-image-banner__paragraph--xl {
-          font-size: 1.2rem;
-        }
-    
         .custom-image-banner__text-content {
           text-align: center;  
         }
         .custom-image-banner__button-container {
           justify-content: center;
         }
+
+        .custom-image-banner__paragraph--3xl {
+          font-size: 2.2rem;
+        }
+        
+        .custom-image-banner__paragraph--2xl {
+          font-size: 1.95rem;
+        }
+        
+        .custom-image-banner__paragraph--xl {
+          font-size: 1.7rem;
+        }
+        
+        .custom-image-banner__paragraph--lg {
+          font-size: 1.45rem;
+        }
+        
+        .custom-image-banner__paragraph--md {
+          font-size: 1.2rem;
+        }
+        
+        .custom-image-banner__paragraph--sm {
+          font-size: 0.9rem;
+        }
+        
+        .custom-image-banner__paragraph--xs {
+          font-size: 0.7rem;
+        }
+        
       }
     </style> 
+
