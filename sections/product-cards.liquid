@@ -1,7 +1,12 @@
 <div class="product-cards-section color-{{ section.settings.color_scheme }}" data-section-id="{{ section.id }}">
   <div class="page-width">
     <!-- Navigation Tabs -->
-    <div class="product-cards-navigation">
+    <div class="product-cards-navigation {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: 1;"
+        {% endif %}
+    >
       {% for block in section.blocks %}
         <button 
           class="nav-tab {% if forloop.first %}active{% endif %}" 
@@ -14,7 +19,12 @@
     </div>
 
     <!-- Cards Container -->
-    <div class="product-cards-container">
+    <div class="product-cards-container {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: 2;"
+          {% endif %}
+    >
       <div class="product-cards-wrapper" data-current-slide="0">
         {% for block in section.blocks %}
           <div class="product-card {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}">
@@ -75,7 +85,7 @@
 
     <!-- Touch/Drag Instructions -->
     <div class="drag-hint">
-      <p>Swipe or drag to explore products</p>
+      <p>Arrasta para veres mais produtos</p>
     </div>
   </div>
 </div>

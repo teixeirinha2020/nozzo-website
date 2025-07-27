@@ -340,6 +340,7 @@
           "type": "card",
           "settings": {
             "redirect_button_text": "Strips",
+            "image": "shopify://shop_images/1_fb80da72-9b72-406c-9e72-3c6829b1fa85.webp",
             "subheading_text": "Nasal Strips",
             "heading_text": "Breathe the Way You Were Meant To!",
             "paragraph_text": "Increase oxygenation by 40%. More oxygen means better performance, stamina, sleep, recovery, focus.",
@@ -351,6 +352,7 @@
           "type": "card",
           "settings": {
             "redirect_button_text": "Tape",
+            "image": "shopify://shop_images/mockup_2.jpg",
             "subheading_text": "Mouth Tape",
             "heading_text": "Reclaim Your Sleep, Define Your Jawline",
             "paragraph_text": "HiStrips Mouth Tape eliminates mouth breathing at night preventing snoring, dry throat, disrupted rest, and morning brain fog.",

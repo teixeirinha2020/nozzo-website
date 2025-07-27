@@ -546,7 +546,8 @@
               <div class="review-block-video grid-item" data-video-block>
                 <div class="video-content">
                   {% if block.settings.cover_image %}
-                    <img src="{{ block.settings.cover_image | image_url }}" alt="Video cover" class="video-cover">
+                    {{ block.settings.cover_image | image_url: width: 1080 | image_tag: class: 'video-cover' , alt: 'Video cover' }}
+                    
                   {% endif %}
                   
                   {% if block.settings.video %}
@@ -585,7 +586,8 @@
               <a href="{{ block.settings.post_link | default: '#' }}" class="review-block-social grid-item" target="_blank" rel="noopener">
                 <div class="social-header">
                   {% if block.settings.profile_image %}
-                    <img src="{{ block.settings.profile_image | image_url: width: 80 }}" alt="{{ block.settings.name }}" class="social-profile-image">
+                    {{ block.settings.profile_image | image_url: width: 80 | image_tag: class: 'social-profile-image' , alt: 'block.settings.name' }}
+                    
                   {% endif %}
                   
                   <div class="social-user-info">
@@ -650,7 +652,7 @@
               <div class="review-block-text grid-item">
                 <div class="text-header">
                   {% if block.settings.image %}
-                    <img src="{{ block.settings.image | image_url: width: 1000 }}" alt="Text block image" class="text-icon">
+                    {{ block.settings.image | image_url: width: 1000 | image_tag: alt: 'Text block image' , class: 'text-icon'  }}
                   {% endif %}
                   
                   <div class="text-content">

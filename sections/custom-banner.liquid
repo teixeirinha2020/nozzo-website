@@ -390,6 +390,8 @@
     <div class="custom-banner__content">
       <div class="custom-banner__text-content">
         {% for block in section.blocks %}
+          {% assign count = 0 %}
+          {% assign count = forloop.index %}
           {% case block.type %}
             {% when 'title' %}
               {% assign title_tag = 'h2' %}
@@ -409,22 +411,29 @@
                 {% assign title_tag = 'div' %}
               {% endif %}
               <{{ title_tag }} 
-                class="custom-banner__title custom-banner__title--{{ block.settings.title_size }}"
+                class="custom-banner__title custom-banner__title--{{ block.settings.title_size }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                 style="{% if block.settings.title_color contains 'gradient' %}background: {{ block.settings.title_color }};-webkit-background-clip: text;-webkit-text-fill-color: transparent;{% else %}color: {{ block.settings.title_color }};{% endif %}
                        font-family: {{ block.settings.title_font.family | escape }}, {{ block.settings.title_font.fallback_families | escape }};
-                       font-weight: {{ block.settings.title_weight }};"
+                       font-weight: {{ block.settings.title_weight }};
+                       {% if settings.animations_reveal_on_scroll %} --animation-order: {{ forloop.index }}; {% endif %}
+                       "
                 {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %} data-cascade {% endif %}
               >
                 {{ block.settings.title_text }}
               </{{ title_tag }}>
             {% when 'span' %}
-              <div class="custom-banner__paragraph custom-banner__paragraph--{{ block.settings.span_size }}"
+              <div class="custom-banner__paragraph custom-banner__paragraph--{{ block.settings.span_size }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                style="{% if settings.animations_reveal_on_scroll %} --animation-order: {{ forloop.index }}; {% endif %}"
+                {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %} data-cascade {% endif %}
+              >
+                <p 
+                class="custom-banner__paragraph custom-banner__paragraph--{{ block.settings.span_size }}"
                 style="color: {{ block.settings.span_color }};
                        font-family: {{ block.settings.span_font.family | escape }}, {{ block.settings.span_font.fallback_families | escape }};
                        font-weight: {{ block.settings.span_weight }};"
-                {{ block.shopify_attributes }}
-              >
-                {{ block.settings.span_text }}
+                >{{ block.settings.span_text }}</p>
               </div>
           {% endcase %}
         {% endfor %}
@@ -433,13 +442,16 @@
         {% for block in section.blocks %}
           {% if block.type == 'button' %}
             <a href="{{ block.settings.button_link }}" 
-              class="custom-banner__button custom-banner__button--{{ block.settings.button_size }}"
+              class="custom-banner__button custom-banner__button--{{ block.settings.button_size }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
               style="color: {{ block.settings.button_text_color }};
                      background-color: {{ block.settings.button_bg_color }};
                      font-family: {{ block.settings.button_font.family | escape }}, {{ block.settings.button_font.fallback_families | escape }};
                      font-weight: {{ block.settings.button_weight }};
-                     border-radius: {{ block.settings.button_radius }}px;"
+                     border-radius: {{ block.settings.button_radius }}px;
+                     {% if settings.animations_reveal_on_scroll %} --animation-order: {{ forloop.index | plus: count }}; {% endif %}
+                     "
               {{ block.shopify_attributes }}
+              {% if settings.animations_reveal_on_scroll %} data-cascade {% endif %}
             >
               {{ block.settings.button_text }}
             </a>
@@ -526,7 +538,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 3;
   }
   
   .custom-banner__image,
@@ -606,7 +618,7 @@
   /* Content */
   .custom-banner__content-container {
     position: relative;
-    z-index: 2;
+    z-index: 4;
     width: 100%;
     max-width: 1440px;
     display: flex;
