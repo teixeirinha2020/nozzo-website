@@ -97,13 +97,29 @@
   }
 
   .glass-effect {
-    background-color: rgba(255, 255, 255, 0.1) !important; /* fundo semi-transparente */
-    backdrop-filter: blur({{ glass_blur_int }}px);          /* desfoque do que está atrás */
-    -webkit-backdrop-filter: blur({{ glass_blur_int }}px);  /* suporte para Safari */
-  
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  /* sombra para realce */
-
+    background: rgba(210, 210, 210, 0.15);
+    backdrop-filter: blur({{ glass_blur_int }}px) saturate(180%);
+    -webkit-backdrop-filter: blur({{ glass_blur_int }}px); saturate(180%) /* suporte para Safari */
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(210, 210, 210, 0.3);
+    border: 1px solid rgba(210, 210, 210, 0.8);
     border-radius: 0.5rem;
+  }
+
+  .glass-effect:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(210, 210, 210, 0.1);
+    border-radius: .5rem;
+    backdrop-filter: blur(1px);
+    box-shadow: inset -10px -8px 0px -11px rgba(210, 210, 210, 1),
+                inset 0px -9px 0px -8px rgba(210, 210, 210, 1);
+    opacity: 0.6;
+    z-index: -1;
+    filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
   }
 
 {%- endstyle -%}

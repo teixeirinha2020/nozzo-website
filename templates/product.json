@@ -163,7 +163,6 @@
       "custom_css": [
         ".global-media-settings {border: none;}",
         ".globo-color-swatch--watermarks {display: none;}",
-        ".product__text {color: rgba(var(--color-foreground), 1) !important;}",
         ".icon-with-text--vertical .icon-with-text__item {margin-bottom: 5px;}",
         ".product__info-container .product-form,.product__info-container .product__description,.product__info-container .icon-with-text {margin: 2rem 0;}",
         ".price-item--sale {color: #ea2078; font-weight: 600;}",
@@ -172,7 +171,7 @@
       ],
       "settings": {
         "enable_sticky_info": true,
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
@@ -226,7 +225,7 @@
         "column_yMBdiJ"
       ],
       "custom_css": [
-        ".multicolumn.background-primary .multicolumn-card {background: rgb(4 4 4) linear-gradient(rgba(var(--color-foreground), .04), rgba(var(--color-foreground), .04));border-radius: 15px; }"
+        ".multicolumn.background-primary .multicolumn-card {background: rgb(4 4 4) linear-gradient( rgba(var(--color-foreground), 0.04), rgba(var(--color-foreground), 0.04) ); border-radius: 15px;}"
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
