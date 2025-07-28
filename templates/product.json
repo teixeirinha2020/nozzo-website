@@ -12,12 +12,12 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "title": {
-          "type": "title",
-          "settings": {}
-        },
         "air_product_reviews_app_summary_block_DjfWfH": {
           "type": "shopify://apps/air-product-reviews/blocks/app-summary-block/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
           "settings": {}
         },
         "price": {
@@ -144,8 +144,8 @@
         }
       },
       "block_order": [
-        "title",
         "air_product_reviews_app_summary_block_DjfWfH",
+        "title",
         "price",
         "vendor",
         "icon_with_text_ffze9b",
@@ -165,9 +165,10 @@
         ".globo-color-swatch--watermarks {display: none;}",
         ".icon-with-text--vertical .icon-with-text__item {margin-bottom: 5px;}",
         ".product__info-container .product-form,.product__info-container .product__description,.product__info-container .icon-with-text {margin: 2rem 0;}",
-        ".price-item--sale {color: #ea2078; font-weight: 600;}",
+        ".price-item--sale {color: #ea2078; font-weight: bolder;}",
         ".price__badge-sale {background-color: #ea2078;}",
-        "p {line-height: normal;}"
+        "p {line-height: normal; font-weight: 300; }",
+        "h1 {color: black !important; font-weight: 300;}"
       ],
       "settings": {
         "enable_sticky_info": true,
