@@ -4,15 +4,27 @@
   <div class="page-width">
     
     {%- if section.settings.heading != blank -%}
-      <h2 class="image-comparison-heading h1" style="color: {{ section.settings.heading_color }};">
-        {{ section.settings.heading }}
-      </h2>
+      <div class="image-comparison-heading-container {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+        style="--animation-order: 1;"
+      {% endif %}
+      >
+        <h2 class="image-comparison-heading h1" style="color: {{ section.settings.heading_color }};">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
     {%- endif -%}
 
     <div class="image-comparison-container">
       
       <!-- Image Comparator -->
-      <div class="image-comparator-wrapper">
+      <div class="image-comparator-wrapper {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+        style="--animation-order: 2;"
+      {% endif %}
+      >
         <div class="image-comparator image-comparator--{{ section.settings.image_format }}" id="comparator-{{ section.id }}">
           
           <!-- Before Image (Left/Top) -->
@@ -78,7 +90,13 @@
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when 'feature' -%}
-                <div class="feature-item" {{ block.shopify_attributes }}>
+                <div class="feature-item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" 
+                {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index | plus: 2 }};"
+                {% endif %}
+                >
                   {%- if block.settings.icon != 'none' -%}
                     <div class="feature-icon" style="color: {{ block.settings.icon_color }};">
                       {% render 'icon-accordion', icon: block.settings.icon %}
@@ -543,13 +561,19 @@
   padding: 36px 0;
 }
 
+.image-comparison-heading-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .image-comparison-heading {
   text-align: center;
   margin: 0 0 4rem 0;
   font-size: 5.2rem;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
-  letter-spacing: -0.02em;
+  letter-spacing: -1px;
 }
 
 .image-comparison-container {
@@ -741,14 +765,16 @@
 
 .feature-title {
   font-size: 2.4rem;
-  font-weight: 500;
+  font-weight: 400;
   margin: 0 0 1rem 0;
   line-height: normal;
+  letter-spacing: -0.5px;
 }
 
 .feature-text {
   font-size: 1.6rem;
-  line-height: normal;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
   margin: 0;
 }
 

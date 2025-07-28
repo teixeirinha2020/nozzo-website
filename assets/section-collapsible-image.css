@@ -1,7 +1,5 @@
 /* Collapsible Image Section Styles */
-.collapsible-image-section {
-  padding: 5rem 0;
-}
+
 
 .collapsible-image-container {
   display: grid;
@@ -55,15 +53,14 @@
 /* Content Styles */
 .collapsible-image-heading {
   margin: 0 0 1.5rem 0;
-  font-size: 2.4rem;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.2;
+  letter-spacing: -0.5px;
 }
 
 .collapsible-image-text {
   margin: 0 0 2rem 0;
-  font-size: 1.6rem;
-  line-height: 1.5;
+  line-height: 1.2;
 }
 
 .collapsible-image-text p {
@@ -239,17 +236,10 @@
   .collapsible-image-container {
     gap: 3rem;
   }
-  
-  .collapsible-image-heading {
-    font-size: 2.2rem;
-  }
 }
 
 @media screen and (max-width: 749px) {
-  .collapsible-image-section {
-    padding: 3rem 0;
-  }
-
+  
   .collapsible-image-container {
     grid-template-columns: 1fr !important;
     gap: 2rem;
@@ -265,7 +255,6 @@
   }
 
   .collapsible-image-heading {
-    font-size: 3rem;
     margin-bottom: 1rem;
   }
 
@@ -302,10 +291,6 @@
 @media screen and (max-width: 479px) {
   .collapsible-image-container {
     gap: 1.5rem;
-  }
-
-  .collapsible-image-heading {
-    font-size: 1.8rem;
   }
 
   .collapsible-tab-heading {

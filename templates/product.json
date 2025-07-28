@@ -69,30 +69,30 @@
           "type": "buy_more_save_more",
           "settings": {
             "mini_heading": "COMPRA MAIS <-> POUPA MAIS",
-            "mini_heading_color": "#ffffff",
+            "mini_heading_color": "#000000",
             "number_of_options": 3,
             "price_1_unit": 2499,
             "price_2_units": 4399,
             "price_3_units": 6199,
             "add_to_cart_text": "ADICIONAR AO CARRINHO",
-            "add_to_cart_bg_color": "#ffffff",
-            "add_to_cart_text_color": "#000000",
-            "discount_badge_bg_color": "#000000",
+            "add_to_cart_bg_color": "#000000",
+            "add_to_cart_text_color": "#ffffff",
+            "discount_badge_bg_color": "#ffffff",
             "option_1_title": "1 PACK",
             "option_1_title_color": "#1a1b18",
             "option_1_price_color": "#1a1b18",
             "option_1_border_color": "#f01c7c",
-            "option_1_badge_text_color": "#ffffff",
+            "option_1_badge_text_color": "#080808",
             "option_2_title": "2 PACKS",
             "option_2_title_color": "#1a1b18",
             "option_2_price_color": "#1a1b18",
             "option_2_border_color": "#f01c7c",
-            "option_2_badge_text_color": "#ffffff",
+            "option_2_badge_text_color": "#000000",
             "option_3_title": "3 PACKS",
             "option_3_title_color": "#1a1b18",
             "option_3_price_color": "#1a1b18",
             "option_3_border_color": "#f01c7c",
-            "option_3_badge_text_color": "#ffffff",
+            "option_3_badge_text_color": "#000000",
             "option_4_title": "4x Pack",
             "option_4_title_color": "#1a1b18",
             "option_4_price_color": "#1a1b18",
@@ -120,7 +120,7 @@
         "custom_liquid_yRUmkM": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div class=\"delivery-tracker\" style=\"display: block !important;\">\n  <h3 class=\"delivery-heading\">Entrega Estimada: 15 de Maio</h3>\n  \n  <div class=\"tracker-container\">\n    <div class=\"tracker-step\">\n      <div class=\"icon-container\">\n        <div class=\"icon\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 100 100\" version=\"1.1\" x=\"0px\" y=\"0px\"><title>lock-check-2</title><desc>Created with Sketch Beta.</desc><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g sketch:type=\"MSArtboardGroup\" fill=\"#000000\"><path d=\"M30,42 L21.9803572,42 C17.5704912,42 14,45.586665 14,50.0110405 L14,85.9889595 C14,90.4258294 17.5729276,94 21.9803572,94 L78.0196428,94 C82.4295088,94 86,90.413335 86,85.9889595 L86,50.0110405 C86,45.5741706 82.4270724,42 78.0196428,42 L70,42 L70,25 C70,14.5042825 61.4914975,6 50.9957277,6 L49.0042723,6 C38.5074446,6 30,14.5065898 30,25 L30,42 L30,42 L30,42 Z M38,42 L62,42 L62,25.9973518 C62,19.363876 56.627417,14 50,14 C43.3860685,14 38,19.3713974 38,25.9973518 L38,42 L38,42 L38,42 Z M39.5824667,63.1606146 L34,68.8303073 L45.9824667,81 L50.1693167,76.7477305 L66,60.6696927 L60.4175333,55 L45.9824667,69.6606146 L39.5824667,63.1606146 L39.5824667,63.1606146 Z\" sketch:type=\"MSShapeGroup\"></path></g></g></svg>\n        </div>\n      </div>\n      <div class=\"step-info\">\n        <p class=\"step-name\">Pedido Efetuado</p>\n        <p class=\"step-date\" id=\"order-date\">14 May</p>\n      </div>\n    </div>\n    \n    <div class=\"tracker-connector\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"#fff\" viewBox=\"0 0 512 512\" xml:space=\"preserve\"><path d=\"M491.318 235.318H20.682C9.26 235.318 0 244.578 0 256c0 11.423 9.26 20.682 20.682 20.682h470.636c11.423 0 20.682-9.259 20.682-20.682s-9.259-20.682-20.682-20.682\"/><path d=\"M505.942 241.375 329.454 64.887c-8.077-8.076-21.172-8.076-29.249 0s-8.076 21.172 0 29.249L462.069 256 300.205 417.863c-8.076 8.077-8.076 21.172 0 29.249a20.62 20.62 0 0 0 14.625 6.058 20.62 20.62 0 0 0 14.625-6.058l176.488-176.488c8.076-8.077 8.076-21.172-.001-29.249\"/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/></svg>\n    </div>\n    \n    <div class=\"tracker-step\">\n      <div class=\"icon-container\">\n        <div class=\"icon\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\"><path d=\"M48.375 22.062L44.219 16.5C43.266 15.352 41.77 14 40 14h-7v25c.48 2.832 3.031 5 6 5s5.43-2.168 5.906-5H47c1.57 0 3-1.43 3-3v-9.625C50 24.363 48.551 22.309 48.375 22.062zM39 42c-2.207 0-4-1.793-4-4s1.793-4 4-4 4 1.793 4 4S41.207 42 39 42zM48 27H38c-1 0-2-1-2-2v-4c0-1.105 1-2 2-2h5.594l3.188 4.25C47.121 23.73 48 25.203 48 26.375V27zM28.188 7H2.844C1.273 7 0 8.277 0 9.844V17.5h12c.276 0 .5-.224.5-.5v-2.835l6.774 6.434L12.5 27.032V24c0-.276-.224-.5-.5-.5H0V36c0 1.566 1.43 3 3 3h4.094c.477 2.836 2.938 5 5.906 5s5.43-2.164 5.906-5h9.25C29.723 39 31 37.723 31 36.156V9.906C31 8.305 29.738 7 28.188 7zM13 42c-2.207 0-4-1.793-4-4s1.793-4 4-4 4 1.793 4 4S15.207 42 13 42z\"></path></svg>        </div>\n      </div>\n      <div class=\"step-info\">\n        <p class=\"step-name\">Encomenda Expedida</p>\n        <p class=\"step-date\" id=\"dispatch-date\">15 May</p>\n      </div>\n    </div>\n    \n    <div class=\"tracker-connector\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"#fff\" viewBox=\"0 0 512 512\" xml:space=\"preserve\"><path d=\"M491.318 235.318H20.682C9.26 235.318 0 244.578 0 256c0 11.423 9.26 20.682 20.682 20.682h470.636c11.423 0 20.682-9.259 20.682-20.682s-9.259-20.682-20.682-20.682\"/><path d=\"M505.942 241.375 329.454 64.887c-8.077-8.076-21.172-8.076-29.249 0s-8.076 21.172 0 29.249L462.069 256 300.205 417.863c-8.076 8.077-8.076 21.172 0 29.249a20.62 20.62 0 0 0 14.625 6.058 20.62 20.62 0 0 0 14.625-6.058l176.488-176.488c8.076-8.077 8.076-21.172-.001-29.249\"/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/></svg>\n    </div>\n    \n    <div class=\"tracker-step\">\n      <div class=\"icon-container\">\n        <div class=\"icon\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\"><path d=\"M 25 1 C 16.179688 1 9 8.179688 9 17 C 9 31.113281 23.628906 47.945313 24.25 48.65625 C 24.441406 48.875 24.710938 49 25 49 C 25.308594 48.980469 25.558594 48.875 25.75 48.65625 C 26.371094 47.933594 41 30.8125 41 17 C 41 8.179688 33.820313 1 25 1 Z M 25 12 C 28.3125 12 31 14.6875 31 18 C 31 21.3125 28.3125 24 25 24 C 21.6875 24 19 21.3125 19 18 C 19 14.6875 21.6875 12 25 12 Z\"></path></svg>\n        </div>\n      </div>\n      <div class=\"step-info\">\n        <p class=\"step-name\">Encomenda Entregue</p>\n        <p class=\"step-date\" id=\"delivery-date\">16 May</p>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n  .delivery-tracker {\n    display: block !important;\n    width: 100%;\n    color: white;\n    margin-bottom: 30px;\n  }\n\n  .delivery-heading {\n    font-size: 13px;\n    font-weight: 400;\n    margin-bottom: 5px;\n    color: white;\n    text-align: left;\n  }\n\n  .tracker-container {\n    display: flex;\n    align-items: flex-start;\n    justify-content: space-between;\n    width: 100%;\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    border-radius: 6px;\n    padding: 10px;\n  }\n\n  .tracker-step {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: space-between;\n    width: 30%;\n    text-align: center;\n    position: relative;\n    gap: 15px;\n  }\n\n  .icon-container {\n    width: 60px;\n    height: 60px;\n    background-color: white;\n    border-radius: 50%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-top: 10px;\n  }\n\n  .icon {\n    width: 35px;\n    height: 35px;\n  }\n\n  .step-info {\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content:space-between;\n  }\n\n  .step-name {\n    font-weight: 400;\n    margin:0;\n    font-size: 14px;\n    line-height: normal;\n  }\n\n  .step-date {\n    font-size: 12px;\n    margin: 0;\n    opacity: 0.8;\n    font-weight: 300;\n  }\n\n  .tracker-connector {\n    flex-grow: 1;\n    position: relative;\n    display:flex;\n    flex-direction: column;\n    margin-top: 35px;\n  }\n\n  .connector-arrow {\n    position: absolute;\n    right: 0;\n    top: 50%;\n    transform: translateY(-50%);\n    width: 0;\n    height: 0;\n    border-left: 6px solid rgba(255, 255, 255, 0.3);\n    border-top: 6px solid transparent;\n    border-bottom: 6px solid transparent;\n  }\n</style>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function() {\n    // Utilitário para formatar \"DD MMM\"\n    function formatDate(date) {\n      const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];\n      return `${date.getDate()} ${months[date.getMonth()]}`;\n    }\n\n    function addWeekdays(startDate, count) {\n      let date = new Date(startDate);\n      let added = 0;\n      while (added < count) {\n        date.setDate(date.getDate() + 1);\n        const day = date.getDay();\n        if (day !== 0 && day !== 6) { // 0 = Domingo, 6 = Sábado\n          added++;\n        }\n      }\n      return date;\n    }\n\n    const now = new Date();\n    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());\n    const hour = now.getHours();\n    const weekday = today.getDay();\n\n    // Determinar data de expedição\n    let dispatchDate = new Date(today);\n    if ((weekday === 5 && hour >= 15)) {\n      dispatchDate.setDate(dispatchDate.getDate() + 3); // Sexta depois das 15h → segunda\n    } else if (weekday === 6) {\n      dispatchDate.setDate(dispatchDate.getDate() + 2); // Sábado → segunda\n    } else if (weekday === 0) {\n      dispatchDate.setDate(dispatchDate.getDate() + 1); // Domingo → segunda\n    } else if (hour >= 15) {\n      dispatchDate.setDate(dispatchDate.getDate() + 1); // Dias úteis depois das 15h → amanhã\n    }\n\n    // Calcular intervalo de 1 a 4 dias úteis a partir da expedição\n    const firstDelivery = addWeekdays(dispatchDate, 1);\n    const lastDelivery = addWeekdays(dispatchDate, 4);\n\n    // Atualizar elementos\n    document.getElementById('order-date').textContent = formatDate(today);\n    document.getElementById('dispatch-date').textContent = formatDate(dispatchDate);\n    document.getElementById('delivery-date').textContent = `${formatDate(firstDelivery)} – ${formatDate(lastDelivery)}`;\n    document.querySelector('.delivery-heading').textContent = `Entrega estimada: ${formatDate(firstDelivery)} – ${formatDate(lastDelivery)}`;\n  });\n</script>"
+            "custom_liquid": "<div class=\"delivery-tracker\" style=\"display: block !important;\">\n  <h3 class=\"delivery-heading\">Entrega Estimada: 15 de Maio</h3>\n  \n  <div class=\"tracker-container\">\n    <div class=\"tracker-step\">\n      <div class=\"icon-container\">\n        <div class=\"icon\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 100 100\" version=\"1.1\" x=\"0px\" y=\"0px\"><title>lock-check-2</title><desc>Created with Sketch Beta.</desc><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g sketch:type=\"MSArtboardGroup\" fill=\"#000000\"><path d=\"M30,42 L21.9803572,42 C17.5704912,42 14,45.586665 14,50.0110405 L14,85.9889595 C14,90.4258294 17.5729276,94 21.9803572,94 L78.0196428,94 C82.4295088,94 86,90.413335 86,85.9889595 L86,50.0110405 C86,45.5741706 82.4270724,42 78.0196428,42 L70,42 L70,25 C70,14.5042825 61.4914975,6 50.9957277,6 L49.0042723,6 C38.5074446,6 30,14.5065898 30,25 L30,42 L30,42 L30,42 Z M38,42 L62,42 L62,25.9973518 C62,19.363876 56.627417,14 50,14 C43.3860685,14 38,19.3713974 38,25.9973518 L38,42 L38,42 L38,42 Z M39.5824667,63.1606146 L34,68.8303073 L45.9824667,81 L50.1693167,76.7477305 L66,60.6696927 L60.4175333,55 L45.9824667,69.6606146 L39.5824667,63.1606146 L39.5824667,63.1606146 Z\" sketch:type=\"MSShapeGroup\"></path></g></g></svg>\n        </div>\n      </div>\n      <div class=\"step-info\">\n        <p class=\"step-name\">Pedido Efetuado</p>\n        <p class=\"step-date\" id=\"order-date\">14 May</p>\n      </div>\n    </div>\n    \n    <div class=\"tracker-connector\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"#fff\" viewBox=\"0 0 512 512\" xml:space=\"preserve\"><path d=\"M491.318 235.318H20.682C9.26 235.318 0 244.578 0 256c0 11.423 9.26 20.682 20.682 20.682h470.636c11.423 0 20.682-9.259 20.682-20.682s-9.259-20.682-20.682-20.682\"/><path d=\"M505.942 241.375 329.454 64.887c-8.077-8.076-21.172-8.076-29.249 0s-8.076 21.172 0 29.249L462.069 256 300.205 417.863c-8.076 8.077-8.076 21.172 0 29.249a20.62 20.62 0 0 0 14.625 6.058 20.62 20.62 0 0 0 14.625-6.058l176.488-176.488c8.076-8.077 8.076-21.172-.001-29.249\"/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/></svg>\n    </div>\n    \n    <div class=\"tracker-step\">\n      <div class=\"icon-container\">\n        <div class=\"icon\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\"><path d=\"M48.375 22.062L44.219 16.5C43.266 15.352 41.77 14 40 14h-7v25c.48 2.832 3.031 5 6 5s5.43-2.168 5.906-5H47c1.57 0 3-1.43 3-3v-9.625C50 24.363 48.551 22.309 48.375 22.062zM39 42c-2.207 0-4-1.793-4-4s1.793-4 4-4 4 1.793 4 4S41.207 42 39 42zM48 27H38c-1 0-2-1-2-2v-4c0-1.105 1-2 2-2h5.594l3.188 4.25C47.121 23.73 48 25.203 48 26.375V27zM28.188 7H2.844C1.273 7 0 8.277 0 9.844V17.5h12c.276 0 .5-.224.5-.5v-2.835l6.774 6.434L12.5 27.032V24c0-.276-.224-.5-.5-.5H0V36c0 1.566 1.43 3 3 3h4.094c.477 2.836 2.938 5 5.906 5s5.43-2.164 5.906-5h9.25C29.723 39 31 37.723 31 36.156V9.906C31 8.305 29.738 7 28.188 7zM13 42c-2.207 0-4-1.793-4-4s1.793-4 4-4 4 1.793 4 4S15.207 42 13 42z\"></path></svg>        </div>\n      </div>\n      <div class=\"step-info\">\n        <p class=\"step-name\">Encomenda Expedida</p>\n        <p class=\"step-date\" id=\"dispatch-date\">15 May</p>\n      </div>\n    </div>\n    \n    <div class=\"tracker-connector\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"#fff\" viewBox=\"0 0 512 512\" xml:space=\"preserve\"><path d=\"M491.318 235.318H20.682C9.26 235.318 0 244.578 0 256c0 11.423 9.26 20.682 20.682 20.682h470.636c11.423 0 20.682-9.259 20.682-20.682s-9.259-20.682-20.682-20.682\"/><path d=\"M505.942 241.375 329.454 64.887c-8.077-8.076-21.172-8.076-29.249 0s-8.076 21.172 0 29.249L462.069 256 300.205 417.863c-8.076 8.077-8.076 21.172 0 29.249a20.62 20.62 0 0 0 14.625 6.058 20.62 20.62 0 0 0 14.625-6.058l176.488-176.488c8.076-8.077 8.076-21.172-.001-29.249\"/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/></svg>\n    </div>\n    \n    <div class=\"tracker-step\">\n      <div class=\"icon-container\">\n        <div class=\"icon\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\"><path d=\"M 25 1 C 16.179688 1 9 8.179688 9 17 C 9 31.113281 23.628906 47.945313 24.25 48.65625 C 24.441406 48.875 24.710938 49 25 49 C 25.308594 48.980469 25.558594 48.875 25.75 48.65625 C 26.371094 47.933594 41 30.8125 41 17 C 41 8.179688 33.820313 1 25 1 Z M 25 12 C 28.3125 12 31 14.6875 31 18 C 31 21.3125 28.3125 24 25 24 C 21.6875 24 19 21.3125 19 18 C 19 14.6875 21.6875 12 25 12 Z\"></path></svg>\n        </div>\n      </div>\n      <div class=\"step-info\">\n        <p class=\"step-name\">Encomenda Entregue</p>\n        <p class=\"step-date\" id=\"delivery-date\">16 May</p>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n  .delivery-tracker {\n    display: block !important;\n    width: 100%;\n    color: black;\n    margin-bottom: 30px;\n  }\n\n  .delivery-heading {\n    font-size: 13px;\n    font-weight: 400;\n    margin-bottom: 5px;\n    color: black;\n    text-align: left;\n  }\n\n  .tracker-container {\n    display: flex;\n    align-items: flex-start;\n    justify-content: space-between;\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.8);\n    border-radius: 6px;\n    padding: 10px;\n  }\n\n  .tracker-step {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: space-between;\n    width: 30%;\n    text-align: center;\n    position: relative;\n    gap: 15px;\n  }\n\n  .icon-container {\n    width: 60px;\n    height: 60px;\n    background-color: white;\n    border-radius: 50%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-top: 10px;\n  }\n\n  .icon {\n    width: 35px;\n    height: 35px;\n  }\n\n  .step-info {\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content:space-between;\n  }\n\n  .step-name {\n    font-weight: 400;\n    margin:0;\n    font-size: 14px;\n    line-height: normal;\n  }\n\n  .step-date {\n    font-size: 12px;\n    margin: 0;\n    opacity: 0.8;\n    font-weight: 300;\n  }\n\n  .tracker-connector {\n    flex-grow: 1;\n    position: relative;\n    display:flex;\n    flex-direction: column;\n    margin-top: 35px;\n  }\n\n  .tracker-connector svg {\nfill: black;\n\n  .connector-arrow {\n    position: absolute;\n    right: 0;\n    top: 50%;\n    transform: translateY(-50%);\n    width: 0;\n    height: 0;\n    border-left: 6px solid rgba(0, 0, 0, 0.9);\n    border-top: 6px solid transparent;\n    border-bottom: 6px solid transparent;\n\n  }\n</style>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function() {\n    // Utilitário para formatar \"DD MMM\"\n    function formatDate(date) {\n      const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];\n      return `${date.getDate()} ${months[date.getMonth()]}`;\n    }\n\n    function addWeekdays(startDate, count) {\n      let date = new Date(startDate);\n      let added = 0;\n      while (added < count) {\n        date.setDate(date.getDate() + 1);\n        const day = date.getDay();\n        if (day !== 0 && day !== 6) { // 0 = Domingo, 6 = Sábado\n          added++;\n        }\n      }\n      return date;\n    }\n\n    const now = new Date();\n    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());\n    const hour = now.getHours();\n    const weekday = today.getDay();\n\n    // Determinar data de expedição\n    let dispatchDate = new Date(today);\n    if ((weekday === 5 && hour >= 15)) {\n      dispatchDate.setDate(dispatchDate.getDate() + 3); // Sexta depois das 15h → segunda\n    } else if (weekday === 6) {\n      dispatchDate.setDate(dispatchDate.getDate() + 2); // Sábado → segunda\n    } else if (weekday === 0) {\n      dispatchDate.setDate(dispatchDate.getDate() + 1); // Domingo → segunda\n    } else if (hour >= 15) {\n      dispatchDate.setDate(dispatchDate.getDate() + 1); // Dias úteis depois das 15h → amanhã\n    }\n\n    // Calcular intervalo de 1 a 4 dias úteis a partir da expedição\n    const firstDelivery = addWeekdays(dispatchDate, 1);\n    const lastDelivery = addWeekdays(dispatchDate, 4);\n\n    // Atualizar elementos\n    document.getElementById('order-date').textContent = formatDate(today);\n    document.getElementById('dispatch-date').textContent = formatDate(dispatchDate);\n    document.getElementById('delivery-date').textContent = `${formatDate(firstDelivery)} – ${formatDate(lastDelivery)}`;\n    document.querySelector('.delivery-heading').textContent = `Entrega estimada: ${formatDate(firstDelivery)} – ${formatDate(lastDelivery)}`;\n  });\n</script>"
           }
         },
         "text_pbPHRt": {
@@ -167,7 +167,7 @@
         ".product__info-container .product-form,.product__info-container .product__description,.product__info-container .icon-with-text {margin: 2rem 0;}",
         ".price-item--sale {color: #ea2078; font-weight: bolder;}",
         ".price__badge-sale {background-color: #ea2078;}",
-        "p {line-height: normal; font-weight: 300; }",
+        "p {line-height: normal; font-weight: 300;}",
         "h1 {color: black !important; font-weight: 300;}"
       ],
       "settings": {
@@ -226,7 +226,7 @@
         "column_yMBdiJ"
       ],
       "custom_css": [
-        ".multicolumn.background-primary .multicolumn-card {background: rgb(4 4 4) linear-gradient( rgba(var(--color-foreground), 0.04), rgba(var(--color-foreground), 0.04) ); border-radius: 15px;}"
+        ".multicolumn.background-primary .multicolumn-card {border-radius: 10px;}"
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
@@ -239,7 +239,7 @@
         "background_style": "primary",
         "button_label": "",
         "button_link": "",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "padding_top": 36,
@@ -258,7 +258,7 @@
         "column_cAgNdi": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/icon_product_page_24d17edf-14f1-42ef-98b1-38fa0dda36e6.png",
+            "image": "shopify://shop_images/icon_product_page.png",
             "title": "Sono mais profundo e reparador",
             "text": "<p><strong>Respirar pelo nariz enquanto dormes melhora o sono e reduz o ressonar.</strong><br/>Descansas melhor, acordas com mais energia e começas o dia com o pé direito.<br/><br/></p>",
             "link_label": "",
@@ -268,7 +268,7 @@
         "column_pqGPHG": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/icon_product_page_1_90269630-ae40-4962-a0d2-5f1110e89953.png",
+            "image": "shopify://shop_images/icon_product_page_1.png",
             "title": "Melhor desempenho",
             "text": "<p>Pode aumentar a oxigenação entre 10% e 30%. Mais oxigénio significa um melhor foco e rendimento.</p>",
             "link_label": "",
@@ -278,7 +278,7 @@
         "column_bcHaFe": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/icon_product_page_2_f8add545-e611-4ba1-985a-76a494f4620a.png",
+            "image": "shopify://shop_images/icon_product_page_2.png",
             "title": "Proteção natural reforçada",
             "text": "<p><strong>O nariz atua como a primeira barreira do corpo contra partículas no ar.</strong><br/>Respirar por onde foste feito para respirar ajuda-te a filtrar o que não devia entrar.<br/><br/></p>",
             "link_label": "",
@@ -288,7 +288,7 @@
         "column_7E6AMJ": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/icon_product_page_3_f2888412-3855-4b3f-b5f5-0de33cc2aada.png",
+            "image": "shopify://shop_images/icon_product_page_3.png",
             "title": "Aspeto mais saudável",
             "text": "<p><strong>Respirar pelo nariz estimula o correto desenvolvimento facial.</strong><br/>Ajuda a manter uma postura mais natural, um rosto mais simétrico e um aspeto mais equilibrado.<br/><br/></p>",
             "link_label": "",
@@ -318,7 +318,7 @@
         "background_style": "none",
         "button_label": "",
         "button_link": "",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "columns_mobile": "2",
         "swipe_on_mobile": false,
         "padding_top": 36,
@@ -334,9 +334,9 @@
             "icon": "check_mark",
             "icon_color": "#f01c7c",
             "title": "Fácil de Usar",
-            "title_color": "#ffffff",
+            "title_color": "#000000",
             "text": "<p>Aplica os stickers em ambos os lados do nariz e depois encaixa-o.</p>",
-            "text_color": "#ffffff"
+            "text_color": "#1a1b18"
           }
         },
         "feature_ezwBrg": {
@@ -345,9 +345,9 @@
             "icon": "stopwatch",
             "icon_color": "#f01c7c",
             "title": "Duradouro",
-            "title_color": "#ffffff",
+            "title_color": "#080808",
             "text": "<p>Desenhado para durar até 24 horas sem descolar.</p>",
-            "text_color": "#ffffff"
+            "text_color": "#1a1b18"
           }
         },
         "feature_Hz8DXU": {
@@ -356,9 +356,9 @@
             "icon": "heart",
             "icon_color": "#f01c7c",
             "title": "Adorado por Muitos",
-            "title_color": "#ffffff",
+            "title_color": "#080808",
             "text": "<p>Popular entre biohackers, atletas e corredores.</p>",
-            "text_color": "#ffffff"
+            "text_color": "#121212"
           }
         },
         "feature_L8469q": {
@@ -367,9 +367,9 @@
             "icon": "star",
             "icon_color": "#f01c7c",
             "title": "Resistente e Firme",
-            "title_color": "#ffffff",
+            "title_color": "#121212",
             "text": "<p>Ao contrário das tiras nasais tradicionais, estas fazem realmente efeito.</p>",
-            "text_color": "#ffffff"
+            "text_color": "#1a1b18"
           }
         }
       },
@@ -381,9 +381,9 @@
       ],
       "name": "Image Comparison",
       "settings": {
-        "background_color": "#000000",
+        "background_color": "#f3f3f3",
         "heading": "Vê a diferença!",
-        "heading_color": "#ffffff",
+        "heading_color": "#000000",
         "image_before": "shopify://shop_images/A9146A3F-9D18-4314-84D1-35E5A10ED6CD.heic",
         "image_after": "shopify://shop_images/E262A930-7600-4AB1-A4AD-25D8C62B5AE9.heic",
         "image_format": "circle",
@@ -456,22 +456,22 @@
       "name": "Comparison Section",
       "settings": {
         "title": "Why our product is the perfect choice",
-        "custom_title_liquid": "<h1>O porquê dos Magnetic Strips serem a<i class=\"gradient-text\"> escolha perfeita!</i>\n</h1>\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');\nh1 {\ncolor: white;\nmargin:0;\n}\n.gradient-text {\nfont-weight:600;\nbackground: linear-gradient(90deg,rgba(131, 58, 180, 1) 33%, rgba(253, 29, 29, 1) 66%, rgba(252, 176, 69, 1) 100%);50%, rgba(252, 176, 69, 1) 100%);\n-webkit-background-clip: text;\nbackground-clip: text;\n-webkit-text-fill-color: transparent;\n color: transparent;\n}\n</style>",
+        "custom_title_liquid": "<h1>O porquê dos Magnetic Strips serem a<i class=\"gradient-text\"> escolha perfeita!</i>\n</h1>\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');\nh1 {\ncolor: black;\nmargin:0;\nfont-weight: 300;\n}\n.gradient-text {\nfont-weight: 700;\nbackground: linear-gradient(90deg,rgba(131, 58, 180, 1) 33%, rgba(253, 29, 29, 1) 66%, rgba(252, 176, 69, 1) 100%);50%, rgba(252, 176, 69, 1) 100%);\n-webkit-background-clip: text;\nbackground-clip: text;\n-webkit-text-fill-color: transparent;\n color: transparent;\n}\n</style>",
         "paragraph": "Um produto que faz realmente diferença na tua vida.",
         "show_button": false,
-        "white_shadow": true,
-        "button_text": "Learn More",
-        "button_link": "",
-        "background_color": "#000000",
-        "text_color": "#fff7f7",
+        "white_shadow": false,
+        "button_text": "",
+        "button_link": "shopify://blogs/novidades",
+        "background_color": "#ffffff",
+        "text_color": "#000000",
         "title_color": "#ffffff",
-        "button_bg_color": "#f01c7c",
+        "button_bg_color": "#ff0072",
         "button_text_color": "#ffffff",
         "table_bg_color": "#000000",
-        "table_left_bg_color": "#ffffff",
+        "table_left_bg_color": "#1a1b18",
         "table_right_bg_color": "#000000",
-        "table_text_color": "#333333",
-        "table_border_color": "#e9ecef",
+        "table_text_color": "#ffffff",
+        "table_border_color": "#000000",
         "icon_fill_color": "#f01c7c",
         "icon_stroke_color": "#f01c7c",
         "icon_check_color": "#ffffff"
@@ -483,53 +483,53 @@
         "collapsible_tab_wxQTyf": {
           "type": "collapsible_tab",
           "settings": {
-            "background-color": "#242424",
+            "background-color": "#ffffff",
             "heading": "Maximiza a Recuperação",
-            "heading_color": "#ffffff",
+            "heading_color": "#000000",
             "content": "<p>Mais oxigénio acelera a regeneração muscular e reduz o ácido lático. Ideal após treinos intensos.</p>",
-            "content_color": "#e5e0e0",
+            "content_color": "#1a1b18",
             "icon": "lightning_bolt",
             "icon_color": "#f01c7c",
-            "icon_toggle_color": "#ffffff"
+            "icon_toggle_color": "#000000"
           }
         },
         "collapsible_tab_KFmEmy": {
           "type": "collapsible_tab",
           "settings": {
-            "background-color": "#242424",
+            "background-color": "#ffffff",
             "heading": "Diminui o Ritmo Cardíaco",
-            "heading_color": "#ffffff",
+            "heading_color": "#000000",
             "content": "<p>Respirar pelo nariz acalma o corpo e reduz o ritmo cardíaco.<br/><br/></p>",
-            "content_color": "#e5e0e0",
+            "content_color": "#1a1b18",
             "icon": "heart",
             "icon_color": "#f01c7c",
-            "icon_toggle_color": "#ffffff"
+            "icon_toggle_color": "#000000"
           }
         },
         "collapsible_tab_M3UYf3": {
           "type": "collapsible_tab",
           "settings": {
-            "background-color": "#242424",
+            "background-color": "#ffffff",
             "heading": "Aumenta a Absorção de Oxigénio",
-            "heading_color": "#ffffff",
+            "heading_color": "#000000",
             "content": "<p>Vários estudos mostram que as magnetic strips nasais, aumentam a tua capacidade de absorver oxigénio entre 10% e 30%.</p>",
-            "content_color": "#e5e0e0",
+            "content_color": "#1a1b18",
             "icon": "leaf",
             "icon_color": "#f01c7c",
-            "icon_toggle_color": "#ffffff"
+            "icon_toggle_color": "#000000"
           }
         },
         "collapsible_tab_gdzhEW": {
           "type": "collapsible_tab",
           "settings": {
-            "background-color": "#242424",
+            "background-color": "#ffffff",
             "heading": "Otimiza o Desempenho",
-            "heading_color": "#ffffff",
+            "heading_color": "#000000",
             "content": "<p>Com mais oxigénio, aumentas o foco, a resistência e a performance mental e física.</p>",
-            "content_color": "#e5e0e0",
+            "content_color": "#1a1b18",
             "icon": "star",
             "icon_color": "#f01c7c",
-            "icon_toggle_color": "#ffffff"
+            "icon_toggle_color": "#000000"
           }
         }
       },
@@ -542,12 +542,12 @@
       "name": "Collapsible Image Section",
       "settings": {
         "image": "shopify://shop_images/magnetic_strips_2_v2.png",
-        "background-color": "#000000",
+        "background-color": "#f3f3f3",
         "layout": "image_first",
         "heading": "Efeitos Diurnos",
-        "heading_color": "#ffffff",
+        "heading_color": "#000000",
         "text": "<p>Ajuda a melhorar o teu foco e a aumentar a tua resistência enquanto estás em ação.</p>",
-        "text_color": "#ffffff",
+        "text_color": "#1a1b18",
         "padding_top": 100,
         "padding_bottom": 52
       }
@@ -558,53 +558,53 @@
         "collapsible_tab_6VgqAK": {
           "type": "collapsible_tab",
           "settings": {
-            "background-color": "#242424",
+            "background-color": "#ffffff",
             "heading": "Diminui o Ressonar",
-            "heading_color": "#ffffff",
+            "heading_color": "#000000",
             "content": "<p>A respiração nasal estabiliza o palato mole e reduz a vibração das vias aéreas — a principal causa do ressonar. O resultado? Um sono mais silencioso e profundo, tanto para ti como para quem dorme ao teu lado.<br/><br/></p>",
-            "content_color": "#e5e0e0",
+            "content_color": "#1a1b18",
             "icon": "leaf",
             "icon_color": "#f01c7c",
-            "icon_toggle_color": "#ffffff"
+            "icon_toggle_color": "#000000"
           }
         },
         "collapsible_tab_W6XbnA": {
           "type": "collapsible_tab",
           "settings": {
-            "background-color": "#242424",
+            "background-color": "#ffffff",
             "heading": "Melhora a Saúde Oral",
-            "heading_color": "#ffffff",
+            "heading_color": "#000000",
             "content": "<p>A saliva é a tua defesa natural contra as bactérias da boca. Quando respiras pela boca, perdes essa proteção.<br/>A respiração nasal mantém a boca húmida, reduz bactérias e melhora a tua higiene oral — desde a primeira noite.<br/><br/></p>",
-            "content_color": "#e5e0e0",
+            "content_color": "#1a1b18",
             "icon": "heart",
             "icon_color": "#f01c7c",
-            "icon_toggle_color": "#ffffff"
+            "icon_toggle_color": "#000000"
           }
         },
         "collapsible_tab_4mYXYC": {
           "type": "collapsible_tab",
           "settings": {
-            "background-color": "#242424",
+            "background-color": "#ffffff",
             "heading": "Descansa e Recarrega",
-            "heading_color": "#ffffff",
+            "heading_color": "#000000",
             "content": "<p>Quando respiras bem, dormes melhor.<br/>A respiração nasal melhora a oxigenação, acalma o corpo e dá-te o descanso que realmente recarrega.<br/><br/></p>",
-            "content_color": "#e5e0e0",
+            "content_color": "#1a1b18",
             "icon": "silhouette",
             "icon_color": "#f01c7c",
-            "icon_toggle_color": "#ffffff"
+            "icon_toggle_color": "#000000"
           }
         },
         "collapsible_tab_YpDUVi": {
           "type": "collapsible_tab",
           "settings": {
-            "background-color": "#242424",
+            "background-color": "#ffffff",
             "heading": "Aumenta os Níveis de Energia",
-            "heading_color": "#ffffff",
+            "heading_color": "#000000",
             "content": "<p>Mais oxigénio, mais energia, mais presença, menos fadiga.</p>",
-            "content_color": "#e5e0e0",
+            "content_color": "#1a1b18",
             "icon": "lightning_bolt",
             "icon_color": "#f01c7c",
-            "icon_toggle_color": "#ffffff"
+            "icon_toggle_color": "#000000"
           }
         }
       },
@@ -617,12 +617,12 @@
       "name": "Collapsible Image Section",
       "settings": {
         "image": "shopify://shop_images/nozzo-session-1-hd-1.jpg",
-        "background-color": "#000000",
+        "background-color": "#f3f3f3",
         "layout": "image_second",
         "heading": "Efeitos Noturnos",
-        "heading_color": "#ffffff",
+        "heading_color": "#000000",
         "text": "<p>Relaxa o teu sistema nervoso e melhora o teu ciclo de sono para recuperares totalmente e estares pronto para o dia a dia.</p>",
-        "text_color": "#ffffff",
+        "text_color": "#1a1b18",
         "padding_top": 52,
         "padding_bottom": 80
       }
