@@ -549,7 +549,7 @@
         "text": "<p>Ajuda a melhorar o teu foco e a aumentar a tua resistência enquanto estás em ação.</p>",
         "text_color": "#1a1b18",
         "padding_top": 100,
-        "padding_bottom": 52
+        "padding_bottom": 60
       }
     },
     "collapsible_image_xJ4jJc": {
@@ -623,8 +623,8 @@
         "heading_color": "#000000",
         "text": "<p>Relaxa o teu sistema nervoso e melhora o teu ciclo de sono para recuperares totalmente e estares pronto para o dia a dia.</p>",
         "text_color": "#1a1b18",
-        "padding_top": 52,
-        "padding_bottom": 80
+        "padding_top": 60,
+        "padding_bottom": 100
       }
     },
     "1750112160b738b78b": {

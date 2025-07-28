@@ -5,7 +5,12 @@
     <div class="collapsible-image-container{% if section.settings.layout == 'image_first' %} image-first{% else %} image-second{% endif %}">
       
       <!-- Image Section -->
-      <div class="collapsible-image-media">
+      <div class="collapsible-image-media {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+        style="--animation-order: 1;"
+      {% endif %}
+      >
         {%- if section.settings.image != blank -%}
           <div class="media media--square">
             <img
@@ -32,13 +37,25 @@
       <div class="collapsible-image-content">
         
         {%- if section.settings.heading != blank -%}
+          <div class="{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: 2;"
+          {% endif %}
+          >
           <h1 class="collapsible-image-heading h1" style="color: {{ section.settings.heading_color }};">
             {{ section.settings.heading }}
           </h1>
+          </div>
         {%- endif -%}
 
         {%- if section.settings.text != blank -%}
-          <div class="collapsible-image-text rte" style="color: {{ section.settings.text_color }};">
+          <div class="collapsible-image-text rte {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: 3;"
+          {% endif %}
+          >
             {{ section.settings.text }}
           </div>
         {%- endif -%}
@@ -48,7 +65,15 @@
             {%- for block in section.blocks -%}
               {%- case block.type -%}
                 {%- when 'collapsible_tab' -%}
-                  <details class="collapsible-tab" {{ block.shopify_attributes }} style="background-color: {{ block.settings.background-color }};">
+                  <details class="collapsible-tab {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" {{ block.shopify_attributes }}
+                   style="background-color: {{ block.settings.background-color }};"
+                   {% if settings.animations_reveal_on_scroll %}
+                    data-cascade
+                    style="--animation-order: {{ forloop.index | plus: 3 }}; background-color: {{ block.settings.background-color }};"
+                  {%  else %}
+                    style="background-color: {{ block.settings.background-color }};"
+                  {% endif %}
+                   >
                     <summary class="collapsible-tab-heading">
                       <div class="collapsible-tab-icon" style="color: {{ block.settings.icon_color }};">
                         {%- if block.settings.icon != 'none' -%}
@@ -135,6 +160,11 @@
     margin: 0 0 2rem 0;
     font-size: 1.6rem;
     line-height: 1.5;
+  }
+
+  .collapsible-image-text p {
+
+    color: {{ section.settings.text_color }};
   }
 
   .collapsible-tabs {
