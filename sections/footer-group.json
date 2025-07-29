@@ -35,7 +35,7 @@
         ".footer-block__newsletter {margin-right: 0; justify-content: center; align-items: center; display: flex;}"
       ],
       "settings": {
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "newsletter_enable": true,
         "newsletter_heading": "Junta-te à nossa comunidade para ficares a par dos lançamentos mais recentes e muito mais!",
         "enable_follow_on_shop": true,

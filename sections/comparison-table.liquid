@@ -105,7 +105,9 @@
         <div class="table-row table-header">
           <div class="table-cell table-left">Features</div>
           <div class="table-cell table-right">
-            {% if shop.brand.logo != blank %}
+            {% if section.settings.logo_image != blank %}
+              {{ section.settings.logo_image |  image_url: width: 1080 |  image_tag: alt: 'shop.name' , class: 'brand-logo' }}  
+            {% elsif shop.brand.logo != blank %}
               {{ shop.brand.logo |  image_url: width: 1080 |  image_tag: alt: 'shop.name' , class: 'brand-logo' }}
             {% elsif settings.logo != blank %}
               {{ settings.logo |  image_url: width: 120 |  image_tag: alt: 'shop.name' , class: 'brand-logo' }}
@@ -507,6 +509,12 @@
       "id": "table_border_color",
       "label": "Table Border Color",
       "default": "#e9ecef"
+    },
+    {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo",
+        "info": "Defult will be the shop's logo."
     },
     {
       "type": "header",
