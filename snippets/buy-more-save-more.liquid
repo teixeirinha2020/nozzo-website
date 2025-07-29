@@ -18,9 +18,11 @@
       {% assign price_color_setting = 'option_' | append: i | append: '_price_color' %}
       {% assign border_color_setting = 'option_' | append: i | append: '_border_color' %}
       {% assign badge_text_color_setting = 'option_' | append: i | append: '_badge_text_color' %}
+      {% assign image_setting = 'option_' | append: i | append: '_image' %}
       
       {% assign quantity = i %}
       {% assign total_price = base_price | times: quantity %}
+      {%  assign multiplicator = quantity | times: 100.0  %}
       
       {% case quantity %}
         {% when 1 %}
@@ -50,6 +52,16 @@
             </div>
           {% endif %}
 
+          {% if block.settings[image_setting] != blank %}
+            <div class="option-image">
+              <img src="{{ block.settings[image_setting] | img_url: width: 1080, height: 1080, crop: 'center' }}" 
+                   alt="Option {{ i }}" 
+                   width="40" 
+                   height="40"
+                   loading="lazy">
+            </div>
+          {% endif %}
+
           <div class="option-header">
             <div class="title-and-badge">
               {% if block.settings[title_setting] != blank %}
@@ -59,8 +71,17 @@
               {% endif %}
               {% if discount_percentage > 0 %}
                 <div class="discount-badge-v2" style="background: {{ block.settings.discount_badge_bg_color }}; color: {{ block.settings[badge_text_color_setting] }}">
-                  -{{ discount_percentage }}%
+                {% if quantity != 1 %}  
+                €{{ discounted_price | divided_by: multiplicator | round: 2 }} por saco
+                {% endif %}
                 </div>
+              {% endif %}
+            </div>
+            <div class="savings">
+              {% if discount_percentage > 0 %}
+                <p>
+                  Poupa {{ discount_percentage }}%
+                 </p>
               {% endif %}
             </div>
           </div>
@@ -122,9 +143,9 @@
   }
 
   .option-content {
-    border: 2.5px solid #F01C7C;
+    border: 1.5px solid #F01C7C;
     border-radius: 8px;
-    padding: 10px 20px;
+    padding: 12px 10px;
     position: relative;
     background: white;
     transition: all 0.2s ease;
@@ -133,52 +154,64 @@
     align-items: center;
   }
 
-  .quantity-option input[type="radio"]:checked + .option-content {
-    border-color: #690a35 !important;
-    border-width: 4px;
-  }
-
-  /* Base bullet style for unselected state */
-  .option-content:before {
-    content: '';
+  .option-image {
     position: absolute;
-    left: 18px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    background: rgba(189, 189, 189, 0.658);
-    border-radius: 50%;
-    border: 2px solid rgba(248, 248, 248, 0.733);
-    outline: 2px solid rgba(189, 189, 189, 0.658);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgb(182, 182, 182);
     transition: all 0.2s ease;
+    z-index: 1;
   }
 
-  /* Selected state bullet */
-  .quantity-option input[type="radio"]:checked + .option-content:before {
-    background: #F01C7C;
-    border: 2px solid white;
-    outline: 2px solid #F01C7C;
+  .option-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
+
+  .quantity-option input[type="radio"]:checked + .option-content .option-image {
+    border-color: #F01C7C;
+    border-width: 3px;
+  }
+
+  .quantity-option input[type="radio"]:checked + .option-content {
+    border-width: 2px;
+  }
+
+
 
   .option-header {
-    flex: 1;
     display: flex !important;
-    align-items: center;
-    padding-left: 33px;
+    flex-direction: column;
+    align-items: left;
+    padding-left: 60px;
+  }
+
+  .savings p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 0.8;
   }
 
   .title-and-badge {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 8px;
   }
 
   .title-and-badge h4 {
     margin: 0;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 500;
     display: block;
+    letter-spacing: -0.5px;
+    line-height: 1;
   }
 
   .discount-badge-v2 {
@@ -186,8 +219,8 @@
     align-items: center;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 0.8em;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 400;
     background: #000000;
     color: white;
   }
@@ -200,16 +233,17 @@
   }
 
   .price-amount {
-    font-weight: 700;
-    font-size: 15px;
-    line-height: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
   }
 
   .original-price {
-    font-size: 12px;
+    font-size: 15px;
     color: #9CA3AF;
     text-decoration: line-through;
     line-height: normal;
+    font-weight: 300;
   }
 
   .add-to-cart-btn {

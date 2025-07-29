@@ -168,7 +168,8 @@
         ".price-item--sale {color: #ea2078; font-weight: bolder;}",
         ".price__badge-sale {background-color: #ea2078;}",
         "p {line-height: normal; font-weight: 300;}",
-        "h1 {color: black !important; font-weight: 300;}"
+        "h1 {color: black !important; font-weight: 300;}",
+        ".product__media {border-radius: 25px;}"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -472,6 +473,7 @@
         "table_right_bg_color": "#000000",
         "table_text_color": "#ffffff",
         "table_border_color": "#000000",
+        "logo_image": "shopify://shop_images/logo_mais_junto_branco_png.png",
         "icon_fill_color": "#f01c7c",
         "icon_stroke_color": "#f01c7c",
         "icon_check_color": "#ffffff"

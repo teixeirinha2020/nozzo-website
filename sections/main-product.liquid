@@ -680,7 +680,7 @@
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
-                {%- when 'athlete_videos' -%}
+              {%- when 'athlete_videos' -%}
                   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
                   <div class="athlete-videos-section">
                     <div class="swiper athlete-videos-swiper">
@@ -849,10 +849,22 @@
                       background: rgba(0,0,0,0.9) !important;
                       transform: translateY(-50%) scale(1.1) !important;
                     }
-                    .athlete-swiper-arrow:after { 
+                    .swiper-button-prev:after { 
                       font-size: 16px !important; 
                       font-weight: bold !important;
+                      position: relative;
+                      top: 7px;
+                      left: -2px;
                     }
+
+                    .swiper-button-next:after { 
+                      font-size: 16px !important; 
+                      font-weight: bold !important;
+                      position: relative;
+                      top: 7px;
+                      left: 2px;
+                    }
+
                     .athlete-swiper-arrow.swiper-button-disabled {
                       opacity: 0.5 !important;
                     }
@@ -2768,6 +2780,11 @@
           "content": "Option 1 Settings"
         },
         {
+          "type": "image_picker",
+          "id": "option_1_image",
+          "label": "Option 1 Image"
+        },
+        {
           "type": "text",
           "id": "option_1_title",
           "label": "Option 1 title",
@@ -2800,6 +2817,11 @@
         {
           "type": "header",
           "content": "Option 2 Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "option_2_image",
+          "label": "Option 2 Image"
         },
         {
           "type": "text",
@@ -2836,6 +2858,11 @@
           "content": "Option 3 Settings"
         },
         {
+          "type": "image_picker",
+          "id": "option_3_image",
+          "label": "Option 3 Image"
+        },
+        {
           "type": "text",
           "id": "option_3_title",
           "label": "Option 3 title",
@@ -2868,6 +2895,11 @@
         {
           "type": "header",
           "content": "Option 4 Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "option_4_image",
+          "label": "Option 4 Image"
         },
         {
           "type": "text",
