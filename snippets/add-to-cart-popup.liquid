@@ -19,9 +19,7 @@
         <h3 class="product-title">{{ product.title }}</h3>
         <div class="product-price">
           <span class="current-price">€{{ current_variant.price | divided_by: 100.0 | round: 2 }}</span>
-          {% if current_variant.compare_at_price > current_variant.price %}
-            <s class="compare-price">€{{ current_variant.compare_at_price | divided_by: 100.0 | round: 2 }}</s>
-          {% endif %}
+          <s class="compare-price" style="display: none;">€{{ current_variant.compare_at_price | divided_by: 100.0 | round: 2 }}</s>
         </div>
       </div>
     </div>
@@ -213,6 +211,7 @@ class AddToCartPopup {
   init() {
     this.setupEventListeners();
     this.updateVariantId();
+    this.syncWithBuyMoreSaveMore();
   }
 
   setupEventListeners() {
@@ -261,6 +260,7 @@ class AddToCartPopup {
     this.isVisible = true;
     this.popup.classList.add('show');
     this.updatePopupPosition();
+    this.syncWithBuyMoreSaveMore();
   }
 
   hidePopup() {
@@ -287,6 +287,15 @@ class AddToCartPopup {
     const variantIdField = document.querySelector('form[action*="/cart/add"] [name="id"]');
     if (variantIdField && this.popup) {
       this.popup.dataset.variantId = variantIdField.value;
+    }
+  }
+
+  syncWithBuyMoreSaveMore() {
+    // Check if there's a function to update popup data from buy-more-save-more
+    if (window.updatePopupData && typeof window.updatePopupData === 'function') {
+      setTimeout(() => {
+        window.updatePopupData();
+      }, 200);
     }
   }
 
