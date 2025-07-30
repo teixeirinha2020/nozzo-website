@@ -13,7 +13,15 @@
 
 {% assign glass_blur_int = section.settings.glass_blur | default: 10 %}
 
+{%- if section.settings.glass_effect == true -%}
+  <style>
+  .header__icon--menu[aria-expanded='true']::before {
+    background-color: transparent !important;
+  }
+  </style>
+{%- endif -%}
 <style> 
+
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;
@@ -96,7 +104,14 @@
     }
   }
 
-  .glass-effect {
+  .glass-effect:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur({{ glass_blur_int }}px) saturate(180%);
     -webkit-backdrop-filter: blur({{ glass_blur_int }}px); saturate(180%) /* suporte para Safari */
@@ -122,6 +137,53 @@
     filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
   }
 
+  /* Menu Drawer Glass Effect */
+  .menu-drawer--glass {
+    margin-top: var(--header-top-margin);
+    border-radius: 0.5rem;
+    background: transparent !important;
+    backdrop-filter: blur({{ glass_blur_int }}px) saturate(180%);
+    -webkit-backdrop-filter: blur({{ glass_blur_int }}px) saturate(180%);
+    border: 1px solid rgba(210, 210, 210, 0.8);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3);
+
+  }
+
+  .menu-drawer--glass::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(1px);
+    box-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
+                inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+    opacity: 0.6;
+    z-index: -1;
+    filter: blur(1px) brightness(115%);
+    pointer-events: none;
+  }
+
+    .glass-effect:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: .5rem;
+    backdrop-filter: blur(1px);
+    box-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
+                inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+    opacity: 0.6;
+    z-index: -1;
+    filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+  }
+
+
 {%- endstyle -%}
 
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
@@ -134,7 +196,11 @@
   endfor
 -%}
 
-<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper {% if section.settings.glass_effect == true %} glass-color {% endif %}  color-{{ section.settings.color_scheme }} gradient {% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+{%- if section.settings.sticky_header_type != 'none' -%}
+  <sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}" class="header-wrapper {% if section.settings.glass_effect == true %} glass-color {% endif %}  color-{{ section.settings.color_scheme }} gradient {% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+{%- else -%}
+  <div class="header-wrapper {% if section.settings.glass_effect == true %} glass-color {% endif %}  color-{{ section.settings.color_scheme }} gradient {% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+{%- endif -%}
   {%- liquid
     assign social_links = false
     assign localization_forms = false
@@ -308,7 +374,11 @@
       </a>
     </div>
   </header>
-</{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
+{%- if section.settings.sticky_header_type != 'none' -%}
+  </sticky-header>
+{%- else -%}
+  </div>
+{%- endif -%}
 
 {%- if settings.cart_type == "notification" -%}
   {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}

@@ -565,8 +565,12 @@ class HeaderDrawer extends MenuDrawer {
       this.borderOffset || this.closest('.header-wrapper').classList.contains('header-wrapper--border-bottom') ? 1 : 0;
     document.documentElement.style.setProperty(
       '--header-bottom-position',
-      `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
+      `${parseInt(this.header.getBoundingClientRect().bottom + this.header.getBoundingClientRect().top + this.header.getBoundingClientRect().top - this.borderOffset)}px`
     );
+    document.documentElement.style.setProperty(
+      '--header-top-margin',
+      `${parseInt(this.header.getBoundingClientRect().top - this.borderOffset)}px`
+      );
     this.header.classList.add('menu-open');
 
     setTimeout(() => {
@@ -590,10 +594,19 @@ class HeaderDrawer extends MenuDrawer {
     this.header &&
       document.documentElement.style.setProperty(
         '--header-bottom-position',
-        `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`
+        `${parseInt(this.header.getBoundingClientRect().bottom + this.header.getBoundingClientRect().top + this.header.getBoundingClientRect().top - this.borderOffset)}px`
       );
     document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
   };
+
+  onResize = () => {
+    this.header &&
+      document.documentElement.style.setProperty(
+        '--header-top-margin',
+        `${parseInt(this.header.getBoundingClientRect().top - this.borderOffset)}px`
+      );
+  };
+
 }
 
 customElements.define('header-drawer', HeaderDrawer);

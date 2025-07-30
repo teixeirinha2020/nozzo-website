@@ -70,7 +70,7 @@
                 </h4>
               {% endif %}
               {% if discount_percentage > 0 %}
-                <div class="discount-badge-v2" style="background: {{ block.settings.discount_badge_bg_color }}; color: {{ block.settings[badge_text_color_setting] }}">
+                <div class="discount-badge-v2" style="background: {{ block.settings.discount_badge_bg_color }}; color: {{ block.settings[badge_text_color_setting] }}; {% if quantity == 1 %} display: none; {% endif %}">
                 {% if quantity != 1 %}  
                 €{{ discounted_price | divided_by: multiplicator | round: 2 }} por saco
                 {% endif %}
@@ -195,7 +195,7 @@
   .savings p {
     margin: 0;
     font-size: 14px;
-    line-height: 0.8;
+    font-weight: 400 !important;
   }
 
   .title-and-badge {
@@ -203,6 +203,15 @@
     flex-direction: row;
     align-items: center;
     gap: 8px;
+  }
+
+  @media screen and (max-width: 360px) {
+    .title-and-badge {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
   }
 
   .title-and-badge h4 {
@@ -219,7 +228,7 @@
     align-items: center;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 400;
     background: #000000;
     color: white;
