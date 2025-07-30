@@ -148,7 +148,8 @@
             "button_bg_color": "#1a1b18",
             "button_text_color": "#ffffff",
             "enable_glass_effect": true,
-            "glass_blur": 10
+            "glass_blur": 10,
+            "discount_badge_bg_color_popup": ""
           }
         },
         "description": {
@@ -179,9 +180,9 @@
         ".globo-color-swatch--watermarks {display: none;}",
         ".icon-with-text--vertical .icon-with-text__item {margin-bottom: 5px;}",
         ".product__info-container .product-form,.product__info-container .product__description,.product__info-container .icon-with-text {margin: 2rem 0;}",
-        ".price-item--sale {color: #ea2078; font-weight: bolder;}",
+        ".price-item--sale {color: #ea2078;}",
         ".price__badge-sale {background-color: #ea2078;}",
-        "p {line-height: normal; font-weight: 300;}",
+        "p {line-height: normal; font-weight: 400; color: black;}",
         "h1 {color: black !important; font-weight: 300;}",
         ".product__media {border-radius: 25px;}"
       ],
