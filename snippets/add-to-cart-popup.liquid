@@ -2,6 +2,8 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 {% assign current_variant_id = current_variant.id %}
 {% assign glass_blur_int = block.settings.glass_blur | default: 10 %}
+{% assign compare_at_price_2 = current_variant.compare_at_price %}
+{% assign  price_2 = current_variant.price %}
 
 <div class="add-to-cart-popup{% if block.settings.enable_glass_effect %} glass-effect-popup{% endif %}" data-variant-id="{{ current_variant_id }}" data-product-id="{{ product.id }}">
   <div class="popup-content">
@@ -17,20 +19,31 @@
       
       <div class="product-details">
         <h3 class="product-title" id="popup-product-title">{{ product.title }}</h3>
-        <div class="product-price">
-          <span class="current-price" id="popup-current-price">€{{ current_variant.price | divided_by: 100.0 | round: 2 }}</span>
-          <s class="compare-price" id="popup-compare-price" style="display: none;">€{{ current_variant.compare_at_price | divided_by: 100.0 | round: 2 }}</s>
+        <div class="product-price-2">
+          <div class="price-container">
+            <span class="current-price" id="popup-current-price2">€{{ price_2 | divided_by: 100.0 | round: 2 }}</span>
+            <s class="compare-price" id="popup-compare-price2" style="display: none;">€{{ compare_at_price_2 | divided_by: 100.0 | round: 2 }}</s>
+          </div>
+          <div class="discount-badge-v2" id="popup-discount-badge" style="display:none; background: {{ block.settings.discount_badge_bg_color_popup }};"></div>
         </div>
       </div>
     </div>
-
-    <div class="popup-actions">
-      <button type="button" class="add-to-cart-btn" style="background: {{ block.settings.button_bg_color }}; color: {{ block.settings.button_text_color }}">
-        <span class="cart-icon">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 128 128" style="enable-background:new 0 0 128 128" xml:space="preserve"><path fill="currentColor" d="M45.3 81.2h78V43.7L35.9 25.4l-3.1-12.9-12.6-4.2c0-.2.1-.3.1-.5 0-4.3-3.5-7.8-7.8-7.8S4.7 3.5 4.7 7.8s3.5 7.8 7.8 7.8c1.8 0 3.4-.6 4.7-1.6l9.4 4.7L39 78l-12.5 9.4V103l5.7 7.1c-1.6 1.9-2.5 4.3-2.5 7 0 6 4.9 10.9 10.9 10.9s10.9-4.9 10.9-10.9-4.9-10.9-10.9-10.9c-.9 0-1.8.1-2.6.3l-2.1-3.4h65.6l3.6 6c-2.2 2-3.6 4.9-3.6 8.1 0 6 4.9 10.9 10.9 10.9s10.9-4.9 10.9-10.9-4.9-10.9-10.9-10.9h-.3l-1.3-3.1h12.5V97H32.8v-6.2l12.5-9.6zm0-6.3-4.6-21.4.6 3L59.8 58l3.8 17H45.3zm21.8 0-3.7-16.7 18.1 1.4 1.4 15.3H67.1zm18.8 0-1.4-15 17 1.3v13.7H85.9zm31.2-15.6v15.6h-12.5V61.5l12.5 1v-3.2l-12.5-1V44.4l12.5 2.4v12.5zM35.9 31.2l65.6 12.6V58l-17.3-1.4-1.5-16.4-3.1-.6 1.6 16.8-18.5-1.5-4.3-19.3-3.7-.7 4.4 19.7-18.5-1.5-4.7-21.9zm76.5 81.2c2.6 0 4.7 2.1 4.7 4.7s-2.1 4.7-4.7 4.7-4.7-2.1-4.7-4.7 2.1-4.7 4.7-4.7zm-71.8 0c2.6 0 4.7 2.1 4.7 4.7s-2.1 4.7-4.7 4.7-4.7-2.1-4.7-4.7 2.1-4.7 4.7-4.7z"/></svg>
-        </span>
-        <span class="button-text">{{ block.settings.button_text }}</span>
-      </button>
+    <div class="popup-actions-and-price">
+      <div class="product-price">
+          <div class="price-container">
+            <span class="current-price" id="popup-current-price">€{{ current_variant.price | divided_by: 100.0 | round: 2 }}</span>
+            <s class="compare-price" id="popup-compare-price" style="display: none;">€{{ current_variant.compare_at_price | divided_by: 100.0 | round: 2 }}</s>
+          </div>
+          <div class="discount-badge-v2" id="popup-discount-badge" style="display:none; background: {{ block.settings.discount_badge_bg_color_popup }};"></div>
+        </div>
+      <div class="popup-actions">
+        <button type="button" class="add-to-cart-btn" style="background: {{ block.settings.button_bg_color }}; color: {{ block.settings.button_text_color }}">
+          <span class="cart-icon">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 128 128" style="enable-background:new 0 0 128 128" xml:space="preserve"><path fill="currentColor" d="M45.3 81.2h78V43.7L35.9 25.4l-3.1-12.9-12.6-4.2c0-.2.1-.3.1-.5 0-4.3-3.5-7.8-7.8-7.8S4.7 3.5 4.7 7.8s3.5 7.8 7.8 7.8c1.8 0 3.4-.6 4.7-1.6l9.4 4.7L39 78l-12.5 9.4V103l5.7 7.1c-1.6 1.9-2.5 4.3-2.5 7 0 6 4.9 10.9 10.9 10.9s10.9-4.9 10.9-10.9-4.9-10.9-10.9-10.9c-.9 0-1.8.1-2.6.3l-2.1-3.4h65.6l3.6 6c-2.2 2-3.6 4.9-3.6 8.1 0 6 4.9 10.9 10.9 10.9s10.9-4.9 10.9-10.9-4.9-10.9-10.9-10.9h-.3l-1.3-3.1h12.5V97H32.8v-6.2l12.5-9.6zm0-6.3-4.6-21.4.6 3L59.8 58l3.8 17H45.3zm21.8 0-3.7-16.7 18.1 1.4 1.4 15.3H67.1zm18.8 0-1.4-15 17 1.3v13.7H85.9zm31.2-15.6v15.6h-12.5V61.5l12.5 1v-3.2l-12.5-1V44.4l12.5 2.4v12.5zM35.9 31.2l65.6 12.6V58l-17.3-1.4-1.5-16.4-3.1-.6 1.6 16.8-18.5-1.5-4.3-19.3-3.7-.7 4.4 19.7-18.5-1.5-4.7-21.9zm76.5 81.2c2.6 0 4.7 2.1 4.7 4.7s-2.1 4.7-4.7 4.7-4.7-2.1-4.7-4.7 2.1-4.7 4.7-4.7zm-71.8 0c2.6 0 4.7 2.1 4.7 4.7s-2.1 4.7-4.7 4.7-4.7-2.1-4.7-4.7 2.1-4.7 4.7-4.7z"/></svg>
+          </span>
+          <span class="button-text">{{ block.settings.button_text }}</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -72,7 +85,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 20px;
+    padding: 12px 50px;
     max-width: 1440px;
     margin: 0 auto;
   }
@@ -82,6 +95,13 @@
     align-items: center;
     gap: 15px;
     flex: 1;
+  }
+
+  .popup-actions-and-price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
 
   .product-image {
@@ -103,29 +123,53 @@
   }
 
   .product-title {
-    margin: 0 0 4px 0;
-    font-size: 16px;
-    font-weight: 600;
+    margin:0;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
     color: rgb(var(--color-foreground));
     line-height: 1.2;
   }
 
   .product-price {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+  }
+
+  .product-price-2 {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .price-container {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .discount-badge-v2 {
+    margin-left: 0;
   }
 
   .current-price {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    line-height: 1;
     color: rgb(var(--color-foreground));
   }
 
   .compare-price {
-    font-size: 14px;
+    font-size: 18px;
     color: rgb(var(--color-foreground-4));
+    letter-spacing: -0.5px;
     text-decoration: line-through;
+    line-height: 1;
   }
 
   .popup-actions {
@@ -139,8 +183,9 @@
     padding: 12px 24px;
     border: none;
     border-radius: var(--inputs-radius);
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
     cursor: pointer;
     transition: opacity 0.2s ease;
     text-transform: uppercase;
@@ -162,16 +207,108 @@
     fill: currentColor;
   }
 
+  .discount-badge-v2 {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 400;
+    background: {{ block.settings.discount_badge_bg_color | default: 'var(--color-accent, #F01C7C)' }};
+    color: #fff;
+  }
+
+  @media screen and (max-width: 990px) {
+    .popup-content {
+      padding: 6px 32px;
+    }
+
+    .product-title , .current-price {
+      font-size: 18px;
+    }
+
+    .compare-price {
+      font-size: 16px ;
+    }
+
+    .price-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+  }
+
   @media screen and (max-width: 749px) {
     .popup-content {
-      padding: 10px 15px;
-      flex-direction: column;
-      gap: 12px;
-      align-items: stretch;
+      padding: 6px 30px;
     }
 
     .product-info {
       justify-content: center;
+    }
+
+    .product-price {
+      display: none;
+    }
+
+    .product-price-2 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .price-container {
+      display: flex;
+      flex-direction: row;
+      gap: 6px;
+    }
+
+    .product-title {
+      font-size: 16px;
+    }
+
+    .current-price {
+      font-size: 16px;
+    }
+
+    .compare-price {
+      font-size: 14px;
+    }
+
+    .add-to-cart-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 20px;
+    }
+
+    .product-details {
+      gap: 4px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width: 630px) {
+    .button-text {
+      display: none;
+    }
+    
+    
+    .add-to-cart-btn {
+      padding: 12px 20px;
+      width: 120px;
+    }
+  }
+
+  @media screen and (max-width: 520px){
+
+
+    .add-to-cart-btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      width: fit-content;
     }
 
     .product-title {
@@ -179,13 +316,11 @@
     }
 
     .current-price {
-      font-size: 16px;
+      font-size: 14px;
     }
 
-    .add-to-cart-btn {
-      width: 100%;
-      justify-content: center;
-      padding: 14px 20px;
+    .compare-price {
+      font-size: 13px;
     }
   }
 
@@ -313,16 +448,36 @@ class AddToCartPopup {
     const originalPrice = optionContent.querySelector('.original-price');
     const popupCurrentPrice = document.getElementById('popup-current-price');
     const popupComparePrice = document.getElementById('popup-compare-price');
+    const popupCurrentPrice2 = document.getElementById('popup-current-price2');
+    const popupComparePrice2 = document.getElementById('popup-compare-price2');
 
     if (priceAmount && popupCurrentPrice) {
       popupCurrentPrice.textContent = priceAmount.textContent;
+      popupCurrentPrice2.textContent = priceAmount.textContent;
     }
 
     if (originalPrice && popupComparePrice) {
       popupComparePrice.textContent = originalPrice.textContent;
       popupComparePrice.style.display = 'inline';
+      popupComparePrice2.textContent = originalPrice.textContent;
+      popupComparePrice2.style.display = 'inline';
     } else if (popupComparePrice) {
       popupComparePrice.style.display = 'none';
+      popupComparePrice2.style.display = 'none';
+    }
+
+    // Atualizar badge de desconto
+    const discountBadge = document.getElementById('popup-discount-badge');
+    if (discountBadge) {
+      const savings = optionContent.querySelector('.savings p');
+      if (savings && savings.textContent.match(/\d+%/)) {
+        discountBadge.textContent = savings.textContent.trim();
+        discountBadge.style.display = 'inline-flex';
+        // Cor dinâmica
+        
+      } else {
+        discountBadge.style.display = 'none';
+      }
     }
   }
 
