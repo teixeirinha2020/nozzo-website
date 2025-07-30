@@ -19,7 +19,9 @@
       {% assign border_color_setting = 'option_' | append: i | append: '_border_color' %}
       {% assign badge_text_color_setting = 'option_' | append: i | append: '_badge_text_color' %}
       {% assign image_setting = 'option_' | append: i | append: '_image' %}
-      
+      {%  assign j = i |  minus: 1  %}
+      {% assign discount_metafield = product.metafields.custom.discount.value[j] %} 
+      {% assign discount_metafield_100 = discount_metafield | times: 100 %}
       {% assign quantity = i %}
       {% assign total_price = base_price | times: quantity %}
       {%  assign multiplicator = quantity | times: 100.0  %}
@@ -27,18 +29,30 @@
       {% case quantity %}
         {% when 1 %}
           {% assign discounted_price = block.settings.price_1_unit %}
+          {% if discounted_price <= 0 %}
+            {% assign discounted_price = total_price | minus: discount_metafield_100 %}
+          {% endif %}
           {% assign original_price = total_price %}
-          {% assign discount_percentage = total_price | minus: discounted_price | times: 100.0 | divided_by: total_price | round %}
+          {% assign discount_percentage = total_price | minus: discounted_price | times: 100.0 | divided_by: total_price | round: 2 %}
         {% when 2 %}
           {% assign discounted_price = block.settings.price_2_units %}
+          {% if discounted_price <= 0 %}
+            {% assign discounted_price = total_price | minus: discount_metafield_100 %}
+          {% endif %}
           {% assign original_price = total_price %}
           {% assign discount_percentage = total_price | minus: discounted_price | times: 100.0 | divided_by: total_price | round %}
         {% when 3 %}
           {% assign discounted_price = block.settings.price_3_units %}
+          {% if discounted_price <= 0 %}
+            {% assign discounted_price = total_price | minus: discount_metafield_100 %}
+          {% endif %}
           {% assign original_price = total_price %}
           {% assign discount_percentage = total_price | minus: discounted_price | times: 100.0 | divided_by: total_price | round %}
         {% when 4 %}
           {% assign discounted_price = block.settings.price_4_units %}
+          {% if discounted_price <= 0 %}
+            {% assign discounted_price = total_price | minus: discount_metafield_100 %}
+          {% endif %}
           {% assign original_price = total_price %}
           {% assign discount_percentage = total_price | minus: discounted_price | times: 100.0 | divided_by: total_price | round %}
       {% endcase %}
