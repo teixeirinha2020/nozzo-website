@@ -19,6 +19,7 @@
       
       <div class="product-details">
         <h3 class="product-title" id="popup-product-title">{{ product.title }}</h3>
+        <h3 class="product-title product-title-2" id="popup-product-title-2">{{ product.title }}</h3>
         <div class="product-price-2">
           <div class="price-container">
             <span class="current-price" id="popup-current-price2">€{{ price_2 | divided_by: 100.0 | round: 2 }}</span>
@@ -77,7 +78,7 @@
 }
 
 .add-to-cart-popup.with-header {
-  top: calc(var(--header-bottom-position, 0px) + 20px);
+  top: calc(var(--header-bottom-position, 0px) + 10px);
 }
 
 
@@ -129,6 +130,7 @@
     letter-spacing: -0.5px;
     color: rgb(var(--color-foreground));
     line-height: 1.2;
+    width: fit-content;
   }
 
   .product-price {
@@ -143,6 +145,10 @@
     flex-direction: row;
     align-items: center;
     gap: 6px;
+  }
+
+  .product-title-2 {
+    display: none;
   }
 
   .price-container {
@@ -248,7 +254,7 @@
       justify-content: center;
     }
 
-    .product-price {
+    .add-to-cart-popup .product-price {
       display: none;
     }
 
@@ -291,22 +297,37 @@
   }
 
   @media screen and (max-width: 630px) {
-    .button-text {
+    .add-to-cart-popup .button-text {
       display: none;
     }
     
+    .product-image {
+      width: 50px;
+      height: 50px;
+    }
     
     .add-to-cart-btn {
       padding: 12px 20px;
       width: 120px;
     }
+
+    .product-info {
+      gap: 6px;
+    }
   }
 
   @media screen and (max-width: 520px){
 
+    .popup-content {
+      padding: 6px 12px;
+    }
+
+    .product-details {
+      gap: 2px;
+    }
 
     .add-to-cart-btn {
-      padding: 12px 20px;
+      padding: 12px 16px;
       border-radius: 10px;
       width: fit-content;
     }
@@ -321,6 +342,29 @@
 
     .compare-price {
       font-size: 13px;
+    }
+
+    .product-price-2 , .price-container {
+      gap: 3px;
+    }
+  }
+
+  @media screen and (max-width: 365px) {
+
+    .product-title {
+      display: none;
+    }
+
+    .product-title-2 {
+      display: flex;
+    }
+    
+    .price-container {
+      flex-direction: column;
+      gap:0;
+    }
+    .product-price-2 {
+      gap: 6px;
     }
   }
 
@@ -394,6 +438,9 @@ class AddToCartPopup {
     // Listen for quantity choice changes in buy-more-save-more
     document.addEventListener('change', this.handleQuantityChoiceChange.bind(this));
 
+    // Listen for window resize to update badge format
+    window.addEventListener('resize', this.handleResize.bind(this), { passive: true });
+
     const addToCartBtn = this.popup.querySelector('.add-to-cart-btn');
     if (addToCartBtn) {
       addToCartBtn.addEventListener('click', this.handleAddToCart.bind(this));
@@ -403,6 +450,32 @@ class AddToCartPopup {
   handleQuantityChoiceChange(event) {
     if (event.target.matches('input[name="quantity-choice"]')) {
       this.updatePopupContent();
+    }
+  }
+
+  handleResize() {
+    // Atualizar apenas a badge quando a tela for redimensionada
+    const discountBadge = document.getElementById('popup-discount-badge');
+    if (discountBadge && discountBadge.style.display !== 'none') {
+      const selectedOption = document.querySelector('input[name="quantity-choice"]:checked');
+      if (selectedOption) {
+        const optionContent = selectedOption.closest('.quantity-option');
+        if (optionContent) {
+          const savings = optionContent.querySelector('.savings p');
+          if (savings && savings.textContent.match(/\d+%/)) {
+            const percentageMatch = savings.textContent.match(/(\d+)%/);
+            if (percentageMatch) {
+              const percentage = percentageMatch[1];
+              
+              if (window.innerWidth <= 365) {
+                discountBadge.textContent = `-${percentage}%`;
+              } else {
+                discountBadge.textContent = savings.textContent.trim();
+              }
+            }
+          }
+        }
+      }
     }
   }
 
@@ -437,10 +510,12 @@ class AddToCartPopup {
     // Update title - combine product name with option title
     const optionTitle = document.getElementById(`option-${quantity}-title`);
     const popupTitle = document.getElementById('popup-product-title');
+    const popupTitle2 = document.getElementById('popup-product-title-2');
     if (optionTitle && popupTitle) {
       const productName = '{{ product.title }}';
       const optionTitleText = optionTitle.textContent;
-      popupTitle.textContent = `${productName} - ${optionTitleText}`;
+      popupTitle.textContent = `${productName}-${optionTitleText}`;
+      popupTitle2.textContent = `${optionTitleText}`;
     }
 
     // Update price
@@ -471,7 +546,18 @@ class AddToCartPopup {
     if (discountBadge) {
       const savings = optionContent.querySelector('.savings p');
       if (savings && savings.textContent.match(/\d+%/)) {
-        discountBadge.textContent = savings.textContent.trim();
+        // Extrair apenas o número da porcentagem
+        const percentageMatch = savings.textContent.match(/(\d+)%/);
+        if (percentageMatch) {
+          const percentage = percentageMatch[1];
+          
+          // Verificar se a tela é menor que 365px
+          if (window.innerWidth <= 365) {
+            discountBadge.textContent = `-${percentage}%`;
+          } else {
+            discountBadge.textContent = savings.textContent.trim();
+          }
+        }
         discountBadge.style.display = 'inline-flex';
         // Cor dinâmica
         
