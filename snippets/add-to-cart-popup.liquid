@@ -1,27 +1,25 @@
 <!-- Add to Cart Popup Snippet Rendered -->
 {% assign current_variant = product.selected_or_first_available_variant %}
 {% assign current_variant_id = current_variant.id %}
+{% assign glass_blur_int = block.settings.glass_blur | default: 10 %}
 
-<div class="add-to-cart-popup" data-variant-id="{{ current_variant_id }}" data-product-id="{{ product.id }}">
+<div class="add-to-cart-popup{% if block.settings.enable_glass_effect %} glass-effect-popup{% endif %}" data-variant-id="{{ current_variant_id }}" data-product-id="{{ product.id }}">
   <div class="popup-content">
     <div class="product-info">
-      {% if product.featured_image %}
-        <div class="product-image">
-          <img src="{{ product.featured_image | img_url: '80x80', crop: 'center' }}" 
-               alt="{{ product.featured_image.alt | escape }}"
-               width="80" 
-               height="80"
-               loading="lazy">
-        </div>
-      {% endif %}
+      <div class="product-image">
+        <img src="{{ product.featured_image | img_url: '80x80', crop: 'center' }}" 
+             alt="{{ product.featured_image.alt | escape }}"
+             width="80" 
+             height="80"
+             loading="lazy"
+             id="popup-product-image">
+      </div>
       
       <div class="product-details">
-        <h3 class="product-title">{{ product.title }}</h3>
+        <h3 class="product-title" id="popup-product-title">{{ product.title }}</h3>
         <div class="product-price">
-          <span class="current-price">€{{ current_variant.price | divided_by: 100.0 | round: 2 }}</span>
-          {% if current_variant.compare_at_price > current_variant.price %}
-            <s class="compare-price">€{{ current_variant.compare_at_price | divided_by: 100.0 | round: 2 }}</s>
-          {% endif %}
+          <span class="current-price" id="popup-current-price">€{{ current_variant.price | divided_by: 100.0 | round: 2 }}</span>
+          <s class="compare-price" id="popup-compare-price" style="display: none;">€{{ current_variant.compare_at_price | divided_by: 100.0 | round: 2 }}</s>
         </div>
       </div>
     </div>
@@ -45,9 +43,9 @@
   right: 0;
   z-index: 7;
   margin: 0px 30px;
-  background-color: white;
+  background-color: rgb(var(--color-background));
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid rgb(var(--color-foreground-4));
   border-radius: .5rem;
 
   transform: translateY(-50px) scale(0.98);
@@ -108,7 +106,7 @@
     margin: 0 0 4px 0;
     font-size: 16px;
     font-weight: 600;
-    color: #1a1b18;
+    color: rgb(var(--color-foreground));
     line-height: 1.2;
   }
 
@@ -121,12 +119,12 @@
   .current-price {
     font-size: 18px;
     font-weight: 700;
-    color: #1a1b18;
+    color: rgb(var(--color-foreground));
   }
 
   .compare-price {
     font-size: 14px;
-    color: #9CA3AF;
+    color: rgb(var(--color-foreground-4));
     text-decoration: line-through;
   }
 
@@ -140,7 +138,7 @@
     gap: 8px;
     padding: 12px 24px;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--inputs-radius);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -190,6 +188,43 @@
       padding: 14px 20px;
     }
   }
+
+ .glass-effect-popup {
+    background-color: transparent !important;
+  }
+  
+ .glass-effect-popup:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur({{ glass_blur_int }}px) saturate(180%);
+    -webkit-backdrop-filter: blur({{ glass_blur_int }}px) saturate(180%); /* suporte para Safari */
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(210, 210, 210, 0.8);
+    border-radius: 0.5rem;
+  }
+
+  .glass-effect-popup:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: .5rem;
+    backdrop-filter: blur(1px);
+    box-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
+                inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+    opacity: 0.6;
+    z-index: -1;
+    filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+  }
 </style>
 
 <script>
@@ -213,6 +248,7 @@ class AddToCartPopup {
   init() {
     this.setupEventListeners();
     this.updateVariantId();
+    this.updatePopupContent();
   }
 
   setupEventListeners() {
@@ -220,9 +256,73 @@ class AddToCartPopup {
     document.addEventListener('change', this.handleVariantChange.bind(this));
     document.addEventListener('variantChange', this.updateVariantId.bind(this));
 
+    // Listen for quantity choice changes in buy-more-save-more
+    document.addEventListener('change', this.handleQuantityChoiceChange.bind(this));
+
     const addToCartBtn = this.popup.querySelector('.add-to-cart-btn');
     if (addToCartBtn) {
       addToCartBtn.addEventListener('click', this.handleAddToCart.bind(this));
+    }
+  }
+
+  handleQuantityChoiceChange(event) {
+    if (event.target.matches('input[name="quantity-choice"]')) {
+      this.updatePopupContent();
+    }
+  }
+
+  updatePopupContent() {
+    // Check if buy-more-save-more exists
+    const buyMoreSaveMore = document.querySelector('.buy-more-save-more');
+    if (!buyMoreSaveMore) return;
+
+    const selectedOption = document.querySelector('input[name="quantity-choice"]:checked');
+    if (!selectedOption) return;
+
+    const quantity = parseInt(selectedOption.value);
+    const optionContent = selectedOption.closest('.quantity-option');
+    
+    if (!optionContent) return;
+
+    // Update image - try to find the specific option image first
+    const optionImage = document.getElementById(`option-${quantity}-image`);
+    const popupImage = document.getElementById('popup-product-image');
+    if (optionImage && popupImage) {
+      popupImage.src = optionImage.src;
+      popupImage.alt = optionImage.alt;
+    } else {
+      // Fallback to featured image if option image not found
+      const featuredImage = document.querySelector('.product__media img, .product__media-item img');
+      if (featuredImage && popupImage) {
+        popupImage.src = featuredImage.src;
+        popupImage.alt = featuredImage.alt;
+      }
+    }
+
+    // Update title - combine product name with option title
+    const optionTitle = document.getElementById(`option-${quantity}-title`);
+    const popupTitle = document.getElementById('popup-product-title');
+    if (optionTitle && popupTitle) {
+      const productName = '{{ product.title }}';
+      const optionTitleText = optionTitle.textContent;
+      popupTitle.textContent = `${productName} - ${optionTitleText}`;
+    }
+
+    // Update price
+    const priceAmount = optionContent.querySelector('.price-amount');
+    const originalPrice = optionContent.querySelector('.original-price');
+    const popupCurrentPrice = document.getElementById('popup-current-price');
+    const popupComparePrice = document.getElementById('popup-compare-price');
+
+    if (priceAmount && popupCurrentPrice) {
+      popupCurrentPrice.textContent = priceAmount.textContent;
+    }
+
+    if (originalPrice && popupComparePrice) {
+      popupComparePrice.textContent = originalPrice.textContent;
+      popupComparePrice.style.display = 'inline';
+    } else if (popupComparePrice) {
+      popupComparePrice.style.display = 'none';
     }
   }
 
@@ -261,6 +361,7 @@ class AddToCartPopup {
     this.isVisible = true;
     this.popup.classList.add('show');
     this.updatePopupPosition();
+    this.updatePopupContent(); // Update content when showing popup
   }
 
   hidePopup() {

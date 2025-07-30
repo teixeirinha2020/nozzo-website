@@ -682,7 +682,7 @@
                                 aria-label="{{ 'general.slider.next_slide' | t }}"
                               >
                                 <span class="svg-wrapper">
-                                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                                  {{- 'icon-caret.svg' | inline_asset_content -}} 
                                 </span>
                               </button>
                             </div>
@@ -3009,6 +3009,22 @@
           "id": "button_text_color",
           "label": "Button text color",
           "default": "#ffffff"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_glass_effect",
+          "label": "Enable glass effect",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "glass_blur",
+          "min": 5,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "label": "Glass blur intensity",
+          "default": 10
         }
       ]
     }

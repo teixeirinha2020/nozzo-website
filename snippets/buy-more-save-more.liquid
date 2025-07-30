@@ -58,14 +58,16 @@
                    alt="Option {{ i }}" 
                    width="40" 
                    height="40"
-                   loading="lazy">
+                   loading="lazy"
+                   id="option-{{ i }}-image"
+                   data-option-quantity="{{ quantity }}">
             </div>
           {% endif %}
 
           <div class="option-header">
             <div class="title-and-badge">
               {% if block.settings[title_setting] != blank %}
-                <h4 style="color: {{ block.settings[title_color_setting] }}">
+                <h4 style="color: {{ block.settings[title_color_setting] }}" id="option-{{ i }}-title" data-option-quantity="{{ quantity }}">
                   {{ block.settings[title_setting] }}
                 </h4>
               {% endif %}
@@ -74,7 +76,7 @@
                 {% if quantity != 1 %}  
                 €{{ discounted_price | divided_by: multiplicator | round: 2 }} por saco
                 {% endif %}
-                </div>
+                </div> 
               {% endif %}
             </div>
             <div class="savings">
