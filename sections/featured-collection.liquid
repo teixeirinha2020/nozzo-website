@@ -113,7 +113,8 @@
               show_rating: section.settings.show_rating,
               skip_styles: skip_card_product_styles,
               section_id: section.id,
-              quick_add: section.settings.quick_add
+              quick_add: section.settings.quick_add,
+              show_discounts: section.settings.show_discounts
             %}
           </li>
           {%- assign skip_card_product_styles = true -%}
@@ -415,6 +416,13 @@
       "id": "show_vendor",
       "default": false,
       "label": "t:sections.featured-collection.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discounts",
+      "default": false,
+      "label": "Show Discounts",
+      "info": "Define the discounts in the product's metafields"
     },
     {
       "type": "checkbox",

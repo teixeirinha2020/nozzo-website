@@ -24,7 +24,7 @@
           "type": "price",
           "settings": {
             "enable_custom_sale": true,
-            "custom_sale_price": 2499,
+            "custom_sale_price": 0,
             "sale_price_color": "#f01c7c",
             "sale_badge_text": "EM PROMOÇÃO",
             "sale_badge_bg_color": "#f01c7c",
