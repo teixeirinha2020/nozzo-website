@@ -88,7 +88,7 @@
     {%- for block in section.blocks -%}
       {%- if block.type == 'add_to_cart_popup' -%}
         <!-- Add to Cart Popup Block Found -->
-        {% render 'add-to-cart-popup', block: block, product: product %}
+        {% render 'add-to-cart-popup', block: block, product: product, section: section %}
         {% break %}
       {%- endif -%}
     {%- endfor -%}

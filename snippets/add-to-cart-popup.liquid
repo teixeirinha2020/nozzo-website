@@ -1,8 +1,39 @@
 <!-- Add to Cart Popup Snippet Rendered -->
 {% assign current_variant = product.selected_or_first_available_variant %}
 {% assign current_variant_id = current_variant.id %}
+{% assign base_price = current_variant.price %}
 
-<div class="add-to-cart-popup" data-variant-id="{{ current_variant_id }}" data-product-id="{{ product.id }}">
+{% comment %} Get buy-more-save-more data from blocks {% endcomment %}
+{% assign buy_more_save_more_block = null %}
+{% for section_block in section.blocks %}
+  {% if section_block.type == 'buy_more_save_more' %}
+    {% assign buy_more_save_more_block = section_block %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<div class="add-to-cart-popup" 
+     data-variant-id="{{ current_variant_id }}" 
+     data-product-id="{{ product.id }}"
+     data-base-price="{{ base_price }}"
+     {% if buy_more_save_more_block %}
+       data-price-1="{{ buy_more_save_more_block.settings.price_1_unit }}"
+       data-price-2="{{ buy_more_save_more_block.settings.price_2_units }}"
+       data-price-3="{{ buy_more_save_more_block.settings.price_3_units }}"
+       data-price-4="{{ buy_more_save_more_block.settings.price_4_units }}"
+       {% if buy_more_save_more_block.settings.option_1_image %}
+         data-image-1="{{ buy_more_save_more_block.settings.option_1_image | img_url: '80x80', crop: 'center' }}"
+       {% endif %}
+       {% if buy_more_save_more_block.settings.option_2_image %}
+         data-image-2="{{ buy_more_save_more_block.settings.option_2_image | img_url: '80x80', crop: 'center' }}"
+       {% endif %}
+       {% if buy_more_save_more_block.settings.option_3_image %}
+         data-image-3="{{ buy_more_save_more_block.settings.option_3_image | img_url: '80x80', crop: 'center' }}"
+       {% endif %}
+       {% if buy_more_save_more_block.settings.option_4_image %}
+         data-image-4="{{ buy_more_save_more_block.settings.option_4_image | img_url: '80x80', crop: 'center' }}"
+       {% endif %}
+     {% endif %}>
   <div class="popup-content">
     <div class="product-info">
       {% if product.featured_image %}
@@ -19,9 +50,11 @@
         <h3 class="product-title">{{ product.title }}</h3>
         <div class="product-price">
           <span class="current-price">€{{ current_variant.price | divided_by: 100.0 | round: 2 }}</span>
-          {% if current_variant.compare_at_price > current_variant.price %}
-            <s class="compare-price">€{{ current_variant.compare_at_price | divided_by: 100.0 | round: 2 }}</s>
-          {% endif %}
+          <s class="compare-price"{% unless current_variant.compare_at_price > current_variant.price %} style="display: none;"{% endunless %}>
+            {% if current_variant.compare_at_price > current_variant.price %}
+              €{{ current_variant.compare_at_price | divided_by: 100.0 | round: 2 }}
+            {% endif %}
+          </s>
         </div>
       </div>
     </div>
@@ -224,6 +257,10 @@ class AddToCartPopup {
     if (addToCartBtn) {
       addToCartBtn.addEventListener('click', this.handleAddToCart.bind(this));
     }
+
+    // Listen for buy-more-save-more changes
+    document.addEventListener('change', this.handleBuyMoreSaveMoreChange.bind(this));
+    this.updatePopupFromBuyMoreSaveMore(); // Initial update
   }
 
   handleScroll() {
@@ -261,6 +298,7 @@ class AddToCartPopup {
     this.isVisible = true;
     this.popup.classList.add('show');
     this.updatePopupPosition();
+    this.updatePopupFromBuyMoreSaveMore(); // Update with current selection
   }
 
   hidePopup() {
@@ -287,6 +325,52 @@ class AddToCartPopup {
     const variantIdField = document.querySelector('form[action*="/cart/add"] [name="id"]');
     if (variantIdField && this.popup) {
       this.popup.dataset.variantId = variantIdField.value;
+    }
+  }
+
+  handleBuyMoreSaveMoreChange(event) {
+    // Check if the change is on a buy-more-save-more quantity option
+    if (event.target.matches('input[name="quantity-choice"]')) {
+      this.updatePopupFromBuyMoreSaveMore();
+    }
+  }
+
+  updatePopupFromBuyMoreSaveMore() {
+    const buyMoreSaveMore = document.querySelector('.buy-more-save-more');
+    if (!buyMoreSaveMore || !this.popup) return;
+
+    const selectedOption = buyMoreSaveMore.querySelector('input[name="quantity-choice"]:checked');
+    if (!selectedOption) return;
+
+    const quantity = parseInt(selectedOption.value);
+    const basePrice = parseInt(this.popup.dataset.basePrice);
+    
+    // Get the discounted price for this quantity
+    const discountedPrice = this.popup.dataset[`price${quantity}`];
+    let finalPrice = discountedPrice ? parseInt(discountedPrice) : (basePrice * quantity);
+    
+    // Update price display
+    const currentPriceElement = this.popup.querySelector('.current-price');
+    if (currentPriceElement) {
+      currentPriceElement.textContent = `€${(finalPrice / 100).toFixed(2)}`;
+    }
+
+    // Show/hide compare price
+    const comparePriceElement = this.popup.querySelector('.compare-price');
+    if (comparePriceElement) {
+      if (discountedPrice && parseInt(discountedPrice) < (basePrice * quantity)) {
+        comparePriceElement.textContent = `€${(basePrice * quantity / 100).toFixed(2)}`;
+        comparePriceElement.style.display = 'inline';
+      } else {
+        comparePriceElement.style.display = 'none';
+      }
+    }
+
+    // Update image if available
+    const popupImage = this.popup.querySelector('.product-image img');
+    const customImage = this.popup.dataset[`image${quantity}`];
+    if (popupImage && customImage) {
+      popupImage.src = customImage;
     }
   }
 
