@@ -86,6 +86,12 @@
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
 
+  /* Initialize header position variables */
+  :root {
+    --header-top-position: 0px;
+    --header-bottom-position: 0px;
+  }
+
   .section-header {
     /* This is for fixing a Safari z-index issue. PR #2147 */
     margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
@@ -140,12 +146,12 @@
   /* Menu Drawer Glass Effect */
   .menu-drawer--glass {
     margin-top: var(--header-top-margin);
-    border-radius: 0.5rem;
-    background: transparent !important;
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur({{ glass_blur_int }}px) saturate(180%);
-    -webkit-backdrop-filter: blur({{ glass_blur_int }}px) saturate(180%);
-    border: 1px solid rgba(210, 210, 210, 0.8);
+    -webkit-backdrop-filter: blur({{ glass_blur_int }}px); saturate(180%) /* suporte para Safari */
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(210, 210, 210, 0.8);
+    border-radius: 0.5rem;
 
   }
 
@@ -385,6 +391,29 @@
 {%- endif -%}
 
 {% javascript %}
+  // Function to update header position variables
+  function updateHeaderPositionVariables() {
+    const header = document.querySelector('.section-header');
+    if (header) {
+      const rect = header.getBoundingClientRect();
+      const borderOffset = header.querySelector('.header-wrapper').classList.contains('header-wrapper--border-bottom') ? 1 : 0;
+      
+      document.documentElement.style.setProperty(
+        '--header-top-position',
+        `${parseInt(rect.top - borderOffset)}px`
+      );
+      document.documentElement.style.setProperty(
+        '--header-bottom-position',
+        `${parseInt(rect.bottom - borderOffset)}px`
+      );
+    }
+  }
+
+  // Update variables on load and resize
+  document.addEventListener('DOMContentLoaded', updateHeaderPositionVariables);
+  window.addEventListener('resize', updateHeaderPositionVariables);
+  window.addEventListener('scroll', updateHeaderPositionVariables);
+
   class StickyHeader extends HTMLElement {
     constructor() {
       super();

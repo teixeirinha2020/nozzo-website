@@ -54,6 +54,16 @@
   {%- endif -%}
 
   {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+  
+  {%- liquid
+    assign has_add_to_cart_popup = false
+    for block in section.blocks
+      if block.type == 'add_to_cart_popup'
+        assign has_add_to_cart_popup = true
+        break
+      endif
+    endfor
+  -%}
   {%- if first_3d_model -%}
     {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
     <link
@@ -73,6 +83,19 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+  
+  {%- if has_add_to_cart_popup -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'add_to_cart_popup' -%}
+        <!-- Add to Cart Popup Block Found -->
+        {% render 'add-to-cart-popup', block: block, product: product %}
+        {% break %}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- else -%}
+    <!-- No Add to Cart Popup Block Found -->
+  {%- endif -%}
+  
   <div class="page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
@@ -2961,6 +2984,31 @@
           "type": "video",
           "id": "video_5",
           "label": "Video 5"
+        }
+      ]
+    },
+    {
+      "type": "add_to_cart_popup",
+      "name": "Add to Cart Popup",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "ADICIONAR AO CARRINHO"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color",
+          "label": "Button background color",
+          "default": "#1a1b18"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button text color",
+          "default": "#ffffff"
         }
       ]
     }

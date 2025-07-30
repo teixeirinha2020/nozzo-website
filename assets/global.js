@@ -596,15 +596,11 @@ class HeaderDrawer extends MenuDrawer {
         '--header-bottom-position',
         `${parseInt(this.header.getBoundingClientRect().bottom + this.header.getBoundingClientRect().top + this.header.getBoundingClientRect().top - this.borderOffset)}px`
       );
-    document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
-  };
-
-  onResize = () => {
-    this.header &&
       document.documentElement.style.setProperty(
         '--header-top-margin',
         `${parseInt(this.header.getBoundingClientRect().top - this.borderOffset)}px`
       );
+    document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
   };
 
 }
