@@ -38,37 +38,44 @@
 </div>
 
 <style>
-  .add-to-cart-popup {
-    position: fixed;
-    top: var(--header-top-position, 0px);
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    border-bottom: 1px solid #e5e5e5;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-    opacity: 0;
-    visibility: hidden;
-  }
+.add-to-cart-popup {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  z-index: 7;
+  margin: 0px 30px;
+  background-color: white;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #e5e5e5;
+  border-radius: .5rem;
 
-  .add-to-cart-popup.show {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
+  transform: translateY(-50px) scale(0.98);
+  opacity: 0;
+  visibility: hidden;
+  transition: 
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1), 
+    opacity 0.7s ease, 
+    visibility 0.7s ease;
+}
 
-  .add-to-cart-popup.with-header {
-    top: var(--header-bottom-position, 0px);
-  }
+.add-to-cart-popup.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.add-to-cart-popup.with-header {
+  top: calc(var(--header-bottom-position, 0px) + 20px);
+}
+
 
   .popup-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 12px 20px;
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
   }
 
@@ -186,237 +193,174 @@
 </style>
 
 <script>
-  class AddToCartPopup {
-         constructor() {
-       this.popup = document.querySelector('.add-to-cart-popup');
-       // Try multiple selectors to find the main product section
-       this.mainProductSection = document.querySelector('.section-main-product') || 
-                                 document.querySelector('[data-section*="main-product"]') ||
-                                 document.querySelector('product-info') ||
-                                 document.querySelector('.product');
-       this.header = document.querySelector('.section-header');
-       this.isVisible = false;
-       this.isHeaderVisible = false;
-       this.lastScrollTop = 0;
-       
-       console.log('AddToCartPopup initialized:', {
-         popup: !!this.popup,
-         mainProductSection: !!this.mainProductSection,
-         header: !!this.header,
-         mainProductSectionElement: this.mainProductSection
-       });
-       
-       if (!this.popup || !this.mainProductSection) {
-         console.log('AddToCartPopup: Missing required elements');
-         console.log('Available sections:', document.querySelectorAll('[data-section]'));
-         console.log('Available product elements:', document.querySelectorAll('.product, product-info'));
-         return;
-       }
-       
-       this.init();
-     }
+class AddToCartPopup {
+  constructor() {
+    this.popup = document.querySelector('.add-to-cart-popup');
+    this.mainProductSection = document.querySelector('.section-main-product') || 
+                              document.querySelector('[data-section*="main-product"]') ||
+                              document.querySelector('product-info') ||
+                              document.querySelector('.product');
+    this.header = document.querySelector('.section-header');
+    this.isVisible = false;
+    this.isHeaderVisible = false;
+    this.lastScrollTop = 0;
 
-    init() {
-      this.setupEventListeners();
-      this.updateVariantId();
-    }
+    if (!this.popup || !this.mainProductSection) return;
 
-    setupEventListeners() {
-      // Listen for scroll events
-      window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
-      
-      // Listen for variant changes
-      document.addEventListener('change', this.handleVariantChange.bind(this));
-      document.addEventListener('variantChange', this.updateVariantId.bind(this));
-      
-      // Listen for add to cart button click
-      const addToCartBtn = this.popup.querySelector('.add-to-cart-btn');
-      if (addToCartBtn) {
-        addToCartBtn.addEventListener('click', this.handleAddToCart.bind(this));
-      }
-    }
+    this.init();
+  }
 
-         handleScroll() {
-       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-       
-       // Get the main product section position
-       const mainProductRect = this.mainProductSection.getBoundingClientRect();
-       const mainProductBottom = mainProductRect.bottom + scrollTop;
-       
-       // Check if we've scrolled past the main product section
-       const isPastMainProduct = scrollTop > mainProductBottom;
-       
-       // Check if header is visible (when sticky header is active)
-       const isHeaderVisible = this.header && this.header.classList.contains('shopify-section-header-sticky');
-       
-       // Debug logging (remove after testing)
-       if (scrollTop % 100 < 10) { // Log every ~100px
-         console.log('Scroll debug:', {
-           scrollTop,
-           mainProductBottom,
-           mainProductRect,
-           isPastMainProduct,
-           isHeaderVisible,
-           isVisible: this.isVisible
-         });
-       }
-       
-       // Determine popup visibility and position
-       if (isPastMainProduct) {
-         if (!this.isVisible) {
-           console.log('Showing popup');
-           this.showPopup();
-         }
-         
-         // Update position based on header visibility
-         if (isHeaderVisible !== this.isHeaderVisible) {
-           this.isHeaderVisible = isHeaderVisible;
-           this.updatePopupPosition();
-         }
-       } else {
-         if (this.isVisible) {
-           console.log('Hiding popup');
-           this.hidePopup();
-         }
-       }
-       
-       this.lastScrollTop = scrollTop;
-     }
+  init() {
+    this.setupEventListeners();
+    this.updateVariantId();
+  }
 
-         showPopup() {
-       console.log('showPopup called');
-       this.isVisible = true;
-       this.popup.classList.add('show');
-       this.updatePopupPosition();
-       console.log('Popup classes after show:', this.popup.className);
-     }
+  setupEventListeners() {
+    window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+    document.addEventListener('change', this.handleVariantChange.bind(this));
+    document.addEventListener('variantChange', this.updateVariantId.bind(this));
 
-     hidePopup() {
-       console.log('hidePopup called');
-       this.isVisible = false;
-       this.isHeaderVisible = false;
-       this.popup.classList.remove('show', 'with-header');
-       console.log('Popup classes after hide:', this.popup.className);
-     }
-
-    updatePopupPosition() {
-      if (this.isHeaderVisible) {
-        this.popup.classList.add('with-header');
-      } else {
-        this.popup.classList.remove('with-header');
-      }
-    }
-
-    handleVariantChange(event) {
-      if (event.target.matches('form[action*="/cart/add"] [name="id"]')) {
-        this.updateVariantId();
-      }
-    }
-
-    updateVariantId() {
-      const variantIdField = document.querySelector('form[action*="/cart/add"] [name="id"]');
-      if (variantIdField && this.popup) {
-        this.popup.dataset.variantId = variantIdField.value;
-      }
-    }
-
-    async handleAddToCart() {
-      const variantId = parseInt(this.popup.dataset.variantId);
-      const productId = parseInt(this.popup.dataset.productId);
-      
-      // Get quantity from buy more save more if available, otherwise default to 1
-      let quantity = 1;
-      const buyMoreSaveMore = document.querySelector('.buy-more-save-more');
-      if (buyMoreSaveMore) {
-        const selectedOption = buyMoreSaveMore.querySelector('input[name="quantity-choice"]:checked');
-        if (selectedOption) {
-          quantity = parseInt(selectedOption.value);
-        }
-      }
-
-      const formData = {
-        'items': [{
-          'id': variantId,
-          'quantity': quantity,
-          'properties': {
-            '_discount_quantity': quantity
-          }
-        }]
-      };
-
-      try {
-        const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        });
-
-        if (response.ok) {
-          const cartData = await response.json();
-          
-          // Get sections to render
-          const sectionsToRender = [
-            {
-              id: 'cart-drawer',
-              section: 'cart-drawer',
-              selector: '.drawer__inner'
-            },
-            {
-              id: 'cart-icon-bubble',
-              section: 'cart-icon-bubble',
-              selector: '.shopify-section'
-            }
-          ];
-
-          // Fetch the sections HTML
-          const sectionsResponse = await fetch(`${window.location.pathname}?sections=${sectionsToRender.map(section => section.section).join(',')}`);
-          const sectionsJson = await sectionsResponse.json();
-
-          // Find cart drawer
-          const cartDrawer = document.querySelector('cart-drawer');
-          if (cartDrawer) {
-            // Update sections data
-            cartData.sections = sectionsJson;
-            
-            // Remove is-empty class if present
-            cartDrawer.classList.remove('is-empty');
-            
-            // Render new contents
-            cartDrawer.renderContents(cartData);
-
-            // Ensure drawer is visible
-            cartDrawer.setAttribute('open', '');
-            cartDrawer.classList.add('animate', 'active');
-            document.body.classList.add('overflow-hidden');
-          }
-
-          // Update cart count in header
-          const cartIconBubble = document.getElementById('cart-icon-bubble');
-          if (cartIconBubble && sectionsJson['cart-icon-bubble']) {
-            cartIconBubble.innerHTML = sectionsJson['cart-icon-bubble'];
-          }
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
+    const addToCartBtn = this.popup.querySelector('.add-to-cart-btn');
+    if (addToCartBtn) {
+      addToCartBtn.addEventListener('click', this.handleAddToCart.bind(this));
     }
   }
 
-     // Initialize popup when DOM is loaded
-   document.addEventListener('DOMContentLoaded', () => {
-     // Small delay to ensure all elements are properly loaded
-     setTimeout(() => {
-       new AddToCartPopup();
-     }, 100);
-   });
+  handleScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const mainProductRect = this.mainProductSection.getBoundingClientRect();
+    const mainProductBottom = mainProductRect.bottom + scrollTop;
 
-   // Also try to initialize after a longer delay in case elements load later
-   setTimeout(() => {
-     if (!document.querySelector('.add-to-cart-popup')) {
-       console.log('AddToCartPopup: Retrying initialization after delay');
-       new AddToCartPopup();
-     }
-   }, 1000);
+    const isPastMainProduct = scrollTop > mainProductBottom;
+
+    // ✅ Updated logic for checking visible sticky header
+    const isHeaderVisible = this.header &&
+      this.header.classList.contains('shopify-section-header-sticky') &&
+      this.header.classList.contains('animate') &&
+      !this.header.classList.contains('shopify-section-header-hidden');
+
+    if (isPastMainProduct) {
+      if (!this.isVisible) {
+        this.showPopup();
+      }
+
+      if (isHeaderVisible !== this.isHeaderVisible) {
+        this.isHeaderVisible = isHeaderVisible;
+        this.updatePopupPosition();
+      }
+    } else {
+      if (this.isVisible) {
+        this.hidePopup();
+      }
+    }
+
+    this.lastScrollTop = scrollTop;
+  }
+
+  showPopup() {
+    this.isVisible = true;
+    this.popup.classList.add('show');
+    this.updatePopupPosition();
+  }
+
+  hidePopup() {
+    this.isVisible = false;
+    this.isHeaderVisible = false;
+    this.popup.classList.remove('show', 'with-header');
+  }
+
+  updatePopupPosition() {
+    if (this.isHeaderVisible) {
+      this.popup.classList.add('with-header');
+    } else {
+      this.popup.classList.remove('with-header');
+    }
+  }
+
+  handleVariantChange(event) {
+    if (event.target.matches('form[action*="/cart/add"] [name="id"]')) {
+      this.updateVariantId();
+    }
+  }
+
+  updateVariantId() {
+    const variantIdField = document.querySelector('form[action*="/cart/add"] [name="id"]');
+    if (variantIdField && this.popup) {
+      this.popup.dataset.variantId = variantIdField.value;
+    }
+  }
+
+  async handleAddToCart() {
+    const variantId = parseInt(this.popup.dataset.variantId);
+    const productId = parseInt(this.popup.dataset.productId);
+
+    let quantity = 1;
+    const buyMoreSaveMore = document.querySelector('.buy-more-save-more');
+    if (buyMoreSaveMore) {
+      const selectedOption = buyMoreSaveMore.querySelector('input[name="quantity-choice"]:checked');
+      if (selectedOption) {
+        quantity = parseInt(selectedOption.value);
+      }
+    }
+
+    const formData = {
+      items: [{
+        id: variantId,
+        quantity: quantity,
+        properties: { '_discount_quantity': quantity }
+      }]
+    };
+
+    try {
+      const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        const cartData = await response.json();
+
+        const sectionsToRender = [
+          { id: 'cart-drawer', section: 'cart-drawer', selector: '.drawer__inner' },
+          { id: 'cart-icon-bubble', section: 'cart-icon-bubble', selector: '.shopify-section' }
+        ];
+
+        const sectionsResponse = await fetch(`${window.location.pathname}?sections=${sectionsToRender.map(section => section.section).join(',')}`);
+        const sectionsJson = await sectionsResponse.json();
+
+        const cartDrawer = document.querySelector('cart-drawer');
+        if (cartDrawer) {
+          cartData.sections = sectionsJson;
+          cartDrawer.classList.remove('is-empty');
+          cartDrawer.renderContents(cartData);
+          cartDrawer.setAttribute('open', '');
+          cartDrawer.classList.add('animate', 'active');
+          document.body.classList.add('overflow-hidden');
+        }
+
+        const cartIconBubble = document.getElementById('cart-icon-bubble');
+        if (cartIconBubble && sectionsJson['cart-icon-bubble']) {
+          cartIconBubble.innerHTML = sectionsJson['cart-icon-bubble'];
+        }
+      }
+    } catch (error) {
+      console.error('Add to Cart Error:', error);
+    }
+  }
+}
+
+// Initialize popup when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    new AddToCartPopup();
+  }, 100);
+});
+
+setTimeout(() => {
+  if (!document.querySelector('.add-to-cart-popup')) {
+    new AddToCartPopup();
+  }
+}, 1000);
+
 </script> 

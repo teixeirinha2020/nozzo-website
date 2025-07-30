@@ -141,6 +141,14 @@
             "video_3": "shopify://files/videos/0604(2) (1).mp4"
           }
         },
+        "add_to_cart_popup_gGCyqc": {
+          "type": "add_to_cart_popup",
+          "settings": {
+            "button_text": "ADICIONAR AO CARRINHO",
+            "button_bg_color": "#1a1b18",
+            "button_text_color": "#ffffff"
+          }
+        },
         "description": {
           "type": "description",
           "settings": {}
@@ -161,6 +169,7 @@
         "custom_liquid_yRUmkM",
         "text_pbPHRt",
         "athlete_videos_Q8iKCn",
+        "add_to_cart_popup_gGCyqc",
         "description"
       ],
       "custom_css": [
