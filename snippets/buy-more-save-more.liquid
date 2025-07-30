@@ -304,35 +304,75 @@
 </style>
 
 <script>
+  console.log('🛒 Buy More Save More - Script initialized');
+  
+  // Check initial state
+  const initialBuyMoreSaveMore = document.querySelector('.buy-more-save-more');
+  const initialVariantId = initialBuyMoreSaveMore ? initialBuyMoreSaveMore.dataset.variantId : null;
+  const initialQuantityOptions = document.querySelectorAll('input[name="quantity-choice"]');
+  const initialSelectedOption = document.querySelector('input[name="quantity-choice"]:checked');
+  
+  console.log('🛒 Buy More Save More - Initial state:');
+  console.log('  - Element found:', !!initialBuyMoreSaveMore);
+  console.log('  - Initial variant ID:', initialVariantId);
+  console.log('  - Quantity options found:', initialQuantityOptions.length);
+  console.log('  - Selected option:', initialSelectedOption ? initialSelectedOption.value : 'none');
+
   // Function to update variant ID when variant changes
   function updateVariantId() {
+    console.log('🛒 Buy More Save More - Updating variant ID...');
     const variantIdField = document.querySelector('form[action*="/cart/add"] [name="id"]');
     const buyMoreSaveMore = document.querySelector('.buy-more-save-more');
     
+    console.log('🛒 Buy More Save More - Variant ID field found:', !!variantIdField);
+    console.log('🛒 Buy More Save More - Buy More Save More element found:', !!buyMoreSaveMore);
+    
     if (variantIdField && buyMoreSaveMore) {
-      buyMoreSaveMore.dataset.variantId = variantIdField.value;
+      const oldVariantId = buyMoreSaveMore.dataset.variantId;
+      const newVariantId = variantIdField.value;
+      buyMoreSaveMore.dataset.variantId = newVariantId;
+      console.log('🛒 Buy More Save More - Variant ID updated from', oldVariantId, 'to', newVariantId);
+    } else {
+      console.warn('🛒 Buy More Save More - Could not update variant ID - missing elements');
     }
   }
 
   // Listen for variant changes
   document.addEventListener('change', function(event) {
     if (event.target.matches('form[action*="/cart/add"] [name="id"]')) {
+      console.log('🛒 Buy More Save More - Variant change detected via form change');
       updateVariantId();
     }
   });
 
   // Listen for variant changes via URL
-  document.addEventListener('variantChange', updateVariantId);
+  document.addEventListener('variantChange', function() {
+    console.log('🛒 Buy More Save More - Variant change detected via variantChange event');
+    updateVariantId();
+  });
 
   // Use more specific selector to avoid conflicts with popup
   const buyMoreSaveMoreBtn = document.querySelector('.buy-more-save-more .add-to-cart-btn');
+  console.log('🛒 Buy More Save More - Button found:', !!buyMoreSaveMoreBtn);
+  
   if (buyMoreSaveMoreBtn) {
+    console.log('🛒 Buy More Save More - Event listener attached');
     buyMoreSaveMoreBtn.addEventListener('click', async () => {
+      console.log('🛒 Buy More Save More - Button clicked!');
+      
       const selectedOption = document.querySelector('input[name="quantity-choice"]:checked');
-      if (!selectedOption) return;
+      console.log('🛒 Buy More Save More - Selected option:', selectedOption);
+      
+      if (!selectedOption) {
+        console.warn('🛒 Buy More Save More - No option selected, aborting');
+        return;
+      }
       
       const quantity = parseInt(selectedOption.value);
       const variantId = parseInt(document.querySelector('.buy-more-save-more').dataset.variantId);
+      
+      console.log('🛒 Buy More Save More - Quantity:', quantity);
+      console.log('🛒 Buy More Save More - Variant ID:', variantId);
     
     const formData = {
       'items': [{
@@ -344,7 +384,10 @@
       }]
     };
 
+    console.log('🛒 Buy More Save More - Form data:', formData);
+
     try {
+      console.log('🛒 Buy More Save More - Sending request to cart...');
       const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
         method: 'POST',
         headers: {
@@ -353,8 +396,11 @@
         body: JSON.stringify(formData)
       });
 
+      console.log('🛒 Buy More Save More - Response status:', response.status);
+
       if (response.ok) {
         const cartData = await response.json();
+        console.log('🛒 Buy More Save More - Cart data received:', cartData);
         
         // Get sections to render
         const sectionsToRender = [
@@ -371,11 +417,15 @@
         ];
 
         // Fetch the sections HTML
+        console.log('🛒 Buy More Save More - Fetching sections for cart update...');
         const sectionsResponse = await fetch(`${window.location.pathname}?sections=${sectionsToRender.map(section => section.section).join(',')}`);
         const sectionsJson = await sectionsResponse.json();
+        console.log('🛒 Buy More Save More - Sections received:', sectionsJson);
 
         // Find cart drawer
         const cartDrawer = document.querySelector('cart-drawer');
+        console.log('🛒 Buy More Save More - Cart drawer found:', !!cartDrawer);
+        
         if (cartDrawer) {
           // Update sections data
           cartData.sections = sectionsJson;
@@ -384,22 +434,32 @@
           cartDrawer.classList.remove('is-empty');
           
           // Render new contents
+          console.log('🛒 Buy More Save More - Rendering cart contents...');
           cartDrawer.renderContents(cartData);
 
           // Ensure drawer is visible
           cartDrawer.setAttribute('open', '');
           cartDrawer.classList.add('animate', 'active');
           document.body.classList.add('overflow-hidden');
+          console.log('🛒 Buy More Save More - Cart drawer opened successfully');
+        } else {
+          console.warn('🛒 Buy More Save More - Cart drawer not found!');
         }
 
         // Update cart count in header
         const cartIconBubble = document.getElementById('cart-icon-bubble');
         if (cartIconBubble && sectionsJson['cart-icon-bubble']) {
           cartIconBubble.innerHTML = sectionsJson['cart-icon-bubble'];
+          console.log('🛒 Buy More Save More - Cart icon updated');
         }
+        
+        console.log('🛒 Buy More Save More - Process completed successfully!');
+      } else {
+        const errorData = await response.json();
+        console.error('🛒 Buy More Save More - Server error:', errorData);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('🛒 Buy More Save More - JavaScript error:', error);
     }
     });
   }
