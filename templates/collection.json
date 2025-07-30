@@ -13,7 +13,7 @@
       "type": "custom-image-banner",
       "name": "Custom Image Banner",
       "settings": {
-        "section_height": "small",
+        "section_height": "adapt",
         "background_image_desktop": "shopify://shop_images/1_24ce74c0-cfd1-4d3e-983c-c7a4a80e0b8f.webp",
         "background_image_mobile": "shopify://shop_images/2_d7ebf5be-69db-4851-8486-f41705a949c7.webp",
         "content_position_desktop": "middle_center",

@@ -42,38 +42,22 @@
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "full_width": true,
         "padding_top": 96,
         "padding_bottom": 24
       }
     },
-    "custom_banner_7HAgbe": {
-      "type": "custom-banner",
-      "custom_css": [
-        ".custom-banner {border-radius: 0;}",
-        ".custom-banner__image img {object-fit: contain;}",
-        ".custom-banner__image,.custom-banner__video-container,.custom-banner__placeholder {background-color: #000000;}"
-      ],
-      "name": "Custom Banner",
+    "custom_image_banner_yKnqU7": {
+      "type": "custom-image-banner",
+      "name": "Custom Image Banner",
       "settings": {
-        "section_height": "adapt",
-        "background_type": "image",
-        "background_image": "shopify://shop_images/banner.png",
+        "section_height": "medium",
+        "background_image_desktop": "shopify://shop_images/banner.png",
         "background_image_mobile": "shopify://shop_images/banner_mobile_050e862d-5860-48f7-9dc2-37f81acc24fa.png",
-        "background_video_url": "",
-        "background_video_url_mobile": "",
-        "background_video": "",
-        "loop_video": true,
-        "mute_video": true,
-        "content_position_desktop": "left",
-        "content_position_mobile": "top",
-        "space_between_desktop": 30,
-        "space_between_mobile": 20,
-        "enable_animations": true,
-        "animation_type": "slide_up",
-        "animation_trigger": "onload",
-        "animation_delay": 0.2
+        "content_position_desktop": "middle_center",
+        "content_position_mobile": "middle_center",
+        "content_justify": "center"
       }
     },
     "form": {
@@ -81,7 +65,7 @@
       "settings": {
         "heading": "",
         "heading_size": "h1",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -90,7 +74,7 @@
   "order": [
     "main",
     "rich_text_8AxBVx",
-    "custom_banner_7HAgbe",
+    "custom_image_banner_yKnqU7",
     "form"
   ]
 }
