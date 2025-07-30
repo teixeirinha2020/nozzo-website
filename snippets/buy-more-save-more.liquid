@@ -324,12 +324,15 @@
   // Listen for variant changes via URL
   document.addEventListener('variantChange', updateVariantId);
 
-  document.querySelector('.add-to-cart-btn').addEventListener('click', async () => {
-    const selectedOption = document.querySelector('input[name="quantity-choice"]:checked');
-    if (!selectedOption) return;
-    
-    const quantity = parseInt(selectedOption.value);
-    const variantId = parseInt(document.querySelector('.buy-more-save-more').dataset.variantId);
+  // Use more specific selector to avoid conflicts with popup
+  const buyMoreSaveMoreBtn = document.querySelector('.buy-more-save-more .add-to-cart-btn');
+  if (buyMoreSaveMoreBtn) {
+    buyMoreSaveMoreBtn.addEventListener('click', async () => {
+      const selectedOption = document.querySelector('input[name="quantity-choice"]:checked');
+      if (!selectedOption) return;
+      
+      const quantity = parseInt(selectedOption.value);
+      const variantId = parseInt(document.querySelector('.buy-more-save-more').dataset.variantId);
     
     const formData = {
       'items': [{
@@ -398,5 +401,6 @@
     } catch (error) {
       console.error('Error:', error);
     }
-  });
+    });
+  }
 </script> 
