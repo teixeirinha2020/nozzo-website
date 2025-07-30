@@ -18,126 +18,30 @@
         "color_scheme": "scheme-1"
       }
     },
-    "rich_text_6LFmDE": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_KwCKTr": {
-          "type": "heading",
-          "settings": {
-            "heading": "Magnetic Strips",
-            "heading_size": "h1"
-          }
-        }
-      },
-      "block_order": [
-        "heading_KwCKTr"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-4",
-        "full_width": true,
-        "padding_top": 88,
-        "padding_bottom": 52
-      }
-    },
     "product-grid": {
       "type": "main-collection-product-grid",
-      "disabled": true,
+      "custom_css": [],
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 4,
-        "color_scheme": "scheme-4",
-        "image_ratio": "adapt",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
         "image_shape": "default",
-        "show_secondary_image": false,
+        "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
         "enable_filtering": true,
-        "filter_type": "horizontal",
+        "filter_type": "drawer",
         "enable_sorting": true,
         "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "featured_product_arYXyA": {
-      "type": "featured-product",
-      "blocks": {
-        "text_Bhng6X": {
-          "type": "text",
-          "settings": {
-            "text": "{{ section.settings.product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
-        "title_QBRzam": {
-          "type": "title",
-          "settings": {
-            "heading_size": "h1"
-          }
-        },
-        "price_icUinF": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_picker_8caGqp": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
-          }
-        },
-        "quantity_selector_4PBKCG": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
-        "buy_buttons_GkYjKm": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
-        },
-        "share_VJMWEi": {
-          "type": "share",
-          "settings": {
-            "share_label": "Partilhar"
-          }
-        }
-      },
-      "block_order": [
-        "text_Bhng6X",
-        "title_QBRzam",
-        "price_icUinF",
-        "variant_picker_8caGqp",
-        "quantity_selector_4PBKCG",
-        "buy_buttons_GkYjKm",
-        "share_VJMWEi"
-      ],
-      "name": "t:sections.featured-product.presets.name",
-      "settings": {
-        "product": "magnetic-strip",
-        "color_scheme": "scheme-4",
-        "secondary_background": false,
-        "media_size": "medium",
-        "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "media_position": "left",
-        "image_zoom": "lightbox",
-        "hide_variants": false,
-        "enable_video_looping": false,
-        "padding_top": 36,
+        "padding_top": 68,
         "padding_bottom": 36
       }
     }
   },
   "order": [
     "banner",
-    "rich_text_6LFmDE",
-    "product-grid",
-    "featured_product_arYXyA"
+    "product-grid"
   ]
 }

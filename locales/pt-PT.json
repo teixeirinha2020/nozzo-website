@@ -116,6 +116,11 @@
   },
   "products": {
     "product": {
+      "from_text_html": "A partir de {{ price }}",
+      "regular_price": "Preço normal",
+      "sale_price": "Preço de saldo",
+      "unit_price": "Preço unitário",
+      "unit_price_label": "Preço unitário",
       "add_to_cart": "Adicionar ao carrinho",
       "description": "Descrição",
       "on_sale": "Em promoção",

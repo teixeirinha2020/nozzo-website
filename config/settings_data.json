@@ -18,8 +18,8 @@
     "body_scale": 100,
     "page_width": 1200,
     "spacing_sections": 0,
-    "spacing_grid_horizontal": 8,
-    "spacing_grid_vertical": 8,
+    "spacing_grid_horizontal": 28,
+    "spacing_grid_vertical": 28,
     "animations_reveal_on_scroll": true,
     "animations_hover_elements": "vertical-lift",
     "buttons_border_thickness": 1,
@@ -49,7 +49,7 @@
     "card_color_scheme": "scheme-2",
     "card_border_thickness": 0,
     "card_border_opacity": 10,
-    "card_corner_radius": 0,
+    "card_corner_radius": 10,
     "card_shadow_opacity": 0,
     "card_shadow_horizontal_offset": 0,
     "card_shadow_vertical_offset": 4,
@@ -446,7 +446,8 @@
   "platform_customizations": {
     "custom_css": [
       ".powered-by {display: none;}",
-      "@media screen and (max-width: 480px) {, chat-input {bottom: 0; }}"
+      "@media screen and (max-width: 480px) {, chat-input {bottom: 0; }}",
+      ".page-width {max-width: 1440px;}"
     ]
   }
 }

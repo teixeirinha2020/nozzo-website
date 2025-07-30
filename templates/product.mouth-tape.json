@@ -1,0 +1,816 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "air_product_reviews_app_summary_block_DjfWfH": {
+          "type": "shopify://apps/air-product-reviews/blocks/app-summary-block/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "enable_custom_sale": true,
+            "custom_sale_price": 1999,
+            "sale_price_color": "#f01c7c",
+            "sale_badge_text": "EM PROMOÇÃO",
+            "sale_badge_bg_color": "#f01c7c",
+            "sale_badge_text_color": "#ffffff"
+          }
+        },
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "Melhora a tua vida por apenas <strong>0,83</strong><em><strong>€ </strong></em>por par de stickers.",
+            "text_style": "body"
+          }
+        },
+        "icon_with_text_ffze9b": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "verified_grey",
+            "heading_1": "30 stickers por pack.",
+            "icon_2": "verified_grey",
+            "heading_2": "Melhora a respiração nasal.",
+            "icon_3": "verified_grey",
+            "heading_3": "Até mais 30% de fluxo de oxigénio.",
+            "icon_4": "verified_grey",
+            "heading_4": "Tem um sono mais profundo."
+          }
+        },
+        "custom_liquid_YgR9nm": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% comment %}\n  Entrega GRÁTIS com cálculo de intervalo:\n  - Corte diário às 15:00\n  - Encomendas depois das 15h consideram-se feitas no próximo dia útil\n  - Entrega estimada entre 1 a 4 dias úteis após expedição\n  - Sem contagem de fim de semana\n{% endcomment %}\n\n{% assign now            = 'now'        | date: '%s' %}\n{% assign hoje_str      = 'now'        | date: '%Y-%m-%d' %}\n{% assign inicio_dia    = hoje_str     | append: ' 00:00' | date: '%s' %}\n{% assign limite_15h    = hoje_str     | append: ' 15:00' | date: '%s' %}\n{% assign dia_semana    = 'now'        | date: '%w' | plus: 0 %}\n\n{% comment %}\n  1) Calcular dias até expedição:\n     - Após 15h → expedição no próximo dia útil\n     - Sábado (6) → 2ª feira\n     - Domingo (0) → 2ª feira\n{% endcomment %}\n{% assign dias_exp = 0 %}\n{% if dia_semana == 6 %}\n  {% assign dias_exp = 2 %}\n{% elsif dia_semana == 0 %}\n  {% assign dias_exp = 1 %}\n{% elsif now >= limite_15h %}\n  {% assign dias_exp = 1 %}\n{% endif %}\n\n{% assign exp_offset = dias_exp | times: 86400 %}\n{% assign exp_ts = inicio_dia | plus: exp_offset %}\n\n{%- comment -%}\n  2) Gerar datas úteis: entrega = exp_ts + 1 a 4 dias úteis (sem contar sáb/dom)\n{%- endcomment -%}\n{% assign dias_uteis = 0 %}\n{% assign dias_total = 0 %}\n{% assign primeira_entrega = '' %}\n{% assign ultima_entrega = '' %}\n\n{% assign current = exp_ts %}\n{% for i in (1..10) %}\n  {% assign current = current | plus: 86400 %}\n  {% assign dow = current | date: '%w' %}\n  {% if dow != '0' and dow != '6' %}\n    {% assign dias_uteis = dias_uteis | plus: 1 %}\n    {% assign dias_total = dias_total | plus: 1 %}\n    {% if dias_uteis == 1 %}\n      {% assign primeira_entrega = current %}\n    {% endif %}\n    {% if dias_uteis == 4 %}\n      {% assign ultima_entrega = current %}\n      {% break %}\n    {% endif %}\n  {% endif %}\n{% endfor %}\n\n{%- comment -%}\n  3) Formatar datas em \"dd\" e \"mês\" (pt)\n{%- endcomment -%}\n{% assign dia_inicio = primeira_entrega | date: '%-d' %}\n{% assign dia_fim    = ultima_entrega   | date: '%-d' %}\n{% assign mes_num    = ultima_entrega   | date: '%m' %}\n{% case mes_num %}\n  {% when '01' %}{% assign month_name = 'janeiro' %}\n  {% when '02' %}{% assign month_name = 'fevereiro' %}\n  {% when '03' %}{% assign month_name = 'março' %}\n  {% when '04' %}{% assign month_name = 'abril' %}\n  {% when '05' %}{% assign month_name = 'maio' %}\n  {% when '06' %}{% assign month_name = 'junho' %}\n  {% when '07' %}{% assign month_name = 'julho' %}\n  {% when '08' %}{% assign month_name = 'agosto' %}\n  {% when '09' %}{% assign month_name = 'setembro' %}\n  {% when '10' %}{% assign month_name = 'outubro' %}\n  {% when '11' %}{% assign month_name = 'novembro' %}\n  {% when '12' %}{% assign month_name = 'dezembro' %}\n{% endcase %}\n\n{% comment %}\n  4) Calcular deadline para “Se pedir dentro de”\n{% endcomment %}\n{% if dia_semana >= 1 and dia_semana <= 5 and now < limite_15h %}\n  {% assign deadline_ts = limite_15h %}\n{% else %}\n  {% assign deadline_ts = inicio_dia | plus: 86400 | plus: 54000 %}\n{% endif %}\n{% assign diff_secs = deadline_ts | minus: now %}\n{% assign horas     = diff_secs | divided_by: 3600 %}\n{% assign minutos   = diff_secs | modulo: 3600 | divided_by: 60 %}\n\n<p class=\"delivery-phrase\">\n  Entrega <strong class=\"gratis\">GRÁTIS</strong>,\n  <em class=\"data\">{{ dia_inicio }}–{{ dia_fim }} de {{ month_name }}</em>.\n  Se pedir dentro de\n  <i style=\"color:#f01c7c;\">{{ horas }} horas {{ minutos }} minutos</i>.\n</p>"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "buy_more_save_more_TanqHa": {
+          "type": "buy_more_save_more",
+          "settings": {
+            "mini_heading": "COMPRA MAIS <-> POUPA MAIS",
+            "mini_heading_color": "#000000",
+            "number_of_options": 3,
+            "price_1_unit": 2499,
+            "price_2_units": 4399,
+            "price_3_units": 6199,
+            "add_to_cart_text": "ADICIONAR AO CARRINHO",
+            "add_to_cart_bg_color": "#000000",
+            "add_to_cart_text_color": "#ffffff",
+            "discount_badge_bg_color": "#ededed",
+            "option_1_image": "shopify://shop_images/1unit.jpg",
+            "option_1_title": "1 PACK",
+            "option_1_title_color": "#1a1b18",
+            "option_1_price_color": "#1a1b18",
+            "option_1_border_color": "#f01c7c",
+            "option_1_badge_text_color": "#080808",
+            "option_2_image": "shopify://shop_images/2unit.jpg",
+            "option_2_title": "2 PACKS",
+            "option_2_title_color": "#1a1b18",
+            "option_2_price_color": "#1a1b18",
+            "option_2_border_color": "#f01c7c",
+            "option_2_badge_text_color": "#000000",
+            "option_3_image": "shopify://shop_images/3unit.jpg",
+            "option_3_title": "3 PACKS",
+            "option_3_title_color": "#1a1b18",
+            "option_3_price_color": "#1a1b18",
+            "option_3_border_color": "#f01c7c",
+            "option_3_badge_text_color": "#000000",
+            "option_4_title": "4x Pack",
+            "option_4_title_color": "#1a1b18",
+            "option_4_price_color": "#1a1b18",
+            "option_4_border_color": "#e5e5e5",
+            "option_4_badge_text_color": "#ffffff"
+          }
+        },
+        "custom_liquid_zMXdwT": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<ul class=\"list list-payment\" role=\"list\">\n              {%- for type in shop.enabled_payment_types -%}\n                <li class=\"list-payment__item\">\n                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}\n                </li>\n              {%- endfor -%}\n </ul>\n<style>\n.list-payment {\n justify-content: center !important;\n}\n</style>"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "custom_liquid_yRUmkM": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"delivery-tracker\" style=\"display: block !important;\">\n  <h3 class=\"delivery-heading\">Entrega Estimada: 15 de Maio</h3>\n  \n  <div class=\"tracker-container\">\n    <div class=\"tracker-step\">\n      <div class=\"icon-container\">\n        <div class=\"icon\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 100 100\" version=\"1.1\" x=\"0px\" y=\"0px\"><title>lock-check-2</title><desc>Created with Sketch Beta.</desc><g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g sketch:type=\"MSArtboardGroup\" fill=\"#000000\"><path d=\"M30,42 L21.9803572,42 C17.5704912,42 14,45.586665 14,50.0110405 L14,85.9889595 C14,90.4258294 17.5729276,94 21.9803572,94 L78.0196428,94 C82.4295088,94 86,90.413335 86,85.9889595 L86,50.0110405 C86,45.5741706 82.4270724,42 78.0196428,42 L70,42 L70,25 C70,14.5042825 61.4914975,6 50.9957277,6 L49.0042723,6 C38.5074446,6 30,14.5065898 30,25 L30,42 L30,42 L30,42 Z M38,42 L62,42 L62,25.9973518 C62,19.363876 56.627417,14 50,14 C43.3860685,14 38,19.3713974 38,25.9973518 L38,42 L38,42 L38,42 Z M39.5824667,63.1606146 L34,68.8303073 L45.9824667,81 L50.1693167,76.7477305 L66,60.6696927 L60.4175333,55 L45.9824667,69.6606146 L39.5824667,63.1606146 L39.5824667,63.1606146 Z\" sketch:type=\"MSShapeGroup\"></path></g></g></svg>\n        </div>\n      </div>\n      <div class=\"step-info\">\n        <p class=\"step-name\">Pedido Efetuado</p>\n        <p class=\"step-date\" id=\"order-date\">14 May</p>\n      </div>\n    </div>\n    \n    <div class=\"tracker-connector\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"#fff\" viewBox=\"0 0 512 512\" xml:space=\"preserve\"><path d=\"M491.318 235.318H20.682C9.26 235.318 0 244.578 0 256c0 11.423 9.26 20.682 20.682 20.682h470.636c11.423 0 20.682-9.259 20.682-20.682s-9.259-20.682-20.682-20.682\"/><path d=\"M505.942 241.375 329.454 64.887c-8.077-8.076-21.172-8.076-29.249 0s-8.076 21.172 0 29.249L462.069 256 300.205 417.863c-8.076 8.077-8.076 21.172 0 29.249a20.62 20.62 0 0 0 14.625 6.058 20.62 20.62 0 0 0 14.625-6.058l176.488-176.488c8.076-8.077 8.076-21.172-.001-29.249\"/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/></svg>\n    </div>\n    \n    <div class=\"tracker-step\">\n      <div class=\"icon-container\">\n        <div class=\"icon\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\"><path d=\"M48.375 22.062L44.219 16.5C43.266 15.352 41.77 14 40 14h-7v25c.48 2.832 3.031 5 6 5s5.43-2.168 5.906-5H47c1.57 0 3-1.43 3-3v-9.625C50 24.363 48.551 22.309 48.375 22.062zM39 42c-2.207 0-4-1.793-4-4s1.793-4 4-4 4 1.793 4 4S41.207 42 39 42zM48 27H38c-1 0-2-1-2-2v-4c0-1.105 1-2 2-2h5.594l3.188 4.25C47.121 23.73 48 25.203 48 26.375V27zM28.188 7H2.844C1.273 7 0 8.277 0 9.844V17.5h12c.276 0 .5-.224.5-.5v-2.835l6.774 6.434L12.5 27.032V24c0-.276-.224-.5-.5-.5H0V36c0 1.566 1.43 3 3 3h4.094c.477 2.836 2.938 5 5.906 5s5.43-2.164 5.906-5h9.25C29.723 39 31 37.723 31 36.156V9.906C31 8.305 29.738 7 28.188 7zM13 42c-2.207 0-4-1.793-4-4s1.793-4 4-4 4 1.793 4 4S15.207 42 13 42z\"></path></svg>        </div>\n      </div>\n      <div class=\"step-info\">\n        <p class=\"step-name\">Encomenda Expedida</p>\n        <p class=\"step-date\" id=\"dispatch-date\">15 May</p>\n      </div>\n    </div>\n    \n    <div class=\"tracker-connector\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"#fff\" viewBox=\"0 0 512 512\" xml:space=\"preserve\"><path d=\"M491.318 235.318H20.682C9.26 235.318 0 244.578 0 256c0 11.423 9.26 20.682 20.682 20.682h470.636c11.423 0 20.682-9.259 20.682-20.682s-9.259-20.682-20.682-20.682\"/><path d=\"M505.942 241.375 329.454 64.887c-8.077-8.076-21.172-8.076-29.249 0s-8.076 21.172 0 29.249L462.069 256 300.205 417.863c-8.076 8.077-8.076 21.172 0 29.249a20.62 20.62 0 0 0 14.625 6.058 20.62 20.62 0 0 0 14.625-6.058l176.488-176.488c8.076-8.077 8.076-21.172-.001-29.249\"/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/><g/></svg>\n    </div>\n    \n    <div class=\"tracker-step\">\n      <div class=\"icon-container\">\n        <div class=\"icon\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\"><path d=\"M 25 1 C 16.179688 1 9 8.179688 9 17 C 9 31.113281 23.628906 47.945313 24.25 48.65625 C 24.441406 48.875 24.710938 49 25 49 C 25.308594 48.980469 25.558594 48.875 25.75 48.65625 C 26.371094 47.933594 41 30.8125 41 17 C 41 8.179688 33.820313 1 25 1 Z M 25 12 C 28.3125 12 31 14.6875 31 18 C 31 21.3125 28.3125 24 25 24 C 21.6875 24 19 21.3125 19 18 C 19 14.6875 21.6875 12 25 12 Z\"></path></svg>\n        </div>\n      </div>\n      <div class=\"step-info\">\n        <p class=\"step-name\">Encomenda Entregue</p>\n        <p class=\"step-date\" id=\"delivery-date\">16 May</p>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n  .delivery-tracker {\n    display: block !important;\n    width: 100%;\n    color: black;\n    margin-bottom: 30px;\n  }\n\n  .delivery-heading {\n    font-size: 13px;\n    font-weight: 400;\n    margin-bottom: 5px;\n    color: black;\n    text-align: left;\n  }\n\n  .tracker-container {\n    display: flex;\n    align-items: flex-start;\n    justify-content: space-between;\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.8);\n    border-radius: 6px;\n    padding: 10px;\n  }\n\n  .tracker-step {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: space-between;\n    width: 30%;\n    text-align: center;\n    position: relative;\n    gap: 15px;\n  }\n\n  .icon-container {\n    width: 60px;\n    height: 60px;\n    background-color: white;\n    border-radius: 50%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin-top: 10px;\n  }\n\n  .icon {\n    width: 35px;\n    height: 35px;\n  }\n\n  .step-info {\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content:space-between;\n  }\n\n  .step-name {\n    font-weight: 400;\n    margin:0;\n    font-size: 14px;\n    line-height: normal;\n  }\n\n  .step-date {\n    font-size: 12px;\n    margin: 0;\n    opacity: 0.8;\n    font-weight: 300;\n  }\n\n  .tracker-connector {\n    flex-grow: 1;\n    position: relative;\n    display:flex;\n    flex-direction: column;\n    margin-top: 35px;\n  }\n\n  .tracker-connector svg {\nfill: black;\n\n  .connector-arrow {\n    position: absolute;\n    right: 0;\n    top: 50%;\n    transform: translateY(-50%);\n    width: 0;\n    height: 0;\n    border-left: 6px solid rgba(0, 0, 0, 0.9);\n    border-top: 6px solid transparent;\n    border-bottom: 6px solid transparent;\n\n  }\n</style>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function() {\n    // Utilitário para formatar \"DD MMM\"\n    function formatDate(date) {\n      const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];\n      return `${date.getDate()} ${months[date.getMonth()]}`;\n    }\n\n    function addWeekdays(startDate, count) {\n      let date = new Date(startDate);\n      let added = 0;\n      while (added < count) {\n        date.setDate(date.getDate() + 1);\n        const day = date.getDay();\n        if (day !== 0 && day !== 6) { // 0 = Domingo, 6 = Sábado\n          added++;\n        }\n      }\n      return date;\n    }\n\n    const now = new Date();\n    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());\n    const hour = now.getHours();\n    const weekday = today.getDay();\n\n    // Determinar data de expedição\n    let dispatchDate = new Date(today);\n    if ((weekday === 5 && hour >= 15)) {\n      dispatchDate.setDate(dispatchDate.getDate() + 3); // Sexta depois das 15h → segunda\n    } else if (weekday === 6) {\n      dispatchDate.setDate(dispatchDate.getDate() + 2); // Sábado → segunda\n    } else if (weekday === 0) {\n      dispatchDate.setDate(dispatchDate.getDate() + 1); // Domingo → segunda\n    } else if (hour >= 15) {\n      dispatchDate.setDate(dispatchDate.getDate() + 1); // Dias úteis depois das 15h → amanhã\n    }\n\n    // Calcular intervalo de 1 a 4 dias úteis a partir da expedição\n    const firstDelivery = addWeekdays(dispatchDate, 1);\n    const lastDelivery = addWeekdays(dispatchDate, 4);\n\n    // Atualizar elementos\n    document.getElementById('order-date').textContent = formatDate(today);\n    document.getElementById('dispatch-date').textContent = formatDate(dispatchDate);\n    document.getElementById('delivery-date').textContent = `${formatDate(firstDelivery)} – ${formatDate(lastDelivery)}`;\n    document.querySelector('.delivery-heading').textContent = `Entrega estimada: ${formatDate(firstDelivery)} – ${formatDate(lastDelivery)}`;\n  });\n</script>"
+          }
+        },
+        "text_pbPHRt": {
+          "type": "text",
+          "settings": {
+            "text": "Vê como colocar as nossas Magnetic Strips no vídeo abaixo!",
+            "text_style": "body"
+          }
+        },
+        "athlete_videos_Q8iKCn": {
+          "type": "athlete_videos",
+          "settings": {
+            "video_1": "shopify://files/videos/how to.mp4",
+            "video_2": "shopify://files/videos/0618 (1).mp4",
+            "video_3": "shopify://files/videos/0604(2) (1).mp4"
+          }
+        },
+        "add_to_cart_popup_gGCyqc": {
+          "type": "add_to_cart_popup",
+          "settings": {
+            "button_text": "ADICIONAR AO CARRINHO",
+            "button_bg_color": "#1a1b18",
+            "button_text_color": "#ffffff",
+            "enable_glass_effect": true,
+            "glass_blur": 10,
+            "discount_badge_bg_color_popup": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "air_product_reviews_app_summary_block_DjfWfH",
+        "title",
+        "price",
+        "vendor",
+        "icon_with_text_ffze9b",
+        "custom_liquid_YgR9nm",
+        "variant_picker",
+        "buy_more_save_more_TanqHa",
+        "custom_liquid_zMXdwT",
+        "quantity_selector",
+        "buy_buttons",
+        "custom_liquid_yRUmkM",
+        "text_pbPHRt",
+        "athlete_videos_Q8iKCn",
+        "add_to_cart_popup_gGCyqc",
+        "description"
+      ],
+      "custom_css": [
+        ".global-media-settings {border: none;}",
+        ".globo-color-swatch--watermarks {display: none;}",
+        ".icon-with-text--vertical .icon-with-text__item {margin-bottom: 5px;}",
+        ".product__info-container .product-form,.product__info-container .product__description,.product__info-container .icon-with-text {margin: 2rem 0;}",
+        ".price-item--sale {color: #ea2078;}",
+        ".price__badge-sale {background-color: #ea2078;}",
+        "p {line-height: normal; font-weight: 400; color: black;}",
+        "h1 {color: black !important; font-weight: 300;}",
+        ".product__media {border-radius: 25px;}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 84,
+        "padding_bottom": 32
+      }
+    },
+    "multicolumn_d7kb3A": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_WE7Mjj": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/icon_product_page_2_f7e32acd-70a8-4537-a081-6186dadad26f.png",
+            "title": "4 Magnetic Strips",
+            "text": "<p>Inclui 4 tamanhos diferentes. Escolhe o tamanho que melhor se adapta ao teu nariz.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_CEtXTd": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/icon_product_page_6.png",
+            "title": "Aplicador",
+            "text": "<p>Usa o aplicador para colar os adesivos magnéticos no teu nariz sem ficarem colados nos teus dedos.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_yMBdiJ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/icon_product_page_2_8f4749e5-26e0-440a-ab0f-3db9958f35ef.png",
+            "title": "60 Magnetic Stickers",
+            "text": "<p>Adesivos resistentes, hipoalergénicos e seguros para peles sensíveis. Desenvolvidos para máximo conforto e performance.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_WE7Mjj",
+        "column_CEtXTd",
+        "column_yMBdiJ"
+      ],
+      "custom_css": [
+        ".multicolumn.background-primary .multicolumn-card {border-radius: 10px;}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "O que está incluído?",
+        "heading_size": "h1",
+        "image_width": "half",
+        "image_ratio": "circle",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1750111445f6683ee4": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "multicolumn_8rmzfz": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_cAgNdi": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/icon_product_page.png",
+            "title": "Sono mais profundo e reparador",
+            "text": "<p><strong>Respirar pelo nariz enquanto dormes melhora o sono e reduz o ressonar.</strong><br/>Descansas melhor, acordas com mais energia e começas o dia com o pé direito.<br/><br/></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_pqGPHG": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/icon_product_page_1.png",
+            "title": "Melhor desempenho",
+            "text": "<p>Pode aumentar a oxigenação entre 10% e 30%. Mais oxigénio significa um melhor foco e rendimento.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_bcHaFe": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/icon_product_page_2.png",
+            "title": "Proteção natural reforçada",
+            "text": "<p><strong>O nariz atua como a primeira barreira do corpo contra partículas no ar.</strong><br/>Respirar por onde foste feito para respirar ajuda-te a filtrar o que não devia entrar.<br/><br/></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_7E6AMJ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/icon_product_page_3.png",
+            "title": "Aspeto mais saudável",
+            "text": "<p><strong>Respirar pelo nariz estimula o correto desenvolvimento facial.</strong><br/>Ajuda a manter uma postura mais natural, um rosto mais simétrico e um aspeto mais equilibrado.<br/><br/></p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_cAgNdi",
+        "column_pqGPHG",
+        "column_bcHaFe",
+        "column_7E6AMJ"
+      ],
+      "custom_css": [
+        ".rte {font-size: 14px;}",
+        ".inline-richtext {font-size: 16px;}",
+        "@media (min-width: 1028px) {.multicolumn-card__image-wrapper--third-width {width: 25%; }}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_comparison_2_hy8hx4": {
+      "type": "image-comparison-2",
+      "blocks": {
+        "feature_xcFXdw": {
+          "type": "feature",
+          "settings": {
+            "icon": "check_mark",
+            "icon_color": "#f01c7c",
+            "title": "Fácil de Usar",
+            "title_color": "#000000",
+            "text": "<p>Aplica os stickers em ambos os lados do nariz e depois encaixa-o.</p>",
+            "text_color": "#1a1b18"
+          }
+        },
+        "feature_ezwBrg": {
+          "type": "feature",
+          "settings": {
+            "icon": "stopwatch",
+            "icon_color": "#f01c7c",
+            "title": "Duradouro",
+            "title_color": "#080808",
+            "text": "<p>Desenhado para durar até 24 horas sem descolar.</p>",
+            "text_color": "#1a1b18"
+          }
+        },
+        "feature_Hz8DXU": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "icon_color": "#f01c7c",
+            "title": "Adorado por Muitos",
+            "title_color": "#080808",
+            "text": "<p>Popular entre biohackers, atletas e corredores.</p>",
+            "text_color": "#121212"
+          }
+        },
+        "feature_L8469q": {
+          "type": "feature",
+          "settings": {
+            "icon": "star",
+            "icon_color": "#f01c7c",
+            "title": "Resistente e Firme",
+            "title_color": "#121212",
+            "text": "<p>Ao contrário das tiras nasais tradicionais, estas fazem realmente efeito.</p>",
+            "text_color": "#1a1b18"
+          }
+        }
+      },
+      "block_order": [
+        "feature_xcFXdw",
+        "feature_ezwBrg",
+        "feature_Hz8DXU",
+        "feature_L8469q"
+      ],
+      "name": "Image Comparison",
+      "settings": {
+        "background_color": "#f3f3f3",
+        "heading": "Vê a diferença!",
+        "heading_color": "#000000",
+        "image_before": "shopify://shop_images/A9146A3F-9D18-4314-84D1-35E5A10ED6CD.heic",
+        "image_after": "shopify://shop_images/E262A930-7600-4AB1-A4AD-25D8C62B5AE9.heic",
+        "image_format": "circle",
+        "padding_top": 36,
+        "padding_bottom": 100
+      }
+    },
+    "comparison_table_MKrwac": {
+      "type": "comparison-table",
+      "blocks": {
+        "comparison_item_HtU33j": {
+          "type": "comparison_item",
+          "settings": {
+            "fact_text": "24 Horas de Duração",
+            "show_check": true
+          }
+        },
+        "comparison_item_ii7Mk6": {
+          "type": "comparison_item",
+          "settings": {
+            "fact_text": "Adesivo Duradouro",
+            "show_check": true
+          }
+        },
+        "comparison_item_kaBbp3": {
+          "type": "comparison_item",
+          "settings": {
+            "fact_text": "Sensação Confortável",
+            "show_check": true
+          }
+        },
+        "comparison_item_bC463r": {
+          "type": "comparison_item",
+          "settings": {
+            "fact_text": "Efeito Instantâneo e Duradouro",
+            "show_check": true
+          }
+        },
+        "comparison_item_6epUex": {
+          "type": "comparison_item",
+          "settings": {
+            "fact_text": "Design Minimalista",
+            "show_check": true
+          }
+        },
+        "comparison_item_hNNGGB": {
+          "type": "comparison_item",
+          "settings": {
+            "fact_text": "Toque Suave Apelativo",
+            "show_check": true
+          }
+        },
+        "comparison_item_pF6Xyt": {
+          "type": "comparison_item",
+          "settings": {
+            "fact_text": "Suave na Pele",
+            "show_check": true
+          }
+        }
+      },
+      "block_order": [
+        "comparison_item_HtU33j",
+        "comparison_item_ii7Mk6",
+        "comparison_item_kaBbp3",
+        "comparison_item_bC463r",
+        "comparison_item_6epUex",
+        "comparison_item_hNNGGB",
+        "comparison_item_pF6Xyt"
+      ],
+      "name": "Comparison Section",
+      "settings": {
+        "title": "Why our product is the perfect choice",
+        "custom_title_liquid": "<h1>O porquê dos Magnetic Strips serem a<i class=\"gradient-text\"> escolha perfeita!</i>\n</h1>\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');\nh1 {\ncolor: black;\nmargin:0;\nfont-weight: 300;\n}\n.gradient-text {\nfont-weight: 700;\nbackground: linear-gradient(90deg,rgba(131, 58, 180, 1) 33%, rgba(253, 29, 29, 1) 66%, rgba(252, 176, 69, 1) 100%);50%, rgba(252, 176, 69, 1) 100%);\n-webkit-background-clip: text;\nbackground-clip: text;\n-webkit-text-fill-color: transparent;\n color: transparent;\n}\n</style>",
+        "paragraph": "Um produto que faz realmente diferença na tua vida.",
+        "show_button": false,
+        "white_shadow": false,
+        "button_text": "",
+        "button_link": "shopify://blogs/novidades",
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "title_color": "#ffffff",
+        "button_bg_color": "#ff0072",
+        "button_text_color": "#ffffff",
+        "table_bg_color": "#000000",
+        "table_left_bg_color": "#1a1b18",
+        "table_right_bg_color": "#000000",
+        "table_text_color": "#ffffff",
+        "table_border_color": "#000000",
+        "logo_image": "shopify://shop_images/logo_mais_junto_branco_png.png",
+        "icon_fill_color": "#f01c7c",
+        "icon_stroke_color": "#f01c7c",
+        "icon_check_color": "#ffffff"
+      }
+    },
+    "collapsible_image_kfznWf": {
+      "type": "collapsible-image",
+      "blocks": {
+        "collapsible_tab_wxQTyf": {
+          "type": "collapsible_tab",
+          "settings": {
+            "background-color": "#ffffff",
+            "heading": "Maximiza a Recuperação",
+            "heading_color": "#000000",
+            "content": "<p>Mais oxigénio acelera a regeneração muscular e reduz o ácido lático. Ideal após treinos intensos.</p>",
+            "content_color": "#1a1b18",
+            "icon": "lightning_bolt",
+            "icon_color": "#f01c7c",
+            "icon_toggle_color": "#000000"
+          }
+        },
+        "collapsible_tab_KFmEmy": {
+          "type": "collapsible_tab",
+          "settings": {
+            "background-color": "#ffffff",
+            "heading": "Diminui o Ritmo Cardíaco",
+            "heading_color": "#000000",
+            "content": "<p>Respirar pelo nariz acalma o corpo e reduz o ritmo cardíaco.<br/><br/></p>",
+            "content_color": "#1a1b18",
+            "icon": "heart",
+            "icon_color": "#f01c7c",
+            "icon_toggle_color": "#000000"
+          }
+        },
+        "collapsible_tab_M3UYf3": {
+          "type": "collapsible_tab",
+          "settings": {
+            "background-color": "#ffffff",
+            "heading": "Aumenta a Absorção de Oxigénio",
+            "heading_color": "#000000",
+            "content": "<p>Vários estudos mostram que as magnetic strips nasais, aumentam a tua capacidade de absorver oxigénio entre 10% e 30%.</p>",
+            "content_color": "#1a1b18",
+            "icon": "leaf",
+            "icon_color": "#f01c7c",
+            "icon_toggle_color": "#000000"
+          }
+        },
+        "collapsible_tab_gdzhEW": {
+          "type": "collapsible_tab",
+          "settings": {
+            "background-color": "#ffffff",
+            "heading": "Otimiza o Desempenho",
+            "heading_color": "#000000",
+            "content": "<p>Com mais oxigénio, aumentas o foco, a resistência e a performance mental e física.</p>",
+            "content_color": "#1a1b18",
+            "icon": "star",
+            "icon_color": "#f01c7c",
+            "icon_toggle_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_tab_wxQTyf",
+        "collapsible_tab_KFmEmy",
+        "collapsible_tab_M3UYf3",
+        "collapsible_tab_gdzhEW"
+      ],
+      "name": "Collapsible Image Section",
+      "settings": {
+        "image": "shopify://shop_images/magnetic_strips_2_v2.png",
+        "background-color": "#f3f3f3",
+        "layout": "image_first",
+        "heading": "Efeitos Diurnos",
+        "heading_color": "#000000",
+        "text": "<p>Ajuda a melhorar o teu foco e a aumentar a tua resistência enquanto estás em ação.</p>",
+        "text_color": "#1a1b18",
+        "padding_top": 100,
+        "padding_bottom": 60
+      }
+    },
+    "collapsible_image_xJ4jJc": {
+      "type": "collapsible-image",
+      "blocks": {
+        "collapsible_tab_6VgqAK": {
+          "type": "collapsible_tab",
+          "settings": {
+            "background-color": "#ffffff",
+            "heading": "Diminui o Ressonar",
+            "heading_color": "#000000",
+            "content": "<p>A respiração nasal estabiliza o palato mole e reduz a vibração das vias aéreas — a principal causa do ressonar. O resultado? Um sono mais silencioso e profundo, tanto para ti como para quem dorme ao teu lado.<br/><br/></p>",
+            "content_color": "#1a1b18",
+            "icon": "leaf",
+            "icon_color": "#f01c7c",
+            "icon_toggle_color": "#000000"
+          }
+        },
+        "collapsible_tab_W6XbnA": {
+          "type": "collapsible_tab",
+          "settings": {
+            "background-color": "#ffffff",
+            "heading": "Melhora a Saúde Oral",
+            "heading_color": "#000000",
+            "content": "<p>A saliva é a tua defesa natural contra as bactérias da boca. Quando respiras pela boca, perdes essa proteção.<br/>A respiração nasal mantém a boca húmida, reduz bactérias e melhora a tua higiene oral — desde a primeira noite.<br/><br/></p>",
+            "content_color": "#1a1b18",
+            "icon": "heart",
+            "icon_color": "#f01c7c",
+            "icon_toggle_color": "#000000"
+          }
+        },
+        "collapsible_tab_4mYXYC": {
+          "type": "collapsible_tab",
+          "settings": {
+            "background-color": "#ffffff",
+            "heading": "Descansa e Recarrega",
+            "heading_color": "#000000",
+            "content": "<p>Quando respiras bem, dormes melhor.<br/>A respiração nasal melhora a oxigenação, acalma o corpo e dá-te o descanso que realmente recarrega.<br/><br/></p>",
+            "content_color": "#1a1b18",
+            "icon": "silhouette",
+            "icon_color": "#f01c7c",
+            "icon_toggle_color": "#000000"
+          }
+        },
+        "collapsible_tab_YpDUVi": {
+          "type": "collapsible_tab",
+          "settings": {
+            "background-color": "#ffffff",
+            "heading": "Aumenta os Níveis de Energia",
+            "heading_color": "#000000",
+            "content": "<p>Mais oxigénio, mais energia, mais presença, menos fadiga.</p>",
+            "content_color": "#1a1b18",
+            "icon": "lightning_bolt",
+            "icon_color": "#f01c7c",
+            "icon_toggle_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_tab_6VgqAK",
+        "collapsible_tab_W6XbnA",
+        "collapsible_tab_4mYXYC",
+        "collapsible_tab_YpDUVi"
+      ],
+      "name": "Collapsible Image Section",
+      "settings": {
+        "image": "shopify://shop_images/nozzo-session-1-hd-1.jpg",
+        "background-color": "#f3f3f3",
+        "layout": "image_second",
+        "heading": "Efeitos Noturnos",
+        "heading_color": "#000000",
+        "text": "<p>Relaxa o teu sistema nervoso e melhora o teu ciclo de sono para recuperares totalmente e estares pronto para o dia a dia.</p>",
+        "text_color": "#1a1b18",
+        "padding_top": 60,
+        "padding_bottom": 100
+      }
+    },
+    "1750112160b738b78b": {
+      "type": "apps",
+      "blocks": {
+        "air_product_reviews_app_block_review_list_rQ6HHw": {
+          "type": "shopify://apps/air-product-reviews/blocks/app-block-review-list/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "settings": {
+            "air_blockreviews_summaryHeading": "Reviews",
+            "air_blockreviews_layout": "list",
+            "air_blockreviews_singleStarColor": "#16a086",
+            "air_blockreviews_primaryColor": "#121212"
+          }
+        }
+      },
+      "block_order": [
+        "air_product_reviews_app_block_review_list_rQ6HHw"
+      ],
+      "custom_css": [
+        ".rev-write-review {padding: 8px 16px; border-radius: 20px;}"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "collapsible_content_AnFPT3": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_UeFMDc": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quanto tempo demora a chegar o meu pedido?",
+            "icon": "question_mark",
+            "row_content": "<p>Encomenda até às 15:00 → envio <strong>no próprio dia</strong><br/><br/>Encomenda pós 15:00 → envio <strong>no dia útil seguinte</strong><br/><br/>24-48h (Continente) | <strong>24-72h (Ilhas)</strong><br/><br/>Sexta feira após as 15:00 → envio <strong>segunda-feira</strong><br/></p><p>🔔 Detalhes de envio mostrados no checkout e no e-mail de confirmação.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_VegNpw": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "O que são as Magnetic Strips?",
+            "icon": "question_mark",
+            "row_content": "<p><strong>São bandas nasais magnéticas compostas por adesivos descartáveis e peças reutilizáveis com ímanes.</strong><br/><br/>Cada adesivo cola-se ao lado do nariz e, com a ajuda dos ímanes, <strong>expande suavemente as narinas</strong>, facilitando o fluxo de ar.</p><p>O objetivo? <strong>Forçar a respiração nasal</strong>, o que melhora o <strong>sono</strong>, a <strong>energia</strong>, o <strong>foco</strong> e até o <strong>hálito matinal</strong>.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_QVVYnX": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "O que vem no Pacote e como Aplicar?",
+            "icon": "question_mark",
+            "row_content": "<p><strong>Cada pack inclui 60 adesivos descartáveis e 4 peças plásticas reutilizáveis com ímanes.</strong><br/><br/>Aplicas um adesivo em cada narina e depois encaixas os ímanes por fora — <strong>eles atraem-se e expandem suavemente as narinas</strong>, melhorando o fluxo de ar.</p><p><strong>O resultado?</strong> Respiração nasal imediata, <strong>mais oxigénio</strong>, <strong>menos ressonar</strong>, <strong>melhor sono</strong> e <strong>mais energia</strong>.</p><p>📦 <strong>Inclui manual de instruções detalhado.</strong><br/><br/>🎥 <strong>Vê os tutoriais nas nossas redes sociais</strong>: <a href=\"https://instagram.com/nozzo.co\">@nozzo.co</a><br/></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_cdbfyY": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "As Magnetic Strips são seguras de usar?",
+            "icon": "question_mark",
+            "row_content": "<p>Sim, são seguras quando usadas corretamente.<br/><br/>Os adesivos são feitos com materiais testados dermatologicamente e os ímanes aplicam apenas uma <strong>pressão leve e confortável</strong> para abrir suavemente as narinas.</p><p>❗ <strong>Nota:</strong> Não é recomendado aplicar em pele queimada, ferida ou muito irritada.<br/><br/>Nesses casos, espera pela recuperação total antes de usar.</p><p>📦 O pack inclui um <strong>manual de instruções</strong>, e podes ver vídeos tutoriais nas nossas redes sociais: <a href=\"https://instagram.com/nozzo.co\">@nozzo.co</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_HWkGR4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Outras questões?",
+            "icon": "question_mark",
+            "row_content": "<p>Podes contactar-nos através do email nozzo.geral@gmail.com , temos muito gosto em ajudar-te.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_UeFMDc",
+        "collapsible_row_VegNpw",
+        "collapsible_row_QVVYnX",
+        "collapsible_row_cdbfyY",
+        "collapsible_row_HWkGR4"
+      ],
+      "custom_css": [
+        ".collapsible-row-layout .accordion summary,.collapsible-row-layout .accordion .accordion__content {padding: 1.8rem 2.2rem;}",
+        ".collapsible-row-layout .accordion {border-radius: 30px;}",
+        ".collapsible-content__header {display: flex; flex-direction: column-reverse;}"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "Obtem soluções rápidas para as tuas dúvidas mais comuns, desde o envio até ao método de aplicação das nossas strips.",
+        "heading": "Tens Questões Sobre a Nozzo?",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "row",
+        "color_scheme": "scheme-1",
+        "container_color_scheme": "scheme-2",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 40,
+        "padding_bottom": 28
+      }
+    },
+    "rich_text_8AcBHH": {
+      "type": "rich-text",
+      "blocks": {
+        "text_4zi79x": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tempo médio de resposta: &lt; 1 hora.<br/><br/> Horário: Segunda-Domingo, 9:00-18:00 horas.</p>"
+          }
+        },
+        "button_DQyMG8": {
+          "type": "button",
+          "settings": {
+            "button_label": "Suporte",
+            "button_link": "shopify://pages/contact",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "text_4zi79x",
+        "button_DQyMG8"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "multicolumn_d7kb3A",
+    "1750111445f6683ee4",
+    "multicolumn_8rmzfz",
+    "image_comparison_2_hy8hx4",
+    "comparison_table_MKrwac",
+    "collapsible_image_kfznWf",
+    "collapsible_image_xJ4jJc",
+    "1750112160b738b78b",
+    "collapsible_content_AnFPT3",
+    "rich_text_8AcBHH",
+    "related-products"
+  ]
+}
