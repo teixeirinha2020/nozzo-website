@@ -81,7 +81,7 @@
         {%- endif -%}
       </div>
       <div class="price__regular">
-        {%- if enable_custom_sale and custom_sale_price < price -%}
+        {%- if enable_custom_sale and custom_sale_price < price and custom_sale_price > 0 -%}
           <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
           <span class="" style="text-decoration: line-through;">
             {{ money_price  }}
