@@ -48,6 +48,16 @@
         "name": "rating",
         "category": "RATING"
       }
+    },
+    {
+      "key": "discount",
+      "namespace": "custom",
+      "name": "Discount",
+      "description": "Descontos atribuídos ao produto.",
+      "type": {
+        "name": "list.number_decimal",
+        "category": "NUMBER"
+      }
     }
   ],
   "variant": [
