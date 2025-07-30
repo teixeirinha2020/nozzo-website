@@ -324,6 +324,83 @@
   // Listen for variant changes via URL
   document.addEventListener('variantChange', updateVariantId);
 
+  // Function to update popup with selected option data
+  function updatePopupData() {
+    const selectedOption = document.querySelector('input[name="quantity-choice"]:checked');
+    const popup = document.querySelector('.add-to-cart-popup');
+    
+    if (!selectedOption || !popup) return;
+    
+    const quantity = parseInt(selectedOption.value);
+    
+    // Get the image for this option
+    const imageSettingName = `option_${quantity}_image`;
+    let optionImage = null;
+    
+    {% for i in (1..4) %}
+      if (quantity === {{ i }}) {
+        {% if block.settings['option_' | append: i | append: '_image'] != blank %}
+          optionImage = "{{ block.settings['option_' | append: i | append: '_image'] | img_url: width: 80, height: 80, crop: 'center' }}";
+        {% endif %}
+      }
+    {% endfor %}
+    
+    // Calculate discounted price for this quantity
+    const basePrice = {{ base_price }};
+    const totalPrice = basePrice * quantity;
+    let discountedPrice = totalPrice;
+    
+    {% for i in (1..4) %}
+      if (quantity === {{ i }}) {
+        {% assign price_setting = 'price_' | append: i | append: '_unit' %}
+        {% if block.settings[price_setting] %}
+          discountedPrice = {{ block.settings[price_setting] }};
+        {% endif %}
+      }
+    {% endfor %}
+    
+    // Update popup image if we have one for this option
+    const popupImage = popup.querySelector('.product-image img');
+    if (popupImage && optionImage) {
+      popupImage.src = optionImage;
+    }
+    
+    // Update popup price
+    const popupPrice = popup.querySelector('.current-price');
+    if (popupPrice) {
+      const pricePerUnit = discountedPrice / (quantity * 100.0);
+      const totalDisplayPrice = discountedPrice / 100.0;
+      popupPrice.textContent = `€${totalDisplayPrice.toFixed(2)}`;
+    }
+    
+    // Update original price if there's a discount
+    const popupComparePrice = popup.querySelector('.compare-price');
+    if (popupComparePrice) {
+      const originalTotalPrice = totalPrice / 100.0;
+      const discountedTotalPrice = discountedPrice / 100.0;
+      
+      if (discountedTotalPrice < originalTotalPrice) {
+        popupComparePrice.textContent = `€${originalTotalPrice.toFixed(2)}`;
+        popupComparePrice.style.display = 'inline';
+      } else {
+        popupComparePrice.style.display = 'none';
+      }
+    }
+  }
+
+  // Listen for quantity option changes
+  document.addEventListener('change', function(event) {
+    if (event.target.matches('input[name="quantity-choice"]')) {
+      updatePopupData();
+    }
+  });
+
+  // Initial update
+  setTimeout(updatePopupData, 100);
+
+  // Expose function globally so popup can access it
+  window.updatePopupData = updatePopupData;
+
   document.querySelector('.add-to-cart-btn2').addEventListener('click', async () => {
     const selectedOption = document.querySelector('input[name="quantity-choice"]:checked');
     if (!selectedOption) return;
