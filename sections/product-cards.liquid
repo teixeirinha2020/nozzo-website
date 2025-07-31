@@ -13,7 +13,7 @@
           data-tab="{{ forloop.index0 }}"
           {{ block.shopify_attributes }}
         >
-          {{ block.settings.redirect_button_text | default: 'Product ' | append: forloop.index }}
+          {{ block.settings.redirect_button_text | default: 'Product'}}
         </button>
       {% endfor %}
     </div>
