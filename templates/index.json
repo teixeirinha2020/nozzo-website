@@ -136,7 +136,7 @@
         "column_WHaMCb": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/para-site-53.jpg",
+            "image": "shopify://shop_images/nozzo-session-1-hd-53.jpg",
             "title": "SONO",
             "text": "",
             "link_label": "",
@@ -218,8 +218,8 @@
       "name": "Custom Image Banner",
       "settings": {
         "section_height": "adapt",
-        "background_image_desktop": "shopify://shop_images/DSC02978_vmnnkf.avif",
-        "background_image_mobile": "shopify://shop_images/Screenshot_1.jpg",
+        "background_image_desktop": "shopify://shop_images/nozzo-session-1-hd-52.jpg",
+        "background_image_mobile": "shopify://shop_images/nozzo-session-1-hd-53.jpg",
         "content_position_desktop": "middle_right",
         "content_position_mobile": "middle_center",
         "content_justify": "center"
@@ -369,7 +369,7 @@
             "heading_text": "Resistente ao Suor. Amigo da Pele.",
             "paragraph_text": "Os nossos stickers foram pensados para manter tudo no lugar, noite após noite. A cola especial garante uma fixação segura, mesmo com suor ou oleosidade na pele — sem irritar nem causar desconforto. São testados dermatologicamente, resistentes, hipoalergénicos e não contêm látex. Tudo isto para garantir que o teu descanso vem com conforto e confiança.",
             "button_text": "Experimenta Já",
-            "button_link": "shopify://products/magnetic-stickers-refills"
+            "button_link": "shopify://products/stickers-refills"
           }
         },
         "card_yHQkmd": {
@@ -381,7 +381,7 @@
             "heading_text": "O Kit Essencial para Quem Leva o Corpo a Sério.",
             "paragraph_text": "O Biohacker’s Bundle junta dois dos nossos produtos mais eficazes: as faixas adesivas para a boca e as tiras magnéticas nasais. Esta combinação ajuda-te a manter uma respiração 100 % nasal durante o sono — promovendo oxigenação ideal, sono mais profundo e até melhorias no alinhamento da mandíbula. Tudo com materiais seguros, adesão firme e conforto garantido. Se levas o teu corpo a sério, começa por otimizar as tuas noites",
             "button_text": "Torna-te um Biohacker",
-            "button_link": "shopify://products/biohackers-bundle"
+            "button_link": "shopify://products/athletes-bundle"
           }
         }
       },
