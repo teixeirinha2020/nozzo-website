@@ -339,43 +339,60 @@
         "card_R3WhAN": {
           "type": "card",
           "settings": {
-            "redirect_button_text": "Magnetic Strips",
-            "image": "shopify://shop_images/bag_mockup_jpeg_with_bk_square.jpg",
-            "subheading_text": "Nasal Strips",
-            "heading_text": "Breathe the Way You Were Meant To!",
-            "paragraph_text": "Increase oxygenation by 40%. More oxygen means better performance, stamina, sleep, recovery, focus.",
-            "button_text": "Shop Now",
-            "button_link": ""
+            "redirect_button_text": "Strips",
+            "image": "shopify://shop_images/magnetic_strips_front_best_seller.jpg",
+            "subheading_text": "Magnetic Nose Strips",
+            "heading_text": "Adeus Nariz Entupido, Olá Boa Noite.",
+            "paragraph_text": "Se costumas acordar com o nariz entupido ou sentes que o teu sono não é tão reparador como devia, estas tiras magnéticas podem fazer a diferença. Ao manterem as narinas abertas de forma natural, ajudam-te a respirar melhor durante a noite. Resultado? Menos interrupções no sono, menos sensação de cansaço ao acordar e noites mais tranquilas – tudo sem medicamentos.",
+            "button_text": "Compra Agora",
+            "button_link": "shopify://products/magnetic-strip"
           }
         },
         "card_p8tPCx": {
           "type": "card",
           "settings": {
             "redirect_button_text": "Tape",
-            "image": "shopify://shop_images/mockup-1-square.jpg",
+            "image": "shopify://shop_images/mouth_tape_front_new_product.jpg",
             "subheading_text": "Mouth Tape",
-            "heading_text": "Reclaim Your Sleep, Define Your Jawline",
-            "paragraph_text": "HiStrips Mouth Tape eliminates mouth breathing at night preventing snoring, dry throat, disrupted rest, and morning brain fog.",
-            "button_text": "Learn More",
-            "button_link": ""
+            "heading_text": "Recupera o Teu Sono.",
+            "paragraph_text": "Respirar pelo nariz durante o sono não é só uma questão de conforto — é uma forma natural de melhorar a qualidade do descanso. Estudos mostram que manter a boca fechada enquanto dormimos pode reduzir o ressonar, melhorar a oxigenação e ajudar a ter um sono mais profundo. Além disso, evita a chamada ‘boca caída’, comum em quem respira pela boca à noite, o que com o tempo pode afetar o alinhamento da mandíbula e a forma da face. As nossas fitas adesivas são seguras, fáceis de usar e ajudam-te a voltar à respiração natural — para acordares com mais energia…",
+            "button_text": "Adquire Já",
+            "button_link": "shopify://products/mouth-tape"
           }
         },
         "card_YkzaH4": {
           "type": "card",
           "settings": {
-            "redirect_button_text": "Sticks",
-            "subheading_text": "Breathing Sticks",
-            "heading_text": "Instant Nasal Relief",
-            "paragraph_text": "Fast-acting nasal breathing enhancement for immediate relief and improved airflow throughout the day.",
-            "button_text": "Try Now",
-            "button_link": ""
+            "redirect_button_text": "Stickers",
+            "image": "shopify://shop_images/extra_stickers_front_refills.jpg",
+            "subheading_text": "Stickers Refills",
+            "heading_text": "Resistente ao Suor. Amigo da Pele.",
+            "paragraph_text": "Os nossos stickers foram pensados para manter tudo no lugar, noite após noite. A cola especial garante uma fixação segura, mesmo com suor ou oleosidade na pele — sem irritar nem causar desconforto. São testados dermatologicamente, resistentes, hipoalergénicos e não contêm látex. Tudo isto para garantir que o teu descanso vem com conforto e confiança.",
+            "button_text": "Experimenta Já",
+            "button_link": "shopify://products/magnetic-stickers-refills"
+          }
+        },
+        "card_yHQkmd": {
+          "type": "card",
+          "settings": {
+            "redirect_button_text": "Bundle",
+            "image": "shopify://shop_images/mag_plus_mouth_biohackers.jpg",
+            "subheading_text": "Biohacker's Bundle",
+            "heading_text": "O Kit Essencial para Quem Leva o Corpo a Sério.",
+            "paragraph_text": "O Biohacker’s Bundle junta dois dos nossos produtos mais eficazes: as faixas adesivas para a boca e as tiras magnéticas nasais. Esta combinação ajuda-te a manter uma respiração 100 % nasal durante o sono — promovendo oxigenação ideal, sono mais profundo e até melhorias no alinhamento da mandíbula. Tudo com materiais seguros, adesão firme e conforto garantido. Se levas o teu corpo a sério, começa por otimizar as tuas noites",
+            "button_text": "Torna-te um Biohacker",
+            "button_link": "shopify://products/biohackers-bundle"
           }
         }
       },
       "block_order": [
         "card_R3WhAN",
         "card_p8tPCx",
-        "card_YkzaH4"
+        "card_YkzaH4",
+        "card_yHQkmd"
+      ],
+      "custom_css": [
+        ".card-image {background: transparent;}"
       ],
       "name": "Interactive Product Cards",
       "settings": {
@@ -494,11 +511,11 @@
       ],
       "name": "Grid of Reviews",
       "settings": {
-        "title": "Thousands of trusted reviews",
+        "title": "Imensas reviews confiáveis",
         "title_size": "h1",
-        "subtitle": "from extraordinary people like you",
+        "subtitle": "de pessoas extraordinárias como tu",
         "subtitle_color": "#999999",
-        "button_text": "View More",
+        "button_text": "Vê Mais",
         "button_link": "",
         "button_text_color": "#ffffff",
         "button_bg_color": "#000000",
@@ -509,7 +526,7 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "title": "Coleção em destaque",
+        "title": "Produtos & Bundles",
         "heading_size": "h1",
         "description": "",
         "show_description": false,
@@ -521,7 +538,7 @@
         "show_view_all": true,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -532,7 +549,79 @@
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "padding_top": 36,
-        "padding_bottom": 36
+        "padding_bottom": 16
+      }
+    },
+    "collapsible_content_Uighbb": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_9n3Jaq": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quanto tempo demora a chegar o meu pedido?",
+            "icon": "question_mark",
+            "row_content": "<p>Encomenda até às 15:00 → envio <strong>no próprio dia</strong><br/><br/>Encomenda pós 15:00 → envio <strong>no dia útil seguinte</strong><br/><br/>24-48h (Continente) | <strong>24-72h (Ilhas)</strong><br/><br/>Sexta feira após as 15:00 → envio <strong>segunda-feira</strong><br/></p><p>🔔 Detalhes de envio mostrados no checkout e no e-mail de confirmação.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_y6PC6m": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "O que são as Magnetic Strips?",
+            "icon": "question_mark",
+            "row_content": "<p><strong>São bandas nasais magnéticas compostas por adesivos descartáveis e peças reutilizáveis com ímanes.</strong><br/><br/>Cada adesivo cola-se ao lado do nariz e, com a ajuda dos ímanes, <strong>expande suavemente as narinas</strong>, facilitando o fluxo de ar.</p><p>O objetivo? <strong>Forçar a respiração nasal</strong>, o que melhora o <strong>sono</strong>, a <strong>energia</strong>, o <strong>foco</strong> e até o <strong>hálito matinal</strong>.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_EBRPKR": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "O que vem no Pacote e como Aplicar?",
+            "icon": "question_mark",
+            "row_content": "<p><strong>Cada pack inclui 60 adesivos descartáveis e 4 peças plásticas reutilizáveis com ímanes.</strong><br/><br/>Aplicas um adesivo em cada narina e depois encaixas os ímanes por fora — <strong>eles atraem-se e expandem suavemente as narinas</strong>, melhorando o fluxo de ar.</p><p><strong>O resultado?</strong> Respiração nasal imediata, <strong>mais oxigénio</strong>, <strong>menos ressonar</strong>, <strong>melhor sono</strong> e <strong>mais energia</strong>.</p><p>📦 <strong>Inclui manual de instruções detalhado.</strong><br/><br/>🎥 <strong>Vê os tutoriais nas nossas redes sociais</strong>: <a href=\"https://instagram.com/nozzo.co\">@nozzo.co</a><br/></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_LLTtQq": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "As Magnetic Strips são seguras de usar?",
+            "icon": "question_mark",
+            "row_content": "<p>Sim, são seguras quando usadas corretamente.<br/><br/>Os adesivos são feitos com materiais testados dermatologicamente e os ímanes aplicam apenas uma <strong>pressão leve e confortável</strong> para abrir suavemente as narinas.</p><p>❗ <strong>Nota:</strong> Não é recomendado aplicar em pele queimada, ferida ou muito irritada.<br/><br/>Nesses casos, espera pela recuperação total antes de usar.</p><p>📦 O pack inclui um <strong>manual de instruções</strong>, e podes ver vídeos tutoriais nas nossas redes sociais: <a href=\"https://instagram.com/nozzo.co\">@nozzo.co</a></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_N3JU7r": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Outras questões?",
+            "icon": "question_mark",
+            "row_content": "<p>Podes contactar-nos através do email nozzo.geral@gmail.com , temos muito gosto em ajudar-te.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_9n3Jaq",
+        "collapsible_row_y6PC6m",
+        "collapsible_row_EBRPKR",
+        "collapsible_row_LLTtQq",
+        "collapsible_row_N3JU7r"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "Obtem soluções rápidas para as tuas dúvidas mais comuns, desde o envio até ao método de aplicação das nossas strips.",
+        "heading": "Tens Questões Sobre a Nozzo?",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "row",
+        "color_scheme": "scheme-1",
+        "container_color_scheme": "scheme-2",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 40,
+        "padding_bottom": 28
       }
     },
     "rich_text_XFQhhn": {
@@ -572,52 +661,6 @@
         "padding_top": 40,
         "padding_bottom": 52
       }
-    },
-    "rich_text_JymLpj": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_GQGjWk": {
-          "type": "heading",
-          "settings": {
-            "heading": "A nossa marca muda a forma como <strong>respiras</strong>!",
-            "heading_size": "h1"
-          }
-        },
-        "caption_Brdrjp": {
-          "type": "caption",
-          "settings": {
-            "caption": "Descobre mais sobre a nossa marca no Blog!",
-            "text_style": "subtitle",
-            "text_size": "medium"
-          }
-        },
-        "button_cQFnKV": {
-          "type": "button",
-          "settings": {
-            "button_label": "Blog",
-            "button_link": "shopify://blogs/novidades",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_GQGjWk",
-        "caption_Brdrjp",
-        "button_cQFnKV"
-      ],
-      "disabled": true,
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 40
-      }
     }
   },
   "order": [
@@ -630,7 +673,7 @@
     "glass_timeline_benefits_qFUPH7",
     "review_grid_k8JwAL",
     "featured_collection_epTGkr",
-    "rich_text_XFQhhn",
-    "rich_text_JymLpj"
+    "collapsible_content_Uighbb",
+    "rich_text_XFQhhn"
   ]
 }
