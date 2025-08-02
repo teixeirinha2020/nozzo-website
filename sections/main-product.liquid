@@ -2722,16 +2722,20 @@
       "limit": 1,
       "settings": [
         {
+          "type": "header",
+          "content": "General Settings"
+        },
+        {
           "type": "text",
           "id": "mini_heading",
-          "label": "Mini heading",
-          "default": "Buy More Save More"
+          "label": "Mini Heading",
+          "default": "Buy More, Save More"
         },
         {
           "type": "color",
           "id": "mini_heading_color",
-          "label": "Mini heading color",
-          "default": "#1a1b18"
+          "label": "Mini Heading Color",
+          "default": "#333333"
         },
         {
           "type": "range",
@@ -2739,72 +2743,59 @@
           "min": 1,
           "max": 4,
           "step": 1,
-          "label": "Number of options",
-          "default": 4
+          "label": "Number of quantity options",
+          "default": 3
         },
         {
           "type": "header",
-          "content": "Price Settings"
+          "content": "Subscription Settings"
         },
         {
-          "type": "number",
-          "id": "price_1_unit",
-          "label": "Price for 1 unit",
-          "info": "Enter the price in cents (e.g., 1999 for €19.99). If you want to use the discount metafield, leave this field empty.",
-          "default": 0
-        },
-        {
-          "type": "number",
-          "id": "price_2_units",
-          "label": "Price for 2 units",
-          "info": "Enter the price in cents (e.g., 3499 for €34.99). If you want to use the discount metafield, leave this field empty.",
-          "default": 0
-        },
-        {
-          "type": "number",
-          "id": "price_3_units",
-          "label": "Price for 3 units",
-          "info": "Enter the price in cents (e.g., 4999 for €49.99). If you want to use the discount metafield, leave this field empty.",
-          "default": 0
-        },
-        {
-          "type": "number",
-          "id": "price_4_units",
-          "label": "Price for 4 units",
-          "info": "Enter the price in cents (e.g., 6499 for €64.99). If you want to use the discount metafield, leave this field empty.",
-          "default": 0
-        },
-        {
-          "type": "header",
-          "content": "Add to Cart Button"
+          "type": "checkbox",
+          "id": "enable_subscriptions",
+          "label": "Enable subscription options",
+          "default": true,
+          "info": "Shows subscription toggle when product has selling plan groups"
         },
         {
           "type": "text",
-          "id": "add_to_cart_text",
-          "label": "Add to cart button text",
-          "default": "ADICIONAR AO CARRINHO"
-        },
-        {
-          "type": "color",
-          "id": "add_to_cart_bg_color",
-          "label": "Add to cart button background",
-          "default": "#00c853"
-        },
-        {
-          "type": "color",
-          "id": "add_to_cart_text_color",
-          "label": "Add to cart button text color",
-          "default": "#ffffff"
-        },
-        {
-          "type": "color",
-          "id": "discount_badge_bg_color",
-          "label": "Discount badge background color",
-          "default": "#ff0000"
+          "id": "onetime_text",
+          "label": "One-time purchase label",
+          "default": "One-time purchase"
         },
         {
           "type": "header",
           "content": "Option 1 Settings"
+        },
+        {
+          "type": "text",
+          "id": "option_1_title",
+          "label": "Option 1 Title",
+          "default": "1 Pack (30 pcs)"
+        },
+        {
+          "type": "color",
+          "id": "option_1_title_color",
+          "label": "Option 1 Title Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "option_1_price_color",
+          "label": "Option 1 Price Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "option_1_border_color",
+          "label": "Option 1 Border Color",
+          "default": "#F01C7C"
+        },
+        {
+          "type": "color",
+          "id": "option_1_badge_text_color",
+          "label": "Option 1 Badge Text Color",
+          "default": "#FFFFFF"
         },
         {
           "type": "image_picker",
@@ -2812,38 +2803,45 @@
           "label": "Option 1 Image"
         },
         {
-          "type": "text",
-          "id": "option_1_title",
-          "label": "Option 1 title",
-          "default": "1x Pack"
-        },
-        {
-          "type": "color",
-          "id": "option_1_title_color",
-          "label": "Option 1 title color",
-          "default": "#1a1b18"
-        },
-        {
-          "type": "color",
-          "id": "option_1_price_color",
-          "label": "Option 1 price color",
-          "default": "#1a1b18"
-        },
-        {
-          "type": "color",
-          "id": "option_1_border_color",
-          "label": "Option 1 border color",
-          "default": "#e5e5e5"
-        },
-        {
-          "type": "color",
-          "id": "option_1_badge_text_color",
-          "label": "Option 1 badge text color",
-          "default": "#ffffff"
+          "type": "number",
+          "id": "price_1_unit",
+          "label": "Custom Price for 1 Unit (in cents)",
+          "info": "Leave as 0 to use metafield discount calculation",
+          "default": 0
         },
         {
           "type": "header",
           "content": "Option 2 Settings"
+        },
+        {
+          "type": "text",
+          "id": "option_2_title",
+          "label": "Option 2 Title",
+          "default": "2 Packs (60 pcs)"
+        },
+        {
+          "type": "color",
+          "id": "option_2_title_color",
+          "label": "Option 2 Title Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "option_2_price_color",
+          "label": "Option 2 Price Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "option_2_border_color",
+          "label": "Option 2 Border Color",
+          "default": "#F01C7C"
+        },
+        {
+          "type": "color",
+          "id": "option_2_badge_text_color",
+          "label": "Option 2 Badge Text Color",
+          "default": "#FFFFFF"
         },
         {
           "type": "image_picker",
@@ -2851,38 +2849,45 @@
           "label": "Option 2 Image"
         },
         {
-          "type": "text",
-          "id": "option_2_title",
-          "label": "Option 2 title",
-          "default": "2x Pack"
-        },
-        {
-          "type": "color",
-          "id": "option_2_title_color",
-          "label": "Option 2 title color",
-          "default": "#1a1b18"
-        },
-        {
-          "type": "color",
-          "id": "option_2_price_color",
-          "label": "Option 2 price color",
-          "default": "#1a1b18"
-        },
-        {
-          "type": "color",
-          "id": "option_2_border_color",
-          "label": "Option 2 border color",
-          "default": "#1a1b18"
-        },
-        {
-          "type": "color",
-          "id": "option_2_badge_text_color",
-          "label": "Option 2 badge text color",
-          "default": "#ffffff"
+          "type": "number",
+          "id": "price_2_units",
+          "label": "Custom Price for 2 Units (in cents)",
+          "info": "Leave as 0 to use metafield discount calculation",
+          "default": 0
         },
         {
           "type": "header",
           "content": "Option 3 Settings"
+        },
+        {
+          "type": "text",
+          "id": "option_3_title",
+          "label": "Option 3 Title",
+          "default": "3 Packs (90 pcs)"
+        },
+        {
+          "type": "color",
+          "id": "option_3_title_color",
+          "label": "Option 3 Title Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "option_3_price_color",
+          "label": "Option 3 Price Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "option_3_border_color",
+          "label": "Option 3 Border Color",
+          "default": "#F01C7C"
+        },
+        {
+          "type": "color",
+          "id": "option_3_badge_text_color",
+          "label": "Option 3 Badge Text Color",
+          "default": "#FFFFFF"
         },
         {
           "type": "image_picker",
@@ -2890,38 +2895,45 @@
           "label": "Option 3 Image"
         },
         {
-          "type": "text",
-          "id": "option_3_title",
-          "label": "Option 3 title",
-          "default": "3x Pack"
-        },
-        {
-          "type": "color",
-          "id": "option_3_title_color",
-          "label": "Option 3 title color",
-          "default": "#1a1b18"
-        },
-        {
-          "type": "color",
-          "id": "option_3_price_color",
-          "label": "Option 3 price color",
-          "default": "#1a1b18"
-        },
-        {
-          "type": "color",
-          "id": "option_3_border_color",
-          "label": "Option 3 border color",
-          "default": "#e5e5e5"
-        },
-        {
-          "type": "color",
-          "id": "option_3_badge_text_color",
-          "label": "Option 3 badge text color",
-          "default": "#ffffff"
+          "type": "number",
+          "id": "price_3_units",
+          "label": "Custom Price for 3 Units (in cents)",
+          "info": "Leave as 0 to use metafield discount calculation",
+          "default": 0
         },
         {
           "type": "header",
           "content": "Option 4 Settings"
+        },
+        {
+          "type": "text",
+          "id": "option_4_title",
+          "label": "Option 4 Title",
+          "default": "4 Packs (120 pcs)"
+        },
+        {
+          "type": "color",
+          "id": "option_4_title_color",
+          "label": "Option 4 Title Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "option_4_price_color",
+          "label": "Option 4 Price Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "option_4_border_color",
+          "label": "Option 4 Border Color",
+          "default": "#F01C7C"
+        },
+        {
+          "type": "color",
+          "id": "option_4_badge_text_color",
+          "label": "Option 4 Badge Text Color",
+          "default": "#FFFFFF"
         },
         {
           "type": "image_picker",
@@ -2929,34 +2941,39 @@
           "label": "Option 4 Image"
         },
         {
+          "type": "number",
+          "id": "price_4_units",
+          "label": "Custom Price for 4 Units (in cents)",
+          "info": "Leave as 0 to use metafield discount calculation",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Styling Settings"
+        },
+        {
+          "type": "color",
+          "id": "discount_badge_bg_color",
+          "label": "Discount Badge Background Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "add_to_cart_bg_color",
+          "label": "Add to Cart Button Background Color",
+          "default": "#F01C7C"
+        },
+        {
+          "type": "color",
+          "id": "add_to_cart_text_color",
+          "label": "Add to Cart Button Text Color",
+          "default": "#FFFFFF"
+        },
+        {
           "type": "text",
-          "id": "option_4_title",
-          "label": "Option 4 title",
-          "default": "4x Pack"
-        },
-        {
-          "type": "color",
-          "id": "option_4_title_color",
-          "label": "Option 4 title color",
-          "default": "#1a1b18"
-        },
-        {
-          "type": "color",
-          "id": "option_4_price_color",
-          "label": "Option 4 price color",
-          "default": "#1a1b18"
-        },
-        {
-          "type": "color",
-          "id": "option_4_border_color",
-          "label": "Option 4 border color",
-          "default": "#e5e5e5"
-        },
-        {
-          "type": "color",
-          "id": "option_4_badge_text_color",
-          "label": "Option 4 badge text color",
-          "default": "#ffffff"
+          "id": "add_to_cart_text",
+          "label": "Add to Cart Button Text",
+          "default": "Add to Cart"
         }
       ]
     },
