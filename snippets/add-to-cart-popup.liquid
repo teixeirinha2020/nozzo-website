@@ -5,7 +5,10 @@
 {% assign compare_at_price_2 = current_variant.compare_at_price %}
 {% assign  price_2 = current_variant.price %}
 
-<div class="add-to-cart-popup{% if block.settings.enable_glass_effect %} glass-effect-popup{% endif %}" data-variant-id="{{ current_variant_id }}" data-product-id="{{ product.id }}">
+<div class="add-to-cart-popup{% if block.settings.enable_glass_effect %} glass-effect-popup{% endif %}" 
+     data-variant-id="{{ current_variant_id }}" 
+     data-product-id="{{ product.id }}"
+     data-product-title="{{ product.title | escape }}">
   <div class="popup-content">
     <div class="product-info">
       <div class="product-image">
@@ -35,14 +38,18 @@
             <span class="current-price" id="popup-current-price">€{{ current_variant.price | divided_by: 100.0 | round: 2 }}</span>
             <s class="compare-price" id="popup-compare-price" style="display: none;">€{{ current_variant.compare_at_price | divided_by: 100.0 | round: 2 }}</s>
           </div>
-          <div class="discount-badge-v2" id="popup-discount-badge" style="display:none; background: {{ block.settings.discount_badge_bg_color_popup }};"></div>
+          <div class="discount-badge-v2" id="popup-discount-badge-2" style="display:none; background: {{ block.settings.discount_badge_bg_color_popup }};"></div>
         </div>
       <div class="popup-actions">
         <button type="button" class="add-to-cart-btn" style="background: {{ block.settings.button_bg_color }}; color: {{ block.settings.button_text_color }}">
           <span class="cart-icon">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 128 128" style="enable-background:new 0 0 128 128" xml:space="preserve"><path fill="currentColor" d="M45.3 81.2h78V43.7L35.9 25.4l-3.1-12.9-12.6-4.2c0-.2.1-.3.1-.5 0-4.3-3.5-7.8-7.8-7.8S4.7 3.5 4.7 7.8s3.5 7.8 7.8 7.8c1.8 0 3.4-.6 4.7-1.6l9.4 4.7L39 78l-12.5 9.4V103l5.7 7.1c-1.6 1.9-2.5 4.3-2.5 7 0 6 4.9 10.9 10.9 10.9s10.9-4.9 10.9-10.9-4.9-10.9-10.9-10.9c-.9 0-1.8.1-2.6.3l-2.1-3.4h65.6l3.6 6c-2.2 2-3.6 4.9-3.6 8.1 0 6 4.9 10.9 10.9 10.9s10.9-4.9 10.9-10.9-4.9-10.9-10.9-10.9h-.3l-1.3-3.1h12.5V97H32.8v-6.2l12.5-9.6zm0-6.3-4.6-21.4.6 3L59.8 58l3.8 17H45.3zm21.8 0-3.7-16.7 18.1 1.4 1.4 15.3H67.1zm18.8 0-1.4-15 17 1.3v13.7H85.9zm31.2-15.6v15.6h-12.5V61.5l12.5 1v-3.2l-12.5-1V44.4l12.5 2.4v12.5zM35.9 31.2l65.6 12.6V58l-17.3-1.4-1.5-16.4-3.1-.6 1.6 16.8-18.5-1.5-4.3-19.3-3.7-.7 4.4 19.7-18.5-1.5-4.7-21.9zm76.5 81.2c2.6 0 4.7 2.1 4.7 4.7s-2.1 4.7-4.7 4.7-4.7-2.1-4.7-4.7 2.1-4.7 4.7-4.7zm-71.8 0c2.6 0 4.7 2.1 4.7 4.7s-2.1 4.7-4.7 4.7-4.7-2.1-4.7-4.7 2.1-4.7 4.7-4.7z"/></svg>
           </span>
-          <span class="button-text">{{ block.settings.button_text }}</span>
+          <span class="button-text" 
+                data-onetime-text="{{ block.settings.button_text }}"
+                data-subscription-text="{{ block.settings.subscription_button_text | default: 'Subscribe Now' }}">
+            {{ block.settings.button_text }}
+          </span>
         </button>
       </div>
     </div>
@@ -438,6 +445,15 @@ class AddToCartPopup {
     // Listen for quantity choice changes in buy-more-save-more
     document.addEventListener('change', this.handleQuantityChoiceChange.bind(this));
 
+    // Listen for purchase type changes (one-time vs subscription)
+    document.addEventListener('change', this.handlePurchaseTypeChange.bind(this));
+
+    // Listen for subscription plan changes
+    document.addEventListener('change', this.handleSubscriptionPlanChange.bind(this));
+
+    // Listen for subscription quantity changes
+    document.addEventListener('change', this.handleSubscriptionQuantityChange.bind(this));
+
     // Listen for window resize to update badge format
     window.addEventListener('resize', this.handleResize.bind(this), { passive: true });
 
@@ -453,29 +469,84 @@ class AddToCartPopup {
     }
   }
 
+  handlePurchaseTypeChange(event) {
+    if (event.target.matches('input[name="purchase-type"]')) {
+      this.updatePopupContent();
+    }
+  }
+
+  handleSubscriptionPlanChange(event) {
+    if (event.target.matches('input[name="subscription-plan"]')) {
+      this.updatePopupContent();
+    }
+  }
+
+  handleSubscriptionQuantityChange(event) {
+    if (event.target.matches('input[name="subscription-quantity"]')) {
+      this.updatePopupContent();
+    }
+  }
+
   handleResize() {
     // Atualizar apenas a badge quando a tela for redimensionada
     const discountBadge = document.getElementById('popup-discount-badge');
     if (discountBadge && discountBadge.style.display !== 'none') {
+      this.updateDiscountBadge();
+    }
+  }
+
+  updateDiscountBadge() {
+    const discountBadge = document.getElementById('popup-discount-badge');
+    if (!discountBadge) return;
+
+    const buyMoreSaveMore = document.querySelector('.buy-more-save-more');
+    if (!buyMoreSaveMore) return;
+
+    const selectedPurchaseType = document.querySelector('input[name="purchase-type"]:checked');
+    const isSubscription = selectedPurchaseType && selectedPurchaseType.value.startsWith('subscription');
+
+    let savingsText = '';
+
+    if (isSubscription) {
+      // For subscriptions, get the savings from subscription quantity options
+      const selectedSubQuantity = document.querySelector('input[name="subscription-quantity"]:checked');
+      if (selectedSubQuantity) {
+        const quantityOption = selectedSubQuantity.closest('.subscription-quantity-option');
+        if (quantityOption) {
+          const savings = quantityOption.querySelector('.subscription-savings');
+          if (savings && savings.textContent.match(/\d+%/)) {
+            savingsText = savings.textContent.trim();
+          }
+        }
+      }
+    } else {
+      // For one-time purchases, get the savings from quantity options
       const selectedOption = document.querySelector('input[name="quantity-choice"]:checked');
       if (selectedOption) {
         const optionContent = selectedOption.closest('.quantity-option');
         if (optionContent) {
           const savings = optionContent.querySelector('.savings p');
           if (savings && savings.textContent.match(/\d+%/)) {
-            const percentageMatch = savings.textContent.match(/(\d+)%/);
-            if (percentageMatch) {
-              const percentage = percentageMatch[1];
-              
-              if (window.innerWidth <= 365) {
-                discountBadge.textContent = `-${percentage}%`;
-              } else {
-                discountBadge.textContent = savings.textContent.trim();
-              }
-            }
+            savingsText = savings.textContent.trim();
           }
         }
       }
+    }
+
+    if (savingsText) {
+      const percentageMatch = savingsText.match(/(\d+)%/);
+      if (percentageMatch) {
+        const percentage = percentageMatch[1];
+        
+        if (window.innerWidth <= 365) {
+          discountBadge.textContent = `-${percentage}%`;
+        } else {
+          discountBadge.textContent = savingsText;
+        }
+      }
+      discountBadge.style.display = 'inline-flex';
+    } else {
+      discountBadge.style.display = 'none';
     }
   }
 
@@ -484,6 +555,21 @@ class AddToCartPopup {
     const buyMoreSaveMore = document.querySelector('.buy-more-save-more');
     if (!buyMoreSaveMore) return;
 
+    // Check if we're in subscription mode
+    const selectedPurchaseType = document.querySelector('input[name="purchase-type"]:checked');
+    const isSubscription = selectedPurchaseType && selectedPurchaseType.value.startsWith('subscription');
+
+    if (isSubscription) {
+      this.updateSubscriptionContent();
+    } else {
+      this.updateOneTimeContent();
+    }
+
+    // Update button text based on purchase type
+    this.updateButtonText(isSubscription);
+  }
+
+  updateOneTimeContent() {
     const selectedOption = document.querySelector('input[name="quantity-choice"]:checked');
     if (!selectedOption) return;
 
@@ -492,35 +578,87 @@ class AddToCartPopup {
     
     if (!optionContent) return;
 
-    // Update image - try to find the specific option image first
+    // Update image
     const optionImage = document.getElementById(`option-${quantity}-image`);
     const popupImage = document.getElementById('popup-product-image');
     if (optionImage && popupImage) {
       popupImage.src = optionImage.src;
       popupImage.alt = optionImage.alt;
     } else {
-      // Fallback to featured image if option image not found
-      const featuredImage = document.querySelector('.product__media img, .product__media-item img');
-      if (featuredImage && popupImage) {
-        popupImage.src = featuredImage.src;
-        popupImage.alt = featuredImage.alt;
-      }
+      this.setFallbackImage();
     }
 
-    // Update title - combine product name with option title
+    // Update title
     const optionTitle = document.getElementById(`option-${quantity}-title`);
     const popupTitle = document.getElementById('popup-product-title');
     const popupTitle2 = document.getElementById('popup-product-title-2');
     if (optionTitle && popupTitle) {
-      const productName = '{{ product.title }}';
+      const productName = this.popup.dataset.productTitle || '{{ product.title }}';
       const optionTitleText = optionTitle.textContent;
-      popupTitle.textContent = `${productName}-${optionTitleText}`;
+      popupTitle.textContent = `${productName} ${optionTitleText}`;
       popupTitle2.textContent = `${optionTitleText}`;
     }
 
     // Update price
     const priceAmount = optionContent.querySelector('.price-amount');
     const originalPrice = optionContent.querySelector('.original-price');
+    this.updatePriceDisplay(priceAmount, originalPrice);
+
+    // Update discount badge
+    this.updateDiscountBadge();
+  }
+
+  updateSubscriptionContent() {
+    const selectedSubQuantity = document.querySelector('input[name="subscription-quantity"]:checked');
+    if (!selectedSubQuantity) return;
+
+    const quantity = parseInt(selectedSubQuantity.value);
+    const quantityOption = selectedSubQuantity.closest('.subscription-quantity-option');
+    
+    if (!quantityOption) return;
+
+    // Update image - try to find corresponding option image
+    let optionImage = quantityOption.querySelector('.option-image img');
+    if (!optionImage) {
+      // Fallback to main option images
+      optionImage = document.getElementById(`option-${quantity}-image`);
+    }
+    
+    const popupImage = document.getElementById('popup-product-image');
+    if (optionImage && popupImage) {
+      popupImage.src = optionImage.src;
+      popupImage.alt = optionImage.alt;
+    } else {
+      this.setFallbackImage();
+    }
+
+    // Update title
+    const titleElement = quantityOption.querySelector('.title-and-badge h4');
+    const popupTitle = document.getElementById('popup-product-title');
+    const popupTitle2 = document.getElementById('popup-product-title-2');
+    
+    if (titleElement && popupTitle) {
+      const productName = this.popup.dataset.productTitle || '{{ product.title }}';
+      const optionTitleText = titleElement.textContent;
+      
+      // Get subscription plan name
+      const selectedPlan = document.querySelector('input[name="subscription-plan"]:checked');
+      const planName = selectedPlan ? selectedPlan.closest('.subscription-plan-option').querySelector('h4').textContent : '';
+      
+      popupTitle.textContent = `${productName} ${optionTitleText}`;
+      popupTitle2.textContent = planName ? `${optionTitleText} (${planName})` : optionTitleText;
+    }
+
+    // Update price from subscription calculations
+    const priceAmount = quantityOption.querySelector('.subscription-price-amount');
+    const originalPrice = quantityOption.querySelector('.subscription-original-price');
+    this.updatePriceDisplay(priceAmount, originalPrice);
+
+    // Update discount badge
+    this.updateDiscountBadge();
+  }
+
+  updatePriceDisplay(priceAmount, originalPrice) {
     const popupCurrentPrice = document.getElementById('popup-current-price');
     const popupComparePrice = document.getElementById('popup-compare-price');
     const popupCurrentPrice2 = document.getElementById('popup-current-price2');
@@ -531,7 +669,7 @@ class AddToCartPopup {
       popupCurrentPrice2.textContent = priceAmount.textContent;
     }
 
-    if (originalPrice && popupComparePrice) {
+    if (originalPrice && originalPrice.style.display !== 'none' && originalPrice.textContent.trim() && popupComparePrice) {
       popupComparePrice.textContent = originalPrice.textContent;
       popupComparePrice.style.display = 'inline';
       popupComparePrice2.textContent = originalPrice.textContent;
@@ -540,30 +678,31 @@ class AddToCartPopup {
       popupComparePrice.style.display = 'none';
       popupComparePrice2.style.display = 'none';
     }
+  }
 
-    // Atualizar badge de desconto
-    const discountBadge = document.getElementById('popup-discount-badge');
-    if (discountBadge) {
-      const savings = optionContent.querySelector('.savings p');
-      if (savings && savings.textContent.match(/\d+%/)) {
-        // Extrair apenas o número da porcentagem
-        const percentageMatch = savings.textContent.match(/(\d+)%/);
-        if (percentageMatch) {
-          const percentage = percentageMatch[1];
-          
-          // Verificar se a tela é menor que 365px
-          if (window.innerWidth <= 365) {
-            discountBadge.textContent = `-${percentage}%`;
-          } else {
-            discountBadge.textContent = savings.textContent.trim();
-          }
-        }
-        discountBadge.style.display = 'inline-flex';
-        // Cor dinâmica
-        
-      } else {
-        discountBadge.style.display = 'none';
-      }
+  updateButtonText(isSubscription) {
+    const buttonText = this.popup.querySelector('.add-to-cart-btn .button-text');
+    if (!buttonText) return;
+
+    if (isSubscription) {
+      // Try to get subscription button text from buy-more-save-more
+      const bmsmButton = document.querySelector('.buy-more-save-more .add-to-cart-btn2 .button-text');
+      const subscriptionText = bmsmButton ? bmsmButton.getAttribute('data-subscription-text') : null;
+      buttonText.textContent = subscriptionText || '{{ block.settings.subscription_button_text }}' || 'Subscribe Now';
+    } else {
+      // Use one-time purchase text
+      const bmsmButton = document.querySelector('.buy-more-save-more .add-to-cart-btn2 .button-text');
+      const onetimeText = bmsmButton ? bmsmButton.getAttribute('data-onetime-text') : null;
+      buttonText.textContent = onetimeText || '{{ block.settings.button_text }}' || 'Add to Cart';
+    }
+  }
+
+  setFallbackImage() {
+    const featuredImage = document.querySelector('.product__media img, .product__media-item img');
+    const popupImage = document.getElementById('popup-product-image');
+    if (featuredImage && popupImage) {
+      popupImage.src = featuredImage.src;
+      popupImage.alt = featuredImage.alt;
     }
   }
 
@@ -636,22 +775,59 @@ class AddToCartPopup {
     const variantId = parseInt(this.popup.dataset.variantId);
     const productId = parseInt(this.popup.dataset.productId);
 
-    let quantity = 1;
-    const buyMoreSaveMore = document.querySelector('.buy-more-save-more');
-    if (buyMoreSaveMore) {
-      const selectedOption = buyMoreSaveMore.querySelector('input[name="quantity-choice"]:checked');
-      if (selectedOption) {
-        quantity = parseInt(selectedOption.value);
-      }
-    }
+    // Check if we're in subscription mode
+    const selectedPurchaseType = document.querySelector('input[name="purchase-type"]:checked');
+    const isSubscription = selectedPurchaseType && selectedPurchaseType.value.startsWith('subscription');
 
-    const formData = {
-      items: [{
-        id: variantId,
-        quantity: quantity,
-        properties: { '_discount_quantity': quantity }
-      }]
-    };
+    let formData;
+
+    if (isSubscription) {
+      // Get subscription details
+      const selectedPlan = document.querySelector('input[name="subscription-plan"]:checked');
+      const selectedSubQuantity = document.querySelector('input[name="subscription-quantity"]:checked');
+      
+      if (!selectedPlan || !selectedSubQuantity) {
+        console.error('Missing subscription selection');
+        return;
+      }
+
+      const quantity = parseInt(selectedSubQuantity.value);
+      const sellingPlan = selectedPlan.value;
+      const groupId = selectedPurchaseType.value.replace('subscription-', '');
+      const subscriptionDiscount = parseFloat(selectedSubQuantity.dataset.discount) || 0;
+
+      formData = {
+        items: [{
+          id: variantId,
+          quantity: quantity,
+          selling_plan: sellingPlan,
+          properties: {
+            '_subscription': 'true',
+            '_selling_plan_group': groupId,
+            '_subscription_quantity': quantity,
+            '_subscription_discount': subscriptionDiscount
+          }
+        }]
+      };
+    } else {
+      // One-time purchase
+      let quantity = 1;
+      const buyMoreSaveMore = document.querySelector('.buy-more-save-more');
+      if (buyMoreSaveMore) {
+        const selectedOption = buyMoreSaveMore.querySelector('input[name="quantity-choice"]:checked');
+        if (selectedOption) {
+          quantity = parseInt(selectedOption.value);
+        }
+      }
+
+      formData = {
+        items: [{
+          id: variantId,
+          quantity: quantity,
+          properties: { '_discount_quantity': quantity }
+        }]
+      };
+    }
 
     try {
       const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
@@ -675,7 +851,9 @@ class AddToCartPopup {
         if (cartDrawer) {
           cartData.sections = sectionsJson;
           cartDrawer.classList.remove('is-empty');
-          cartDrawer.renderContents(cartData);
+          if (typeof cartDrawer.renderContents === 'function') {
+            cartDrawer.renderContents(cartData);
+          }
           cartDrawer.setAttribute('open', '');
           cartDrawer.classList.add('animate', 'active');
           document.body.classList.add('overflow-hidden');
@@ -685,6 +863,14 @@ class AddToCartPopup {
         if (cartIconBubble && sectionsJson['cart-icon-bubble']) {
           cartIconBubble.innerHTML = sectionsJson['cart-icon-bubble'];
         }
+
+        // Trigger cart update events
+        document.dispatchEvent(new CustomEvent('cart:updated', {
+          detail: { cart: cartData }
+        }));
+      } else {
+        const errorText = await response.text();
+        console.error('Cart add failed:', errorText);
       }
     } catch (error) {
       console.error('Add to Cart Error:', error);
@@ -704,5 +890,4 @@ setTimeout(() => {
     new AddToCartPopup();
   }
 }, 1000);
-
-</script> 
+</script>

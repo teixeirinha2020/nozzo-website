@@ -58,6 +58,26 @@
         "name": "list.number_decimal",
         "category": "NUMBER"
       }
+    },
+    {
+      "key": "subscription_discount",
+      "namespace": "custom",
+      "name": "Subscription Discount",
+      "description": "Descontos das Subscrições",
+      "type": {
+        "name": "list.number_decimal",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "treatment-objective",
+      "namespace": "shopify",
+      "name": "Objetivo do tratamento",
+      "description": "Define o problema que o produto aborda, normalmente para itens de higiene pessoal; por exemplo, ronco, febre",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
     }
   ],
   "variant": [
