@@ -70,6 +70,8 @@
           "settings": {
             "mini_heading": "COMPRA MAIS <-> POUPA MAIS",
             "mini_heading_color": "#000000",
+            "types_of_purchase_text_color": "#000000",
+            "types_of_purchase_background_color": "#f01c7c",
             "number_of_options": 3,
             "enable_subscriptions": true,
             "onetime_text": "One-time purchase",
@@ -103,7 +105,8 @@
             "discount_badge_bg_color": "#ededed",
             "add_to_cart_bg_color": "#000000",
             "add_to_cart_text_color": "#ffffff",
-            "add_to_cart_text": "ADICIONAR AO CARRINHO"
+            "add_to_cart_text": "ADICIONAR AO CARRINHO",
+            "subscription_button_text": "SUBSCREVE JÁ"
           }
         },
         "collapsible_tab_xaCTMX": {
