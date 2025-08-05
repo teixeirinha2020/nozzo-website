@@ -219,7 +219,7 @@
       "settings": {
         "section_height": "adapt",
         "background_image_desktop": "shopify://shop_images/nozzo-session-1-hd-52.jpg",
-        "background_image_mobile": "shopify://shop_images/nozzo-session-1-hd-53.jpg",
+        "background_image_mobile": "shopify://shop_images/foto-86.jpg",
         "content_position_desktop": "middle_right",
         "content_position_mobile": "middle_center",
         "content_justify": "center"
@@ -409,37 +409,37 @@
         "benefit_BcVCUi": {
           "type": "benefit",
           "settings": {
-            "small_text": "Up to 44%",
-            "main_text": "Less time to fall asleep",
-            "box_color": "#fc000073",
-            "benefit_height": 100
+            "small_text": "Até 39%",
+            "main_text": "Menos resistência nasal",
+            "box_color": "#ff000073",
+            "benefit_height": 90
           }
         },
         "benefit_zmwiMR": {
           "type": "benefit",
           "settings": {
-            "small_text": "Up to 44%",
-            "main_text": "Less time to fall asleep",
+            "small_text": "Até 37%",
+            "main_text": "Menos despertares noturnos",
             "box_color": "#242d4273",
-            "benefit_height": 200
+            "benefit_height": 50
           }
         },
         "benefit_7LMxTT": {
           "type": "benefit",
           "settings": {
-            "small_text": "Up to 44%",
-            "main_text": "Less time to fall asleep",
+            "small_text": "Até 47%",
+            "main_text": "Diminuição do ressonar",
             "box_color": "#242d4273",
-            "benefit_height": 124
+            "benefit_height": 160
           }
         },
         "benefit_ajhqMr": {
           "type": "benefit",
           "settings": {
-            "small_text": "Up to 44%",
-            "main_text": "Less time to fall asleep",
+            "small_text": "Até 67%",
+            "main_text": "Mais sono reparador",
             "box_color": "#242d4273",
-            "benefit_height": 50
+            "benefit_height": 200
           }
         }
       },
@@ -449,11 +449,14 @@
         "benefit_7LMxTT",
         "benefit_ajhqMr"
       ],
+      "custom_css": [
+        ".glass-timeline__subtitle {line-height: 1.2;}"
+      ],
       "name": "Glass Timeline Benefits",
       "settings": {
-        "title": "The best sleep you've ever had",
+        "title": "O melhor sono que já tiveste!",
         "title_color": "#ffffff",
-        "subtitle": "The Pod is clinically proven to deliver real results for your sleep, every night",
+        "subtitle": "Reduz o tempo para adormecer, melhora a oxigenação e promove sono profundo — tudo através da respiração nasal. Os nossos produtos dão resultados reais, todas as noites.",
         "subtitle_color": "#ffffff",
         "background_gradient": "linear-gradient(90deg, rgba(55, 65, 81, 1), rgba(17, 24, 39, 1) 50%, rgba(0, 0, 0, 1) 100%)",
         "timeline_color": "#ffffff",

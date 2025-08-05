@@ -20,31 +20,6 @@
           "type": "title",
           "settings": {}
         },
-        "subscriptions_app_block_nm7BeC": {
-          "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
-          "settings": {
-            "color_text_body": "#6D7175",
-            "dividers_color": "#8F8D8D",
-            "bacgkround_color": "#FFFFFF",
-            "border_thickness": 1,
-            "border_radius": 0,
-            "subscription_policy_url": "",
-            "product": "{{product}}"
-          }
-        },
-        "subscriptions_app_block_6NNqxA": {
-          "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
-          "disabled": true,
-          "settings": {
-            "color_text_body": "#6d7175",
-            "dividers_color": "#8f8d8d",
-            "bacgkround_color": "#ffffff",
-            "border_thickness": 1,
-            "border_radius": 0,
-            "subscription_policy_url": "",
-            "product": "{{product}}"
-          }
-        },
         "price": {
           "type": "price",
           "settings": {
@@ -96,41 +71,80 @@
             "mini_heading": "COMPRA MAIS <-> POUPA MAIS",
             "mini_heading_color": "#000000",
             "number_of_options": 3,
-            "price_1_unit": 0,
-            "price_2_units": 0,
-            "price_3_units": 0,
-            "price_4_units": 0,
-            "add_to_cart_text": "ADICIONAR AO CARRINHO",
-            "add_to_cart_bg_color": "#000000",
-            "add_to_cart_text_color": "#ffffff",
-            "discount_badge_bg_color": "#ededed",
-            "option_1_image": "shopify://shop_images/1unit.jpg",
+            "enable_subscriptions": true,
+            "onetime_text": "One-time purchase",
             "option_1_title": "1 PACK",
             "option_1_title_color": "#1a1b18",
             "option_1_price_color": "#1a1b18",
             "option_1_border_color": "#f01c7c",
             "option_1_badge_text_color": "#080808",
-            "option_2_image": "shopify://shop_images/2unit.jpg",
+            "option_1_image": "shopify://shop_images/1unit.jpg",
+            "price_1_unit": 0,
             "option_2_title": "2 PACKS",
             "option_2_title_color": "#1a1b18",
             "option_2_price_color": "#1a1b18",
             "option_2_border_color": "#f01c7c",
             "option_2_badge_text_color": "#000000",
-            "option_3_image": "shopify://shop_images/3unit.jpg",
+            "option_2_image": "shopify://shop_images/2unit.jpg",
+            "price_2_units": 0,
             "option_3_title": "3 PACKS",
             "option_3_title_color": "#1a1b18",
             "option_3_price_color": "#1a1b18",
             "option_3_border_color": "#f01c7c",
             "option_3_badge_text_color": "#000000",
+            "option_3_image": "shopify://shop_images/3unit.jpg",
+            "price_3_units": 0,
             "option_4_title": "4x Pack",
             "option_4_title_color": "#1a1b18",
             "option_4_price_color": "#1a1b18",
             "option_4_border_color": "#e5e5e5",
-            "option_4_badge_text_color": "#ffffff"
+            "option_4_badge_text_color": "#ffffff",
+            "price_4_units": 0,
+            "discount_badge_bg_color": "#ededed",
+            "add_to_cart_bg_color": "#000000",
+            "add_to_cart_text_color": "#ffffff",
+            "add_to_cart_text": "ADICIONAR AO CARRINHO"
+          }
+        },
+        "collapsible_tab_xaCTMX": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Que benefícios posso esperar?",
+            "icon": "check_mark",
+            "content": "<ol><li>Abrem as vias nasais instantaneamente, reduzindo a resistência ao ar e facilitando a respiração durante o sono e o treino. Em estudos, tiras nasais semelhantes mostraram diminuição de até 27–39% na resistência nasal, o que se traduz em respiração mais fluida e relaxamento natural.</li><li>Muitos utilizadores relatam dormir melhor, com menos despertares e sensação de sono mais contínuo e reparador.</li><li>Durante atividades físicas leves a moderadas, as tiras podem reduzir a perceção de fadiga e melhorar a sensação de frescura respiratória, especialmente em quem tem congestionamento nasal.</li></ol>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_mTfG6J": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Ficam no lugar durante treinos intensos?",
+            "icon": "check_mark",
+            "content": "<ul><li>Sim — as <strong>Magnetic Strips</strong> têm uma cola especial forte e testada dermatologicamente. Mesmo durante suor, movimento ou noites de sono, mantêm-se firmes e confortáveis, sem irritar a pele. </li><li><strong>Atenção</strong>: Deves sempre limpar e secar cuidadosamente a zona do nariz.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_xtpWHa": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "O que torna as Magnetic Strips diferentes das outras tiras nasais?",
+            "icon": "check_mark",
+            "content": "<ol><li><strong>Adesivo magnético reforçado</strong>, especialmente desenvolvido para segurança e durabilidade.</li><li><strong>Testadas dermatologicamente</strong>, hipoalergénicas e sem látex, ideais para pele sensível.</li><li>Projetadas cuidadosamente para serem discretas e funcionais — pensadas tanto para dormir como para treinar.</li><li>Combinam benefícios para o <strong>sono (respiração natural, menos ronco)</strong> e para o <strong>desempenho desportivo (redução da fadiga respiratória)</strong>.</li></ol>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_MyghVK": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Descrição do produto",
+            "icon": "check_mark",
+            "content": "<ul><li><strong>Magnetic Strips (60 stickers -&gt; 30 pares de stickers -&gt; 30 utilizações)</strong></li><li>As nossas <strong>Magnetic Strips</strong> são tiras nasais externas realçadas com tecnologia magnética para abrir as vias aéreas de forma natural. Ideais para noites de sono mais calmo e para treinos de baixa a média intensidade — ajudam-te a respirar melhor sem recorrer a químicos ou aparelhos complexos.</li><li>Aderência robusta mesmo com suor ou movimento;</li><li>Cola premium hipoalergénica, sem látex e testada dermatologicamente;</li><li>Design discreto, confortável para dormir e treinar.</li></ul>",
+            "page": ""
           }
         },
         "custom_liquid_zMXdwT": {
           "type": "custom_liquid",
+          "name": "Métodos de Pagamento",
           "settings": {
             "custom_liquid": "<ul class=\"list list-payment\" role=\"list\">\n              {%- for type in shop.enabled_payment_types -%}\n                <li class=\"list-payment__item\">\n                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}\n                </li>\n              {%- endfor -%}\n </ul>\n<style>\n.list-payment {\n justify-content: center !important;\n}\n</style>"
           }
@@ -186,14 +200,16 @@
       "block_order": [
         "air_product_reviews_app_summary_block_DjfWfH",
         "title",
-        "subscriptions_app_block_nm7BeC",
-        "subscriptions_app_block_6NNqxA",
         "price",
         "vendor",
         "icon_with_text_ffze9b",
         "custom_liquid_YgR9nm",
         "variant_picker",
         "buy_more_save_more_TanqHa",
+        "collapsible_tab_xaCTMX",
+        "collapsible_tab_mTfG6J",
+        "collapsible_tab_xtpWHa",
+        "collapsible_tab_MyghVK",
         "custom_liquid_zMXdwT",
         "quantity_selector",
         "buy_buttons",

@@ -71,37 +71,66 @@
             "mini_heading": "COMPRA MAIS <-> POUPA MAIS",
             "mini_heading_color": "#000000",
             "number_of_options": 3,
-            "price_1_unit": 0,
-            "price_2_units": 0,
-            "price_3_units": 0,
-            "price_4_units": 0,
-            "add_to_cart_text": "ADICIONAR AO CARRINHO",
-            "add_to_cart_bg_color": "#000000",
-            "add_to_cart_text_color": "#ffffff",
-            "discount_badge_bg_color": "#ededed",
-            "option_1_image": "shopify://shop_images/1unit.jpg",
+            "enable_subscriptions": true,
+            "onetime_text": "One-time purchase",
             "option_1_title": "1 PACK",
             "option_1_title_color": "#1a1b18",
             "option_1_price_color": "#1a1b18",
             "option_1_border_color": "#f01c7c",
             "option_1_badge_text_color": "#080808",
-            "option_2_image": "shopify://shop_images/2unit.jpg",
+            "option_1_image": "shopify://shop_images/1unit.jpg",
+            "price_1_unit": 0,
             "option_2_title": "2 PACKS",
             "option_2_title_color": "#1a1b18",
             "option_2_price_color": "#1a1b18",
             "option_2_border_color": "#f01c7c",
             "option_2_badge_text_color": "#000000",
-            "option_3_image": "shopify://shop_images/3unit.jpg",
+            "option_2_image": "shopify://shop_images/2unit.jpg",
+            "price_2_units": 0,
             "option_3_title": "3 PACKS",
             "option_3_title_color": "#1a1b18",
             "option_3_price_color": "#1a1b18",
             "option_3_border_color": "#f01c7c",
             "option_3_badge_text_color": "#000000",
+            "option_3_image": "shopify://shop_images/3unit.jpg",
+            "price_3_units": 0,
             "option_4_title": "4x Pack",
             "option_4_title_color": "#1a1b18",
             "option_4_price_color": "#1a1b18",
             "option_4_border_color": "#e5e5e5",
-            "option_4_badge_text_color": "#ffffff"
+            "option_4_badge_text_color": "#ffffff",
+            "price_4_units": 0,
+            "discount_badge_bg_color": "#ededed",
+            "add_to_cart_bg_color": "#000000",
+            "add_to_cart_text_color": "#ffffff",
+            "add_to_cart_text": "ADICIONAR AO CARRINHO"
+          }
+        },
+        "collapsible_tab_gkxJMa": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Que benefícios posso esperar?",
+            "icon": "star",
+            "content": "<ol><li>Promove a respiração nasal durante o sono;</li><li>Reduz o ressonar e a secura na boca;</li><li>Favorece a recuperação e a hidratação da pele;</li><li>Melhora a qualidade do sono;</li><li>Sem irritações nem resíduos.</li></ol><h3><strong>Tem o sono que mereces. Acorda com mais clareza.</strong></h3><ul><li>Descobre o segredo para um sono mais profundo e reparador com a nossa <em>mouth tape</em>. Foi especialmente desenhada para incentivar a respiração nasal durante o sono, ajudando-te a respirar melhor, reduzir o ressonar e melhorar a qualidade geral do descanso.</li><li>Feita com materiais respiráveis e hipoalergénicos, esta fita é suave para a pele e garante uma fixação segura e confortável durante toda a noite.</li><li>Se sofres de boca seca, congestão ou simplesmente queres otimizar o teu sono, a nossa <em>mouth tape</em> oferece uma solução simples e eficaz.</li></ul><h4>Como usar:</h4><ul><li>Cola simplesmente a <em>mouth tape</em> sobre a boca antes de dormir para aproveitar os benefícios de um sono mais profundo. Fácil de remover de manhã, sem deixar resíduos nem causar desconforto.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_LcTPJ4": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "O que torna as nossas Mouth Tapes diferentes?",
+            "icon": "check_mark",
+            "content": "<h4>As nossas <em>Mouth Tapes</em> foram criadas especificamente para quem leva o sono a sério — e isso nota-se em cada detalhe.</h4><ul><li><strong>Adesivo premium hipoalergénico</strong>, seguro para a pele, mesmo após várias horas de uso. Fica bem fixo durante a noite, mas sai facilmente de manhã, sem irritar nem deixar resíduos.</li><li><strong>Design discreto, leve e respirável</strong>, pensado para conforto total — não bloqueia por completo o ar se precisares de abrir a boca.</li><li><strong>Sem látex, sem químicos desnecessários</strong>, adequadas para todos os tipos de pele, incluindo as mais sensíveis.</li><li><strong>Funciona com quem respira pela boca</strong> ou tem dificuldade em manter a boca fechada durante o sono - ajuda a criar o hábito de respirar pelo nariz de forma natural.</li><li><strong>Testadas em situações reais</strong>: por pessoas que treinam, trabalham e dormem com foco no desempenho e recuperação.</li><li>Enquanto outras fitas são desconfortáveis ou colam demasiado, as nossas equilibram segurança com suavidade — para noites mais tranquilas e respiração mais saudável.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_km8kYw": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Descrição do produto",
+            "icon": "box",
+            "content": "<h4>A nossa <em>mouth tape</em> para a boca ajuda-te a manter a boca fechada durante o sono, promovendo a respiração nasal natural. Reduz o ressonar, evita a boca seca e melhora a qualidade do descanso.</h4><ul><li>Hipoalergénica e sem latex;</li><li>Fixa com segurança, sem causar irritação;</li><li>Fácil de aplicar e remover;</li><li>Confortável para toda a noite.</li></ul><h4>Para noites mais tranquilas e manhãs com mais energia.<br/><br/></h4>",
+            "page": ""
           }
         },
         "custom_liquid_zMXdwT": {
@@ -167,6 +196,9 @@
         "custom_liquid_YgR9nm",
         "variant_picker",
         "buy_more_save_more_TanqHa",
+        "collapsible_tab_gkxJMa",
+        "collapsible_tab_LcTPJ4",
+        "collapsible_tab_km8kYw",
         "custom_liquid_zMXdwT",
         "quantity_selector",
         "buy_buttons",
@@ -201,66 +233,6 @@
         "enable_video_looping": false,
         "padding_top": 84,
         "padding_bottom": 32
-      }
-    },
-    "multicolumn_d7kb3A": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_WE7Mjj": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/icon_product_page_2_f7e32acd-70a8-4537-a081-6186dadad26f.png",
-            "title": "4 Magnetic Strips",
-            "text": "<p>Inclui 4 tamanhos diferentes. Escolhe o tamanho que melhor se adapta ao teu nariz.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_CEtXTd": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/icon_product_page_6.png",
-            "title": "Aplicador",
-            "text": "<p>Usa o aplicador para colar os adesivos magnéticos no teu nariz sem ficarem colados nos teus dedos.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_yMBdiJ": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/icon_product_page_2_8f4749e5-26e0-440a-ab0f-3db9958f35ef.png",
-            "title": "60 Magnetic Stickers",
-            "text": "<p>Adesivos resistentes, hipoalergénicos e seguros para peles sensíveis. Desenvolvidos para máximo conforto e performance.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_WE7Mjj",
-        "column_CEtXTd",
-        "column_yMBdiJ"
-      ],
-      "custom_css": [
-        ".multicolumn.background-primary .multicolumn-card {border-radius: 10px;}"
-      ],
-      "name": "t:sections.multicolumn.presets.name",
-      "settings": {
-        "title": "O que está incluído?",
-        "heading_size": "h1",
-        "image_width": "half",
-        "image_ratio": "circle",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "primary",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "1750111445f6683ee4": {
@@ -340,72 +312,6 @@
         "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
-      }
-    },
-    "image_comparison_2_hy8hx4": {
-      "type": "image-comparison-2",
-      "blocks": {
-        "feature_xcFXdw": {
-          "type": "feature",
-          "settings": {
-            "icon": "check_mark",
-            "icon_color": "#f01c7c",
-            "title": "Fácil de Usar",
-            "title_color": "#000000",
-            "text": "<p>Aplica os stickers em ambos os lados do nariz e depois encaixa-o.</p>",
-            "text_color": "#1a1b18"
-          }
-        },
-        "feature_ezwBrg": {
-          "type": "feature",
-          "settings": {
-            "icon": "stopwatch",
-            "icon_color": "#f01c7c",
-            "title": "Duradouro",
-            "title_color": "#080808",
-            "text": "<p>Desenhado para durar até 24 horas sem descolar.</p>",
-            "text_color": "#1a1b18"
-          }
-        },
-        "feature_Hz8DXU": {
-          "type": "feature",
-          "settings": {
-            "icon": "heart",
-            "icon_color": "#f01c7c",
-            "title": "Adorado por Muitos",
-            "title_color": "#080808",
-            "text": "<p>Popular entre biohackers, atletas e corredores.</p>",
-            "text_color": "#121212"
-          }
-        },
-        "feature_L8469q": {
-          "type": "feature",
-          "settings": {
-            "icon": "star",
-            "icon_color": "#f01c7c",
-            "title": "Resistente e Firme",
-            "title_color": "#121212",
-            "text": "<p>Ao contrário das tiras nasais tradicionais, estas fazem realmente efeito.</p>",
-            "text_color": "#1a1b18"
-          }
-        }
-      },
-      "block_order": [
-        "feature_xcFXdw",
-        "feature_ezwBrg",
-        "feature_Hz8DXU",
-        "feature_L8469q"
-      ],
-      "name": "Image Comparison",
-      "settings": {
-        "background_color": "#f3f3f3",
-        "heading": "Vê a diferença!",
-        "heading_color": "#000000",
-        "image_before": "shopify://shop_images/A9146A3F-9D18-4314-84D1-35E5A10ED6CD.heic",
-        "image_after": "shopify://shop_images/E262A930-7600-4AB1-A4AD-25D8C62B5AE9.heic",
-        "image_format": "circle",
-        "padding_top": 36,
-        "padding_bottom": 100
       }
     },
     "comparison_table_MKrwac": {
@@ -493,81 +399,6 @@
         "icon_fill_color": "#f01c7c",
         "icon_stroke_color": "#f01c7c",
         "icon_check_color": "#ffffff"
-      }
-    },
-    "collapsible_image_kfznWf": {
-      "type": "collapsible-image",
-      "blocks": {
-        "collapsible_tab_wxQTyf": {
-          "type": "collapsible_tab",
-          "settings": {
-            "background-color": "#ffffff",
-            "heading": "Maximiza a Recuperação",
-            "heading_color": "#000000",
-            "content": "<p>Mais oxigénio acelera a regeneração muscular e reduz o ácido lático. Ideal após treinos intensos.</p>",
-            "content_color": "#1a1b18",
-            "icon": "lightning_bolt",
-            "icon_color": "#f01c7c",
-            "icon_toggle_color": "#000000"
-          }
-        },
-        "collapsible_tab_KFmEmy": {
-          "type": "collapsible_tab",
-          "settings": {
-            "background-color": "#ffffff",
-            "heading": "Diminui o Ritmo Cardíaco",
-            "heading_color": "#000000",
-            "content": "<p>Respirar pelo nariz acalma o corpo e reduz o ritmo cardíaco.<br/><br/></p>",
-            "content_color": "#1a1b18",
-            "icon": "heart",
-            "icon_color": "#f01c7c",
-            "icon_toggle_color": "#000000"
-          }
-        },
-        "collapsible_tab_M3UYf3": {
-          "type": "collapsible_tab",
-          "settings": {
-            "background-color": "#ffffff",
-            "heading": "Aumenta a Absorção de Oxigénio",
-            "heading_color": "#000000",
-            "content": "<p>Vários estudos mostram que as magnetic strips nasais, aumentam a tua capacidade de absorver oxigénio entre 10% e 30%.</p>",
-            "content_color": "#1a1b18",
-            "icon": "leaf",
-            "icon_color": "#f01c7c",
-            "icon_toggle_color": "#000000"
-          }
-        },
-        "collapsible_tab_gdzhEW": {
-          "type": "collapsible_tab",
-          "settings": {
-            "background-color": "#ffffff",
-            "heading": "Otimiza o Desempenho",
-            "heading_color": "#000000",
-            "content": "<p>Com mais oxigénio, aumentas o foco, a resistência e a performance mental e física.</p>",
-            "content_color": "#1a1b18",
-            "icon": "star",
-            "icon_color": "#f01c7c",
-            "icon_toggle_color": "#000000"
-          }
-        }
-      },
-      "block_order": [
-        "collapsible_tab_wxQTyf",
-        "collapsible_tab_KFmEmy",
-        "collapsible_tab_M3UYf3",
-        "collapsible_tab_gdzhEW"
-      ],
-      "name": "Collapsible Image Section",
-      "settings": {
-        "image": "shopify://shop_images/magnetic_strips_2_v2.png",
-        "background-color": "#f3f3f3",
-        "layout": "image_first",
-        "heading": "Efeitos Diurnos",
-        "heading_color": "#000000",
-        "text": "<p>Ajuda a melhorar o teu foco e a aumentar a tua resistência enquanto estás em ação.</p>",
-        "text_color": "#1a1b18",
-        "padding_top": 100,
-        "padding_bottom": 60
       }
     },
     "collapsible_image_xJ4jJc": {
@@ -802,12 +633,9 @@
   },
   "order": [
     "main",
-    "multicolumn_d7kb3A",
     "1750111445f6683ee4",
     "multicolumn_8rmzfz",
-    "image_comparison_2_hy8hx4",
     "comparison_table_MKrwac",
-    "collapsible_image_kfznWf",
     "collapsible_image_xJ4jJc",
     "1750112160b738b78b",
     "collapsible_content_AnFPT3",
