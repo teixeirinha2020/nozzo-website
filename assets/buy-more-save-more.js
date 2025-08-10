@@ -265,11 +265,50 @@ class BuyMoreSaveMore {
   }
 
   setDefaultQuantity() {
-    // Set default quantity to most popular option (index 2)
-    const defaultQuantityInput = document.querySelector('input[name="quantity-choice"]:checked');
-    if (defaultQuantityInput) {
-      this.currentQuantity = parseInt(defaultQuantityInput.value);
+    // Contar quantas opções de quantidade existem (número de descontos disponíveis)
+    const quantityOptions = document.querySelectorAll('input[name="quantity-choice"]');
+    const numberOfDiscounts = quantityOptions.length;
+    
+    // Determinar qual opção deve ser selecionada por padrão
+    let defaultValue;
+    if (numberOfDiscounts >= 2) {
+      // Se existem pelo menos 2 descontos, seleciona a opção 2 (segunda opção)
+      defaultValue = '2';
+      this.currentQuantity = 2;
+    } else {
+      // Se existe apenas 1 desconto, seleciona a opção 1 (primeira opção)
+      defaultValue = '1';
+      this.currentQuantity = 1;
     }
+    
+    // Desmarcar todas as opções primeiro
+    quantityOptions.forEach(input => {
+      input.checked = false;
+    });
+    
+    // Selecionar a opção apropriada
+    const targetOption = document.querySelector(`input[name="quantity-choice"][value="${defaultValue}"]`);
+    if (targetOption) {
+      targetOption.checked = true;
+      this.currentQuantity = parseInt(targetOption.value);
+      
+      // Adicionar visual feedback para "most popular" se for a opção 2
+      if (defaultValue === '2') {
+        const label = targetOption.closest('.quantity-option');
+        if (label && !label.classList.contains('most-popular')) {
+          label.classList.add('most-popular');
+        }
+      }
+    } else {
+      // Fallback: selecionar a primeira opção disponível
+      const firstOption = quantityOptions[0];
+      if (firstOption) {
+        firstOption.checked = true;
+        this.currentQuantity = parseInt(firstOption.value);
+      }
+    }
+    
+    console.log(`Set default quantity: ${this.currentQuantity} (based on ${numberOfDiscounts} available discounts)`);
     
     // Set default subscription quantity to 1
     const defaultSubscriptionQuantityInput = document.querySelector('input[name="subscription-quantity"]:checked');

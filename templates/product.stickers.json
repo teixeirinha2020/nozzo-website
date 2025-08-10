@@ -34,7 +34,7 @@
         "vendor": {
           "type": "text",
           "settings": {
-            "text": "Melhora a tua vida por apenas <strong>0,83</strong><em><strong>€ </strong></em>por dia.",
+            "text": "Apenas <em><strong>0,13€  </strong></em>por sticker<em><strong>.</strong></em>",
             "text_style": "body"
           }
         },
@@ -43,13 +43,13 @@
           "settings": {
             "layout": "vertical",
             "icon_1": "verified_grey",
-            "heading_1": "30 stickers por pack.",
+            "heading_1": "60 stickers por pack.",
             "icon_2": "verified_grey",
-            "heading_2": "Melhora a respiração nasal.",
+            "heading_2": "Hipoalergénicos e Suaves.",
             "icon_3": "verified_grey",
-            "heading_3": "Até mais 30% de fluxo de oxigénio.",
+            "heading_3": "Sem látex.",
             "icon_4": "verified_grey",
-            "heading_4": "Tem um sono mais profundo."
+            "heading_4": "Subscrição mensal disponível."
           }
         },
         "custom_liquid_YgR9nm": {
@@ -70,44 +70,85 @@
           "settings": {
             "mini_heading": "COMPRA MAIS <-> POUPA MAIS",
             "mini_heading_color": "#000000",
+            "types_of_purchase_text_color": "#000000",
+            "types_of_purchase_background_color": "#f01c7c",
             "number_of_options": 3,
-            "price_1_unit": 0,
-            "price_2_units": 0,
-            "price_3_units": 0,
-            "price_4_units": 0,
-            "add_to_cart_text": "ADICIONAR AO CARRINHO",
-            "add_to_cart_bg_color": "#000000",
-            "add_to_cart_text_color": "#ffffff",
-            "discount_badge_bg_color": "#ededed",
-            "option_1_image": "shopify://shop_images/1unit.jpg",
+            "enable_subscriptions": true,
+            "onetime_text": "Compra Única",
             "option_1_title": "1 PACK",
             "option_1_title_color": "#1a1b18",
             "option_1_price_color": "#1a1b18",
             "option_1_border_color": "#f01c7c",
             "option_1_badge_text_color": "#080808",
-            "option_2_image": "shopify://shop_images/2unit.jpg",
+            "option_1_image": "shopify://shop_images/unit-1_b71cc306-0be5-451d-bf0d-c0d8799495c7.jpg",
+            "price_1_unit": 0,
             "option_2_title": "2 PACKS",
             "option_2_title_color": "#1a1b18",
             "option_2_price_color": "#1a1b18",
             "option_2_border_color": "#f01c7c",
             "option_2_badge_text_color": "#000000",
-            "option_3_image": "shopify://shop_images/3unit.jpg",
+            "option_2_image": "shopify://shop_images/2unit.jpg",
+            "price_2_units": 0,
             "option_3_title": "3 PACKS",
             "option_3_title_color": "#1a1b18",
             "option_3_price_color": "#1a1b18",
             "option_3_border_color": "#f01c7c",
             "option_3_badge_text_color": "#000000",
+            "option_3_image": "shopify://shop_images/3unit.jpg",
+            "price_3_units": 0,
             "option_4_title": "4x Pack",
             "option_4_title_color": "#1a1b18",
             "option_4_price_color": "#1a1b18",
             "option_4_border_color": "#e5e5e5",
-            "option_4_badge_text_color": "#ffffff"
+            "option_4_badge_text_color": "#ffffff",
+            "price_4_units": 0,
+            "discount_badge_bg_color": "#ededed",
+            "add_to_cart_bg_color": "#000000",
+            "add_to_cart_text_color": "#ffffff",
+            "add_to_cart_text": "ADICIONAR AO CARRINHO",
+            "subscription_button_text": "SUBSCREVE JÁ"
+          }
+        },
+        "collapsible_tab_dWKXM3": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Que benefícios posso esperar?",
+            "icon": "star",
+            "content": "<p>Os nossos <strong>Stickers Refills</strong> foram desenvolvidos para manter o teu <strong>Magnetic Strip</strong> perfeitamente funcional, noite após noite. Têm uma cola premium, pensada para proporcionar:</p><ul><li><strong>Fixação segura durante o sono</strong>, mesmo com movimento ou suor leve;</li><li><strong>Substituição fácil e limpa</strong>, sem deixar resíduos ou causar irritações;</li><li><strong>Aderência fiável</strong>, mantendo o efeito da tira nasal magnética por completo;</li><li>Compatibilidade total com os <em>Magnetic Strips</em>, garantindo conforto e eficácia contínuos.</li></ul><p>Com os <strong>refills</strong>, prolongas a vida útil dos teus Magnetic Strips sem comprometer a qualidade da respiração, o descanso ou o desempenho.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_KQyMGc": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Que modalidades de compra estão disponíveis?",
+            "icon": "price_tag",
+            "content": "<p>Podes adquirir os Stickers Refills de duas formas:</p><ul><li><strong>Compra única:</strong> ideal para testar ou repor conforme precisares</li><li><strong>Subscreve & Poupa:</strong> recebes os teus refills automaticamente, com desconto exclusivo e sem preocupações — pausa ou cancela quando quiseres.<br/></li></ul><p>Esta segunda opção é perfeita para quem já integra os Magnetic Strips na rotina de sono ou treino.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_iebcxp": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Como colocar?",
+            "icon": "question_mark",
+            "content": "<p><strong>Passo 1:</strong><br/>Lava suavemente a zona à volta do nariz e seca bem com uma toalha. A pele deve estar limpa e seca para garantir a melhor aderência.<br/><br/><strong>Passo 2:</strong><br/>Descola o adesivo e com a ajuda do aplicador aplica-o na cartilagem do nariz, com o lado côncavo virado para baixo. Pressiona levemente para fixar.<br/><br/><strong>Passo 3</strong>:<br/>Coloca o Magnetic Strip sobre o adesivo. Está pronto para agir — respiração nasal livre e confortável.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_8eFWWK": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Descrição do produto",
+            "icon": "box",
+            "content": "<p><strong>Stickers Refills – Adesivos de Substituição (30 unidades por pack)</strong><br/>Concebidos para manter os teus Magnetic Strips sempre prontos a usar, estes adesivos têm uma fórmula hipoalergénica e uma fixação fiável, confortável e resistente ao movimento. Ideais para garantir a continuidade dos benefícios da respiração nasal, todas as noites.</p><ul><li>Cola segura, sem resíduos;</li><li>Hipoalergénico e sem látex;</li><li>Substituição rápida e prática;</li><li>Compatível com a pele sensível;</li><li>Duração pensada para uso prolongado;</li></ul>",
+            "page": ""
           }
         },
         "custom_liquid_zMXdwT": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<ul class=\"list list-payment\" role=\"list\">\n              {%- for type in shop.enabled_payment_types -%}\n                <li class=\"list-payment__item\">\n                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}\n                </li>\n              {%- endfor -%}\n </ul>\n<style>\n.list-payment {\n justify-content: center !important;\n}\n</style>"
+            "custom_liquid": "<ul class=\"list list-payment\" role=\"list\">\n              {%- for type in shop.enabled_payment_types -%}\n                <li class=\"list-payment__item\">\n                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}\n                </li>\n              {%- endfor -%}\n </ul>\n<style>\n.list-payment {\n justify-content: center !important;\nmargin-top: 12px !important;\n}\n</style>"
           }
         },
         "quantity_selector": {
@@ -130,16 +171,18 @@
         "text_pbPHRt": {
           "type": "text",
           "settings": {
-            "text": "Vê como colocar as nossas Magnetic Strips no vídeo abaixo!",
+            "text": "Vê como colocar os Stickers no vídeo abaixo!",
             "text_style": "body"
           }
         },
         "athlete_videos_Q8iKCn": {
           "type": "athlete_videos",
           "settings": {
-            "video_1": "shopify://files/videos/how to.mp4",
+            "video_1": "shopify://files/videos/low.mp4",
             "video_2": "shopify://files/videos/0618 (1).mp4",
-            "video_3": "shopify://files/videos/0604(2) (1).mp4"
+            "video_3": "shopify://files/videos/0604(2) (1).mp4",
+            "video_4": "shopify://files/videos/0804 (1).mp4",
+            "video_5": "shopify://files/videos/0804(1) compressed.mp4"
           }
         },
         "add_to_cart_popup_gGCyqc": {
@@ -167,6 +210,10 @@
         "custom_liquid_YgR9nm",
         "variant_picker",
         "buy_more_save_more_TanqHa",
+        "collapsible_tab_dWKXM3",
+        "collapsible_tab_KQyMGc",
+        "collapsible_tab_iebcxp",
+        "collapsible_tab_8eFWWK",
         "custom_liquid_zMXdwT",
         "quantity_selector",
         "buy_buttons",
@@ -206,26 +253,6 @@
     "multicolumn_d7kb3A": {
       "type": "multicolumn",
       "blocks": {
-        "column_WE7Mjj": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/icon_product_page_2_f7e32acd-70a8-4537-a081-6186dadad26f.png",
-            "title": "4 Magnetic Strips",
-            "text": "<p>Inclui 4 tamanhos diferentes. Escolhe o tamanho que melhor se adapta ao teu nariz.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_CEtXTd": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/icon_product_page_6.png",
-            "title": "Aplicador",
-            "text": "<p>Usa o aplicador para colar os adesivos magnéticos no teu nariz sem ficarem colados nos teus dedos.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
         "column_yMBdiJ": {
           "type": "column",
           "settings": {
@@ -238,8 +265,6 @@
         }
       },
       "block_order": [
-        "column_WE7Mjj",
-        "column_CEtXTd",
         "column_yMBdiJ"
       ],
       "custom_css": [
@@ -645,6 +670,36 @@
         "padding_bottom": 100
       }
     },
+    "featured_collection_HGFXY9": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "title": "Produtos & Bundles",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "frontpage",
+        "products_to_show": 5,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_discounts": true,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 16
+      }
+    },
     "1750112160b738b78b": {
       "type": "apps",
       "blocks": {
@@ -809,6 +864,7 @@
     "comparison_table_MKrwac",
     "collapsible_image_kfznWf",
     "collapsible_image_xJ4jJc",
+    "featured_collection_HGFXY9",
     "1750112160b738b78b",
     "collapsible_content_AnFPT3",
     "rich_text_8AcBHH",

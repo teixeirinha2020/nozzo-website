@@ -11,61 +11,10 @@
   "sections": {
     "custom_banner_AMNhVf": {
       "type": "custom-banner",
-      "blocks": {
-        "title_PMTTXc": {
-          "type": "title",
-          "settings": {
-            "title_text": "Mais leve.",
-            "title_color": "linear-gradient(100deg, rgba(255, 31, 236, 1) 2%, rgba(82, 137, 255, 1) 50%, rgba(52, 42, 244, 1) 100%)",
-            "title_font": "poppins_n4",
-            "title_weight": "700",
-            "title_size": "ultra"
-          }
-        },
-        "title_dcQQa7": {
-          "type": "title",
-          "settings": {
-            "title_text": "Mais elegante.",
-            "title_color": "linear-gradient(169deg, #ff1fec 2%, #5289ff 50%, #342af4 100%)",
-            "title_font": "poppins_n4",
-            "title_weight": "700",
-            "title_size": "ultra"
-          }
-        },
-        "span_gnp3Gr": {
-          "type": "span",
-          "settings": {
-            "span_text": "Feito para ti.",
-            "span_color": "#0e50ff",
-            "span_font": "poppins_n4",
-            "span_weight": "400",
-            "span_size": "3xl",
-            "span_justify": false
-          }
-        },
-        "button_xNJftR": {
-          "type": "button",
-          "settings": {
-            "button_text": "Descobre Mais",
-            "button_link": "shopify://products/magnetic-strip",
-            "button_text_color": "#ffffff",
-            "button_bg_color": "#001542",
-            "button_font": "poppins_n4",
-            "button_weight": "700",
-            "button_size": "lg",
-            "button_radius": 30
-          }
-        }
-      },
-      "block_order": [
-        "title_PMTTXc",
-        "title_dcQQa7",
-        "span_gnp3Gr",
-        "button_xNJftR"
-      ],
       "name": "Custom Banner",
       "settings": {
         "section_height": "vh",
+        "background_video_mobile": "shopify://files/videos/0804 (1).mp4",
         "background_video_url_desktop": "https://res.cloudinary.com/eightsleep/video/upload/v1747183973/Homepage_hero_desktop_2_kedlf9.mp4",
         "background_video_url_mobile": "https://res.cloudinary.com/eightsleep/video/upload/v1747183973/Homepage_hero_desktop_2_kedlf9.mp4",
         "content_position_desktop": "middle_center",
@@ -218,7 +167,7 @@
       "name": "Custom Image Banner",
       "settings": {
         "section_height": "adapt",
-        "background_image_desktop": "shopify://shop_images/nozzo-session-1-hd-52.jpg",
+        "background_image_desktop": "shopify://shop_images/foto-16.jpg",
         "background_image_mobile": "shopify://shop_images/foto-86.jpg",
         "content_position_desktop": "middle_right",
         "content_position_mobile": "middle_center",
@@ -343,7 +292,7 @@
             "image": "shopify://shop_images/magnetic_strips_front_best_seller.jpg",
             "subheading_text": "Magnetic Nose Strips",
             "heading_text": "Adeus Nariz Entupido, Olá Boa Noite.",
-            "paragraph_text": "Se costumas acordar com o nariz entupido ou sentes que o teu sono não é tão reparador como devia, estas tiras magnéticas podem fazer a diferença. Ao manterem as narinas abertas de forma natural, ajudam-te a respirar melhor durante a noite. Resultado? Menos interrupções no sono, menos sensação de cansaço ao acordar e noites mais tranquilas – tudo sem medicamentos.",
+            "paragraph_text": "Se costumas acordar com o nariz entupido ou sentes que o teu sono não é tão reparador como devia, nossas strips vão fazer a diferença. Ao manterem as narinas abertas de forma natural, ajudam-te a respirar melhor durante a noite. Resultado? Menos interrupções no sono, menos sensação de cansaço ao acordar e noites mais tranquilas – tudo sem medicamentos.",
             "button_text": "Compra Agora",
             "button_link": "shopify://products/magnetic-strip"
           }
@@ -355,7 +304,7 @@
             "image": "shopify://shop_images/mouth_tape_front_new_product.jpg",
             "subheading_text": "Mouth Tape",
             "heading_text": "Recupera o Teu Sono.",
-            "paragraph_text": "Respirar pelo nariz durante o sono não é só uma questão de conforto — é uma forma natural de melhorar a qualidade do descanso. Estudos mostram que manter a boca fechada enquanto dormimos pode reduzir o ressonar, melhorar a oxigenação e ajudar a ter um sono mais profundo. Além disso, evita a chamada ‘boca caída’, comum em quem respira pela boca à noite, o que com o tempo pode afetar o alinhamento da mandíbula e a forma da face. As nossas fitas adesivas são seguras, fáceis de usar e ajudam-te a voltar à respiração natural — para acordares com mais energia…",
+            "paragraph_text": "Respirar pelo nariz durante o sono não é só uma questão de conforto — é uma forma natural de melhorar a qualidade do descanso. Estudos mostram que manter a boca fechada enquanto dormimos reduz o ressonar, melhora a oxigenação e ajuda a ter um sono mais profundo. Além disso, evita a chamada ‘boca caída’, comum em quem respira pela boca à noite, o que com o tempo afeta o alinhamento da mandíbula e a forma da face. As nossas mouth tapes são seguras, fáceis de usar e ajudam-te a voltar à respiração natural — para acordares com mais energia…",
             "button_text": "Adquire Já",
             "button_link": "shopify://products/mouth-tape"
           }
@@ -376,12 +325,12 @@
           "type": "card",
           "settings": {
             "redirect_button_text": "Bundle",
-            "image": "shopify://shop_images/mag_plus_mouth_biohackers.jpg",
-            "subheading_text": "Biohacker's Bundle",
+            "image": "shopify://shop_images/sleep_combo.jpg",
+            "subheading_text": "Sleep Combo",
             "heading_text": "O Kit Essencial para Quem Leva o Corpo a Sério.",
-            "paragraph_text": "O Biohacker’s Bundle junta dois dos nossos produtos mais eficazes: as faixas adesivas para a boca e as tiras magnéticas nasais. Esta combinação ajuda-te a manter uma respiração 100 % nasal durante o sono — promovendo oxigenação ideal, sono mais profundo e até melhorias no alinhamento da mandíbula. Tudo com materiais seguros, adesão firme e conforto garantido. Se levas o teu corpo a sério, começa por otimizar as tuas noites",
-            "button_text": "Torna-te um Biohacker",
-            "button_link": "shopify://products/athletes-bundle"
+            "paragraph_text": "O Sleep Combo junta dois dos nossos produtos mais eficazes: as Mouth Tapes e as Magnetic Nose Strips. Esta combinação ajuda-te a manter uma respiração 100 % nasal durante o sono — promovendo oxigenação ideal, sono mais profundo e até melhorias no alinhamento da mandíbula. Tudo com materiais seguros, adesão firme e conforto garantido. Se levas o teu corpo a sério, começa por otimizar as tuas noites",
+            "button_text": "Torna-te um mestre",
+            "button_link": "shopify://products/sleep-combo"
           }
         }
       },
@@ -397,7 +346,7 @@
       "name": "Interactive Product Cards",
       "settings": {
         "color_scheme": "background-1",
-        "auto_advance": false,
+        "auto_advance": true,
         "auto_advance_delay": 5,
         "padding_top": 60,
         "padding_bottom": 60

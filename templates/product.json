@@ -149,7 +149,7 @@
           "type": "custom_liquid",
           "name": "Métodos de Pagamento",
           "settings": {
-            "custom_liquid": "<ul class=\"list list-payment\" role=\"list\">\n              {%- for type in shop.enabled_payment_types -%}\n                <li class=\"list-payment__item\">\n                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}\n                </li>\n              {%- endfor -%}\n </ul>\n<style>\n.list-payment {\n justify-content: center !important;\n}\n</style>"
+            "custom_liquid": "<ul class=\"list list-payment\" role=\"list\">\n              {%- for type in shop.enabled_payment_types -%}\n                <li class=\"list-payment__item\">\n                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}\n                </li>\n              {%- endfor -%}\n </ul>\n<style>\n.list-payment {\n justify-content: center !important;\nmargin-top: 12px !important;\n}\n</style>"
           }
         },
         "quantity_selector": {
@@ -179,9 +179,10 @@
         "athlete_videos_Q8iKCn": {
           "type": "athlete_videos",
           "settings": {
-            "video_1": "shopify://files/videos/how to.mp4",
+            "video_1": "shopify://files/videos/low.mp4",
             "video_2": "shopify://files/videos/0618 (1).mp4",
-            "video_3": "shopify://files/videos/0604(2) (1).mp4"
+            "video_3": "shopify://files/videos/0604(2) (1).mp4",
+            "video_4": "shopify://files/videos/0804 (1).mp4"
           }
         },
         "add_to_cart_popup_gGCyqc": {
@@ -680,7 +681,7 @@
       ],
       "name": "Collapsible Image Section",
       "settings": {
-        "image": "shopify://shop_images/nozzo-session-1-hd-1.jpg",
+        "image": "shopify://shop_images/foto-86.jpg",
         "background-color": "#f3f3f3",
         "layout": "image_second",
         "heading": "Efeitos Noturnos",
@@ -689,6 +690,36 @@
         "text_color": "#1a1b18",
         "padding_top": 60,
         "padding_bottom": 100
+      }
+    },
+    "featured_collection_Q4DHyY": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "title": "Produtos & Bundles",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "frontpage",
+        "products_to_show": 5,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_discounts": true,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 16
       }
     },
     "1750112160b738b78b": {
@@ -855,6 +886,7 @@
     "comparison_table_MKrwac",
     "collapsible_image_kfznWf",
     "collapsible_image_xJ4jJc",
+    "featured_collection_Q4DHyY",
     "1750112160b738b78b",
     "collapsible_content_AnFPT3",
     "rich_text_8AcBHH",

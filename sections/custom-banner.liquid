@@ -330,16 +330,7 @@
     {% if section.settings.background_video_desktop != blank or section.settings.background_video_mobile != blank or section.settings.background_video_url_desktop != blank or section.settings.background_video_url_mobile != blank %}
       <div class="custom-banner__video-container">
         {% if section.settings.background_video_desktop != blank %}
-          <video 
-            class="custom-banner__video custom-banner__video-desktop" 
-            autoplay 
-            playsinline
-            muted
-            preload="auto"
-          >
-            <source src="{{ section.settings.background_video_desktop.url }}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+          {{ section.settings.background_video_desktop | video_tag: class: 'custom-banner__video custom-banner__video-desktop' , autoplay: true , playsinline: true , muted: true , preload: 'auto' }} 
         {% elsif section.settings.background_video_url_desktop != blank %}
           <video 
             class="custom-banner__video custom-banner__video-desktop" 
@@ -348,22 +339,13 @@
             muted
             preload="auto"
           >
-            <source src="{{ section.settings.background_video_url_desktop }}" type="video/mp4">
+            <source src="{{ section.settings.background_video_url_desktop  }}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         {% endif %}
         
         {% if section.settings.background_video_mobile != blank %}
-            <video 
-              class="custom-banner__video custom-banner__video-mobile" 
-              autoplay 
-              playsinline
-            muted
-              preload="auto"
-            >
-            <source src="{{ section.settings.background_video_mobile.url }}" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
+          {{ section.settings.background_video_mobile | video_tag: class: 'custom-banner__video custom-banner__video-mobile' , autoplay: true , playsinline: true , muted: true , preload: 'auto' }}
         {% elsif section.settings.background_video_url_mobile != blank %}
             <video 
             class="custom-banner__video custom-banner__video-mobile" 
