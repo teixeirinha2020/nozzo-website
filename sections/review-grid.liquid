@@ -19,7 +19,7 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       text-align: left;
     }
 
@@ -361,6 +361,9 @@
       font-weight: 300;
       margin-bottom: 12px;
       color: black;
+      display: flex;
+      flex-direction: column;
+      gap:5px;
     }
   
     .social-date {
@@ -617,7 +620,12 @@
                 </div>
                 
                 {% if block.settings.comment != blank %}
-                  <div class="social-content">{{ block.settings.comment }}</div>
+                  <div class="social-content">
+                    {% if block.settings.content_image != blank %}
+                      <div class="image">{{ block.settings.content_image |  image_url: width: 1080 |  image_tag: class: 'text-icon' }}</div>
+                    {% endif %}
+                    <div class="comment">{{ block.settings.comment }}</div>
+                  </div>
                 {% endif %}
                 
                 {% if block.settings.date_time != blank %}
@@ -968,6 +976,11 @@ function initMasonry() {
             "type": "textarea",
             "id": "comment",
             "label": "Comment Text"
+          },
+          {
+            "type": "image_picker",
+            "id": "content_image",
+            "label": "Image"
           },
           {
             "type": "text",

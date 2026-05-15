@@ -407,7 +407,7 @@
         "title_color": "#ffffff",
         "subtitle": "Reduz o tempo para adormecer, melhora a oxigenação e promove sono profundo — tudo através da respiração nasal. Os nossos produtos dão resultados reais, todas as noites.",
         "subtitle_color": "#ffffff",
-        "background_gradient": "linear-gradient(90deg, rgba(55, 65, 81, 1), rgba(17, 24, 39, 1) 50%, rgba(0, 0, 0, 1) 100%)",
+        "background_gradient": "linear-gradient(-135deg, rgba(38, 38, 38, 1) 8%, rgba(255, 0, 114, 1) 92%)",
         "timeline_color": "#ffffff",
         "ticks_count": 20
       }
@@ -418,10 +418,39 @@
         "video_9x78Fy": {
           "type": "video",
           "settings": {
-            "video": "shopify://files/videos/729e4e0b79bc48d0981d00420cb539f5.mp4",
-            "cover_image": "shopify://shop_images/fotos2-96.jpg",
-            "title": "text",
-            "subtitle": "text"
+            "video": "shopify://files/videos/0618 (1).mp4",
+            "cover_image": "shopify://shop_images/foto-54-tomas-low.jpg",
+            "title": "Tomás Costa",
+            "subtitle": "Atletismo Sporting"
+          }
+        },
+        "social_comment_jMibJV": {
+          "type": "social_comment",
+          "settings": {
+            "social_platform": "instagram",
+            "post_link": "",
+            "name": "User Name",
+            "profile_image": "shopify://shop_images/Intake_After.webp",
+            "verified": true,
+            "username": "@hello",
+            "comment": "ththththhtth",
+            "date_time": "10 10 10 1010"
+          }
+        },
+        "text_with_image_MLpTmN": {
+          "type": "text_with_image",
+          "settings": {
+            "image": "shopify://shop_images/Intake_After.webp",
+            "title": "ttttttt",
+            "subtitle": "ttttttt"
+          }
+        },
+        "image_R9hT98": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/andre-coimbra-21-low.jpg",
+            "title": "André Coimbra",
+            "subtitle": "Bodybuilder"
           }
         },
         "social_comment_Kcxwdi": {
@@ -437,37 +466,49 @@
             "date_time": "10 10 10 1010"
           }
         },
-        "image_R9hT98": {
-          "type": "image",
+        "social_comment_XgChGC": {
+          "type": "social_comment",
           "settings": {
-            "image": "shopify://shop_images/Screenshot_1.jpg",
-            "icon_image": "shopify://shop_images/Men_s_Health_svg.png",
-            "title": "hello",
-            "subtitle": "heçllo"
+            "social_platform": "instagram",
+            "post_link": "",
+            "name": "User Name",
+            "profile_image": "shopify://shop_images/Intake_After.webp",
+            "verified": true,
+            "username": "@hello",
+            "comment": "ththththhtth",
+            "date_time": "10 10 10 1010"
           }
         },
-        "text_with_image_MLpTmN": {
-          "type": "text_with_image",
+        "social_comment_CeAMhc": {
+          "type": "social_comment",
           "settings": {
-            "image": "shopify://shop_images/Intake_After.webp",
-            "title": "ttttttt",
-            "subtitle": "ttttttt"
+            "social_platform": "instagram",
+            "post_link": "",
+            "name": "User Name",
+            "profile_image": "shopify://shop_images/Intake_After.webp",
+            "verified": true,
+            "username": "@hello",
+            "comment": "ththththhtth",
+            "date_time": "10 10 10 1010"
           }
         }
       },
       "block_order": [
         "video_9x78Fy",
-        "social_comment_Kcxwdi",
+        "social_comment_jMibJV",
+        "text_with_image_MLpTmN",
         "image_R9hT98",
-        "text_with_image_MLpTmN"
+        "social_comment_Kcxwdi",
+        "social_comment_XgChGC",
+        "social_comment_CeAMhc"
       ],
       "name": "Grid of Reviews",
       "settings": {
         "title": "Imensas reviews confiáveis",
         "title_size": "h1",
-        "subtitle": "de pessoas extraordinárias como tu",
+        "subtitle": "de pessoas incríveis como tu",
         "subtitle_color": "#999999",
-        "button_text": "Vê Mais",
+        "button_text": "",
         "button_link": "",
         "button_text_color": "#ffffff",
         "button_bg_color": "#000000",
@@ -559,6 +600,11 @@
         "collapsible_row_EBRPKR",
         "collapsible_row_LLTtQq",
         "collapsible_row_N3JU7r"
+      ],
+      "custom_css": [
+        ".collapsible-row-layout .accordion summary,.collapsible-row-layout .accordion .accordion__content {padding: 1.8rem 2.2rem;}",
+        ".collapsible-row-layout .accordion {border-radius: 30px;}",
+        ".collapsible-content__header {display: flex; flex-direction: column-reverse;}"
       ],
       "name": "t:sections.collapsible_content.presets.name",
       "settings": {

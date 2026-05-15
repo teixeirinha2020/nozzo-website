@@ -68,7 +68,7 @@
         "buy_more_save_more_TanqHa": {
           "type": "buy_more_save_more",
           "settings": {
-            "mini_heading": "COMPRA MAIS <-> POUPA MAIS",
+            "mini_heading": "",
             "mini_heading_color": "#000000",
             "types_of_purchase_text_color": "#000000",
             "types_of_purchase_background_color": "#f01c7c",
@@ -132,7 +132,7 @@
           "settings": {
             "heading": "Descrição do produto",
             "icon": "box",
-            "content": "<h4>A nossa <em>mouth tape</em> para a boca ajuda-te a manter a boca fechada durante o sono, promovendo a respiração nasal natural. Reduz o ressonar, evita a boca seca e melhora a qualidade do descanso.</h4><ul><li>Hipoalergénica e sem latex;</li><li>Fixa com segurança, sem causar irritação;</li><li>Fácil de aplicar e remover;</li><li>Confortável para toda a noite.</li></ul><h4>Para noites mais tranquilas e manhãs com mais energia.<br/><br/></h4>",
+            "content": "<p><strong>30 unidades</strong></p><p>A nossa <em>mouth tape</em> para a boca ajuda-te a manter a boca fechada durante o sono, promovendo a respiração nasal natural. Reduz o ressonar, evita a boca seca e melhora a qualidade do descanso.</p><ul><li>Hipoalergénica e sem latex;</li><li>Fixa com segurança, sem causar irritação;</li><li>Fácil de aplicar e remover;</li><li>Confortável para toda a noite.</li></ul><h4>Para noites mais tranquilas e manhãs com mais energia.<br/><br/></h4>",
             "page": ""
           }
         },
@@ -241,7 +241,7 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/mouth-tape.png",
-            "title": "60 Mouth Tapes",
+            "title": "30 Mouth Tapes",
             "text": "<p>A nossa mouth tape para a boca ajuda-te a manter a boca fechada durante o sono, promovendo a respiração nasal natural. Reduz o ressonar, evita a boca seca e melhora a qualidade do descanso. Hipoalergénica e sem latex.</p>",
             "link_label": "",
             "link": ""
@@ -351,7 +351,7 @@
             "small_text": "Até 50%",
             "main_text": "Menos ressonar",
             "box_color": "#ffffff0a",
-            "benefit_height": 200
+            "benefit_height": 104
           }
         },
         "benefit_NG3MkG": {
@@ -369,7 +369,7 @@
             "small_text": "Até 92%",
             "main_text": "Relatam melhorias no sono",
             "box_color": "#ffffff0a",
-            "benefit_height": 124
+            "benefit_height": 200
           }
         }
       },
@@ -513,7 +513,7 @@
           "type": "collapsible_tab",
           "settings": {
             "background-color": "#ffffff",
-            "heading": "Promove Sono REM Restaurador",
+            "heading": "Promove Sono REM Reparador",
             "heading_color": "#000000",
             "content": "<p>Ao incentivar a respiração nasal contínua, a mouth tape ajuda o corpo a entrar mais facilmente nas fases profundas do sono, como o REM. Isso contribui para uma recuperação física e mental mais eficaz, melhor memória e um despertar mais nítido e revigorado.</p>",
             "content_color": "#1a1b18",
@@ -528,7 +528,7 @@
             "background-color": "#ffffff",
             "heading": "Acelera a Recuperação Durante o Sono",
             "heading_color": "#000000",
-            "content": "<p>Ao promover uma respiração nasal estável, a fita Nozzo ajuda a melhorar a oxigenação e a regulação do sistema nervoso parassimpático - o estado natural de recuperação do corpo. Resultado? Um sono mais eficiente, ideal para regenerar músculos, reduzir inflamações e acordar com menos fadiga.</p>",
+            "content": "<p>Ao promover uma respiração nasal estável, a <em>mouth tape</em> ajuda a melhorar a oxigenação e a regulação do sistema nervoso parassimpático - o estado natural de recuperação do corpo. Resultado? Um sono mais eficiente, ideal para regenerar músculos, reduzir inflamações e acordar com menos fadiga.</p>",
             "content_color": "#1a1b18",
             "icon": "lightning_bolt",
             "icon_color": "#f01c7c",
@@ -583,6 +583,41 @@
         "swipe_on_mobile": true,
         "padding_top": 36,
         "padding_bottom": 16
+      }
+    },
+    "rich_text_mtzLhb": {
+      "type": "rich-text",
+      "blocks": {
+        "text_A7LQMQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tempo médio de resposta: imediato. Horário: Segunda-Domingo, 9:00-18:00.</p>"
+          }
+        },
+        "button_NhpWjB": {
+          "type": "button",
+          "settings": {
+            "button_label": "Suporte",
+            "button_link": "shopify://pages/contact",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "text_A7LQMQ",
+        "button_NhpWjB"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     },
     "1750112160b738b78b": {
@@ -687,41 +722,6 @@
         "padding_bottom": 28
       }
     },
-    "rich_text_8AcBHH": {
-      "type": "rich-text",
-      "blocks": {
-        "text_4zi79x": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Tempo médio de resposta: &lt; 1 hora.<br/><br/> Horário: Segunda-Domingo, 9:00-18:00 horas.</p>"
-          }
-        },
-        "button_DQyMG8": {
-          "type": "button",
-          "settings": {
-            "button_label": "Suporte",
-            "button_link": "shopify://pages/contact",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "text_4zi79x",
-        "button_DQyMG8"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
-    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -751,9 +751,9 @@
     "comparison_table_MKrwac",
     "collapsible_image_xJ4jJc",
     "featured_collection_NF8x3W",
+    "rich_text_mtzLhb",
     "1750112160b738b78b",
     "collapsible_content_AnFPT3",
-    "rich_text_8AcBHH",
     "related-products"
   ]
 }

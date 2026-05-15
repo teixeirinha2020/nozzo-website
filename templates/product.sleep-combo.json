@@ -68,7 +68,7 @@
         "buy_more_save_more_TanqHa": {
           "type": "buy_more_save_more",
           "settings": {
-            "mini_heading": "COMPRA MAIS <-> POUPA MAIS",
+            "mini_heading": "",
             "mini_heading_color": "#000000",
             "types_of_purchase_text_color": "#000000",
             "types_of_purchase_background_color": "#f01c7c",
@@ -646,6 +646,19 @@
             "icon_toggle_color": "#000000"
           }
         },
+        "collapsible_tab_8Kbdy4": {
+          "type": "collapsible_tab",
+          "settings": {
+            "background-color": "#ffffff",
+            "heading": "Compatível com Barba & Respirável",
+            "heading_color": "#000000",
+            "content": "<p>A mouth tape garante uma fixação confortável e segura que permite respirar facilmente e dormir sem interrupções. A aderência suave adapta-se ao pelo facial sem causar irritação nem perder eficácia - para noites tranquilas, com ou sem barba.</p>",
+            "content_color": "#1a1b18",
+            "icon": "leaf",
+            "icon_color": "#f01c7c",
+            "icon_toggle_color": "#000000"
+          }
+        },
         "collapsible_tab_4mYXYC": {
           "type": "collapsible_tab",
           "settings": {
@@ -676,12 +689,13 @@
       "block_order": [
         "collapsible_tab_6VgqAK",
         "collapsible_tab_W6XbnA",
+        "collapsible_tab_8Kbdy4",
         "collapsible_tab_4mYXYC",
         "collapsible_tab_YpDUVi"
       ],
       "name": "Collapsible Image Section",
       "settings": {
-        "image": "shopify://shop_images/nozzo-session-1-hd-1.jpg",
+        "image": "shopify://shop_images/foto-16.jpg",
         "background-color": "#f3f3f3",
         "layout": "image_second",
         "heading": "Efeitos Noturnos",
@@ -792,16 +806,16 @@
         "padding_bottom": 28
       }
     },
-    "rich_text_8AcBHH": {
+    "rich_text_fwHKjd": {
       "type": "rich-text",
       "blocks": {
-        "text_4zi79x": {
+        "text_8LPHzL": {
           "type": "text",
           "settings": {
-            "text": "<p>Tempo médio de resposta: &lt; 1 hora.<br/><br/> Horário: Segunda-Domingo, 9:00-18:00 horas.</p>"
+            "text": "<p>Tempo médio de resposta: imediato. Horário: Segunda-Domingo, 9:00-18:00.</p>"
           }
         },
-        "button_DQyMG8": {
+        "button_UkcY4c": {
           "type": "button",
           "settings": {
             "button_label": "Suporte",
@@ -814,8 +828,8 @@
         }
       },
       "block_order": [
-        "text_4zi79x",
-        "button_DQyMG8"
+        "text_8LPHzL",
+        "button_UkcY4c"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
@@ -858,7 +872,7 @@
     "collapsible_image_xJ4jJc",
     "1750112160b738b78b",
     "collapsible_content_AnFPT3",
-    "rich_text_8AcBHH",
+    "rich_text_fwHKjd",
     "related-products"
   ]
 }

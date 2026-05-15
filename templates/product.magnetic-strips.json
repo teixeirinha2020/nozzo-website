@@ -178,7 +178,7 @@
         "athlete_videos_Q8iKCn": {
           "type": "athlete_videos",
           "settings": {
-            "video_1": "shopify://files/videos/how to.mp4",
+            "video_1": "shopify://files/videos/low.mp4",
             "video_2": "shopify://files/videos/0618 (1).mp4",
             "video_3": "shopify://files/videos/0604(2) (1).mp4"
           }
@@ -820,16 +820,16 @@
         "padding_bottom": 28
       }
     },
-    "rich_text_8AcBHH": {
+    "rich_text_Ng4fQz": {
       "type": "rich-text",
       "blocks": {
-        "text_4zi79x": {
+        "text_PYCEW6": {
           "type": "text",
           "settings": {
-            "text": "<p>Tempo médio de resposta: &lt; 1 hora.<br/><br/> Horário: Segunda-Domingo, 9:00-18:00 horas.</p>"
+            "text": "<p>Tempo médio de resposta: imediato. Horário: Segunda-Domingo, 9:00-18:00.</p>"
           }
         },
-        "button_DQyMG8": {
+        "button_9yp77B": {
           "type": "button",
           "settings": {
             "button_label": "Suporte",
@@ -842,8 +842,8 @@
         }
       },
       "block_order": [
-        "text_4zi79x",
-        "button_DQyMG8"
+        "text_PYCEW6",
+        "button_9yp77B"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
@@ -887,7 +887,7 @@
     "featured_collection_nDREDi",
     "1750112160b738b78b",
     "collapsible_content_AnFPT3",
-    "rich_text_8AcBHH",
+    "rich_text_Ng4fQz",
     "related-products"
   ]
 }

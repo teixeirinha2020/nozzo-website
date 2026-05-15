@@ -68,7 +68,7 @@
         "buy_more_save_more_TanqHa": {
           "type": "buy_more_save_more",
           "settings": {
-            "mini_heading": "COMPRA MAIS <-> POUPA MAIS",
+            "mini_heading": "",
             "mini_heading_color": "#000000",
             "types_of_purchase_text_color": "#000000",
             "types_of_purchase_background_color": "#f01c7c",
@@ -800,16 +800,16 @@
         "padding_bottom": 28
       }
     },
-    "rich_text_8AcBHH": {
+    "rich_text_fY36xD": {
       "type": "rich-text",
       "blocks": {
-        "text_4zi79x": {
+        "text_grzpVn": {
           "type": "text",
           "settings": {
-            "text": "<p>Tempo médio de resposta: &lt; 1 hora.<br/><br/> Horário: Segunda-Domingo, 9:00-18:00 horas.</p>"
+            "text": "<p>Tempo médio de resposta: imediato. Horário: Segunda-Domingo, 9:00-18:00.</p>"
           }
         },
-        "button_DQyMG8": {
+        "button_BryzEY": {
           "type": "button",
           "settings": {
             "button_label": "Suporte",
@@ -822,8 +822,8 @@
         }
       },
       "block_order": [
-        "text_4zi79x",
-        "button_DQyMG8"
+        "text_grzpVn",
+        "button_BryzEY"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
@@ -867,7 +867,7 @@
     "featured_collection_HGFXY9",
     "1750112160b738b78b",
     "collapsible_content_AnFPT3",
-    "rich_text_8AcBHH",
+    "rich_text_fY36xD",
     "related-products"
   ]
 }
