@@ -14,6 +14,7 @@
       "name": "Custom Banner",
       "settings": {
         "section_height": "vh",
+        "background_video_desktop": "shopify://files/videos/video banner animation.mp4",
         "background_video_mobile": "shopify://files/videos/0804 (1).mp4",
         "background_video_url_desktop": "https://res.cloudinary.com/eightsleep/video/upload/v1747183973/Homepage_hero_desktop_2_kedlf9.mp4",
         "background_video_url_mobile": "https://res.cloudinary.com/eightsleep/video/upload/v1747183973/Homepage_hero_desktop_2_kedlf9.mp4",
@@ -428,21 +429,14 @@
           "type": "social_comment",
           "settings": {
             "social_platform": "instagram",
-            "post_link": "",
-            "name": "User Name",
-            "profile_image": "shopify://shop_images/Intake_After.webp",
+            "post_link": "https://www.instagram.com/p/DKsYN8TgXVF/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+            "name": "more training",
+            "profile_image": "shopify://shop_images/more_training_logo.jpg",
             "verified": true,
-            "username": "@hello",
-            "comment": "ththththhtth",
-            "date_time": "10 10 10 1010"
-          }
-        },
-        "text_with_image_MLpTmN": {
-          "type": "text_with_image",
-          "settings": {
-            "image": "shopify://shop_images/Intake_After.webp",
-            "title": "ttttttt",
-            "subtitle": "ttttttt"
+            "username": "@_moretraining",
+            "comment": "um sábado diferente na companhia da @nozzo.co. obrigado a todos os que estiveram presentes.\n\nsleep. run. repeat.",
+            "content_image": "shopify://shop_images/foto-126-more-verylow.jpg",
+            "date_time": "Julho 9 2025"
           }
         },
         "image_R9hT98": {
@@ -453,54 +447,42 @@
             "subtitle": "Bodybuilder"
           }
         },
-        "social_comment_Kcxwdi": {
+        "social_comment_Ty9FcY": {
           "type": "social_comment",
           "settings": {
             "social_platform": "instagram",
             "post_link": "",
-            "name": "User Name",
-            "profile_image": "shopify://shop_images/Intake_After.webp",
-            "verified": true,
-            "username": "@hello",
-            "comment": "ththththhtth",
-            "date_time": "10 10 10 1010"
+            "name": "Francisco Ramos",
+            "profile_image": "shopify://shop_images/ramos.jpg",
+            "verified": false,
+            "username": "@_francisco_ramos05",
+            "comment": "Breathe Better. Perform Better\n#nozzo #breath #respira #nasalstrips",
+            "content_image": "shopify://shop_images/fotos2-98-gym-low-4-5.jpg",
+            "date_time": ""
           }
         },
-        "social_comment_XgChGC": {
-          "type": "social_comment",
+        "text_with_image_68LQqW": {
+          "type": "text_with_image",
           "settings": {
-            "social_platform": "instagram",
-            "post_link": "",
-            "name": "User Name",
-            "profile_image": "shopify://shop_images/Intake_After.webp",
-            "verified": true,
-            "username": "@hello",
-            "comment": "ththththhtth",
-            "date_time": "10 10 10 1010"
+            "title": "",
+            "subtitle": ""
           }
         },
-        "social_comment_CeAMhc": {
-          "type": "social_comment",
+        "text_with_image_E344Jw": {
+          "type": "text_with_image",
           "settings": {
-            "social_platform": "instagram",
-            "post_link": "",
-            "name": "User Name",
-            "profile_image": "shopify://shop_images/Intake_After.webp",
-            "verified": true,
-            "username": "@hello",
-            "comment": "ththththhtth",
-            "date_time": "10 10 10 1010"
+            "title": "",
+            "subtitle": ""
           }
         }
       },
       "block_order": [
         "video_9x78Fy",
         "social_comment_jMibJV",
-        "text_with_image_MLpTmN",
         "image_R9hT98",
-        "social_comment_Kcxwdi",
-        "social_comment_XgChGC",
-        "social_comment_CeAMhc"
+        "social_comment_Ty9FcY",
+        "text_with_image_68LQqW",
+        "text_with_image_E344Jw"
       ],
       "name": "Grid of Reviews",
       "settings": {
@@ -569,18 +551,9 @@
         "collapsible_row_EBRPKR": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "O que vem no Pacote e como Aplicar?",
+            "heading": "O que são as Mouth Tapes?",
             "icon": "question_mark",
-            "row_content": "<p><strong>Cada pack inclui 60 adesivos descartáveis e 4 peças plásticas reutilizáveis com ímanes.</strong><br/><br/>Aplicas um adesivo em cada narina e depois encaixas os ímanes por fora — <strong>eles atraem-se e expandem suavemente as narinas</strong>, melhorando o fluxo de ar.</p><p><strong>O resultado?</strong> Respiração nasal imediata, <strong>mais oxigénio</strong>, <strong>menos ressonar</strong>, <strong>melhor sono</strong> e <strong>mais energia</strong>.</p><p>📦 <strong>Inclui manual de instruções detalhado.</strong><br/><br/>🎥 <strong>Vê os tutoriais nas nossas redes sociais</strong>: <a href=\"https://instagram.com/nozzo.co\">@nozzo.co</a><br/></p>",
-            "page": ""
-          }
-        },
-        "collapsible_row_LLTtQq": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "As Magnetic Strips são seguras de usar?",
-            "icon": "question_mark",
-            "row_content": "<p>Sim, são seguras quando usadas corretamente.<br/><br/>Os adesivos são feitos com materiais testados dermatologicamente e os ímanes aplicam apenas uma <strong>pressão leve e confortável</strong> para abrir suavemente as narinas.</p><p>❗ <strong>Nota:</strong> Não é recomendado aplicar em pele queimada, ferida ou muito irritada.<br/><br/>Nesses casos, espera pela recuperação total antes de usar.</p><p>📦 O pack inclui um <strong>manual de instruções</strong>, e podes ver vídeos tutoriais nas nossas redes sociais: <a href=\"https://instagram.com/nozzo.co\">@nozzo.co</a></p>",
+            "row_content": "<p>As <em>mouth tapes</em> são fitas adesivas suaves e hipoalergénicas que se colocam sobre os lábios antes de dormir para <strong>encorajar a respiração pelo nariz</strong>. Ao manterem a boca suavemente fechada, ajudam a <strong>eliminar o ressonar</strong>, <strong>evitar a boca seca</strong> e <strong>tornar o sono mais contínuo e reparador</strong>. São respiráveis, de <strong>uso único</strong>, fáceis de aplicar e remover, e não deixam resíduos.</p>",
             "page": ""
           }
         },
@@ -598,7 +571,6 @@
         "collapsible_row_9n3Jaq",
         "collapsible_row_y6PC6m",
         "collapsible_row_EBRPKR",
-        "collapsible_row_LLTtQq",
         "collapsible_row_N3JU7r"
       ],
       "custom_css": [
@@ -608,7 +580,7 @@
       ],
       "name": "t:sections.collapsible_content.presets.name",
       "settings": {
-        "caption": "Obtem soluções rápidas para as tuas dúvidas mais comuns, desde o envio até ao método de aplicação das nossas strips.",
+        "caption": "Obtem soluções rápidas para as tuas dúvidas mais comuns.",
         "heading": "Tens Questões Sobre a Nozzo?",
         "heading_size": "h1",
         "heading_alignment": "center",

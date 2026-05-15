@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-blog",
+      "disabled": true,
       "settings": {
         "layout": "collage",
         "show_image": true,
@@ -20,9 +21,25 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "collapsible_image_zdi4bQ": {
+      "type": "collapsible-image",
+      "name": "Collapsible Image Section",
+      "settings": {
+        "image": "shopify://shop_images/foto-54-tomas-low.jpg",
+        "background-color": "#ffffff",
+        "layout": "image_first",
+        "heading": "Blog em breve!",
+        "heading_color": "#121212",
+        "text": "<p>Queres fazer parte da nossa comunidade de atletas e apareceres aqui? Entra em contacto connosco através das nossas redes sociais. <a href=\"https://www.instagram.com/nozzo.co/\" target=\"_blank\" title=\"nozzo.co\"><strong>@nozzo.co</strong></a></p>",
+        "text_color": "#121212",
+        "padding_top": 100,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "collapsible_image_zdi4bQ"
   ]
 }
